@@ -5690,15 +5690,15 @@ static void rtl_ephy_init(struct rtl8169_private *tp, const struct ephy_info *e,
 	}
 }
 
-static void rtl_disable_clock_request(struct pci_dev *pdev)
+static void rtl_disable_clock_request(struct rtl8169_private *tp)
 {
-	pcie_capability_clear_word(pdev, PCI_EXP_LNKCTL,
+	pcie_capability_clear_word(tp->pci_dev, PCI_EXP_LNKCTL,
 				   PCI_EXP_LNKCTL_CLKREQ_EN);
 }
 
-static void rtl_enable_clock_request(struct pci_dev *pdev)
+static void rtl_enable_clock_request(struct rtl8169_private *tp)
 {
-	pcie_capability_set_word(pdev, PCI_EXP_LNKCTL,
+	pcie_capability_set_word(tp->pci_dev, PCI_EXP_LNKCTL,
 				 PCI_EXP_LNKCTL_CLKREQ_EN);
 }
 
@@ -5750,8 +5750,6 @@ static void rtl_hw_start_8168bef(struct rtl8169_private *tp)
 
 static void __rtl_hw_start_8168cp(struct rtl8169_private *tp)
 {
-	struct pci_dev *pdev = tp->pci_dev;
-
 	RTL_W8(tp, Config1, RTL_R8(tp, Config1) | Speed_down);
 
 	RTL_W8(tp, Config3, RTL_R8(tp, Config3) & ~Beacon_en);
@@ -5759,7 +5757,7 @@ static void __rtl_hw_start_8168cp(struct rtl8169_private *tp)
 	if (tp->dev->mtu <= ETH_DATA_LEN)
 		rtl_tx_performance_tweak(tp, 0x5 << MAX_READ_REQUEST_SHIFT);
 
-	rtl_disable_clock_request(pdev);
+	rtl_disable_clock_request(tp);
 
 	RTL_W16(tp, CPlusCmd, RTL_R16(tp, CPlusCmd) & ~R8168_CPCMD_QUIRK_MASK);
 }
@@ -5855,11 +5853,9 @@ static void rtl_hw_start_8168c_4(struct rtl8169_private *tp)
 
 static void rtl_hw_start_8168d(struct rtl8169_private *tp)
 {
-	struct pci_dev *pdev = tp->pci_dev;
-
 	rtl_csi_access_enable_2(tp);
 
-	rtl_disable_clock_request(pdev);
+	rtl_disable_clock_request(tp);
 
 	RTL_W8(tp, MaxTxPacketSize, TxPacketMax);
 
@@ -5871,8 +5867,6 @@ static void rtl_hw_start_8168d(struct rtl8169_private *tp)
 
 static void rtl_hw_start_8168dp(struct rtl8169_private *tp)
 {
-	struct pci_dev *pdev = tp->pci_dev;
-
 	rtl_csi_access_enable_1(tp);
 
 	if (tp->dev->mtu <= ETH_DATA_LEN)
@@ -5880,12 +5874,11 @@ static void rtl_hw_start_8168dp(struct rtl8169_private *tp)
 
 	RTL_W8(tp, MaxTxPacketSize, TxPacketMax);
 
-	rtl_disable_clock_request(pdev);
+	rtl_disable_clock_request(tp);
 }
 
 static void rtl_hw_start_8168d_4(struct rtl8169_private *tp)
 {
-	struct pci_dev *pdev = tp->pci_dev;
 	static const struct ephy_info e_info_8168d_4[] = {
 		{ 0x0b, 0x0000,	0x0048 },
 		{ 0x19, 0x0020,	0x0050 },
@@ -5900,12 +5893,11 @@ static void rtl_hw_start_8168d_4(struct rtl8169_private *tp)
 
 	rtl_ephy_init(tp, e_info_8168d_4, ARRAY_SIZE(e_info_8168d_4));
 
-	rtl_enable_clock_request(pdev);
+	rtl_enable_clock_request(tp);
 }
 
 static void rtl_hw_start_8168e_1(struct rtl8169_private *tp)
 {
-	struct pci_dev *pdev = tp->pci_dev;
 	static const struct ephy_info e_info_8168e_1[] = {
 		{ 0x00, 0x0200,	0x0100 },
 		{ 0x00, 0x0000,	0x0004 },
@@ -5931,7 +5923,7 @@ static void rtl_hw_start_8168e_1(struct rtl8169_private *tp)
 
 	RTL_W8(tp, MaxTxPacketSize, TxPacketMax);
 
-	rtl_disable_clock_request(pdev);
+	rtl_disable_clock_request(tp);
 
 	/* Reset tx FIFO pointer */
 	RTL_W32(tp, MISC, RTL_R32(tp, MISC) | TXPLA_RST);
@@ -5942,7 +5934,6 @@ static void rtl_hw_start_8168e_1(struct rtl8169_private *tp)
 
 static void rtl_hw_start_8168e_2(struct rtl8169_private *tp)
 {
-	struct pci_dev *pdev = tp->pci_dev;
 	static const struct ephy_info e_info_8168e_2[] = {
 		{ 0x09, 0x0000,	0x0080 },
 		{ 0x19, 0x0000,	0x0224 }
@@ -5966,7 +5957,7 @@ static void rtl_hw_start_8168e_2(struct rtl8169_private *tp)
 
 	RTL_W8(tp, MaxTxPacketSize, EarlySize);
 
-	rtl_disable_clock_request(pdev);
+	rtl_disable_clock_request(tp);
 
 	RTL_W32(tp, TxConfig, RTL_R32(tp, TxConfig) | TXCFG_AUTO_FIFO);
 	RTL_W8(tp, MCU, RTL_R8(tp, MCU) & ~NOW_IS_OOB);
@@ -5981,8 +5972,6 @@ static void rtl_hw_start_8168e_2(struct rtl8169_private *tp)
 
 static void rtl_hw_start_8168f(struct rtl8169_private *tp)
 {
-	struct pci_dev *pdev = tp->pci_dev;
-
 	rtl_csi_access_enable_2(tp);
 
 	rtl_tx_performance_tweak(tp, 0x5 << MAX_READ_REQUEST_SHIFT);
@@ -6000,7 +5989,7 @@ static void rtl_hw_start_8168f(struct rtl8169_private *tp)
 
 	RTL_W8(tp, MaxTxPacketSize, EarlySize);
 
-	rtl_disable_clock_request(pdev);
+	rtl_disable_clock_request(tp);
 
 	RTL_W32(tp, TxConfig, RTL_R32(tp, TxConfig) | TXCFG_AUTO_FIFO);
 	RTL_W8(tp, MCU, RTL_R8(tp, MCU) & ~NOW_IS_OOB);
