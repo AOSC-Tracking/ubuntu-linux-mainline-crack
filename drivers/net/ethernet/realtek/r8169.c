@@ -5450,8 +5450,6 @@ static void rtl_hw_start_8169(struct rtl8169_private *tp)
 
 	RTL_W32(tp, RxMissed, 0);
 
-	rtl_set_rx_mode(tp->dev);
-
 	/* no early-rx interrupts */
 	RTL_W16(tp, MultiIntr, RTL_R16(tp, MultiIntr) & 0xf000);
 }
@@ -6366,8 +6364,6 @@ static void rtl_hw_start_8168(struct rtl8169_private *tp)
 
 	RTL_W8(tp, ChipCmd, CmdTxEnb | CmdRxEnb);
 
-	rtl_set_rx_mode(tp->dev);
-
 	RTL_W16(tp, MultiIntr, RTL_R16(tp, MultiIntr) & 0xf000);
 }
 
@@ -6558,8 +6554,6 @@ static void rtl_hw_start_8101(struct rtl8169_private *tp)
 	RTL_W16(tp, IntrMitigate, 0x0000);
 
 	RTL_W8(tp, ChipCmd, CmdTxEnb | CmdRxEnb);
-
-	rtl_set_rx_mode(tp->dev);
 
 	RTL_R8(tp, IntrMask);
 
