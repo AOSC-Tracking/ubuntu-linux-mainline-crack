@@ -1621,8 +1621,7 @@ static void handle_port_status(struct xhci_hcd *xhci,
 			xhci_test_and_clear_bit(xhci, port_array,
 					hcd_portnum, PORT_PLC);
 			usb_hcd_start_port_resume(&hcd->self, hcd_portnum);
-			xhci_set_link_state(xhci, port_array, hcd_portnum,
-						XDEV_U0);
+			xhci_set_link_state(xhci, port, XDEV_U0);
 			/* Need to wait until the next link state change
 			 * indicates the device is actually in U0.
 			 */
