@@ -718,16 +718,16 @@ static void xhci_set_remote_wake_mask(struct xhci_hcd *xhci,
 }
 
 /* Test and clear port RWC bit */
-void xhci_test_and_clear_bit(struct xhci_hcd *xhci, __le32 __iomem **port_array,
-				int port_id, u32 port_bit)
+void xhci_test_and_clear_bit(struct xhci_hcd *xhci, struct xhci_port *port,
+			     u32 port_bit)
 {
 	u32 temp;
 
-	temp = readl(port_array[port_id]);
+	temp = readl(port->addr);
 	if (temp & port_bit) {
 		temp = xhci_port_state_to_neutral(temp);
 		temp |= port_bit;
-		writel(temp, port_array[port_id]);
+		writel(temp, port->addr);
 	}
 }
 
@@ -847,9 +847,8 @@ static u32 xhci_get_ext_port_status(u32 raw_port_status, u32 port_li)
  */
 static u32 xhci_get_port_status(struct usb_hcd *hcd,
 		struct xhci_bus_state *bus_state,
-		__le32 __iomem **port_array,
-		u16 wIndex, u32 raw_port_status,
-		unsigned long *flags)
+	u16 wIndex, u32 raw_port_status,
+		unsigned long flags)
 	__releases(&xhci->lock)
 	__acquires(&xhci->lock)
 {
@@ -939,16 +938,15 @@ static u32 xhci_get_port_status(struct usb_hcd *hcd,
 
 			set_bit(wIndex, &bus_state->rexit_ports);
 
-			xhci_test_and_clear_bit(xhci, port_array, wIndex,
-						PORT_PLC);
+			xhci_test_and_clear_bit(xhci, port, PORT_PLC);
 			xhci_set_link_state(xhci, port, XDEV_U0);
 
-			spin_unlock_irqrestore(&xhci->lock, *flags);
+			spin_unlock_irqrestore(&xhci->lock, flags);
 			time_left = wait_for_completion_timeout(
 					&bus_state->rexit_done[wIndex],
 					msecs_to_jiffies(
 						XHCI_MAX_REXIT_TIMEOUT_MS));
-			spin_lock_irqsave(&xhci->lock, *flags);
+			spin_lock_irqsave(&xhci->lock, flags);
 
 			if (time_left) {
 				slot_id = xhci_find_slot_id_by_port(hcd,
@@ -1099,8 +1097,8 @@ int xhci_hub_control(struct usb_hcd *hcd, u16 typeReq, u16 wValue,
 			retval = -ENODEV;
 			break;
 		}
-		status = xhci_get_port_status(hcd, bus_state, port_array,
-				wIndex, temp, &flags);
+		status = xhci_get_port_status(hcd, bus_state, wIndex, temp,
+					      flags);
 		if (status == 0xffffffff)
 			goto error;
 
@@ -1726,7 +1724,7 @@ int xhci_bus_resume(struct usb_hcd *hcd)
 		for_each_set_bit(port_index, &bus_state->bus_suspended,
 				 BITS_PER_LONG) {
 			/* Clear PLC to poll it later for U0 transition */
-			xhci_test_and_clear_bit(xhci, port_array, port_index,
+			xhci_test_and_clear_bit(xhci, ports[port_index],
 						PORT_PLC);
 			xhci_set_link_state(xhci, ports[port_index], XDEV_U0);
 		}
@@ -1741,7 +1739,7 @@ int xhci_bus_resume(struct usb_hcd *hcd)
 				  port_index);
 			continue;
 		}
-		xhci_test_and_clear_bit(xhci, port_array, port_index, PORT_PLC);
+		xhci_test_and_clear_bit(xhci, ports[port_index], PORT_PLC);
 		slot_id = xhci_find_slot_id_by_port(hcd, xhci, port_index + 1);
 		if (slot_id)
 			xhci_ring_device(xhci, slot_id);
