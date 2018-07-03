@@ -679,16 +679,16 @@ static int xhci_exit_test_mode(struct xhci_hcd *xhci)
 	return xhci_reset(xhci);
 }
 
-void xhci_set_link_state(struct xhci_hcd *xhci, __le32 __iomem **port_array,
-				int port_id, u32 link_state)
+void xhci_set_link_state(struct xhci_hcd *xhci, struct xhci_port *port,
+			 u32 link_state)
 {
 	u32 temp;
 
-	temp = readl(port_array[port_id]);
+	temp = readl(port->addr);
 	temp = xhci_port_state_to_neutral(temp);
 	temp &= ~PORT_PLS_MASK;
 	temp |= PORT_LINK_STROBE | link_state;
-	writel(temp, port_array[port_id]);
+	writel(temp, port->addr);
 }
 
 static void xhci_set_remote_wake_mask(struct xhci_hcd *xhci,
@@ -941,8 +941,7 @@ static u32 xhci_get_port_status(struct usb_hcd *hcd,
 
 			xhci_test_and_clear_bit(xhci, port_array, wIndex,
 						PORT_PLC);
-			xhci_set_link_state(xhci, port_array, wIndex,
-					XDEV_U0);
+			xhci_set_link_state(xhci, port, XDEV_U0);
 
 			spin_unlock_irqrestore(&xhci->lock, *flags);
 			time_left = wait_for_completion_timeout(
@@ -1150,7 +1149,7 @@ int xhci_hub_control(struct usb_hcd *hcd, u16 typeReq, u16 wValue,
 			temp = readl(ports[wIndex]->addr);
 			if ((temp & PORT_PLS_MASK) != XDEV_U0) {
 				/* Resume the port to U0 first */
-				xhci_set_link_state(xhci, port_array, wIndex,
+				xhci_set_link_state(xhci, ports[wIndex],
 							XDEV_U0);
 				spin_unlock_irqrestore(&xhci->lock, flags);
 				msleep(10);
@@ -1178,7 +1177,7 @@ int xhci_hub_control(struct usb_hcd *hcd, u16 typeReq, u16 wValue,
 			xhci_stop_device(xhci, slot_id, 1);
 			spin_lock_irqsave(&xhci->lock, flags);
 
-			xhci_set_link_state(xhci, port_array, wIndex, XDEV_U3);
+			xhci_set_link_state(xhci, ports[wIndex], XDEV_U3);
 
 			spin_unlock_irqrestore(&xhci->lock, flags);
 			msleep(10); /* wait device to enter */
@@ -1208,8 +1207,8 @@ int xhci_hub_control(struct usb_hcd *hcd, u16 typeReq, u16 wValue,
 			/* Put link in RxDetect (enable port) */
 			if (link_state == USB_SS_PORT_LS_RX_DETECT) {
 				xhci_dbg(xhci, "Enable port %d\n", wIndex);
-				xhci_set_link_state(xhci, port_array, wIndex,
-						link_state);
+				xhci_set_link_state(xhci, ports[wIndex],
+							link_state);
 				temp = readl(ports[wIndex]->addr);
 				break;
 			}
@@ -1241,8 +1240,9 @@ int xhci_hub_control(struct usb_hcd *hcd, u16 typeReq, u16 wValue,
 
 				xhci_dbg(xhci, "Enable compliance mode transition for port %d\n",
 						wIndex);
-				xhci_set_link_state(xhci, port_array, wIndex,
+				xhci_set_link_state(xhci, ports[wIndex],
 						link_state);
+
 				temp = readl(ports[wIndex]->addr);
 				break;
 			}
@@ -1270,8 +1270,7 @@ int xhci_hub_control(struct usb_hcd *hcd, u16 typeReq, u16 wValue,
 				}
 			}
 
-			xhci_set_link_state(xhci, port_array, wIndex,
-						link_state);
+			xhci_set_link_state(xhci, ports[wIndex], link_state);
 
 			spin_unlock_irqrestore(&xhci->lock, flags);
 			msleep(20); /* wait device to enter */
@@ -1365,12 +1364,12 @@ int xhci_hub_control(struct usb_hcd *hcd, u16 typeReq, u16 wValue,
 					goto error;
 
 				set_bit(wIndex, &bus_state->resuming_ports);
-				xhci_set_link_state(xhci, port_array, wIndex,
-							XDEV_RESUME);
+				xhci_set_link_state(xhci, ports[wIndex],
+						    XDEV_RESUME);
 				spin_unlock_irqrestore(&xhci->lock, flags);
 				msleep(USB_RESUME_TIMEOUT);
 				spin_lock_irqsave(&xhci->lock, flags);
-				xhci_set_link_state(xhci, port_array, wIndex,
+				xhci_set_link_state(xhci, ports[wIndex],
 							XDEV_U0);
 				clear_bit(wIndex, &bus_state->resuming_ports);
 			}
@@ -1720,8 +1719,7 @@ int xhci_bus_resume(struct usb_hcd *hcd)
 			/* Clear PLC to poll it later for U0 transition */
 			xhci_test_and_clear_bit(xhci, port_array, port_index,
 						PORT_PLC);
-			xhci_set_link_state(xhci, port_array, port_index,
-					    XDEV_U0);
+			xhci_set_link_state(xhci, ports[port_index], XDEV_U0);
 		}
 	}
 
