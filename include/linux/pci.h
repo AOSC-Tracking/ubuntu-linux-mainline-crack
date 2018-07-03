@@ -372,8 +372,7 @@ struct pci_dev {
 	unsigned int	pref_window:1;		/* Bridge has pref mem window */
 	unsigned int	pref_64_window:1;	/* Pref mem window is 64-bit */
 	unsigned int	multifunction:1;	/* Multi-function device */
-	/* keep track of device state */
-	unsigned int	is_added:1;
+
 	unsigned int	is_busmaster:1;		/* Is busmaster */
 	unsigned int	no_msi:1;		/* May not use MSI */
 	unsigned int	no_64bit_msi:1; 	/* May only use 32-bit MSIs */
