@@ -2178,6 +2178,14 @@ static const struct ethtool_ops rtl8169_ethtool_ops = {
 	.set_link_ksettings	= phy_ethtool_set_link_ksettings,
 };
 
+static void rtl_enable_eee(struct rtl8169_private *tp)
+{
+	int supported = rtl_get_eee_supp(tp);
+
+	if (supported > 0)
+		rtl_set_eee_adv(tp, supported);
+}
+
 static void rtl8169_get_mac_version(struct rtl8169_private *tp)
 {
 	/*
@@ -3629,12 +3637,14 @@ static void rtl8168g_1_hw_phy_config(struct rtl8169_private *tp)
 
 	rtl8168g_disable_aldps(tp);
 	rtl8168g_config_eee_phy(tp);
+	rtl_enable_eee(tp);
 }
 
 static void rtl8168g_2_hw_phy_config(struct rtl8169_private *tp)
 {
 	rtl_apply_firmware(tp);
 	rtl8168g_config_eee_phy(tp);
+	rtl_enable_eee(tp);
 }
 
 static void rtl8168h_1_hw_phy_config(struct rtl8169_private *tp)
@@ -3741,6 +3751,7 @@ static void rtl8168h_1_hw_phy_config(struct rtl8169_private *tp)
 
 	rtl8168g_disable_aldps(tp);
 	rtl8168g_config_eee_phy(tp);
+	rtl_enable_eee(tp);
 }
 
 static void rtl8168h_2_hw_phy_config(struct rtl8169_private *tp)
@@ -3810,6 +3821,7 @@ static void rtl8168h_2_hw_phy_config(struct rtl8169_private *tp)
 
 	rtl8168g_disable_aldps(tp);
 	rtl8168g_config_eee_phy(tp);
+	rtl_enable_eee(tp);
 }
 
 static void rtl8168ep_1_hw_phy_config(struct rtl8169_private *tp)
@@ -3839,6 +3851,7 @@ static void rtl8168ep_1_hw_phy_config(struct rtl8169_private *tp)
 
 	rtl8168g_disable_aldps(tp);
 	rtl8168g_config_eee_phy(tp);
+	rtl_enable_eee(tp);
 }
 
 static void rtl8168ep_2_hw_phy_config(struct rtl8169_private *tp)
@@ -3917,6 +3930,7 @@ static void rtl8168ep_2_hw_phy_config(struct rtl8169_private *tp)
 
 	rtl8168g_disable_aldps(tp);
 	rtl8168g_config_eee_phy(tp);
+	rtl_enable_eee(tp);
 }
 
 static void rtl8102e_hw_phy_config(struct rtl8169_private *tp)
