@@ -1615,6 +1615,7 @@ iwl_dump_ini_mem(struct iwl_fw_runtime *fwrt,
 	if (!range) {
 		IWL_ERR(fwrt, "Failed to fill region header: id=%d, type=%d\n",
 			le32_to_cpu(reg->region_id), type);
+		memset(*data, 0, le32_to_cpu((*data)->len));
 		return;
 	}
 
@@ -1624,6 +1625,7 @@ iwl_dump_ini_mem(struct iwl_fw_runtime *fwrt,
 		if (range_size < 0) {
 			IWL_ERR(fwrt, "Failed to dump region: id=%d, type=%d\n",
 				le32_to_cpu(reg->region_id), type);
+			memset(*data, 0, le32_to_cpu((*data)->len));
 			return;
 		}
 		range = range + range_size;
