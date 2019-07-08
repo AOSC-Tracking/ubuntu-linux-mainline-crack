@@ -899,6 +899,12 @@ $(KCONFIG_CONFIG):
 # (Note: use the grouped target '&:' when we bump to GNU Make 4.3)
 #
 # Do not use $(call cmd,...) here. That would suppress prompts from syncconfig,
+# ensure -fcf-protection is disabled when using retpoline as it is
+# incompatible with -mindirect-branch=thunk-extern
+ifdef CONFIG_RETPOLINE
+KBUILD_CFLAGS += $(call cc-option,-fcf-protection=none,)
+endif
+
 # so you cannot notice that Kconfig is waiting for the user input.
 %/config/auto.conf %/config/auto.conf.cmd %/generated/autoconf.h %/generated/rustc_cfg: $(KCONFIG_CONFIG)
 	$(Q)$(kecho) "  SYNC    $@"
