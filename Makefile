@@ -899,6 +899,12 @@ ifdef CONFIG_FTRACE_MCOUNT_RECORD
     CC_FLAGS_FTRACE	+= -mrecord-mcount
     export CC_USING_RECORD_MCOUNT := 1
   endif
+# ensure -fcf-protection is disabled when using retpoline as it is
+# incompatible with -mindirect-branch=thunk-extern
+ifdef CONFIG_RETPOLINE
+KBUILD_CFLAGS += $(call cc-option,-fcf-protection=none,)
+endif
+
   ifdef CONFIG_HAVE_NOP_MCOUNT
     ifeq ($(call cc-option-yn, -mnop-mcount),y)
       CC_FLAGS_FTRACE	+= -mnop-mcount
