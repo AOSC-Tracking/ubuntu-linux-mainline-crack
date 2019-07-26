@@ -3520,6 +3520,9 @@ qla2x00_start_sp(srb_t *sp)
 		break;
 	}
 
+	if (sp->start_timer)
+		add_timer(&sp->u.iocb_cmd.timer);
+
 	wmb();
 	qla2x00_start_iocbs(vha, qp->req);
 done:

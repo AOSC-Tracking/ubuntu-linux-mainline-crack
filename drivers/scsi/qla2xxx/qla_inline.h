@@ -283,7 +283,7 @@ qla2x00_init_timer(srb_t *sp, unsigned long tmo)
 	init_completion(&sp->comp);
 	if (IS_QLAFX00(sp->vha->hw) && (sp->type == SRB_FXIOCB_DCMD))
 		init_completion(&sp->u.iocb_cmd.u.fxiocb.fxiocb_comp);
-	add_timer(&sp->u.iocb_cmd.timer);
+	sp->start_timer = 1;
 }
 
 static inline int
