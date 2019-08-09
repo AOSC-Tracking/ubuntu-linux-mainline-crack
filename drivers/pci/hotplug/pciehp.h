@@ -73,6 +73,7 @@ do {									\
  *	used for synchronous writes to the Slot Control register
  * @pending_events: used by the IRQ handler to save events retrieved from the
  *	Slot Status register for later consumption by the IRQ thread
+ * @ist_running: flag to keep user request waiting while IRQ thread is running
  * @notification_enabled: whether the IRQ was requested successfully
  * @power_fault_detected: whether a power fault was detected by the hardware
  *	that has not yet been cleared by the user
@@ -106,6 +107,7 @@ struct controller {
 	wait_queue_head_t queue;
 
 	atomic_t pending_events;		/* event handling */
+	unsigned int ist_running;
 	unsigned int notification_enabled:1;
 	unsigned int power_fault_detected;
 	struct task_struct *poll_thread;
