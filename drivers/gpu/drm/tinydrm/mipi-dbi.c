@@ -972,8 +972,7 @@ static ssize_t mipi_dbi_debugfs_command_write(struct file *file,
 	struct mipi_dbi *mipi = m->private;
 	u8 val, cmd = 0, parameters[64];
 	char *buf, *pos, *token;
-	unsigned int i;
-	int ret;
+	int i, ret;
 
 	buf = memdup_user_nul(ubuf, count);
 	if (IS_ERR(buf))
