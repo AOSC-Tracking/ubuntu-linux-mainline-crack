@@ -406,7 +406,7 @@ extern const struct sh_pfc_soc_info shx3_pinmux_info;
  *   - psel: Physical multiplexing selector
  */
 #define PINMUX_IPSR_PHYS(ipsr, fn, psel) \
-	PINMUX_DATA(fn##_MARK, FN_##psel)
+	PINMUX_DATA(fn##_MARK, FN_##psel, FN_##ipsr)
 
 /*
  * Describe a pinmux configuration for a single-function pin with GPIO
