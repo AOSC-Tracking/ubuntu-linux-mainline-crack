@@ -1886,7 +1886,7 @@ static int smbd_recv_buf(struct smbd_connection *info, char *buf,
 again:
 	if (info->transport_status != SMBD_CONNECTED) {
 		log_read(ERR, "disconnected\n");
-		return -ENODEV;
+		return -ECONNABORTED;
 	}
 
 	/*
