@@ -1617,6 +1617,11 @@ static int pxa2xx_spi_fw_translate_cs(struct spi_controller *master,
 	return cs;
 }
 
+static size_t pxa2xx_spi_max_dma_transfer_size(struct spi_device *spi)
+{
+	return MAX_DMA_LEN;
+}
+
 static int pxa2xx_spi_probe(struct platform_device *pdev)
 {
 	struct device *dev = &pdev->dev;
@@ -1722,6 +1727,8 @@ static int pxa2xx_spi_probe(struct platform_device *pdev)
 		} else {
 			master->can_dma = pxa2xx_spi_can_dma;
 			master->max_dma_len = MAX_DMA_LEN;
+			master->max_transfer_size =
+				pxa2xx_spi_max_dma_transfer_size;
 		}
 	}
 
