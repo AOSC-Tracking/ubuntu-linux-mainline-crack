@@ -140,6 +140,7 @@ static int run_test(struct pci_test *test)
 	}
 
 	fflush(stdout);
+	close(fd);
 }
 
 int main(int argc, char **argv)
