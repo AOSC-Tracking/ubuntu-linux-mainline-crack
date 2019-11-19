@@ -262,7 +262,7 @@ int intel_timeline_init(struct intel_timeline *timeline,
 	return 0;
 }
 
-static void timelines_init(struct intel_gt *gt)
+void intel_gt_init_timelines(struct intel_gt *gt)
 {
 	struct intel_gt_timelines *timelines = &gt->timelines;
 
@@ -271,11 +271,6 @@ static void timelines_init(struct intel_gt *gt)
 
 	spin_lock_init(&timelines->hwsp_lock);
 	INIT_LIST_HEAD(&timelines->hwsp_free_list);
-}
-
-void intel_timelines_init(struct drm_i915_private *i915)
-{
-	timelines_init(&i915->gt);
 }
 
 void intel_timeline_fini(struct intel_timeline *timeline)
@@ -347,7 +342,7 @@ void intel_timeline_enter(struct intel_timeline *tl)
 	GEM_BUG_ON(!tl->active_count); /* overflow? */
 
 	spin_lock_irqsave(&timelines->lock, flags);
-	list_add(&tl->link, &timelines->active_list);
+	list_add_tail(&tl->link, &timelines->active_list);
 	spin_unlock_irqrestore(&timelines->lock, flags);
 }
 
@@ -562,17 +557,12 @@ void __intel_timeline_free(struct kref *kref)
 	kfree_rcu(timeline, rcu);
 }
 
-static void timelines_fini(struct intel_gt *gt)
+void intel_gt_fini_timelines(struct intel_gt *gt)
 {
 	struct intel_gt_timelines *timelines = &gt->timelines;
 
 	GEM_BUG_ON(!list_empty(&timelines->active_list));
 	GEM_BUG_ON(!list_empty(&timelines->hwsp_free_list));
-}
-
-void intel_timelines_fini(struct drm_i915_private *i915)
-{
-	timelines_fini(&i915->gt);
 }
 
 #if IS_ENABLED(CONFIG_DRM_I915_SELFTEST)
