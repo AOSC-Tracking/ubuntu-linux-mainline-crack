@@ -53,9 +53,7 @@ static struct pulse *pulse_create(void)
 
 static void pulse_unlock_wait(struct pulse *p)
 {
-	mutex_lock(&p->active.mutex);
-	mutex_unlock(&p->active.mutex);
-	flush_work(&p->active.work);
+	i915_active_unlock_wait(&p->active);
 }
 
 static int __live_idle_pulse(struct intel_engine_cs *engine,
@@ -93,6 +91,11 @@ static int __live_idle_pulse(struct intel_engine_cs *engine,
 	GEM_BUG_ON(!llist_empty(&engine->barrier_tasks));
 
 	if (intel_gt_retire_requests_timeout(engine->gt, HZ / 5)) {
+		struct drm_printer m = drm_err_printer("pulse");
+
+		pr_err("%s: no heartbeat pulse?\n", engine->name);
+		intel_engine_dump(engine, &m, "%s", engine->name);
+
 		err = -ETIME;
 		goto out;
 	}
