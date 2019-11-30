@@ -454,7 +454,8 @@ static u32 *gen7_xcs_emit_breadcrumb(struct i915_request *rq, u32 *cs)
 	GEM_BUG_ON(i915_request_active_timeline(rq)->hwsp_ggtt != rq->engine->status_page.vma);
 	GEM_BUG_ON(offset_in_page(i915_request_active_timeline(rq)->hwsp_offset) != I915_GEM_HWS_SEQNO_ADDR);
 
-	*cs++ = MI_FLUSH_DW | MI_FLUSH_DW_OP_STOREDW | MI_FLUSH_DW_STORE_INDEX;
+	*cs++ = MI_FLUSH_DW | MI_INVALIDATE_TLB |
+		MI_FLUSH_DW_OP_STOREDW | MI_FLUSH_DW_STORE_INDEX;
 	*cs++ = I915_GEM_HWS_SEQNO_ADDR | MI_FLUSH_DW_USE_GTT;
 	*cs++ = rq->fence.seqno;
 
@@ -1365,13 +1366,19 @@ static int load_pd_dir(struct i915_request *rq, const struct i915_ppgtt *ppgtt)
 	const struct intel_engine_cs * const engine = rq->engine;
 	u32 *cs;
 
-	cs = intel_ring_begin(rq, 6);
+	cs = intel_ring_begin(rq, 10);
 	if (IS_ERR(cs))
 		return PTR_ERR(cs);
 
 	*cs++ = MI_LOAD_REGISTER_IMM(1);
 	*cs++ = i915_mmio_reg_offset(RING_PP_DIR_DCLV(engine->mmio_base));
 	*cs++ = PP_DIR_DCLV_2G;
+
+	*cs++ = MI_STORE_REGISTER_MEM | MI_SRM_LRM_GLOBAL_GTT;
+	*cs++ = i915_mmio_reg_offset(RING_PP_DIR_DCLV(engine->mmio_base));
+	*cs++ = intel_gt_scratch_offset(rq->engine->gt,
+					INTEL_GT_SCRATCH_FIELD_DEFAULT);
+	*cs++ = MI_NOOP;
 
 	*cs++ = MI_LOAD_REGISTER_IMM(1);
 	*cs++ = i915_mmio_reg_offset(RING_PP_DIR_BASE(engine->mmio_base));
@@ -1578,39 +1585,17 @@ static int switch_context(struct i915_request *rq)
 {
 	struct intel_context *ce = rq->hw_context;
 	struct i915_address_space *vm = vm_alias(ce);
+	u32 hw_flags = 0;
 	int ret;
 
 	GEM_BUG_ON(HAS_EXECLISTS(rq->i915));
 
 	if (vm) {
+		struct intel_engine_cs *engine = rq->engine;
+
 		ret = load_pd_dir(rq, i915_vm_to_ppgtt(vm));
 		if (ret)
 			return ret;
-	}
-
-	if (ce->state) {
-		u32 hw_flags;
-
-		GEM_BUG_ON(rq->engine->id != RCS0);
-
-		/*
-		 * The kernel context(s) is treated as pure scratch and is not
-		 * expected to retain any state (as we sacrifice it during
-		 * suspend and on resume it may be corrupted). This is ok,
-		 * as nothing actually executes using the kernel context; it
-		 * is purely used for flushing user contexts.
-		 */
-		hw_flags = 0;
-		if (i915_gem_context_is_kernel(rq->gem_context))
-			hw_flags = MI_RESTORE_INHIBIT;
-
-		ret = mi_set_context(rq, hw_flags);
-		if (ret)
-			return ret;
-	}
-
-	if (vm) {
-		struct intel_engine_cs *engine = rq->engine;
 
 		ret = engine->emit_flush(rq, EMIT_INVALIDATE);
 		if (ret)
@@ -1633,6 +1618,17 @@ static int switch_context(struct i915_request *rq)
 			return ret;
 
 		ret = engine->emit_flush(rq, EMIT_FLUSH);
+		if (ret)
+			return ret;
+	}
+
+	if (ce->state) {
+		GEM_BUG_ON(rq->engine->id != RCS0);
+
+		if (!rq->engine->default_state)
+			hw_flags = MI_RESTORE_INHIBIT;
+
+		ret = mi_set_context(rq, hw_flags);
 		if (ret)
 			return ret;
 	}
