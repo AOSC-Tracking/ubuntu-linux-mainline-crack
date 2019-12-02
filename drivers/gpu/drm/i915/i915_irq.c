@@ -2484,7 +2484,11 @@ __gen11_irq_handler(struct drm_i915_private * const i915,
 		 * GEN11_DISPLAY_INT_CTL has same format as GEN8_MASTER_IRQ
 		 * for the display related bits.
 		 */
+		raw_reg_write(regs, GEN11_DISPLAY_INT_CTL, 0x0);
 		gen8_de_irq_handler(i915, disp_ctl);
+		raw_reg_write(regs, GEN11_DISPLAY_INT_CTL,
+			      GEN11_DISPLAY_IRQ_ENABLE);
+
 		enable_rpm_wakeref_asserts(&i915->runtime_pm);
 	}
 
@@ -2976,6 +2980,8 @@ static void icp_hpd_irq_setup(struct drm_i915_private *dev_priv,
 	hotplug_irqs = sde_ddi_mask | sde_tc_mask;
 	enabled_irqs = intel_hpd_enabled_irqs(dev_priv, pins);
 
+	I915_WRITE(SHPD_FILTER_CNT, SHPD_FILTER_CNT_500_ADJ);
+
 	ibx_display_interrupt_update(dev_priv, hotplug_irqs, enabled_irqs);
 
 	icp_hpd_detection_setup(dev_priv, ddi_enable_mask, tc_enable_mask);
@@ -3080,6 +3086,9 @@ static void spt_hpd_detection_setup(struct drm_i915_private *dev_priv)
 static void spt_hpd_irq_setup(struct drm_i915_private *dev_priv)
 {
 	u32 hotplug_irqs, enabled_irqs;
+
+	if (INTEL_PCH_TYPE(dev_priv) >= PCH_CNP)
+		I915_WRITE(SHPD_FILTER_CNT, SHPD_FILTER_CNT_500_ADJ);
 
 	hotplug_irqs = SDE_HOTPLUG_MASK_SPT;
 	enabled_irqs = intel_hpd_enabled_irqs(dev_priv, hpd_spt);
