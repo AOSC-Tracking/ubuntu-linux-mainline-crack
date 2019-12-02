@@ -61,19 +61,15 @@ void i915_active_noop(struct dma_fence *fence, struct dma_fence_cb *cb);
  */
 static inline void
 __i915_active_fence_init(struct i915_active_fence *active,
-			 struct mutex *lock,
 			 void *fence,
 			 dma_fence_func_t fn)
 {
 	RCU_INIT_POINTER(active->fence, fence);
 	active->cb.func = fn ?: i915_active_noop;
-#if IS_ENABLED(CONFIG_DRM_I915_DEBUG_GEM)
-	active->lock = lock;
-#endif
 }
 
-#define INIT_ACTIVE_FENCE(A, LOCK) \
-	__i915_active_fence_init((A), (LOCK), NULL, NULL)
+#define INIT_ACTIVE_FENCE(A) \
+	__i915_active_fence_init((A), NULL, NULL)
 
 struct dma_fence *
 __i915_active_fence_set(struct i915_active_fence *active,
@@ -125,15 +121,6 @@ static inline bool
 i915_active_fence_isset(const struct i915_active_fence *active)
 {
 	return rcu_access_pointer(active->fence);
-}
-
-static inline void
-i915_active_fence_cb(struct dma_fence *fence, struct dma_fence_cb *cb)
-{
-	struct i915_active_fence *active =
-		container_of(cb, typeof(*active), cb);
-
-	RCU_INIT_POINTER(active->fence, NULL);
 }
 
 /*
@@ -215,5 +202,6 @@ void i915_active_acquire_barrier(struct i915_active *ref);
 void i915_request_add_active_barriers(struct i915_request *rq);
 
 void i915_active_print(struct i915_active *ref, struct drm_printer *m);
+void i915_active_unlock_wait(struct i915_active *ref);
 
 #endif /* _I915_ACTIVE_H_ */
