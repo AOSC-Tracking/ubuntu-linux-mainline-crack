@@ -1354,6 +1354,7 @@ firmware:       rtlwifi/rtl8723efw.bin
 firmware:       rtlwifi/rtl8821aefw.bin
 firmware:       rtlwifi/rtl8821aefw_29.bin
 firmware:       rtlwifi/rtl8822befw.bin
+firmware:       rtw88/rtw8723d_fw.bin
 firmware:       rtw88/rtw8822b_fw.bin
 firmware:       rtw88/rtw8822c_fw.bin
 firmware:       sd8385.bin
