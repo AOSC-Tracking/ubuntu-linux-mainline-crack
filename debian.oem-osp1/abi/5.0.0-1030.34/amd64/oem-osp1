@@ -3313,6 +3313,7 @@ EXPORT_SYMBOL drivers/net/wireless/realtek/rtlwifi/rtlwifi 0x00000000	rtl_signal
 EXPORT_SYMBOL drivers/net/wireless/realtek/rtlwifi/rtlwifi 0x00000000	rtl_wowlan_fw_cb
 EXPORT_SYMBOL drivers/net/wireless/realtek/rtlwifi/rtlwifi 0x00000000	rtlwifi_rate_mapping
 EXPORT_SYMBOL drivers/net/wireless/realtek/rtw88/rtw88 0x00000000	__rtw_dbg
+EXPORT_SYMBOL drivers/net/wireless/realtek/rtw88/rtw88 0x00000000	rtw8723d_hw_spec
 EXPORT_SYMBOL drivers/net/wireless/realtek/rtw88/rtw88 0x00000000	rtw8822b_hw_spec
 EXPORT_SYMBOL drivers/net/wireless/realtek/rtw88/rtw88 0x00000000	rtw8822c_hw_spec
 EXPORT_SYMBOL drivers/net/wireless/realtek/rtw88/rtw88 0x00000000	rtw_chip_info_setup
@@ -3320,7 +3321,9 @@ EXPORT_SYMBOL drivers/net/wireless/realtek/rtw88/rtw88 0x00000000	rtw_core_deini
 EXPORT_SYMBOL drivers/net/wireless/realtek/rtw88/rtw88 0x00000000	rtw_core_init
 EXPORT_SYMBOL drivers/net/wireless/realtek/rtw88/rtw88 0x00000000	rtw_debug_mask
 EXPORT_SYMBOL drivers/net/wireless/realtek/rtw88/rtw88 0x00000000	rtw_fw_c2h_cmd_rx_irqsafe
+EXPORT_SYMBOL drivers/net/wireless/realtek/rtw88/rtw88 0x00000000	rtw_fw_lps_deep_mode
 EXPORT_SYMBOL drivers/net/wireless/realtek/rtw88/rtw88 0x00000000	rtw_ops
+EXPORT_SYMBOL drivers/net/wireless/realtek/rtw88/rtw88 0x00000000	rtw_power_mode_change
 EXPORT_SYMBOL drivers/net/wireless/realtek/rtw88/rtw88 0x00000000	rtw_register_hw
 EXPORT_SYMBOL drivers/net/wireless/realtek/rtw88/rtw88 0x00000000	rtw_rx_stats
 EXPORT_SYMBOL drivers/net/wireless/realtek/rtw88/rtw88 0x00000000	rtw_tx_fill_tx_desc
