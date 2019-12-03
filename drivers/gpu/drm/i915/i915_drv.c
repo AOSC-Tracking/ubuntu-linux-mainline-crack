@@ -297,9 +297,6 @@ static int i915_driver_modeset_probe(struct drm_i915_private *i915)
 	if (ret)
 		goto cleanup_vga_client;
 
-	/* must happen before intel_power_domains_init_hw() on VLV/CHV */
-	intel_update_rawclk(i915);
-
 	intel_power_domains_init_hw(i915, false);
 
 	intel_csr_ucode_init(i915);
@@ -1055,7 +1052,7 @@ intel_get_dram_info(struct drm_i915_private *dev_priv)
 	 */
 	dram_info->is_16gb_dimm = !IS_GEN9_LP(dev_priv);
 
-	if (INTEL_GEN(dev_priv) < 9)
+	if (INTEL_GEN(dev_priv) < 9 || !HAS_DISPLAY(dev_priv))
 		return;
 
 	if (IS_GEN9_LP(dev_priv))
@@ -1819,8 +1816,6 @@ static int i915_drm_resume(struct drm_device *dev)
 	int ret;
 
 	disable_rpm_wakeref_asserts(&dev_priv->runtime_pm);
-
-	intel_rc6_ctx_wa_resume(&dev_priv->gt.rc6);
 
 	intel_gt_sanitize(&dev_priv->gt, true);
 
@@ -2787,7 +2782,3 @@ static struct drm_driver driver = {
 	.minor = DRIVER_MINOR,
 	.patchlevel = DRIVER_PATCHLEVEL,
 };
-
-#if IS_ENABLED(CONFIG_DRM_I915_SELFTEST)
-#include "selftests/mock_drm.c"
-#endif
