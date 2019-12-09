@@ -2102,7 +2102,7 @@ static bool ata_identify_page_supported(struct ata_device *dev, u8 page)
 	unsigned int err, i;
 
 	if (!ata_log_supported(dev, ATA_LOG_IDENTIFY_DEVICE)) {
-		ata_dev_warn(dev, "ATA Identify Device Log not supported\n");
+		ata_dev_notice(dev, "ATA Identify Device Log not supported\n");
 		return false;
 	}
 
@@ -2176,7 +2176,7 @@ static void ata_dev_config_ncq_send_recv(struct ata_device *dev)
 	unsigned int err_mask;
 
 	if (!ata_log_supported(dev, ATA_LOG_NCQ_SEND_RECV)) {
-		ata_dev_warn(dev, "NCQ Send/Recv Log not supported\n");
+		ata_dev_notice(dev, "NCQ Send/Recv Log not supported\n");
 		return;
 	}
 	err_mask = ata_read_log_page(dev, ATA_LOG_NCQ_SEND_RECV,
@@ -2205,8 +2205,8 @@ static void ata_dev_config_ncq_non_data(struct ata_device *dev)
 	unsigned int err_mask;
 
 	if (!ata_log_supported(dev, ATA_LOG_NCQ_NON_DATA)) {
-		ata_dev_warn(dev,
-			     "NCQ Send/Recv Log not supported\n");
+		ata_dev_notice(dev,
+			       "NCQ Send/Recv Log not supported\n");
 		return;
 	}
 	err_mask = ata_read_log_page(dev, ATA_LOG_NCQ_NON_DATA,
@@ -2536,14 +2536,14 @@ int ata_dev_configure(struct ata_device *dev)
 		if (ata_id_is_cfa(id)) {
 			/* CPRM may make this media unusable */
 			if (id[ATA_ID_CFA_KEY_MGMT] & 1)
-				ata_dev_warn(dev,
+				ata_dev_notice(dev,
 	"supports DRM functions and may not be fully accessible\n");
 			snprintf(revbuf, 7, "CFA");
 		} else {
 			snprintf(revbuf, 7, "ATA-%d", ata_id_major_version(id));
 			/* Warn the user if the device has TPM extensions */
 			if (ata_id_has_tpm(id))
-				ata_dev_warn(dev,
+				ata_dev_notice(dev,
 	"supports DRM functions and may not be fully accessible\n");
 		}
 
@@ -2759,8 +2759,8 @@ int ata_dev_configure(struct ata_device *dev)
 	}
 
 	if ((dev->horkage & ATA_HORKAGE_FIRMWARE_WARN) && print_info) {
-		ata_dev_warn(dev, "WARNING: device requires firmware update to be fully functional\n");
-		ata_dev_warn(dev, "         contact the vendor or visit http://ata.wiki.kernel.org\n");
+		ata_dev_notice(dev, "WARNING: device requires firmware update to be fully functional\n");
+		ata_dev_notice(dev, "         contact the vendor or visit http://ata.wiki.kernel.org\n");
 	}
 
 	return 0;
@@ -4980,7 +4980,10 @@ int ata_std_qc_defer(struct ata_queued_cmd *qc)
 	return ATA_DEFER_LINK;
 }
 
-void ata_noop_qc_prep(struct ata_queued_cmd *qc) { }
+enum ata_completion_errors ata_noop_qc_prep(struct ata_queued_cmd *qc)
+{
+	return AC_ERR_OK;
+}
 
 /**
  *	ata_sg_init - Associate command with scatter-gather table.
@@ -5443,7 +5446,9 @@ void ata_qc_issue(struct ata_queued_cmd *qc)
 		return;
 	}
 
-	ap->ops->qc_prep(qc);
+	qc->err_mask |= ap->ops->qc_prep(qc);
+	if (unlikely(qc->err_mask))
+		goto err;
 	trace_ata_qc_issue(qc);
 	qc->err_mask |= ap->ops->qc_issue(qc);
 	if (unlikely(qc->err_mask))
@@ -6707,6 +6712,9 @@ static void ata_port_detach(struct ata_port *ap)
 void ata_host_detach(struct ata_host *host)
 {
 	int i;
+
+	/* Ensure ata_port probe has completed */
+	async_synchronize_full();
 
 	for (i = 0; i < host->n_ports; i++)
 		ata_port_detach(host->ports[i]);
