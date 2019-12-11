@@ -1,0 +1,32 @@
+drm drm-fixes 781d5eb4b4a63df352d6f222c85f2628988aba87
+	Merge tag 'drm-misc-fixes-2019-11-25' of git://anongit.freedesktop.org/drm/drm-misc into drm-fixes
+drm-misc drm-misc-fixes 78baee8d3b976a6a6a2c208e3a36d3f1e6297e6c
+	MAINTAINERS: Match on dma_buf|fence|resv anywhere
+drm-intel drm-intel-fixes 750bde2fd4ffacc297473c36d6fdb29c395b06aa
+	drm/i915: Serialise with remote retirement
+drm-amd drm-amd-fixes 2b702e72e33bbdec0764cfb6e1dd00fe1142ae55
+	Merge tag 'drm-misc-fixes-2017-09-28-1' of git://anongit.freedesktop.org/git/drm-misc into drm-fixes
+drm drm-next e42617b825f8073569da76dc4510bfa019b1c35a
+	Linux 5.5-rc1
+drm-misc drm-misc-next-fixes 0a5239985a3bc084738851afdf3fceb7d5651b0c
+	drm/panfrost: Open/close the perfcnt BO
+drm-intel drm-intel-next-fixes 01bb630319337be15fc50c211126180198d4e157
+	drm/i915/ehl: Make icp_digital_port_connected() use phy instead of port
+drm-amd drm-amd-next-fixes 2bd6bf03f4c1c59381d62c61d03f6cc3fe71f66e
+	Linux 4.14-rc1
+drm-misc drm-misc-next 14856e9efb87381ab3ff71085ae8129ee4b2607e
+	drm/udl: Remove udl_fb.c
+drm-intel drm-intel-next-queued 6aacb5a3b0bccfa207ef2710f106020c1d749f1d
+	drm/i915: Align start for memcpy_from_wc
+drm-intel drm-intel-next 1883e2999f045e1fd6f76a7f30288a5312085289
+	drm/i915: Update DRIVER_DATE to 20191101
+drm-amd drm-amd-next 754270c7c56292e97d0eff924a5d5d83f92add07
+	Merge branch 'drm-next-4.15' of git://people.freedesktop.org/~agd5f/linux into drm-next
+sound-upstream for-linus 5815bdfd7f54739be9abed1301d55f5e74d7ad1f
+	ALSA: hda/realtek - Line-out jack doesn't work on a Dell AIO
+sound-upstream for-next dc5eafe7787c6c4ffab6c6b8a5f78859a249880e
+	ALSA: usb-audio: Support PCM sync_stop
+drm-intel topic/core-for-CI fc8e409df4c8c4931ae61d6ad09b2cd4d9eaccaa
+	Revert "drm/i915: Don't select BROKEN"
+drm drm-vmwgfx-coherent 0a6cad5df541108cfd3fbd79eef48eb824c89bdc
+	Merge branch 'vmwgfx-coherent' of git://people.freedesktop.org/~thomash/linux into drm-next
