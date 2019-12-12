@@ -54,7 +54,7 @@ struct drm_printer;
 	param(int, edp_vswing, 0) \
 	param(int, reset, 2) \
 	param(unsigned int, inject_load_failure, 0) \
-	param(int, enable_dpcd_backlight, 0) \
+	param(int, enable_dpcd_backlight, -1) \
 	/* leave bools at the end to not create holes */ \
 	param(bool, alpha_support, IS_ENABLED(CONFIG_DRM_I915_ALPHA_SUPPORT)) \
 	param(bool, enable_hangcheck, true) \
