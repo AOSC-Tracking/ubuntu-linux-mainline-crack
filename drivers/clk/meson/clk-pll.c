@@ -70,6 +70,15 @@ static unsigned long meson_clk_pll_recalc_rate(struct clk_hw *hw,
 	u16 frac;
 
 	pllt.n = meson_parm_read(clk->map, &pll->n);
+
+	/*
+	 * On some HW, N is set to zero on init. This value is invalid as
+	 * it would result in a division by zero. The rate can't be
+	 * calculated in this case
+	 */
+	if (pllt.n == 0)
+		return 0;
+
 	pllt.m = meson_parm_read(clk->map, &pll->m);
 
 	frac = MESON_PARM_APPLICABLE(&pll->frac) ?
