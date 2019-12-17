@@ -1,0 +1,32 @@
+drm drm-fixes d1eef1c619749b2a57e514a3fa67d9a516ffa919
+	Linux 5.5-rc2
+drm-misc drm-misc-fixes d16f0f61400074dbc75797ca5ef5c3d50f6c0ddf
+	Merge tag 'drm-fixes-5.5-2019-12-12' of git://people.freedesktop.org/~agd5f/linux into drm-fixes
+drm-intel drm-intel-fixes d55157f6aaca04df4223c2c7a96995ceda016a15
+	drm/i915: Fix WARN_ON condition for cursor plane ddb allocation
+drm-amd drm-amd-fixes 2b702e72e33bbdec0764cfb6e1dd00fe1142ae55
+	Merge tag 'drm-misc-fixes-2017-09-28-1' of git://anongit.freedesktop.org/git/drm-misc into drm-fixes
+drm drm-next be452c4e8d1434a0095a9baa6523bb9772258d59
+	Merge tag 'drm-next-5.6-2019-12-11' of git://people.freedesktop.org/~agd5f/linux into drm-next
+drm-misc drm-misc-next-fixes 0a5239985a3bc084738851afdf3fceb7d5651b0c
+	drm/panfrost: Open/close the perfcnt BO
+drm-intel drm-intel-next-fixes 01bb630319337be15fc50c211126180198d4e157
+	drm/i915/ehl: Make icp_digital_port_connected() use phy instead of port
+drm-amd drm-amd-next-fixes 2bd6bf03f4c1c59381d62c61d03f6cc3fe71f66e
+	Linux 4.14-rc1
+drm-misc drm-misc-next c8d4a56082eebabbf96ddb86238808c30124f06b
+	drm/mcde: Some fixes to handling video mode
+drm-intel drm-intel-next-queued f20c6b278d1a0cedc691c3b0ebcf9154ad9d8a1a
+	drm/i915/guc: Unify notify() functions
+drm-intel drm-intel-next 1883e2999f045e1fd6f76a7f30288a5312085289
+	drm/i915: Update DRIVER_DATE to 20191101
+drm-amd drm-amd-next 754270c7c56292e97d0eff924a5d5d83f92add07
+	Merge branch 'drm-next-4.15' of git://people.freedesktop.org/~agd5f/linux into drm-next
+sound-upstream for-linus 7c497d799267134786afdf719d9230b7d6f77d84
+	Merge tag 'asoc-fix-v5.5-rc2' of https://git.kernel.org/pub/scm/linux/kernel/git/broonie/sound into for-linus
+sound-upstream for-next df1d6ea05a75104b8e7dc642cc5d3f9c4b80d58b
+	Merge tag 'y2038-alsa-v8-signed' of git://git.kernel.org:/pub/scm/linux/kernel/git/arnd/playground into for-next
+drm-intel topic/core-for-CI 1c4f0022734092f0f8ed3c977c9c6542815b0983
+	Revert "devtmpfs: use do_mount() instead of ksys_mount()"
+drm drm-vmwgfx-coherent 0a6cad5df541108cfd3fbd79eef48eb824c89bdc
+	Merge branch 'vmwgfx-coherent' of git://people.freedesktop.org/~thomash/linux into drm-next
