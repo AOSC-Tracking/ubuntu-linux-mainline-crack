@@ -63,7 +63,7 @@ static void slice_print_mask(const char *label, const struct slice_mask *mask) {
 
 #endif
 
-static inline bool slice_addr_is_low(unsigned long addr)
+static inline notrace bool slice_addr_is_low(unsigned long addr)
 {
 	u64 tmp = (u64)addr;
 
@@ -709,7 +709,7 @@ unsigned long arch_get_unmapped_area_topdown(struct file *filp,
 				       current->mm->context.user_psize, 1);
 }
 
-unsigned int get_slice_psize(struct mm_struct *mm, unsigned long addr)
+unsigned int notrace get_slice_psize(struct mm_struct *mm, unsigned long addr)
 {
 	unsigned char *psizes;
 	int index, mask_index;
