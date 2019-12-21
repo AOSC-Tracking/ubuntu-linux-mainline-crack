@@ -25,6 +25,7 @@ void intel_gt_init_early(struct intel_gt *gt, struct drm_i915_private *i915)
 
 	intel_gt_init_reset(gt);
 	intel_gt_init_requests(gt);
+	intel_gt_init_timelines(gt);
 	intel_gt_pm_init_early(gt);
 
 	intel_rps_init_early(&gt->rps);
@@ -73,7 +74,6 @@ int intel_gt_init_hw(struct intel_gt *gt)
 	struct intel_uncore *uncore = gt->uncore;
 	int ret;
 
-	BUG_ON(!i915->kernel_context);
 	ret = intel_gt_terminally_wedged(gt);
 	if (ret)
 		return ret;
@@ -303,7 +303,7 @@ void intel_gt_flush_ggtt_writes(struct intel_gt *gt)
 
 	intel_gt_chipset_flush(gt);
 
-	with_intel_runtime_pm(uncore->rpm, wakeref) {
+	with_intel_runtime_pm_if_in_use(uncore->rpm, wakeref) {
 		unsigned long flags;
 
 		spin_lock_irqsave(&uncore->lock, flags);
@@ -364,6 +364,14 @@ static void intel_gt_fini_scratch(struct intel_gt *gt)
 	i915_vma_unpin_and_release(&gt->scratch, 0);
 }
 
+static struct i915_address_space *kernel_vm(struct intel_gt *gt)
+{
+	if (INTEL_PPGTT(gt->i915) > INTEL_PPGTT_ALIASING)
+		return &i915_ppgtt_create(gt->i915)->vm;
+	else
+		return i915_vm_get(&gt->ggtt->vm);
+}
+
 int intel_gt_init(struct intel_gt *gt)
 {
 	int err;
@@ -374,7 +382,17 @@ int intel_gt_init(struct intel_gt *gt)
 
 	intel_gt_pm_init(gt);
 
+	gt->vm = kernel_vm(gt);
+	if (!gt->vm) {
+		err = -ENOMEM;
+		goto err_scratch;
+	}
+
 	return 0;
+
+err_scratch:
+	intel_gt_fini_scratch(gt);
+	return err;
 }
 
 void intel_gt_driver_remove(struct intel_gt *gt)
@@ -389,6 +407,12 @@ void intel_gt_driver_unregister(struct intel_gt *gt)
 
 void intel_gt_driver_release(struct intel_gt *gt)
 {
+	struct i915_address_space *vm;
+
+	vm = fetch_and_zero(&gt->vm);
+	if (vm) /* FIXME being called twice on error paths :( */
+		i915_vm_put(vm);
+
 	intel_gt_pm_fini(gt);
 	intel_gt_fini_scratch(gt);
 }
@@ -396,5 +420,7 @@ void intel_gt_driver_release(struct intel_gt *gt)
 void intel_gt_driver_late_release(struct intel_gt *gt)
 {
 	intel_uc_driver_late_release(&gt->uc);
+	intel_gt_fini_requests(gt);
 	intel_gt_fini_reset(gt);
+	intel_gt_fini_timelines(gt);
 }
