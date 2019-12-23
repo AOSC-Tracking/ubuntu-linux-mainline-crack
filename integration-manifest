@@ -1,0 +1,32 @@
+drm drm-fixes 0c517e6ced039b389bbe2d6be757525e52442f64
+	Merge tag 'drm-intel-fixes-2019-12-19' of git://anongit.freedesktop.org/drm/drm-intel into drm-fixes
+drm-misc drm-misc-fixes ac2917b01992c098b8d4e6837115e3ca347fdd90
+	drm/arm/mali: make malidp_mw_connector_helper_funcs static
+drm-intel drm-intel-fixes e85ade1f50aae464ce196672faa7a099fd1721ed
+	drm/i915: Hold reference to intel_frontbuffer as we track activity
+drm-amd drm-amd-fixes 2b702e72e33bbdec0764cfb6e1dd00fe1142ae55
+	Merge tag 'drm-misc-fixes-2017-09-28-1' of git://anongit.freedesktop.org/git/drm-misc into drm-fixes
+drm drm-next 5f773e551a3b977013df24d570d486645f326672
+	drm/amdgpu/display: use msleep rather than udelay for HDCP
+drm-misc drm-misc-next-fixes 0a5239985a3bc084738851afdf3fceb7d5651b0c
+	drm/panfrost: Open/close the perfcnt BO
+drm-intel drm-intel-next-fixes 01bb630319337be15fc50c211126180198d4e157
+	drm/i915/ehl: Make icp_digital_port_connected() use phy instead of port
+drm-amd drm-amd-next-fixes 2bd6bf03f4c1c59381d62c61d03f6cc3fe71f66e
+	Linux 4.14-rc1
+drm-misc drm-misc-next 42240c90e3b03deb52c224609e1b2b132ff40f8b
+	drm/atomic: Spell CRTC consistently
+drm-intel drm-intel-next-queued 44963bf9d4c28815b6bcfb03061e37831ab1ce42
+	drm/i915/gt: Tidy up checking active timelines during retirement
+drm-intel drm-intel-next 3446c63a0f2a691fdc6fffaddc6e0c1285efc80c
+	drm/i915: Update DRIVER_DATE to 20191223
+drm-amd drm-amd-next 754270c7c56292e97d0eff924a5d5d83f92add07
+	Merge branch 'drm-next-4.15' of git://people.freedesktop.org/~agd5f/linux into drm-next
+sound-upstream for-linus 8cc0991c09bfd11fd878b0321a7a06724520d879
+	ALSA: hda/hdmi - fix atpx_present when CLASS is not VGA
+sound-upstream for-next bd3eb4e87eb399a9fe15ef1b59db78faf9c20359
+	ALSA: ctl: bump protocol version up to v2.1.0
+drm-intel topic/core-for-CI a42e0d4d725b6b6ee543d11282658b2b1d6eb3df
+	Revert "drm/i915: Don't select BROKEN"
+drm drm-vmwgfx-coherent 0a6cad5df541108cfd3fbd79eef48eb824c89bdc
+	Merge branch 'vmwgfx-coherent' of git://people.freedesktop.org/~thomash/linux into drm-next
