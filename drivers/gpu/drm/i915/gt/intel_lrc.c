@@ -1108,7 +1108,7 @@ __execlists_schedule_in(struct i915_request *rq)
 		/* We don't need a strict matching tag, just different values */
 		ce->lrc_desc &= ~GENMASK_ULL(47, 37);
 		ce->lrc_desc |=
-			(u64)(engine->context_tag++ % NUM_CONTEXT_TAG) <<
+			(u64)(++engine->context_tag % NUM_CONTEXT_TAG) <<
 			GEN11_SW_CTX_ID_SHIFT;
 		BUILD_BUG_ON(NUM_CONTEXT_TAG > GEN12_MAX_CONTEXT_HW_ID);
 	}
@@ -2925,6 +2925,8 @@ static void enable_execlists(struct intel_engine_cs *engine)
 			RING_HWS_PGA,
 			i915_ggtt_offset(engine->status_page.vma));
 	ENGINE_POSTING_READ(engine, RING_HWS_PGA);
+
+	engine->context_tag = 0;
 }
 
 static bool unexpected_starting_state(struct intel_engine_cs *engine)
@@ -3030,10 +3032,8 @@ static void reset_csb_pointers(struct intel_engine_cs *engine)
 			       &execlists->csb_status[reset_value]);
 }
 
-static void __execlists_reset_reg_state(const struct intel_context *ce,
-					const struct intel_engine_cs *engine)
+static void __reset_stop_ring(u32 *regs, const struct intel_engine_cs *engine)
 {
-	u32 *regs = ce->lrc_reg_state;
 	int x;
 
 	x = lrc_ring_mi_mode(engine);
@@ -3041,6 +3041,14 @@ static void __execlists_reset_reg_state(const struct intel_context *ce,
 		regs[x + 1] &= ~STOP_RING;
 		regs[x + 1] |= STOP_RING << 16;
 	}
+}
+
+static void __execlists_reset_reg_state(const struct intel_context *ce,
+					const struct intel_engine_cs *engine)
+{
+	u32 *regs = ce->lrc_reg_state;
+
+	__reset_stop_ring(regs, engine);
 }
 
 static void __execlists_reset(struct intel_engine_cs *engine, bool stalled)
@@ -3960,7 +3968,6 @@ static void init_common_reg_state(u32 * const regs,
 					    CTX_CTRL_RS_CTX_ENABLE);
 
 	regs[CTX_RING_CTL] = RING_CTL_SIZE(ring->size) | RING_VALID;
-	regs[CTX_BB_STATE] = RING_BB_PPGTT;
 }
 
 static void init_wa_bb_reg_state(u32 * const regs,
@@ -4043,6 +4050,8 @@ static void execlists_init_reg_state(u32 *regs,
 			     INTEL_GEN(engine->i915) >= 12 ?
 			     GEN12_CTX_BB_PER_CTX_PTR :
 			     CTX_BB_PER_CTX_PTR);
+
+	__reset_stop_ring(regs, engine);
 }
 
 static int
