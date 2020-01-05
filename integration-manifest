@@ -1,0 +1,32 @@
+drm drm-fixes a6204fc7b83cbe3398f61cf1742b09f66f0ae220
+	agp: remove unused variable arqsz in agp_3_5_enable()
+drm-misc drm-misc-fixes c4e4fccc5d52d881afaac11d3353265ef4eccb8b
+	drm/dp_mst: correct the shifting in DP_REMOTE_I2C_READ
+drm-intel drm-intel-fixes fd6988496e79a6a4bdb514a4655d2920209eb85d
+	Linux 5.5-rc4
+drm-amd drm-amd-fixes 2b702e72e33bbdec0764cfb6e1dd00fe1142ae55
+	Merge tag 'drm-misc-fixes-2017-09-28-1' of git://anongit.freedesktop.org/git/drm-misc into drm-fixes
+drm drm-next f5c547efa16c0ea5abff0596e829f502be11902e
+	Merge tag 'drm-misc-next-2020-01-02' of git://anongit.freedesktop.org/drm/drm-misc into drm-next
+drm-misc drm-misc-next-fixes 0a5239985a3bc084738851afdf3fceb7d5651b0c
+	drm/panfrost: Open/close the perfcnt BO
+drm-intel drm-intel-next-fixes 01bb630319337be15fc50c211126180198d4e157
+	drm/i915/ehl: Make icp_digital_port_connected() use phy instead of port
+drm-amd drm-amd-next-fixes 2bd6bf03f4c1c59381d62c61d03f6cc3fe71f66e
+	Linux 4.14-rc1
+drm-misc drm-misc-next 3d0dad869aeb5d8e81985c73a6c73428258f8083
+	drm/rockchip: lvds: move hardware-specific functions together
+drm-intel drm-intel-next-queued 05e8a5f51eb5863d8c316c68091500511770bff7
+	drm/i915: Create dumb buffer from LMEM
+drm-intel drm-intel-next 3446c63a0f2a691fdc6fffaddc6e0c1285efc80c
+	drm/i915: Update DRIVER_DATE to 20191223
+drm-amd drm-amd-next 754270c7c56292e97d0eff924a5d5d83f92add07
+	Merge branch 'drm-next-4.15' of git://people.freedesktop.org/~agd5f/linux into drm-next
+sound-upstream for-linus 51d4efab7865e6ea6a4ebcd25b3f03c019515c4c
+	ALSA: usb-audio: Apply the sample rate quirk for Bose Companion 5
+sound-upstream for-next 8be03a7177c36bfc05bbe9f4949cdeba57f1c2ab
+	ALSA: usb-audio: Use lower hex numbers for IDs
+drm-intel topic/core-for-CI 78c1332d19c217f195c5cf2e3e735f18ac9e8936
+	sched/vtime: Prevent unstable evaluation of WARN(vtime->state)
+drm drm-vmwgfx-coherent 0a6cad5df541108cfd3fbd79eef48eb824c89bdc
+	Merge branch 'vmwgfx-coherent' of git://people.freedesktop.org/~thomash/linux into drm-next
