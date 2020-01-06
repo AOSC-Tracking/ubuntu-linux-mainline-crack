@@ -1024,8 +1024,9 @@ int hns_roce_ib_umem_write_mtt(struct hns_roce_dev *hr_dev,
 				sg_dma_address(sg) + (k << umem->page_shift);
 			if (!(npage % (1 << (mtt->page_shift - PAGE_SHIFT)))) {
 				if (page_addr & ((1 << mtt->page_shift) - 1)) {
-					dev_err(dev, "page_addr 0x%llx is not page_shift %d alignment!\n",
-						page_addr, mtt->page_shift);
+					dev_err(dev,
+						"page_addr is not page_shift %d alignment!\n",
+						mtt->page_shift);
 					ret = -EINVAL;
 					goto out;
 				}
