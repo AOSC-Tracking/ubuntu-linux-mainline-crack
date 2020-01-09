@@ -3789,6 +3789,7 @@ rk3399_dmc
 rk805-pwrkey
 rk808
 rk808-regulator
+rk_crypto
 rm3100-core
 rm3100-i2c
 rm3100-spi
