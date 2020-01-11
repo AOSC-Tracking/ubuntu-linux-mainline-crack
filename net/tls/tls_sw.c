@@ -634,6 +634,12 @@ static int tls_push_record(struct sock *sk, int flags,
 	sk_msg_iter_var_prev(i);
 	sg_mark_end(sk_msg_elem(msg_pl, i));
 
+	if (msg_pl->sg.end < msg_pl->sg.start) {
+		sg_chain(&msg_pl->sg.data[msg_pl->sg.start],
+			 MAX_SKB_FRAGS - msg_pl->sg.start + 1,
+			 msg_pl->sg.data);
+	}
+
 	i = msg_pl->sg.start;
 	sg_chain(rec->sg_aead_in, 2, &msg_pl->sg.data[i]);
 
