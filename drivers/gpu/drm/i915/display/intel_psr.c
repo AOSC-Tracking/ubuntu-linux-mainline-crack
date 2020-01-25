@@ -454,22 +454,30 @@ static u32 intel_psr1_get_tp_time(struct intel_dp *intel_dp)
 	return val;
 }
 
+static u8 psr_compute_idle_frames(struct intel_dp *intel_dp)
+{
+	struct drm_i915_private *dev_priv = dp_to_i915(intel_dp);
+	int idle_frames;
+
+	/* Let's use 6 as the minimum to cover all known cases including the
+	 * off-by-one issue that HW has in some cases.
+	 */
+	idle_frames = max(6, dev_priv->vbt.psr.idle_frames);
+	idle_frames = max(idle_frames, dev_priv->psr.sink_sync_latency + 1);
+
+	if (WARN_ON(idle_frames > 0xf))
+		idle_frames = 0xf;
+
+	return idle_frames;
+}
+
 static void hsw_activate_psr1(struct intel_dp *intel_dp)
 {
 	struct drm_i915_private *dev_priv = dp_to_i915(intel_dp);
 	u32 max_sleep_time = 0x1f;
 	u32 val = EDP_PSR_ENABLE;
 
-	/* Let's use 6 as the minimum to cover all known cases including the
-	 * off-by-one issue that HW has in some cases.
-	 */
-	int idle_frames = max(6, dev_priv->vbt.psr.idle_frames);
-
-	/* sink_sync_latency of 8 means source has to wait for more than 8
-	 * frames, we'll go with 9 frames for now
-	 */
-	idle_frames = max(idle_frames, dev_priv->psr.sink_sync_latency + 1);
-	val |= idle_frames << EDP_PSR_IDLE_FRAME_SHIFT;
+	val |= psr_compute_idle_frames(intel_dp) << EDP_PSR_IDLE_FRAME_SHIFT;
 
 	val |= max_sleep_time << EDP_PSR_MAX_SLEEP_TIME_SHIFT;
 	if (IS_HASWELL(dev_priv))
@@ -493,13 +501,7 @@ static void hsw_activate_psr2(struct intel_dp *intel_dp)
 	struct drm_i915_private *dev_priv = dp_to_i915(intel_dp);
 	u32 val;
 
-	/* Let's use 6 as the minimum to cover all known cases including the
-	 * off-by-one issue that HW has in some cases.
-	 */
-	int idle_frames = max(6, dev_priv->vbt.psr.idle_frames);
-
-	idle_frames = max(idle_frames, dev_priv->psr.sink_sync_latency + 1);
-	val = idle_frames << EDP_PSR2_IDLE_FRAME_SHIFT;
+	val = psr_compute_idle_frames(intel_dp) << EDP_PSR2_IDLE_FRAME_SHIFT;
 
 	val |= EDP_PSR2_ENABLE | EDP_SU_TRACK_ENABLE;
 	if (INTEL_GEN(dev_priv) >= 10 || IS_GEMINILAKE(dev_priv))
@@ -566,16 +568,10 @@ static void tgl_psr2_enable_dc3co(struct drm_i915_private *dev_priv)
 
 static void tgl_psr2_disable_dc3co(struct drm_i915_private *dev_priv)
 {
-	int idle_frames;
+	struct intel_dp *intel_dp = dev_priv->psr.dp;
 
 	intel_display_power_set_target_dc_state(dev_priv, DC_STATE_EN_UPTO_DC6);
-	/*
-	 * Restore PSR2 idle frame let's use 6 as the minimum to cover all known
-	 * cases including the off-by-one issue that HW has in some cases.
-	 */
-	idle_frames = max(6, dev_priv->vbt.psr.idle_frames);
-	idle_frames = max(idle_frames, dev_priv->psr.sink_sync_latency + 1);
-	psr2_program_idle_frames(dev_priv, idle_frames);
+	psr2_program_idle_frames(dev_priv, psr_compute_idle_frames(intel_dp));
 }
 
 static void tgl_dc5_idle_thread(struct work_struct *work)
@@ -602,6 +598,36 @@ static void tgl_disallow_dc3co_on_psr2_exit(struct drm_i915_private *dev_priv)
 	cancel_delayed_work(&dev_priv->psr.idle_work);
 	/* Before PSR2 exit disallow dc3co*/
 	tgl_psr2_disable_dc3co(dev_priv);
+}
+
+static void
+tgl_dc3co_exitline_compute_config(struct intel_dp *intel_dp,
+				  struct intel_crtc_state *crtc_state)
+{
+	const u32 crtc_vdisplay = crtc_state->uapi.adjusted_mode.crtc_vdisplay;
+	struct intel_digital_port *dig_port = dp_to_dig_port(intel_dp);
+	struct drm_i915_private *dev_priv = dp_to_i915(intel_dp);
+	u32 exit_scanlines;
+
+	if (!(dev_priv->csr.allowed_dc_mask & DC_STATE_EN_DC3CO))
+		return;
+
+	/* B.Specs:49196 DC3CO only works with pipeA and DDIA.*/
+	if (to_intel_crtc(crtc_state->uapi.crtc)->pipe != PIPE_A ||
+	    dig_port->base.port != PORT_A)
+		return;
+
+	/*
+	 * DC3CO Exit time 200us B.Spec 49196
+	 * PSR2 transcoder Early Exit scanlines = ROUNDUP(200 / line time) + 1
+	 */
+	exit_scanlines =
+		intel_usecs_to_scanlines(&crtc_state->uapi.adjusted_mode, 200) + 1;
+
+	if (WARN_ON(exit_scanlines > crtc_vdisplay))
+		return;
+
+	crtc_state->dc3co_exitline = crtc_vdisplay - exit_scanlines;
 }
 
 static bool intel_psr2_config_valid(struct intel_dp *intel_dp,
@@ -675,6 +701,7 @@ static bool intel_psr2_config_valid(struct intel_dp *intel_dp,
 		return false;
 	}
 
+	tgl_dc3co_exitline_compute_config(intel_dp, crtc_state);
 	return true;
 }
 
@@ -792,6 +819,20 @@ static void intel_psr_enable_source(struct intel_dp *intel_dp,
 	I915_WRITE(EDP_PSR_DEBUG(dev_priv->psr.transcoder), mask);
 
 	psr_irq_control(dev_priv);
+
+	if (crtc_state->dc3co_exitline) {
+		u32 val;
+
+		/*
+		 * TODO: if future platforms supports DC3CO in more than one
+		 * transcoder, EXITLINE will need to be unset when disabling PSR
+		 */
+		val = I915_READ(EXITLINE(cpu_transcoder));
+		val &= ~EXITLINE_MASK;
+		val |= crtc_state->dc3co_exitline << EXITLINE_SHIFT;
+		val |= EXITLINE_ENABLE;
+		I915_WRITE(EXITLINE(cpu_transcoder), val);
+	}
 }
 
 static void intel_psr_enable_locked(struct drm_i915_private *dev_priv,
@@ -806,8 +847,10 @@ static void intel_psr_enable_locked(struct drm_i915_private *dev_priv,
 	dev_priv->psr.busy_frontbuffer_bits = 0;
 	dev_priv->psr.pipe = to_intel_crtc(crtc_state->uapi.crtc)->pipe;
 	dev_priv->psr.dc3co_enabled = !!crtc_state->dc3co_exitline;
-	dev_priv->psr.dc3co_exit_delay = intel_get_frame_time_us(crtc_state);
 	dev_priv->psr.transcoder = crtc_state->cpu_transcoder;
+	/* DC5/DC6 requires at least 6 idle frames */
+	val = usecs_to_jiffies(intel_get_frame_time_us(crtc_state) * 6);
+	dev_priv->psr.dc3co_exit_delay = val;
 
 	/*
 	 * If a PSR error happened and the driver is reloaded, the EDP_PSR_IIR
@@ -1281,8 +1324,6 @@ static void
 tgl_dc3co_flush(struct drm_i915_private *dev_priv,
 		unsigned int frontbuffer_bits, enum fb_op_origin origin)
 {
-	u32 delay;
-
 	mutex_lock(&dev_priv->psr.lock);
 
 	if (!dev_priv->psr.dc3co_enabled)
@@ -1300,10 +1341,8 @@ tgl_dc3co_flush(struct drm_i915_private *dev_priv,
 		goto unlock;
 
 	tgl_psr2_enable_dc3co(dev_priv);
-	/* DC5/DC6 required idle frames = 6 */
-	delay = 6 * dev_priv->psr.dc3co_exit_delay;
 	mod_delayed_work(system_wq, &dev_priv->psr.idle_work,
-			 usecs_to_jiffies(delay));
+			 dev_priv->psr.dc3co_exit_delay);
 
 unlock:
 	mutex_unlock(&dev_priv->psr.lock);
@@ -1538,7 +1577,7 @@ void intel_psr_atomic_check(struct drm_connector *connector,
 		return;
 
 	intel_connector = to_intel_connector(connector);
-	dig_port = enc_to_dig_port(intel_connector->encoder);
+	dig_port = enc_to_dig_port(intel_attached_encoder(intel_connector));
 	if (dev_priv->psr.dp != &dig_port->dp)
 		return;
 
