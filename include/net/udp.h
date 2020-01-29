@@ -473,6 +473,13 @@ static inline struct sk_buff *udp_rcv_segment(struct sock *sk,
 {
 	struct sk_buff *segs;
 
+	/* UDP segmentation expects packets of type CHECKSUM_PARTIAL or
+	 * CHECKSUM_NONE in __udp_gso_segment. UDP GRO indeed builds partial
+	 * packets in udp_gro_complete_segment. As does UDP GSO, verified by
+	 * udp_send_skb. But when those packets are looped in dev_loopback_xmit
+	 * their ip_summed is set to CHECKSUM_UNNECESSARY. Reset in this
+	 * specific case, where PARTIAL is both correct and required.
+	 */
 	if (skb->pkt_type == PACKET_LOOPBACK)
 		skb->ip_summed = CHECKSUM_PARTIAL;
 
