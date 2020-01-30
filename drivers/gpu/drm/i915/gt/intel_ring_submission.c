@@ -568,7 +568,8 @@ static void flush_cs_tlb(struct intel_engine_cs *engine)
 		return;
 
 	/* ring should be idle before issuing a sync flush*/
-	WARN_ON((ENGINE_READ(engine, RING_MI_MODE) & MODE_IDLE) == 0);
+	drm_WARN_ON(&dev_priv->drm,
+		    (ENGINE_READ(engine, RING_MI_MODE) & MODE_IDLE) == 0);
 
 	ENGINE_WRITE(engine, RING_INSTPM,
 		     _MASKED_BIT_ENABLE(INSTPM_TLB_INVALIDATE |
@@ -1662,7 +1663,8 @@ static void gen6_bsd_submit_request(struct i915_request *request)
 					 GEN6_BSD_SLEEP_INDICATOR,
 					 0,
 					 1000, 0, NULL))
-		DRM_ERROR("timed out waiting for the BSD ring to wake up\n");
+		drm_err(&uncore->i915->drm,
+			"timed out waiting for the BSD ring to wake up\n");
 
 	/* Now that the ring is fully powered up, update the tail */
 	i9xx_submit_request(request);
@@ -1787,8 +1789,8 @@ static void ring_release(struct intel_engine_cs *engine)
 {
 	struct drm_i915_private *dev_priv = engine->i915;
 
-	WARN_ON(INTEL_GEN(dev_priv) > 2 &&
-		(ENGINE_READ(engine, RING_MI_MODE) & MODE_IDLE) == 0);
+	drm_WARN_ON(&dev_priv->drm, INTEL_GEN(dev_priv) > 2 &&
+		    (ENGINE_READ(engine, RING_MI_MODE) & MODE_IDLE) == 0);
 
 	intel_engine_cleanup_common(engine);
 
