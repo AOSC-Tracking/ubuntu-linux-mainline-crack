@@ -455,6 +455,11 @@ err_rq:
 		if (!rq)
 			continue;
 
+		if (rq->fence.error) {
+			err = -EIO;
+			goto out;
+		}
+
 		GEM_BUG_ON(!test_bit(CONTEXT_ALLOC_BIT, &rq->context->flags));
 		state = rq->context->state;
 		if (!state)
@@ -537,6 +542,10 @@ static int __engines_verify_workarounds(struct intel_gt *gt)
 		if (intel_engine_verify_workarounds(engine, "load"))
 			err = -EIO;
 	}
+
+	/* Flush and restore the kernel context for safety */
+	if (intel_gt_wait_for_idle(gt, I915_GEM_IDLE_TIMEOUT) == -ETIME)
+		err = -EIO;
 
 	return err;
 }
