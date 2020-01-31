@@ -390,13 +390,19 @@ out:
 	return err;
 }
 
-void i915_active_set_exclusive(struct i915_active *ref, struct dma_fence *f)
+struct dma_fence *
+i915_active_set_exclusive(struct i915_active *ref, struct dma_fence *f)
 {
+	struct dma_fence *prev;
+
 	/* We expect the caller to manage the exclusive timeline ordering */
 	GEM_BUG_ON(i915_active_is_idle(ref));
 
-	if (!__i915_active_fence_set(&ref->excl, f))
+	prev = __i915_active_fence_set(&ref->excl, f);
+	if (!prev)
 		atomic_inc(&ref->count);
+
+	return prev;
 }
 
 bool i915_active_acquire_if_busy(struct i915_active *ref)
@@ -623,6 +629,7 @@ int i915_active_acquire_preallocate_barrier(struct i915_active *ref,
 	 * We can then use the preallocated nodes in
 	 * i915_active_acquire_barrier()
 	 */
+	GEM_BUG_ON(!mask);
 	for_each_engine_masked(engine, gt, mask, tmp) {
 		u64 idx = engine->kernel_context->timeline->fence_context;
 		struct llist_node *prev = first;
