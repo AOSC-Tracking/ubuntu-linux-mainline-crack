@@ -921,7 +921,7 @@ static u32 xhci_get_port_status(struct usb_hcd *hcd,
 
 			set_bit(wIndex, &bus_state->rexit_ports);
 
-			xhci_test_and_clear_bit(xhci, port_array, wIndex,
+			xhci_test_and_clear_bit(xhci, port,
 						PORT_PLC);
 			xhci_set_link_state(xhci, port, XDEV_U0);
 
