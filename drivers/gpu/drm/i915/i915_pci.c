@@ -823,7 +823,6 @@ static const struct intel_device_info tgl_info = {
 	.display.has_modular_fia = 1,
 	.engine_mask =
 		BIT(RCS0) | BIT(BCS0) | BIT(VECS0) | BIT(VCS0) | BIT(VCS2),
-	.has_rps = false, /* XXX disabled for debugging */
 };
 
 #define GEN12_DGFX_FEATURES \
@@ -928,13 +927,6 @@ static bool force_probe(u16 device_id, const char *devices)
 	char *s, *p, *tok;
 	bool ret;
 
-	/* FIXME: transitional */
-	if (i915_modparams.alpha_support) {
-		DRM_INFO("i915.alpha_support is deprecated, use i915.force_probe=%04x instead\n",
-			 device_id);
-		return true;
-	}
-
 	if (!devices || !*devices)
 		return false;
 
@@ -968,7 +960,8 @@ static int i915_pci_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 
 	if (intel_info->require_force_probe &&
 	    !force_probe(pdev->device, i915_modparams.force_probe)) {
-		DRM_INFO("Your graphics device %04x is not properly supported by the driver in this\n"
+		drm_info(&pdev_to_i915(pdev)->drm,
+			 "Your graphics device %04x is not properly supported by the driver in this\n"
 			 "kernel version. To force driver probe anyway, use i915.force_probe=%04x\n"
 			 "module parameter or CONFIG_DRM_I915_FORCE_PROBE=%04x configuration option,\n"
 			 "or (recommended) check for kernel updates.\n",
