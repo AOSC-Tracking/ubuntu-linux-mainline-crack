@@ -75,6 +75,7 @@ struct intel_engine_coredump {
 	u32 hws;
 	u32 ipeir;
 	u32 ipehr;
+	u32 esr;
 	u32 bbstate;
 	u32 instpm;
 	u32 instps;
@@ -314,8 +315,11 @@ i915_vma_capture_finish(struct intel_gt_coredump *gt,
 }
 
 static inline void
-i915_error_state_store(struct drm_i915_private *i915,
-		       struct i915_gpu_coredump *error)
+i915_error_state_store(struct i915_gpu_coredump *error)
+{
+}
+
+static inline void i915_gpu_coredump_put(struct i915_gpu_coredump *gpu)
 {
 }
 
