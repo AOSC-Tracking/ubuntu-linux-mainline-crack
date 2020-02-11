@@ -1,0 +1,34 @@
+drm drm-fixes d5226fa6dbae0569ee43ecfc08bdcd6770fc4755
+	Linux 5.5
+drm-misc drm-misc-fixes 48bc281e4bf049abd3bb98371209315651bf4a14
+	drm/bridge: ti-tfp410: Update drm_connector_init_with_ddc() error message
+drm-intel drm-intel-fixes d5226fa6dbae0569ee43ecfc08bdcd6770fc4755
+	Linux 5.5
+drm-amd drm-amd-fixes 2b702e72e33bbdec0764cfb6e1dd00fe1142ae55
+	Merge tag 'drm-misc-fixes-2017-09-28-1' of git://anongit.freedesktop.org/git/drm-misc into drm-fixes
+drm drm-next 9f880327160feb695de03caa29604883b0d00087
+	Merge tag 'amd-drm-next-5.6-2020-02-05' of git://people.freedesktop.org/~agd5f/linux into drm-next
+drm-misc drm-misc-next-fixes e1cf35b94c5fd122a8780587559fc6da9fc2dd12
+	drm/edid: fix building error
+drm-intel drm-intel-next-fixes 1b5af53781654706e1a4ee479274f8a3e3f74c01
+	drm/i915/gt: Use the BIT when checking the flags, not the index
+drm-amd drm-amd-next-fixes 2bd6bf03f4c1c59381d62c61d03f6cc3fe71f66e
+	Linux 4.14-rc1
+drm-misc drm-misc-next 2f2aa13724d56829d910b2fa8e80c502d388f106
+	drm/virtio: move virtio_gpu_mem_entry initialization to new function
+drm-intel drm-intel-next-queued cbc1f3cb67b6ec13182117a329b6f03810c03cf6
+	drm/i915: Skip CPU synchronisation on dmabuf attachments
+drm-intel drm-intel-next f2221a50494037af98206713155c8d4f2e7bccaa
+	drm/i915: Update DRIVER_DATE to 20200114
+drm-amd drm-amd-next 754270c7c56292e97d0eff924a5d5d83f92add07
+	Merge branch 'drm-next-4.15' of git://people.freedesktop.org/~agd5f/linux into drm-next
+sound-upstream for-linus bb6d3fb354c5ee8d6bde2d576eb7220ea09862b9
+	Linux 5.6-rc1
+sound-upstream for-next 0e023687ca552147a76540377be4c642b1313d53
+	ALSA: info: remove redundant assignment to variable c
+drm-intel topic/core-for-CI 2208da3a71d7913f187f195ddfa9be48133aa751
+	sched/vtime: Prevent unstable evaluation of WARN(vtime->state)
+drm drm-vmwgfx-coherent 0a6cad5df541108cfd3fbd79eef48eb824c89bdc
+	Merge branch 'vmwgfx-coherent' of git://people.freedesktop.org/~thomash/linux into drm-next
+drm-intel topic/drm-warn dc1a73e50f9c63d4dd928df538082200467dc4b1
+	drm/print: introduce new struct drm_device based WARN* macros
