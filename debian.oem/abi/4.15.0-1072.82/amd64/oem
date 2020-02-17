@@ -836,6 +836,7 @@ EXPORT_SYMBOL drivers/gpu/drm/ttm/ttm 0x00000000	ttm_vt_lock
 EXPORT_SYMBOL drivers/gpu/drm/ttm/ttm 0x00000000	ttm_vt_unlock
 EXPORT_SYMBOL drivers/gpu/drm/ttm/ttm 0x00000000	ttm_write_lock
 EXPORT_SYMBOL drivers/gpu/drm/ttm/ttm 0x00000000	ttm_write_unlock
+EXPORT_SYMBOL drivers/hid/hid 0x00000000	hid_bus_type
 EXPORT_SYMBOL drivers/hid/intel-ish-hid/intel-ishtp 0x00000000	__ishtp_cl_driver_register
 EXPORT_SYMBOL drivers/hid/intel-ish-hid/intel-ishtp 0x00000000	ishtp_bus_remove_all_clients
 EXPORT_SYMBOL drivers/hid/intel-ish-hid/intel-ishtp 0x00000000	ishtp_cl_allocate
@@ -5756,6 +5757,7 @@ EXPORT_SYMBOL net/wireless/cfg80211 0x00000000	cfg80211_scan_done
 EXPORT_SYMBOL net/wireless/cfg80211 0x00000000	cfg80211_sched_scan_results
 EXPORT_SYMBOL net/wireless/cfg80211 0x00000000	cfg80211_sched_scan_stopped
 EXPORT_SYMBOL net/wireless/cfg80211 0x00000000	cfg80211_sched_scan_stopped_rtnl
+EXPORT_SYMBOL net/wireless/cfg80211 0x00000000	cfg80211_send_layer2_update
 EXPORT_SYMBOL net/wireless/cfg80211 0x00000000	cfg80211_stop_iface
 EXPORT_SYMBOL net/wireless/cfg80211 0x00000000	cfg80211_tdls_oper_request
 EXPORT_SYMBOL net/wireless/cfg80211 0x00000000	cfg80211_tx_mlme_mgmt
@@ -12023,9 +12025,11 @@ EXPORT_SYMBOL_GPL drivers/ata/libahci 0x00000000	ahci_start_engine
 EXPORT_SYMBOL_GPL drivers/ata/libahci 0x00000000	ahci_start_fis_rx
 EXPORT_SYMBOL_GPL drivers/ata/libahci 0x00000000	ahci_stop_engine
 EXPORT_SYMBOL_GPL drivers/ata/libahci_platform 0x00000000	ahci_platform_disable_clks
+EXPORT_SYMBOL_GPL drivers/ata/libahci_platform 0x00000000	ahci_platform_disable_phys
 EXPORT_SYMBOL_GPL drivers/ata/libahci_platform 0x00000000	ahci_platform_disable_regulators
 EXPORT_SYMBOL_GPL drivers/ata/libahci_platform 0x00000000	ahci_platform_disable_resources
 EXPORT_SYMBOL_GPL drivers/ata/libahci_platform 0x00000000	ahci_platform_enable_clks
+EXPORT_SYMBOL_GPL drivers/ata/libahci_platform 0x00000000	ahci_platform_enable_phys
 EXPORT_SYMBOL_GPL drivers/ata/libahci_platform 0x00000000	ahci_platform_enable_regulators
 EXPORT_SYMBOL_GPL drivers/ata/libahci_platform 0x00000000	ahci_platform_enable_resources
 EXPORT_SYMBOL_GPL drivers/ata/libahci_platform 0x00000000	ahci_platform_get_resources
@@ -12292,9 +12296,13 @@ EXPORT_SYMBOL_GPL drivers/hid/hid 0x00000000	hid_hw_start
 EXPORT_SYMBOL_GPL drivers/hid/hid 0x00000000	hid_hw_stop
 EXPORT_SYMBOL_GPL drivers/hid/hid 0x00000000	hid_ignore
 EXPORT_SYMBOL_GPL drivers/hid/hid 0x00000000	hid_input_report
+EXPORT_SYMBOL_GPL drivers/hid/hid 0x00000000	hid_lookup_quirk
+EXPORT_SYMBOL_GPL drivers/hid/hid 0x00000000	hid_match_device
 EXPORT_SYMBOL_GPL drivers/hid/hid 0x00000000	hid_open_report
 EXPORT_SYMBOL_GPL drivers/hid/hid 0x00000000	hid_output_report
 EXPORT_SYMBOL_GPL drivers/hid/hid 0x00000000	hid_parse_report
+EXPORT_SYMBOL_GPL drivers/hid/hid 0x00000000	hid_quirks_exit
+EXPORT_SYMBOL_GPL drivers/hid/hid 0x00000000	hid_quirks_init
 EXPORT_SYMBOL_GPL drivers/hid/hid 0x00000000	hid_register_report
 EXPORT_SYMBOL_GPL drivers/hid/hid 0x00000000	hid_report_raw_event
 EXPORT_SYMBOL_GPL drivers/hid/hid 0x00000000	hid_resolv_usage
@@ -12334,7 +12342,6 @@ EXPORT_SYMBOL_GPL drivers/hid/i2c-hid/i2c-hid 0x00000000	i2c_hid_ll_driver
 EXPORT_SYMBOL_GPL drivers/hid/uhid 0x00000000	uhid_hid_driver
 EXPORT_SYMBOL_GPL drivers/hid/usbhid/usbhid 0x00000000	hiddev_hid_event
 EXPORT_SYMBOL_GPL drivers/hid/usbhid/usbhid 0x00000000	usb_hid_driver
-EXPORT_SYMBOL_GPL drivers/hid/usbhid/usbhid 0x00000000	usbhid_lookup_quirk
 EXPORT_SYMBOL_GPL drivers/hsi/hsi 0x00000000	hsi_alloc_controller
 EXPORT_SYMBOL_GPL drivers/hsi/hsi 0x00000000	hsi_alloc_msg
 EXPORT_SYMBOL_GPL drivers/hsi/hsi 0x00000000	hsi_async
@@ -14135,7 +14142,6 @@ EXPORT_SYMBOL_GPL drivers/net/wireless/intel/iwlwifi/iwlwifi 0x00000000	iwl_init
 EXPORT_SYMBOL_GPL drivers/net/wireless/intel/iwlwifi/iwlwifi 0x00000000	iwl_init_sbands
 EXPORT_SYMBOL_GPL drivers/net/wireless/intel/iwlwifi/iwlwifi 0x00000000	iwl_notification_wait
 EXPORT_SYMBOL_GPL drivers/net/wireless/intel/iwlwifi/iwlwifi 0x00000000	iwl_notification_wait_init
-EXPORT_SYMBOL_GPL drivers/net/wireless/intel/iwlwifi/iwlwifi 0x00000000	iwl_nvm_check_version
 EXPORT_SYMBOL_GPL drivers/net/wireless/intel/iwlwifi/iwlwifi 0x00000000	iwl_opmode_deregister
 EXPORT_SYMBOL_GPL drivers/net/wireless/intel/iwlwifi/iwlwifi 0x00000000	iwl_opmode_register
 EXPORT_SYMBOL_GPL drivers/net/wireless/intel/iwlwifi/iwlwifi 0x00000000	iwl_parse_eeprom_data
@@ -16028,7 +16034,6 @@ EXPORT_SYMBOL_GPL fs/ocfs2/ocfs2_stackglue 0x00000000	ocfs2_dlm_lock_status
 EXPORT_SYMBOL_GPL fs/ocfs2/ocfs2_stackglue 0x00000000	ocfs2_dlm_lvb
 EXPORT_SYMBOL_GPL fs/ocfs2/ocfs2_stackglue 0x00000000	ocfs2_dlm_lvb_valid
 EXPORT_SYMBOL_GPL fs/ocfs2/ocfs2_stackglue 0x00000000	ocfs2_dlm_unlock
-EXPORT_SYMBOL_GPL fs/ocfs2/ocfs2_stackglue 0x00000000	ocfs2_is_o2cb_active
 EXPORT_SYMBOL_GPL fs/ocfs2/ocfs2_stackglue 0x00000000	ocfs2_kset
 EXPORT_SYMBOL_GPL fs/ocfs2/ocfs2_stackglue 0x00000000	ocfs2_plock
 EXPORT_SYMBOL_GPL fs/ocfs2/ocfs2_stackglue 0x00000000	ocfs2_stack_glue_register
@@ -18237,7 +18242,6 @@ EXPORT_SYMBOL_GPL vmlinux 0x00000000	add_hwgenerator_randomness
 EXPORT_SYMBOL_GPL vmlinux 0x00000000	add_input_randomness
 EXPORT_SYMBOL_GPL vmlinux 0x00000000	add_interrupt_randomness
 EXPORT_SYMBOL_GPL vmlinux 0x00000000	add_memory
-EXPORT_SYMBOL_GPL vmlinux 0x00000000	add_memory_resource
 EXPORT_SYMBOL_GPL vmlinux 0x00000000	add_page_wait_queue
 EXPORT_SYMBOL_GPL vmlinux 0x00000000	add_timer_on
 EXPORT_SYMBOL_GPL vmlinux 0x00000000	add_to_page_cache_lru
@@ -22829,6 +22833,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x00000000	xhci_gen_setup
 EXPORT_SYMBOL_GPL vmlinux 0x00000000	xhci_init_driver
 EXPORT_SYMBOL_GPL vmlinux 0x00000000	xhci_resume
 EXPORT_SYMBOL_GPL vmlinux 0x00000000	xhci_run
+EXPORT_SYMBOL_GPL vmlinux 0x00000000	xhci_shutdown
 EXPORT_SYMBOL_GPL vmlinux 0x00000000	xhci_suspend
 EXPORT_SYMBOL_GPL vmlinux 0x00000000	xts_crypt
 EXPORT_SYMBOL_GPL vmlinux 0x00000000	yield_to
