@@ -12687,13 +12687,15 @@ CONFIG_NUMA_EMU                                 note<LP:1557690> mark<ENFORCED>
 # Menu: Processor type and features >> Support for extended (non-PC) x86 platforms >> Architecture: x86
 CONFIG_X86_NUMACHIP                             policy<{'amd64': 'y'}>
 CONFIG_X86_VSMP                                 policy<{'amd64': 'n'}>
-CONFIG_X86_UV                                   policy<{'amd64': 'n'}>
+CONFIG_X86_UV                                   policy<{'amd64': 'y'}>
 CONFIG_X86_GOLDFISH                             policy<{'amd64': 'n', 'i386': 'n'}>
 CONFIG_X86_INTEL_MID                            policy<{'amd64': 'n', 'i386': 'y'}>
 CONFIG_X86_INTEL_QUARK                          policy<{'i386': 'n'}>
 CONFIG_X86_RDC321X                              policy<{'i386': 'n'}>
 CONFIG_X86_32_NON_STANDARD                      policy<{'i386': 'n'}>
 CONFIG_APB_TIMER                                policy<{'i386': 'y'}>
+#
+CONFIG_X86_UV                                   mark<ENFORCED> note<LP:1863810>
 
 # Menu: Processor type and features >> Supported processor vendors >> Architecture: x86
 CONFIG_PROCESSOR_SELECT                         policy<{'amd64': 'y', 'i386': 'y'}>
