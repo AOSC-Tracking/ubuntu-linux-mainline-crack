@@ -7662,14 +7662,16 @@ CONFIG_SND_SOC_INTEL_SST_TOPLEVEL               policy<{'amd64': 'y', 'i386': 'y
 CONFIG_SND_SOC_INTEL_HASWELL                    policy<{'amd64': 'm', 'i386': 'm'}>
 CONFIG_SND_SST_ATOM_HIFI2_PLATFORM_PCI          policy<{'amd64': 'm', 'i386': 'm'}>
 CONFIG_SND_SST_ATOM_HIFI2_PLATFORM_ACPI         policy<{'amd64': 'm', 'i386': 'm'}>
-CONFIG_SND_SOC_INTEL_SKYLAKE                    policy<{'amd64': 'm', 'i386': 'm'}>
+CONFIG_SND_SOC_INTEL_SKYLAKE                    policy<{'amd64': 'n', 'i386': 'n'}>
+CONFIG_SND_SOC_INTEL_SKYLAKE                    mark<ENFORCED> note<LP:#1864061>
 CONFIG_SND_SOC_INTEL_SKL                        policy<{'amd64': 'm', 'i386': 'm'}>
 CONFIG_SND_SOC_INTEL_APL                        policy<{'amd64': 'm', 'i386': 'm'}>
 CONFIG_SND_SOC_INTEL_KBL                        policy<{'amd64': 'm', 'i386': 'm'}>
 CONFIG_SND_SOC_INTEL_GLK                        policy<{'amd64': 'm', 'i386': 'm'}>
 CONFIG_SND_SOC_INTEL_CNL                        policy<{'amd64': 'm', 'i386': 'm'}>
 CONFIG_SND_SOC_INTEL_CFL                        policy<{'amd64': 'm', 'i386': 'm'}>
-CONFIG_SND_SOC_INTEL_SKYLAKE_HDAUDIO_CODEC      policy<{'amd64': 'y', 'i386': 'y'}>
+CONFIG_SND_SOC_INTEL_SKYLAKE_HDAUDIO_CODEC      policy<{'amd64': 'n', 'i386': 'n'}>
+CONFIG_SND_SOC_INTEL_SKYLAKE_HDAUDIO_CODEC      mark<ENFORCED> note<LP:#1864061>
 
 # Menu: Device Drivers >> Sound card support >> Advanced Linux Sound Architecture >> ALSA for SoC audio support >> Intel ASoC SST drivers >> Intel Machine drivers
 CONFIG_SND_SOC_INTEL_MACH                       policy<{'amd64': 'y', 'i386': 'y'}>
