@@ -238,8 +238,14 @@ static int i915_driver_modeset_probe_noirq(struct drm_i915_private *i915)
 
 	intel_csr_ucode_init(i915);
 
+	ret = intel_modeset_init_noirq(i915);
+	if (ret)
+		goto cleanup_vga_client;
+
 	return 0;
 
+cleanup_vga_client:
+	intel_vga_unregister(i915);
 out:
 	return ret;
 }
@@ -1374,8 +1380,6 @@ i915_driver_create(struct pci_dev *pdev, const struct pci_device_id *ent)
 		kfree(i915);
 		return ERR_PTR(err);
 	}
-
-	i915->drm.dev_private = i915;
 
 	i915->drm.pdev = pdev;
 	pci_set_drvdata(pdev, i915);

@@ -313,10 +313,11 @@ enum phy_fia {
 };
 
 #define for_each_pipe(__dev_priv, __p) \
-	for ((__p) = 0; (__p) < INTEL_NUM_PIPES(__dev_priv); (__p)++)
+	for ((__p) = 0; (__p) < I915_MAX_PIPES; (__p)++) \
+		for_each_if(INTEL_INFO(__dev_priv)->pipe_mask & BIT(__p))
 
 #define for_each_pipe_masked(__dev_priv, __p, __mask) \
-	for ((__p) = 0; (__p) < INTEL_NUM_PIPES(__dev_priv); (__p)++) \
+	for_each_pipe(__dev_priv, __p) \
 		for_each_if((__mask) & BIT(__p))
 
 #define for_each_cpu_transcoder_masked(__dev_priv, __t, __mask) \
@@ -614,6 +615,7 @@ intel_format_info_is_yuv_semiplanar(const struct drm_format_info *info,
 
 /* modesetting */
 void intel_modeset_init_hw(struct drm_i915_private *i915);
+int intel_modeset_init_noirq(struct drm_i915_private *i915);
 int intel_modeset_init(struct drm_i915_private *i915);
 void intel_modeset_driver_remove(struct drm_i915_private *i915);
 void intel_modeset_driver_remove_noirq(struct drm_i915_private *i915);
