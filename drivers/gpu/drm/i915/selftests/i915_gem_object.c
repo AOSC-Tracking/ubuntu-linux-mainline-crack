@@ -322,7 +322,7 @@ static int igt_partial_tiling(void *arg)
 			      nreal << PAGE_SHIFT,
 			      (1 + next_prime_number(i915->ggtt.vm.total >> PAGE_SHIFT)) << PAGE_SHIFT);
 	if (IS_ERR(obj))
-		return PTR_ERR(obj);
+		return false;
 
 	err = i915_gem_object_pin_pages(obj);
 	if (err) {
