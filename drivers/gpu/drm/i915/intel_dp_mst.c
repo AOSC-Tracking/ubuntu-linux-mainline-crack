@@ -45,7 +45,7 @@ static bool intel_dp_mst_compute_config(struct intel_encoder *encoder,
 	int lane_count, slots = 0;
 	const struct drm_display_mode *adjusted_mode = &pipe_config->base.adjusted_mode;
 	int mst_pbn;
-	bool constant_n = drm_dp_has_quirk(&intel_dp->desc,
+	bool constant_n = drm_dp_has_quirk(&intel_dp->desc, 0,
 					   DP_DPCD_QUIRK_CONSTANT_N);
 
 	if (adjusted_mode->flags & DRM_MODE_FLAG_DBLSCAN)
