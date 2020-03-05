@@ -129,6 +129,11 @@ static inline int list_is_first(const struct list_head *list,
 	return head->next == list;
 }
 
+static inline bool is_power_of_2_u64(u64 n)
+{
+	return (n != 0 && ((n & (n - 1)) == 0));
+}
+
 static inline void __list_del_many(struct list_head *head,
 				   struct list_head *first)
 {
