@@ -159,8 +159,10 @@ static struct sk_buff *taprio_dequeue(struct Qdisc *sch)
 		prio = skb->priority;
 		tc = netdev_get_prio_tc_map(dev, prio);
 
-		if (!(gate_mask & BIT(tc)))
+		if (!(gate_mask & BIT(tc))) {
+			skb = NULL;
 			continue;
+		}
 
 		len = qdisc_pkt_len(skb);
 		guard = ktime_add_ns(q->get_time(),
