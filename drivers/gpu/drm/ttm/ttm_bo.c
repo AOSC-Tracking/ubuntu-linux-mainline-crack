@@ -151,8 +151,6 @@ static void ttm_bo_add_mem_to_lru(struct ttm_buffer_object *bo,
 	struct ttm_bo_device *bdev = bo->bdev;
 	struct ttm_mem_type_manager *man;
 
-	dma_resv_assert_held(bo->base.resv);
-
 	if (!list_empty(&bo->lru))
 		return;
 
@@ -604,7 +602,8 @@ static void ttm_bo_release(struct kref *kref)
 		 */
 		if (bo->mem.placement & TTM_PL_FLAG_NO_EVICT) {
 			bo->mem.placement &= ~TTM_PL_FLAG_NO_EVICT;
-			ttm_bo_move_to_lru_tail(bo, NULL);
+			ttm_bo_del_from_lru(bo);
+			ttm_bo_add_mem_to_lru(bo, &bo->mem);
 		}
 
 		kref_init(&bo->kref);
@@ -1196,6 +1195,18 @@ int ttm_bo_validate(struct ttm_buffer_object *bo,
 	uint32_t new_flags;
 
 	dma_resv_assert_held(bo->base.resv);
+
+	/*
+	 * Remove the backing store if no placement is given.
+	 */
+	if (!placement->num_placement && !placement->num_busy_placement) {
+		ret = ttm_bo_pipeline_gutting(bo);
+		if (ret)
+			return ret;
+
+		return ttm_tt_create(bo, false);
+	}
+
 	/*
 	 * Check whether we need to move buffer.
 	 */
