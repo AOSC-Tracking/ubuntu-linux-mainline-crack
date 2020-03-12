@@ -677,6 +677,7 @@ EXPORT_SYMBOL drivers/gpu/drm/drm_kms_helper 0x00000000	drm_dp_find_vcpi_slots
 EXPORT_SYMBOL drivers/gpu/drm/drm_kms_helper 0x00000000	drm_dp_get_adjust_request_pre_emphasis
 EXPORT_SYMBOL drivers/gpu/drm/drm_kms_helper 0x00000000	drm_dp_get_adjust_request_voltage
 EXPORT_SYMBOL drivers/gpu/drm/drm_kms_helper 0x00000000	drm_dp_get_dual_mode_type_name
+EXPORT_SYMBOL drivers/gpu/drm/drm_kms_helper 0x00000000	drm_dp_get_edid_quirks
 EXPORT_SYMBOL drivers/gpu/drm/drm_kms_helper 0x00000000	drm_dp_link_configure
 EXPORT_SYMBOL drivers/gpu/drm/drm_kms_helper 0x00000000	drm_dp_link_power_down
 EXPORT_SYMBOL drivers/gpu/drm/drm_kms_helper 0x00000000	drm_dp_link_power_up
@@ -17781,7 +17782,9 @@ EXPORT_SYMBOL_GPL sound/soc/intel/common/snd-soc-acpi-intel-match 0x00000000	snd
 EXPORT_SYMBOL_GPL sound/soc/intel/common/snd-soc-acpi-intel-match 0x00000000	snd_soc_acpi_intel_baytrail_machines
 EXPORT_SYMBOL_GPL sound/soc/intel/common/snd-soc-acpi-intel-match 0x00000000	snd_soc_acpi_intel_broadwell_machines
 EXPORT_SYMBOL_GPL sound/soc/intel/common/snd-soc-acpi-intel-match 0x00000000	snd_soc_acpi_intel_bxt_machines
+EXPORT_SYMBOL_GPL sound/soc/intel/common/snd-soc-acpi-intel-match 0x00000000	snd_soc_acpi_intel_cfl_machines
 EXPORT_SYMBOL_GPL sound/soc/intel/common/snd-soc-acpi-intel-match 0x00000000	snd_soc_acpi_intel_cherrytrail_machines
+EXPORT_SYMBOL_GPL sound/soc/intel/common/snd-soc-acpi-intel-match 0x00000000	snd_soc_acpi_intel_cml_machines
 EXPORT_SYMBOL_GPL sound/soc/intel/common/snd-soc-acpi-intel-match 0x00000000	snd_soc_acpi_intel_cnl_machines
 EXPORT_SYMBOL_GPL sound/soc/intel/common/snd-soc-acpi-intel-match 0x00000000	snd_soc_acpi_intel_glk_machines
 EXPORT_SYMBOL_GPL sound/soc/intel/common/snd-soc-acpi-intel-match 0x00000000	snd_soc_acpi_intel_haswell_machines
