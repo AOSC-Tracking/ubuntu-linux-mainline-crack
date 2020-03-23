@@ -6915,8 +6915,6 @@ static const struct hda_fixup alc269_fixups[] = {
 	[ALC256_FIXUP_SKIP_FORCE_RESUME] = {
 		.type = HDA_FIXUP_FUNC,
 		.v.func = alc_fixup_skip_force_resume,
-		.chained = true,
-		.chain_id = ALC255_FIXUP_DELL1_MIC_NO_PRESENCE
 	},
 	[ALC294_FIXUP_ASUS_INTSPK_HEADSET_MIC] = {
 		.type = HDA_FIXUP_PINS,
