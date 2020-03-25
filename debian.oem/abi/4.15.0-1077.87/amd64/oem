@@ -7344,6 +7344,7 @@ EXPORT_SYMBOL vmlinux 0x00000000	bioset_integrity_free
 EXPORT_SYMBOL vmlinux 0x00000000	bit_wait
 EXPORT_SYMBOL vmlinux 0x00000000	bit_wait_io
 EXPORT_SYMBOL vmlinux 0x00000000	bit_waitqueue
+EXPORT_SYMBOL vmlinux 0x00000000	bitmap_alloc
 EXPORT_SYMBOL vmlinux 0x00000000	bitmap_allocate_region
 EXPORT_SYMBOL vmlinux 0x00000000	bitmap_bitremap
 EXPORT_SYMBOL vmlinux 0x00000000	bitmap_close_sync
@@ -7368,6 +7369,7 @@ EXPORT_SYMBOL vmlinux 0x00000000	bitmap_sync_with_cluster
 EXPORT_SYMBOL vmlinux 0x00000000	bitmap_to_u32array
 EXPORT_SYMBOL vmlinux 0x00000000	bitmap_unplug
 EXPORT_SYMBOL vmlinux 0x00000000	bitmap_update_sb
+EXPORT_SYMBOL vmlinux 0x00000000	bitmap_zalloc
 EXPORT_SYMBOL vmlinux 0x00000000	blk_alloc_queue
 EXPORT_SYMBOL vmlinux 0x00000000	blk_alloc_queue_node
 EXPORT_SYMBOL vmlinux 0x00000000	blk_check_plugged
@@ -9220,6 +9222,7 @@ EXPORT_SYMBOL vmlinux 0x00000000	mb_cache_entry_find_first
 EXPORT_SYMBOL vmlinux 0x00000000	mb_cache_entry_find_next
 EXPORT_SYMBOL vmlinux 0x00000000	mb_cache_entry_get
 EXPORT_SYMBOL vmlinux 0x00000000	mb_cache_entry_touch
+EXPORT_SYMBOL vmlinux 0x00000000	md_bitmap_free
 EXPORT_SYMBOL vmlinux 0x00000000	md_check_no_bitmap
 EXPORT_SYMBOL vmlinux 0x00000000	md_check_recovery
 EXPORT_SYMBOL vmlinux 0x00000000	md_cluster_mod
@@ -17355,17 +17358,18 @@ EXPORT_SYMBOL_GPL sound/pci/hda/snd-hda-codec 0x00000000	snd_hda_get_num_devices
 EXPORT_SYMBOL_GPL sound/pci/hda/snd-hda-codec 0x00000000	snd_hda_get_pin_label
 EXPORT_SYMBOL_GPL sound/pci/hda/snd-hda-codec 0x00000000	snd_hda_input_mux_info
 EXPORT_SYMBOL_GPL sound/pci/hda/snd-hda-codec 0x00000000	snd_hda_input_mux_put
-EXPORT_SYMBOL_GPL sound/pci/hda/snd-hda-codec 0x00000000	snd_hda_jack_add_kctl
+EXPORT_SYMBOL_GPL sound/pci/hda/snd-hda-codec 0x00000000	snd_hda_jack_add_kctl_mst
 EXPORT_SYMBOL_GPL sound/pci/hda/snd-hda-codec 0x00000000	snd_hda_jack_add_kctls
 EXPORT_SYMBOL_GPL sound/pci/hda/snd-hda-codec 0x00000000	snd_hda_jack_detect_enable
-EXPORT_SYMBOL_GPL sound/pci/hda/snd-hda-codec 0x00000000	snd_hda_jack_detect_enable_callback
-EXPORT_SYMBOL_GPL sound/pci/hda/snd-hda-codec 0x00000000	snd_hda_jack_detect_state
+EXPORT_SYMBOL_GPL sound/pci/hda/snd-hda-codec 0x00000000	snd_hda_jack_detect_enable_callback_mst
+EXPORT_SYMBOL_GPL sound/pci/hda/snd-hda-codec 0x00000000	snd_hda_jack_detect_state_mst
+EXPORT_SYMBOL_GPL sound/pci/hda/snd-hda-codec 0x00000000	snd_hda_jack_pin_sense
 EXPORT_SYMBOL_GPL sound/pci/hda/snd-hda-codec 0x00000000	snd_hda_jack_poll_all
 EXPORT_SYMBOL_GPL sound/pci/hda/snd-hda-codec 0x00000000	snd_hda_jack_report_sync
 EXPORT_SYMBOL_GPL sound/pci/hda/snd-hda-codec 0x00000000	snd_hda_jack_set_dirty_all
 EXPORT_SYMBOL_GPL sound/pci/hda/snd-hda-codec 0x00000000	snd_hda_jack_set_gating_jack
-EXPORT_SYMBOL_GPL sound/pci/hda/snd-hda-codec 0x00000000	snd_hda_jack_tbl_get
 EXPORT_SYMBOL_GPL sound/pci/hda/snd-hda-codec 0x00000000	snd_hda_jack_tbl_get_from_tag
+EXPORT_SYMBOL_GPL sound/pci/hda/snd-hda-codec 0x00000000	snd_hda_jack_tbl_get_mst
 EXPORT_SYMBOL_GPL sound/pci/hda/snd-hda-codec 0x00000000	snd_hda_jack_unsol_event
 EXPORT_SYMBOL_GPL sound/pci/hda/snd-hda-codec 0x00000000	snd_hda_load_patch
 EXPORT_SYMBOL_GPL sound/pci/hda/snd-hda-codec 0x00000000	snd_hda_lock_devices
@@ -17390,7 +17394,6 @@ EXPORT_SYMBOL_GPL sound/pci/hda/snd-hda-codec 0x00000000	snd_hda_override_conn_l
 EXPORT_SYMBOL_GPL sound/pci/hda/snd-hda-codec 0x00000000	snd_hda_parse_pin_defcfg
 EXPORT_SYMBOL_GPL sound/pci/hda/snd-hda-codec 0x00000000	snd_hda_pick_fixup
 EXPORT_SYMBOL_GPL sound/pci/hda/snd-hda-codec 0x00000000	snd_hda_pick_pin_fixup
-EXPORT_SYMBOL_GPL sound/pci/hda/snd-hda-codec 0x00000000	snd_hda_pin_sense
 EXPORT_SYMBOL_GPL sound/pci/hda/snd-hda-codec 0x00000000	snd_hda_register_beep_device
 EXPORT_SYMBOL_GPL sound/pci/hda/snd-hda-codec 0x00000000	snd_hda_sequence_write
 EXPORT_SYMBOL_GPL sound/pci/hda/snd-hda-codec 0x00000000	snd_hda_set_dev_select
@@ -19063,7 +19066,6 @@ EXPORT_SYMBOL_GPL vmlinux 0x00000000	crypto_shash_final
 EXPORT_SYMBOL_GPL vmlinux 0x00000000	crypto_shash_finup
 EXPORT_SYMBOL_GPL vmlinux 0x00000000	crypto_shash_setkey
 EXPORT_SYMBOL_GPL vmlinux 0x00000000	crypto_shash_update
-EXPORT_SYMBOL_GPL vmlinux 0x00000000	crypto_shoot_alg
 EXPORT_SYMBOL_GPL vmlinux 0x00000000	crypto_spawn_tfm
 EXPORT_SYMBOL_GPL vmlinux 0x00000000	crypto_spawn_tfm2
 EXPORT_SYMBOL_GPL vmlinux 0x00000000	crypto_tfm_in_queue
