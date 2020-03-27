@@ -1915,11 +1915,26 @@ static void execlists_dequeue(struct intel_engine_cs *engine)
 	 * of trouble.
 	 */
 	active = READ_ONCE(execlists->active);
-	while ((last = *active) && i915_request_completed(last))
-		active++;
 
-	if (last) {
+	/*
+	 * In theory we can skip over completed contexts that have not
+	 * yet been processed by events (as those events are in flight):
+	 *
+	 * while ((last = *active) && i915_request_completed(last))
+	 *	active++;
+	 *
+	 * However, the GPU cannot handle this as it will ultimately
+	 * find itself trying to jump back into a context it has just
+	 * completed and barf.
+	 */
+
+	if ((last = *active)) {
 		if (need_preempt(engine, last, rb)) {
+			if (i915_request_completed(last)) {
+				tasklet_hi_schedule(&execlists->tasklet);
+				return;
+			}
+
 			ENGINE_TRACE(engine,
 				     "preempting last=%llx:%lld, prio=%d, hint=%d\n",
 				     last->fence.context,
@@ -1947,6 +1962,11 @@ static void execlists_dequeue(struct intel_engine_cs *engine)
 			last = NULL;
 		} else if (need_timeslice(engine, last) &&
 			   timer_expired(&engine->execlists.timer)) {
+			if (i915_request_completed(last)) {
+				tasklet_hi_schedule(&execlists->tasklet);
+				return;
+			}
+
 			ENGINE_TRACE(engine,
 				     "expired last=%llx:%lld, prio=%d, hint=%d\n",
 				     last->fence.context,
@@ -2901,10 +2921,14 @@ static void __submit_queue_imm(struct intel_engine_cs *engine)
 	if (reset_in_progress(execlists))
 		return; /* defer until we restart the engine following reset */
 
-	if (execlists->tasklet.func == execlists_submission_tasklet)
-		__execlists_submission_tasklet(engine);
-	else
-		tasklet_hi_schedule(&execlists->tasklet);
+	/* Hopefully we clear execlists->pending[] to let us through */
+	if (READ_ONCE(execlists->pending[0]) &&
+	    tasklet_trylock(&execlists->tasklet)) {
+		process_csb(engine);
+		tasklet_unlock(&execlists->tasklet);
+	}
+
+	__execlists_submission_tasklet(engine);
 }
 
 static void submit_queue(struct intel_engine_cs *engine,
@@ -3442,7 +3466,8 @@ static int intel_init_workaround_bb(struct intel_engine_cs *engine)
 
 	ret = lrc_setup_wa_ctx(engine);
 	if (ret) {
-		DRM_DEBUG_DRIVER("Failed to setup context WA page: %d\n", ret);
+		drm_dbg(&engine->i915->drm,
+			"Failed to setup context WA page: %d\n", ret);
 		return ret;
 	}
 
@@ -3549,7 +3574,8 @@ static bool unexpected_starting_state(struct intel_engine_cs *engine)
 	bool unexpected = false;
 
 	if (ENGINE_READ_FW(engine, RING_MI_MODE) & STOP_RING) {
-		DRM_DEBUG_DRIVER("STOP_RING still set in RING_MI_MODE\n");
+		drm_dbg(&engine->i915->drm,
+			"STOP_RING still set in RING_MI_MODE\n");
 		unexpected = true;
 	}
 
@@ -4493,7 +4519,7 @@ int intel_execlists_submission_setup(struct intel_engine_cs *engine)
 		 * because we only expect rare glitches but nothing
 		 * critical to prevent us from using GPU
 		 */
-		DRM_ERROR("WA batch buffer initialization failed\n");
+		drm_err(&i915->drm, "WA batch buffer initialization failed\n");
 
 	if (HAS_LOGICAL_RING_ELSQ(i915)) {
 		execlists->submit_reg = uncore->regs +
@@ -4668,7 +4694,8 @@ populate_lr_context(struct intel_context *ce,
 	vaddr = i915_gem_object_pin_map(ctx_obj, I915_MAP_WB);
 	if (IS_ERR(vaddr)) {
 		ret = PTR_ERR(vaddr);
-		DRM_DEBUG_DRIVER("Could not map object pages! (%d)\n", ret);
+		drm_dbg(&engine->i915->drm,
+			"Could not map object pages! (%d)\n", ret);
 		return ret;
 	}
 
@@ -4761,7 +4788,8 @@ static int __execlists_context_alloc(struct intel_context *ce,
 
 	ret = populate_lr_context(ce, ctx_obj, engine, ring);
 	if (ret) {
-		DRM_DEBUG_DRIVER("Failed to populate LRC: %d\n", ret);
+		drm_dbg(&engine->i915->drm,
+			"Failed to populate LRC: %d\n", ret);
 		goto error_ring_free;
 	}
 
@@ -4994,10 +5022,8 @@ static void virtual_submission_tasklet(unsigned long data)
 submit_engine:
 		GEM_BUG_ON(RB_EMPTY_NODE(&node->rb));
 		node->prio = prio;
-		if (first && prio > sibling->execlists.queue_priority_hint) {
-			sibling->execlists.queue_priority_hint = prio;
+		if (first && prio > sibling->execlists.queue_priority_hint)
 			tasklet_hi_schedule(&sibling->execlists.tasklet);
-		}
 
 		spin_unlock(&sibling->active.lock);
 	}
