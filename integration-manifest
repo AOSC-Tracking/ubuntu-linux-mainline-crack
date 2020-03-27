@@ -1,0 +1,34 @@
+drm drm-fixes c4b979ebcafe978338cad1df4c77cdc8f84bd51c
+	Merge tag 'amd-drm-fixes-5.6-2020-03-26' of git://people.freedesktop.org/~agd5f/linux into drm-fixes
+drm-misc drm-misc-fixes 83a196773b8bc6702f49df1eddc848180e350340
+	drm/bridge: analogix_dp: Split bind() into probe() and real bind()
+drm-intel drm-intel-fixes 16fbf79b0f83bc752cee8589279f1ebfe57b3b6e
+	Linux 5.6-rc7
+drm-amd drm-amd-fixes 2b702e72e33bbdec0764cfb6e1dd00fe1142ae55
+	Merge tag 'drm-misc-fixes-2017-09-28-1' of git://anongit.freedesktop.org/git/drm-misc into drm-fixes
+drm drm-next c2556238120bce8be37670e145226c12870a9e5a
+	Merge branch 'feature/staging_sm5' of git://people.freedesktop.org/~sroland/linux into drm-next
+drm-misc drm-misc-next-fixes b1e7396a1d0e6af6806337fdaaa44098d6b3343c
+	drm/vc4: Fix HDMI mode validation
+drm-intel drm-intel-next-fixes 2bdd4c28baff29163808677a70942de2b45f17dc
+	drm/i915/display: Fix mode private_flags comparison at atomic_check
+drm-amd drm-amd-next-fixes 2bd6bf03f4c1c59381d62c61d03f6cc3fe71f66e
+	Linux 4.14-rc1
+drm-misc drm-misc-next 6bb0942e8f46863a745489cce27efe5be2a3885e
+	drm/dp_mst: Remove single tx msg restriction.
+drm-intel drm-intel-next-queued 106d4ffd6cb8f15f3b66c0f64c16dfeda4f395e2
+	drm/i915/tgl: Add definitions for VRR registers and bits
+drm-intel drm-intel-next 217a485c8399634abacd2f138b3524d2e78e8aad
+	drm/i915: Update DRIVER_DATE to 20200313
+drm-amd drm-amd-next 754270c7c56292e97d0eff924a5d5d83f92add07
+	Merge branch 'drm-next-4.15' of git://people.freedesktop.org/~agd5f/linux into drm-next
+sound-upstream for-linus f5a88b0accc24c4a9021247d7a3124f90aa4c586
+	ALSA: hda/realtek: Enable mute LED on an HP system
+sound-upstream for-next 04a9af2e03842347269fe1b3e64b94b8226fbba1
+	ALSA: ppc: keywest: convert to use i2c_new_client_device()
+drm-intel topic/core-for-CI 5b39064d452ac9739d59c5183c8a7c90a5982acb
+	rtc/cmos: Protect rtc_lock from interrupts
+drm drm-vmwgfx-coherent 0a6cad5df541108cfd3fbd79eef48eb824c89bdc
+	Merge branch 'vmwgfx-coherent' of git://people.freedesktop.org/~thomash/linux into drm-next
+drm-misc topic/mst-bw-check-fixes-for-airlied 047d4cd2067b028e7bca906c5ce20f4c89b65386
+	drm/dp_mst: Rewrite and fix bandwidth limit checks
