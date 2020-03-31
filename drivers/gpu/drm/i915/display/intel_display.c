@@ -620,45 +620,43 @@ int chv_calc_dpll_params(int refclk, struct dpll *clock)
 	return clock->dot / 5;
 }
 
-#define INTELPllInvalid(s)   do { /* DRM_DEBUG(s); */ return false; } while (0)
-
 /*
  * Returns whether the given set of divisors are valid for a given refclk with
  * the given connectors.
  */
-static bool intel_PLL_is_valid(struct drm_i915_private *dev_priv,
+static bool intel_pll_is_valid(struct drm_i915_private *dev_priv,
 			       const struct intel_limit *limit,
 			       const struct dpll *clock)
 {
-	if (clock->n   < limit->n.min   || limit->n.max   < clock->n)
-		INTELPllInvalid("n out of range\n");
-	if (clock->p1  < limit->p1.min  || limit->p1.max  < clock->p1)
-		INTELPllInvalid("p1 out of range\n");
-	if (clock->m2  < limit->m2.min  || limit->m2.max  < clock->m2)
-		INTELPllInvalid("m2 out of range\n");
-	if (clock->m1  < limit->m1.min  || limit->m1.max  < clock->m1)
-		INTELPllInvalid("m1 out of range\n");
+	if (clock->n < limit->n.min || limit->n.max < clock->n)
+		return false;
+	if (clock->p1 < limit->p1.min || limit->p1.max < clock->p1)
+		return false;
+	if (clock->m2 < limit->m2.min || limit->m2.max < clock->m2)
+		return false;
+	if (clock->m1 < limit->m1.min || limit->m1.max < clock->m1)
+		return false;
 
 	if (!IS_PINEVIEW(dev_priv) && !IS_VALLEYVIEW(dev_priv) &&
 	    !IS_CHERRYVIEW(dev_priv) && !IS_GEN9_LP(dev_priv))
 		if (clock->m1 <= clock->m2)
-			INTELPllInvalid("m1 <= m2\n");
+			return false;
 
 	if (!IS_VALLEYVIEW(dev_priv) && !IS_CHERRYVIEW(dev_priv) &&
 	    !IS_GEN9_LP(dev_priv)) {
 		if (clock->p < limit->p.min || limit->p.max < clock->p)
-			INTELPllInvalid("p out of range\n");
+			return false;
 		if (clock->m < limit->m.min || limit->m.max < clock->m)
-			INTELPllInvalid("m out of range\n");
+			return false;
 	}
 
 	if (clock->vco < limit->vco.min || limit->vco.max < clock->vco)
-		INTELPllInvalid("vco out of range\n");
+		return false;
 	/* XXX: We may need to be checking "Dot clock" depending on the multiplier,
 	 * connector, etc., rather than just a single range.
 	 */
 	if (clock->dot < limit->dot.min || limit->dot.max < clock->dot)
-		INTELPllInvalid("dot out of range\n");
+		return false;
 
 	return true;
 }
@@ -725,7 +723,7 @@ i9xx_find_best_dpll(const struct intel_limit *limit,
 					int this_err;
 
 					i9xx_calc_dpll_params(refclk, &clock);
-					if (!intel_PLL_is_valid(to_i915(dev),
+					if (!intel_pll_is_valid(to_i915(dev),
 								limit,
 								&clock))
 						continue;
@@ -781,7 +779,7 @@ pnv_find_best_dpll(const struct intel_limit *limit,
 					int this_err;
 
 					pnv_calc_dpll_params(refclk, &clock);
-					if (!intel_PLL_is_valid(to_i915(dev),
+					if (!intel_pll_is_valid(to_i915(dev),
 								limit,
 								&clock))
 						continue;
@@ -842,7 +840,7 @@ g4x_find_best_dpll(const struct intel_limit *limit,
 					int this_err;
 
 					i9xx_calc_dpll_params(refclk, &clock);
-					if (!intel_PLL_is_valid(to_i915(dev),
+					if (!intel_pll_is_valid(to_i915(dev),
 								limit,
 								&clock))
 						continue;
@@ -939,7 +937,7 @@ vlv_find_best_dpll(const struct intel_limit *limit,
 
 					vlv_calc_dpll_params(refclk, &clock);
 
-					if (!intel_PLL_is_valid(to_i915(dev),
+					if (!intel_pll_is_valid(to_i915(dev),
 								limit,
 								&clock))
 						continue;
@@ -1008,7 +1006,7 @@ chv_find_best_dpll(const struct intel_limit *limit,
 
 			chv_calc_dpll_params(refclk, &clock);
 
-			if (!intel_PLL_is_valid(to_i915(dev), limit, &clock))
+			if (!intel_pll_is_valid(to_i915(dev), limit, &clock))
 				continue;
 
 			if (!vlv_PLL_is_optimal(dev, target, &clock, best_clock,
@@ -2910,6 +2908,7 @@ intel_fb_plane_get_subsampling(int *hsub, int *vsub,
 static int
 intel_fb_check_ccs_xy(struct drm_framebuffer *fb, int ccs_plane, int x, int y)
 {
+	struct drm_i915_private *i915 = to_i915(fb->dev);
 	struct intel_framebuffer *intel_fb = to_intel_framebuffer(fb);
 	int main_plane;
 	int hsub, vsub;
@@ -2938,7 +2937,8 @@ intel_fb_check_ccs_xy(struct drm_framebuffer *fb, int ccs_plane, int x, int y)
 	 * x/y offsets must match between CCS and the main surface.
 	 */
 	if (main_x != ccs_x || main_y != ccs_y) {
-		DRM_DEBUG_KMS("Bad CCS x/y (main %d,%d ccs %d,%d) full (main %d,%d ccs %d,%d)\n",
+		drm_dbg_kms(&i915->drm,
+			      "Bad CCS x/y (main %d,%d ccs %d,%d) full (main %d,%d ccs %d,%d)\n",
 			      main_x, main_y,
 			      ccs_x, ccs_y,
 			      intel_fb->normal[main_plane].x,
@@ -4998,37 +4998,6 @@ static void icl_set_pipe_chicken(struct intel_crtc *crtc)
 	intel_de_write(dev_priv, PIPE_CHICKEN(pipe), tmp);
 }
 
-static void icl_enable_trans_port_sync(const struct intel_crtc_state *crtc_state)
-{
-	struct intel_crtc *crtc = to_intel_crtc(crtc_state->uapi.crtc);
-	struct drm_i915_private *dev_priv = to_i915(crtc->base.dev);
-	u32 trans_ddi_func_ctl2_val;
-	u8 master_select;
-
-	/*
-	 * Configure the master select and enable Transcoder Port Sync for
-	 * Slave CRTCs transcoder.
-	 */
-	if (crtc_state->master_transcoder == INVALID_TRANSCODER)
-		return;
-
-	if (crtc_state->master_transcoder == TRANSCODER_EDP)
-		master_select = 0;
-	else
-		master_select = crtc_state->master_transcoder + 1;
-
-	/* Set the master select bits for Tranascoder Port Sync */
-	trans_ddi_func_ctl2_val = (PORT_SYNC_MODE_MASTER_SELECT(master_select) &
-				   PORT_SYNC_MODE_MASTER_SELECT_MASK) <<
-		PORT_SYNC_MODE_MASTER_SELECT_SHIFT;
-	/* Enable Transcoder Port Sync */
-	trans_ddi_func_ctl2_val |= PORT_SYNC_MODE_ENABLE;
-
-	intel_de_write(dev_priv,
-		       TRANS_DDI_FUNC_CTL2(crtc_state->cpu_transcoder),
-		       trans_ddi_func_ctl2_val);
-}
-
 static void intel_fdi_normal_train(struct intel_crtc *crtc)
 {
 	struct drm_device *dev = crtc->base.dev;
@@ -7036,9 +7005,6 @@ static void hsw_crtc_enable(struct intel_atomic_state *state,
 
 	if (!transcoder_is_dsi(cpu_transcoder))
 		intel_set_pipe_timings(new_crtc_state);
-
-	if (INTEL_GEN(dev_priv) >= 11)
-		icl_enable_trans_port_sync(new_crtc_state);
 
 	intel_set_pipe_src_size(new_crtc_state);
 
@@ -9398,7 +9364,6 @@ static bool i9xx_get_pipe_config(struct intel_crtc *crtc,
 	pipe_config->output_format = INTEL_OUTPUT_FORMAT_RGB;
 	pipe_config->cpu_transcoder = (enum transcoder) crtc->pipe;
 	pipe_config->shared_dpll = NULL;
-	pipe_config->master_transcoder = INVALID_TRANSCODER;
 
 	ret = false;
 
@@ -10622,7 +10587,6 @@ static bool ilk_get_pipe_config(struct intel_crtc *crtc,
 
 	pipe_config->cpu_transcoder = (enum transcoder) crtc->pipe;
 	pipe_config->shared_dpll = NULL;
-	pipe_config->master_transcoder = INVALID_TRANSCODER;
 
 	ret = false;
 	tmp = intel_de_read(dev_priv, PIPECONF(crtc->pipe));
@@ -11085,61 +11049,6 @@ static void hsw_get_ddi_port_state(struct intel_crtc *crtc,
 	}
 }
 
-static enum transcoder transcoder_master_readout(struct drm_i915_private *dev_priv,
-						 enum transcoder cpu_transcoder)
-{
-	u32 trans_port_sync, master_select;
-
-	trans_port_sync = intel_de_read(dev_priv,
-				        TRANS_DDI_FUNC_CTL2(cpu_transcoder));
-
-	if ((trans_port_sync & PORT_SYNC_MODE_ENABLE) == 0)
-		return INVALID_TRANSCODER;
-
-	master_select = trans_port_sync &
-			PORT_SYNC_MODE_MASTER_SELECT_MASK;
-	if (master_select == 0)
-		return TRANSCODER_EDP;
-	else
-		return master_select - 1;
-}
-
-static void icl_get_trans_port_sync_config(struct intel_crtc_state *crtc_state)
-{
-	struct drm_i915_private *dev_priv = to_i915(crtc_state->uapi.crtc->dev);
-	u32 transcoders;
-	enum transcoder cpu_transcoder;
-
-	crtc_state->master_transcoder = transcoder_master_readout(dev_priv,
-								  crtc_state->cpu_transcoder);
-
-	transcoders = BIT(TRANSCODER_A) |
-		BIT(TRANSCODER_B) |
-		BIT(TRANSCODER_C) |
-		BIT(TRANSCODER_D);
-	for_each_cpu_transcoder_masked(dev_priv, cpu_transcoder, transcoders) {
-		enum intel_display_power_domain power_domain;
-		intel_wakeref_t trans_wakeref;
-
-		power_domain = POWER_DOMAIN_TRANSCODER(cpu_transcoder);
-		trans_wakeref = intel_display_power_get_if_enabled(dev_priv,
-								   power_domain);
-
-		if (!trans_wakeref)
-			continue;
-
-		if (transcoder_master_readout(dev_priv, cpu_transcoder) ==
-		    crtc_state->cpu_transcoder)
-			crtc_state->sync_mode_slaves_mask |= BIT(cpu_transcoder);
-
-		intel_display_power_put(dev_priv, power_domain, trans_wakeref);
-	}
-
-	drm_WARN_ON(&dev_priv->drm,
-		    crtc_state->master_transcoder != INVALID_TRANSCODER &&
-		    crtc_state->sync_mode_slaves_mask);
-}
-
 static bool hsw_get_pipe_config(struct intel_crtc *crtc,
 				struct intel_crtc_state *pipe_config)
 {
@@ -11270,10 +11179,6 @@ static bool hsw_get_pipe_config(struct intel_crtc *crtc,
 	} else {
 		pipe_config->pixel_multiplier = 1;
 	}
-
-	if (INTEL_GEN(dev_priv) >= 11 &&
-	    !transcoder_is_dsi(pipe_config->cpu_transcoder))
-		icl_get_trans_port_sync_config(pipe_config);
 
 out:
 	for_each_power_domain(power_domain, power_domain_mask)
@@ -12377,10 +12282,8 @@ int intel_plane_atomic_calc_changes(const struct intel_crtc_state *old_crtc_stat
 	 * only combine the results from all planes in the current place?
 	 */
 	if (!is_crtc_enabled) {
-		plane_state->uapi.visible = visible = false;
-		crtc_state->active_planes &= ~BIT(plane->id);
-		crtc_state->data_rate[plane->id] = 0;
-		crtc_state->min_cdclk[plane->id] = 0;
+		intel_plane_set_invisible(crtc_state, plane_state);
+		visible = false;
 	}
 
 	if (!was_visible && !visible)
@@ -12886,16 +12789,17 @@ compute_baseline_pipe_bpp(struct intel_crtc *crtc,
 	return 0;
 }
 
-static void intel_dump_crtc_timings(const struct drm_display_mode *mode)
+static void intel_dump_crtc_timings(struct drm_i915_private *i915,
+				    const struct drm_display_mode *mode)
 {
-	DRM_DEBUG_KMS("crtc timings: %d %d %d %d %d %d %d %d %d, "
-		      "type: 0x%x flags: 0x%x\n",
-		      mode->crtc_clock,
-		      mode->crtc_hdisplay, mode->crtc_hsync_start,
-		      mode->crtc_hsync_end, mode->crtc_htotal,
-		      mode->crtc_vdisplay, mode->crtc_vsync_start,
-		      mode->crtc_vsync_end, mode->crtc_vtotal,
-		      mode->type, mode->flags);
+	drm_dbg_kms(&i915->drm, "crtc timings: %d %d %d %d %d %d %d %d %d, "
+		    "type: 0x%x flags: 0x%x\n",
+		    mode->crtc_clock,
+		    mode->crtc_hdisplay, mode->crtc_hsync_start,
+		    mode->crtc_hsync_end, mode->crtc_htotal,
+		    mode->crtc_vdisplay, mode->crtc_vsync_start,
+		    mode->crtc_vsync_end, mode->crtc_vtotal,
+		    mode->type, mode->flags);
 }
 
 static inline void
@@ -13042,6 +12946,11 @@ static void intel_dump_pipe_config(const struct intel_crtc_state *pipe_config,
 		    transcoder_name(pipe_config->cpu_transcoder),
 		    pipe_config->pipe_bpp, pipe_config->dither);
 
+	drm_dbg_kms(&dev_priv->drm,
+		    "port sync: master transcoder: %s, slave transcoder bitmask = 0x%x\n",
+		    transcoder_name(pipe_config->master_transcoder),
+		    pipe_config->sync_mode_slaves_mask);
+
 	if (pipe_config->has_pch_encoder)
 		intel_dump_m_n_config(pipe_config, "fdi",
 				      pipe_config->fdi_lanes,
@@ -13079,7 +12988,7 @@ static void intel_dump_pipe_config(const struct intel_crtc_state *pipe_config,
 	drm_mode_debug_printmodeline(&pipe_config->hw.mode);
 	drm_dbg_kms(&dev_priv->drm, "adjusted mode:\n");
 	drm_mode_debug_printmodeline(&pipe_config->hw.adjusted_mode);
-	intel_dump_crtc_timings(&pipe_config->hw.adjusted_mode);
+	intel_dump_crtc_timings(dev_priv, &pipe_config->hw.adjusted_mode);
 	drm_dbg_kms(&dev_priv->drm,
 		    "port clock: %d, pipe src size: %dx%d, pixel rate %d\n",
 		    pipe_config->port_clock,
