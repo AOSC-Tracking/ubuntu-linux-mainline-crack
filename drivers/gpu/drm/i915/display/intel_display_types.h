@@ -146,28 +146,35 @@ struct intel_encoder {
 	void (*update_prepare)(struct intel_atomic_state *,
 			       struct intel_encoder *,
 			       struct intel_crtc *);
-	void (*pre_pll_enable)(struct intel_encoder *,
+	void (*pre_pll_enable)(struct intel_atomic_state *,
+			       struct intel_encoder *,
 			       const struct intel_crtc_state *,
 			       const struct drm_connector_state *);
-	void (*pre_enable)(struct intel_encoder *,
+	void (*pre_enable)(struct intel_atomic_state *,
+			   struct intel_encoder *,
 			   const struct intel_crtc_state *,
 			   const struct drm_connector_state *);
-	void (*enable)(struct intel_encoder *,
+	void (*enable)(struct intel_atomic_state *,
+		       struct intel_encoder *,
 		       const struct intel_crtc_state *,
 		       const struct drm_connector_state *);
 	void (*update_complete)(struct intel_atomic_state *,
 				struct intel_encoder *,
 				struct intel_crtc *);
-	void (*disable)(struct intel_encoder *,
+	void (*disable)(struct intel_atomic_state *,
+			struct intel_encoder *,
 			const struct intel_crtc_state *,
 			const struct drm_connector_state *);
-	void (*post_disable)(struct intel_encoder *,
+	void (*post_disable)(struct intel_atomic_state *,
+			     struct intel_encoder *,
 			     const struct intel_crtc_state *,
 			     const struct drm_connector_state *);
-	void (*post_pll_disable)(struct intel_encoder *,
+	void (*post_pll_disable)(struct intel_atomic_state *,
+				 struct intel_encoder *,
 				 const struct intel_crtc_state *,
 				 const struct drm_connector_state *);
-	void (*update_pipe)(struct intel_encoder *,
+	void (*update_pipe)(struct intel_atomic_state *,
+			    struct intel_encoder *,
 			    const struct intel_crtc_state *,
 			    const struct drm_connector_state *);
 	/* Read out the current hw state of this connector, returning true if
@@ -640,6 +647,16 @@ struct intel_crtc_scaler_state {
 #define I915_MODE_FLAG_GET_SCANLINE_FROM_TIMESTAMP (1<<1)
 /* Flag to use the scanline counter instead of the pixel counter */
 #define I915_MODE_FLAG_USE_SCANLINE_COUNTER (1<<2)
+/*
+ * TE0 or TE1 flag is set if the crtc has a DSI encoder which
+ * is operating in command mode.
+ * Flag to use TE from DSI0 instead of VBI in command mode
+ */
+#define I915_MODE_FLAG_DSI_USE_TE0 (1<<3)
+/* Flag to use TE from DSI1 instead of VBI in command mode */
+#define I915_MODE_FLAG_DSI_USE_TE1 (1<<4)
+/* Flag to indicate mipi dsi periodic command mode where we do not get TE */
+#define I915_MODE_FLAG_DSI_PERIODIC_CMD_MODE (1<<5)
 
 struct intel_wm_level {
 	bool enable;
@@ -1015,6 +1032,7 @@ struct intel_crtc_state {
 		union hdmi_infoframe spd;
 		union hdmi_infoframe hdmi;
 		union hdmi_infoframe drm;
+		struct drm_dp_vsc_sdp vsc;
 	} infoframes;
 
 	/* HDMI scrambling status */
