@@ -131,6 +131,7 @@ static int xdr_decode_AFSFetchStatus(struct afs_call *call,
 	bool inline_error = (call->operation_ID == afs_FS_InlineBulkStatus);
 	u64 data_version, size;
 	u32 type, abort_code;
+	int ret;
 	u8 flags = 0;
 
 	abort_code = ntohl(xdr->abort_code);
@@ -144,7 +145,7 @@ static int xdr_decode_AFSFetchStatus(struct afs_call *call,
 			 * case.
 			 */
 			status->abort_code = abort_code;
-			return 0;
+			goto good;
 		}
 
 		pr_warn("Unknown AFSFetchStatus version %u\n", ntohl(xdr->if_version));
@@ -153,7 +154,7 @@ static int xdr_decode_AFSFetchStatus(struct afs_call *call,
 
 	if (abort_code != 0 && inline_error) {
 		status->abort_code = abort_code;
-		return 0;
+		goto good;
 	}
 
 	type = ntohl(xdr->type);
@@ -215,7 +216,9 @@ static int xdr_decode_AFSFetchStatus(struct afs_call *call,
 		read_req->data_version = data_version;
 		read_req->file_size = size;
 	}
-
+good:
+	ret = 0;
+advance:
 	*_bp = (const void *)*_bp + sizeof(*xdr);
 
 	if (vnode) {
@@ -225,11 +228,12 @@ static int xdr_decode_AFSFetchStatus(struct afs_call *call,
 					     flags);
 	}
 
-	return 0;
+	return ret;
 
 bad:
 	xdr_dump_bad(*_bp);
-	return afs_protocol_error(call, -EBADMSG, afs_eproto_bad_status);
+	ret = afs_protocol_error(call, -EBADMSG, afs_eproto_bad_status);
+	goto advance;
 }
 
 /*

@@ -192,6 +192,7 @@ static int xdr_decode_YFSFetchStatus(struct afs_call *call,
 {
 	const struct yfs_xdr_YFSFetchStatus *xdr = (const void *)*_bp;
 	u32 type;
+	int ret;
 	u8 flags = 0;
 
 	status->abort_code = ntohl(xdr->abort_code);
@@ -201,7 +202,7 @@ static int xdr_decode_YFSFetchStatus(struct afs_call *call,
 			status->nlink = 0;
 			__afs_break_callback(vnode);
 		}
-		return 0;
+		goto good;
 	}
 
 	type = ntohl(xdr->type);
@@ -270,7 +271,9 @@ static int xdr_decode_YFSFetchStatus(struct afs_call *call,
 		read_req->data_version = status->data_version;
 		read_req->file_size = status->size;
 	}
-
+good:
+	ret = 0;
+advance:
 	*_bp += xdr_size(xdr);
 
 	if (vnode) {
@@ -280,11 +283,12 @@ static int xdr_decode_YFSFetchStatus(struct afs_call *call,
 					     flags);
 	}
 
-	return 0;
+	return ret;
 
 bad:
 	xdr_dump_bad(*_bp);
-	return afs_protocol_error(call, -EBADMSG, afs_eproto_bad_status);
+	ret = afs_protocol_error(call, -EBADMSG, afs_eproto_bad_status);
+	goto advance;
 }
 
 /*
