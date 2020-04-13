@@ -652,6 +652,7 @@ static irqreturn_t cmos_interrupt(int irq, void *p)
 	unsigned long	flags;
 	u8		irqstat;
 	u8		rtc_control;
+	unsigned long	flags;
 
 	spin_lock_irqsave(&rtc_lock, flags);
 
