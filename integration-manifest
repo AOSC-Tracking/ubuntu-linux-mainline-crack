@@ -1,0 +1,36 @@
+drm drm-fixes 4da858c086433cd012c0bb16b5921f6fafe3f803
+	Merge branch 'linux-5.7' of git://github.com/skeggsb/linux into drm-fixes
+drm-misc drm-misc-fixes 7bfc1fec1af3e2f0194843855b0d49054fa42fd2
+	drm/dp_mst: Zero assigned PBN when releasing VCPI slots
+drm-intel drm-intel-fixes 5809e8f8ee42db54c283c3a6bcfcbbdbfd888f5c
+	Merge tag 'gvt-fixes-2020-04-14' of https://github.com/intel/gvt-linux into drm-intel-fixes
+drm-amd drm-amd-fixes 2b702e72e33bbdec0764cfb6e1dd00fe1142ae55
+	Merge tag 'drm-misc-fixes-2017-09-28-1' of git://anongit.freedesktop.org/git/drm-misc into drm-fixes
+drm drm-next 8f3d9f354286745c751374f5f1fcafee6b3f3136
+	Linux 5.7-rc1
+drm-misc drm-misc-next-fixes 152cce0006abf7e17dfb7dc94896b044bda4e588
+	drm/bridge: analogix_dp: Split bind() into probe() and real bind()
+drm-intel drm-intel-next-fixes 74bd4f0c921cc9cf5f99ba4129dafe35496de6f3
+	Merge tag 'amd-drm-fixes-5.7-2020-04-08' of git://people.freedesktop.org/~agd5f/linux into drm-next
+drm-amd drm-amd-next-fixes 2bd6bf03f4c1c59381d62c61d03f6cc3fe71f66e
+	Linux 4.14-rc1
+drm-misc drm-misc-next 8eea6e26fc2eda6922e5008ccb7f55bc1775d5b3
+	dt-bindings: display: convert rockchip rk3066 hdmi bindings to yaml
+drm-intel drm-intel-next-queued 31a02eb70b8d9e68c848f2543fa8e745073363e2
+	drm/i915: Refactor setting dma info to a common helper
+drm-intel drm-intel-next b06ef327e26367b9286a2079b31cde8d2161c0d8
+	drm/i915: Update DRIVER_DATE to 20200417
+drm-amd drm-amd-next 754270c7c56292e97d0eff924a5d5d83f92add07
+	Merge branch 'drm-next-4.15' of git://people.freedesktop.org/~agd5f/linux into drm-next
+sound-upstream for-linus 67791202c5e069cf2ba51db0718d56c634709e78
+	ALSA: hda/realtek - Fix unexpected init_amp override
+sound-upstream for-next aa08ff0f345ef68829bab30ddb5a23e9d99301b7
+	ALSA: Fix misspellings of "Analog Devices"
+drm-intel topic/core-for-CI d0435a9b45070b945578c093dcd363b6b73a502c
+	cpufreq/pstate: Only mention the BIOS disabling turbo mode once
+drm drm-vmwgfx-coherent 0a6cad5df541108cfd3fbd79eef48eb824c89bdc
+	Merge branch 'vmwgfx-coherent' of git://people.freedesktop.org/~thomash/linux into drm-next
+drm-misc topic/mst-bw-check-fixes-for-airlied 047d4cd2067b028e7bca906c5ce20f4c89b65386
+	drm/dp_mst: Rewrite and fix bandwidth limit checks
+drm-misc topic/phy-compliance 8cdf727119289db3a98835662eb28e1c5ad835f1
+	drm/i915/dp: Program vswing, pre-emphasis, test-pattern
