@@ -1890,6 +1890,7 @@ struct ath10k_htt_tx_ops {
 		      struct sk_buff *msdu);
 	int (*htt_alloc_txbuff)(struct ath10k_htt *htt);
 	void (*htt_free_txbuff)(struct ath10k_htt *htt);
+	void (*htt_flush_tx)(struct ath10k_htt *htt);
 };
 
 static inline int ath10k_htt_send_rx_ring_cfg(struct ath10k_htt *htt)
@@ -1927,6 +1928,12 @@ static inline int ath10k_htt_tx(struct ath10k_htt *htt,
 				struct sk_buff *msdu)
 {
 	return htt->tx_ops->htt_tx(htt, txmode, msdu);
+}
+
+static inline void ath10k_htt_flush_tx(struct ath10k_htt *htt)
+{
+	if (htt->tx_ops->htt_flush_tx)
+		htt->tx_ops->htt_flush_tx(htt);
 }
 
 static inline int ath10k_htt_alloc_txbuff(struct ath10k_htt *htt)
