@@ -4310,7 +4310,6 @@ snd-indigoiox
 snd-intel-dspcfg
 snd-intel-sst-acpi
 snd-intel-sst-core
-snd-intel-sst-pci
 snd-intel8x0
 snd-intel8x0m
 snd-isight
@@ -4536,7 +4535,6 @@ snd-soc-sst-cht-bsw-rt5672
 snd-soc-sst-dsp
 snd-soc-sst-firmware
 snd-soc-sst-glk-rt5682_max98357a
-snd-soc-sst-haswell
 snd-soc-sst-haswell-pcm
 snd-soc-sst-ipc
 snd-soc-sta32x
@@ -4598,10 +4596,8 @@ snd-soc-xtfpga-i2s
 snd-soc-zx-aud96p22
 snd-sof
 snd-sof-acpi
-snd-sof-intel-byt
 snd-sof-intel-hda
 snd-sof-intel-hda-common
-snd-sof-intel-ipc
 snd-sof-pci
 snd-sof-xtensa-dsp
 snd-sonicvibes
@@ -4644,7 +4640,6 @@ soundcore
 soundwire-bus
 soundwire-cadence
 soundwire-intel
-soundwire-intel-init
 soundwire-qcom
 sp2
 sp5100_tco
