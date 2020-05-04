@@ -12,6 +12,9 @@
 
 bool enable_evmcs;
 
+struct hv_enlightened_vmcs *current_evmcs;
+struct hv_vp_assist_page *current_vp_assist;
+
 int vcpu_enable_evmcs(struct kvm_vm *vm, int vcpu_id)
 {
 	uint16_t evmcs_ver;
