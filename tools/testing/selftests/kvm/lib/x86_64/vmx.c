@@ -15,6 +15,9 @@
 
 bool enable_evmcs;
 
+struct hv_enlightened_vmcs *current_evmcs;
+struct hv_vp_assist_page *current_vp_assist;
+
 /* Allocate memory regions for nested VMX tests.
  *
  * Input Args:
