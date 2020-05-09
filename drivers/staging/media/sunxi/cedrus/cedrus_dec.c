@@ -50,6 +50,8 @@ void cedrus_device_run(void *priv)
 		break;
 	}
 
+	cedrus_dst_format_set(dev, &ctx->dst_fmt);
+
 	dev->dec_ops[ctx->current_codec]->setup(ctx, &run);
 
 	/* Complete request(s) controls if needed. */
