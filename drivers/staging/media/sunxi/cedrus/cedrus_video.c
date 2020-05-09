@@ -281,7 +281,6 @@ static int cedrus_s_fmt_vid_cap(struct file *file, void *priv,
 				struct v4l2_format *f)
 {
 	struct cedrus_ctx *ctx = cedrus_file2ctx(file);
-	struct cedrus_dev *dev = ctx->dev;
 	int ret;
 
 	ret = cedrus_try_fmt_vid_cap(file, priv, f);
@@ -289,8 +288,6 @@ static int cedrus_s_fmt_vid_cap(struct file *file, void *priv,
 		return ret;
 
 	ctx->dst_fmt = f->fmt.pix;
-
-	cedrus_dst_format_set(dev, &ctx->dst_fmt);
 
 	return 0;
 }
