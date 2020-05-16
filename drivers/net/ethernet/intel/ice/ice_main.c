@@ -2124,7 +2124,7 @@ static int ice_probe(struct pci_dev *pdev,
 		dev_err(&pdev->dev,
 			"ice_init_interrupt_scheme failed: %d\n", err);
 		err = -EIO;
-		goto err_init_interrupt_unroll;
+		goto err_init_vsi_unroll;
 	}
 
 	/* Driver is mostly up */
@@ -2186,6 +2186,7 @@ err_msix_misc_unroll:
 	ice_free_irq_msix_misc(pf);
 err_init_interrupt_unroll:
 	ice_clear_interrupt_scheme(pf);
+err_init_vsi_unroll:
 	devm_kfree(&pdev->dev, pf->vsi);
 err_init_pf_unroll:
 	ice_deinit_pf(pf);
