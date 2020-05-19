@@ -1161,7 +1161,7 @@ static bool gen9_dc_off_power_well_enabled(struct drm_i915_private *dev_priv,
 static void gen9_assert_dbuf_enabled(struct drm_i915_private *dev_priv)
 {
 	u8 hw_enabled_dbuf_slices = intel_enabled_dbuf_slices_mask(dev_priv);
-	u8 enabled_dbuf_slices = dev_priv->enabled_dbuf_slices_mask;
+	u8 enabled_dbuf_slices = dev_priv->dbuf.enabled_slices;
 
 	drm_WARN(&dev_priv->drm,
 		 hw_enabled_dbuf_slices != enabled_dbuf_slices,
@@ -1943,22 +1943,29 @@ static u64 __async_put_domains_mask(struct i915_power_domains *power_domains)
 static bool
 assert_async_put_domain_masks_disjoint(struct i915_power_domains *power_domains)
 {
-	return !WARN_ON(power_domains->async_put_domains[0] &
-			power_domains->async_put_domains[1]);
+	struct drm_i915_private *i915 = container_of(power_domains,
+						     struct drm_i915_private,
+						     power_domains);
+	return !drm_WARN_ON(&i915->drm, power_domains->async_put_domains[0] &
+			    power_domains->async_put_domains[1]);
 }
 
 static bool
 __async_put_domains_state_ok(struct i915_power_domains *power_domains)
 {
+	struct drm_i915_private *i915 = container_of(power_domains,
+						     struct drm_i915_private,
+						     power_domains);
 	enum intel_display_power_domain domain;
 	bool err = false;
 
 	err |= !assert_async_put_domain_masks_disjoint(power_domains);
-	err |= WARN_ON(!!power_domains->async_put_wakeref !=
-		       !!__async_put_domains_mask(power_domains));
+	err |= drm_WARN_ON(&i915->drm, !!power_domains->async_put_wakeref !=
+			   !!__async_put_domains_mask(power_domains));
 
 	for_each_power_domain(domain, __async_put_domains_mask(power_domains))
-		err |= WARN_ON(power_domains->domain_use_count[domain] != 1);
+		err |= drm_WARN_ON(&i915->drm,
+				   power_domains->domain_use_count[domain] != 1);
 
 	return !err;
 }
@@ -2200,11 +2207,14 @@ static void
 queue_async_put_domains_work(struct i915_power_domains *power_domains,
 			     intel_wakeref_t wakeref)
 {
-	WARN_ON(power_domains->async_put_wakeref);
+	struct drm_i915_private *i915 = container_of(power_domains,
+						     struct drm_i915_private,
+						     power_domains);
+	drm_WARN_ON(&i915->drm, power_domains->async_put_wakeref);
 	power_domains->async_put_wakeref = wakeref;
-	WARN_ON(!queue_delayed_work(system_unbound_wq,
-				    &power_domains->async_put_work,
-				    msecs_to_jiffies(100)));
+	drm_WARN_ON(&i915->drm, !queue_delayed_work(system_unbound_wq,
+						    &power_domains->async_put_work,
+						    msecs_to_jiffies(100)));
 }
 
 static void
@@ -4365,6 +4375,9 @@ __set_power_wells(struct i915_power_domains *power_domains,
 		  const struct i915_power_well_desc *power_well_descs,
 		  int power_well_count)
 {
+	struct drm_i915_private *i915 = container_of(power_domains,
+						     struct drm_i915_private,
+						     power_domains);
 	u64 power_well_ids = 0;
 	int i;
 
@@ -4384,8 +4397,8 @@ __set_power_wells(struct i915_power_domains *power_domains,
 		if (id == DISP_PW_ID_NONE)
 			continue;
 
-		WARN_ON(id >= sizeof(power_well_ids) * 8);
-		WARN_ON(power_well_ids & BIT_ULL(id));
+		drm_WARN_ON(&i915->drm, id >= sizeof(power_well_ids) * 8);
+		drm_WARN_ON(&i915->drm, power_well_ids & BIT_ULL(id));
 		power_well_ids |= BIT_ULL(id);
 	}
 
@@ -4491,45 +4504,38 @@ static void intel_power_domains_sync_hw(struct drm_i915_private *dev_priv)
 	mutex_unlock(&power_domains->lock);
 }
 
-static bool intel_dbuf_slice_set(struct drm_i915_private *dev_priv,
-				 i915_reg_t reg, bool enable)
+static void gen9_dbuf_slice_set(struct drm_i915_private *dev_priv,
+				enum dbuf_slice slice, bool enable)
 {
-	u32 val, status;
+	i915_reg_t reg = DBUF_CTL_S(slice);
+	bool state;
+	u32 val;
 
 	val = intel_de_read(dev_priv, reg);
-	val = enable ? (val | DBUF_POWER_REQUEST) : (val & ~DBUF_POWER_REQUEST);
+	if (enable)
+		val |= DBUF_POWER_REQUEST;
+	else
+		val &= ~DBUF_POWER_REQUEST;
 	intel_de_write(dev_priv, reg, val);
 	intel_de_posting_read(dev_priv, reg);
 	udelay(10);
 
-	status = intel_de_read(dev_priv, reg) & DBUF_POWER_STATE;
-	if ((enable && !status) || (!enable && status)) {
-		drm_err(&dev_priv->drm, "DBus power %s timeout!\n",
-			enable ? "enable" : "disable");
-		return false;
-	}
-	return true;
+	state = intel_de_read(dev_priv, reg) & DBUF_POWER_STATE;
+	drm_WARN(&dev_priv->drm, enable != state,
+		 "DBuf slice %d power %s timeout!\n",
+		 slice, enable ? "enable" : "disable");
 }
 
-static void gen9_dbuf_enable(struct drm_i915_private *dev_priv)
+void gen9_dbuf_slices_update(struct drm_i915_private *dev_priv,
+			     u8 req_slices)
 {
-	icl_dbuf_slices_update(dev_priv, BIT(DBUF_S1));
-}
-
-static void gen9_dbuf_disable(struct drm_i915_private *dev_priv)
-{
-	icl_dbuf_slices_update(dev_priv, 0);
-}
-
-void icl_dbuf_slices_update(struct drm_i915_private *dev_priv,
-			    u8 req_slices)
-{
-	int i;
-	int max_slices = INTEL_INFO(dev_priv)->num_supported_dbuf_slices;
+	int num_slices = INTEL_INFO(dev_priv)->num_supported_dbuf_slices;
 	struct i915_power_domains *power_domains = &dev_priv->power_domains;
+	enum dbuf_slice slice;
 
-	drm_WARN(&dev_priv->drm, hweight8(req_slices) > max_slices,
-		 "Invalid number of dbuf slices requested\n");
+	drm_WARN(&dev_priv->drm, req_slices & ~(BIT(num_slices) - 1),
+		 "Invalid set of dbuf slices (0x%x) requested (num dbuf slices %d)\n",
+		 req_slices, num_slices);
 
 	drm_dbg_kms(&dev_priv->drm, "Updating dbuf slices to 0x%x\n",
 		    req_slices);
@@ -4543,31 +4549,30 @@ void icl_dbuf_slices_update(struct drm_i915_private *dev_priv,
 	 */
 	mutex_lock(&power_domains->lock);
 
-	for (i = 0; i < max_slices; i++) {
-		intel_dbuf_slice_set(dev_priv,
-				     DBUF_CTL_S(i),
-				     (req_slices & BIT(i)) != 0);
-	}
+	for (slice = DBUF_S1; slice < num_slices; slice++)
+		gen9_dbuf_slice_set(dev_priv, slice, req_slices & BIT(slice));
 
-	dev_priv->enabled_dbuf_slices_mask = req_slices;
+	dev_priv->dbuf.enabled_slices = req_slices;
 
 	mutex_unlock(&power_domains->lock);
 }
 
-static void icl_dbuf_enable(struct drm_i915_private *dev_priv)
+static void gen9_dbuf_enable(struct drm_i915_private *dev_priv)
 {
-	skl_ddb_get_hw_state(dev_priv);
+	dev_priv->dbuf.enabled_slices =
+		intel_enabled_dbuf_slices_mask(dev_priv);
+
 	/*
 	 * Just power up at least 1 slice, we will
 	 * figure out later which slices we have and what we need.
 	 */
-	icl_dbuf_slices_update(dev_priv, dev_priv->enabled_dbuf_slices_mask |
-			       BIT(DBUF_S1));
+	gen9_dbuf_slices_update(dev_priv, BIT(DBUF_S1) |
+				dev_priv->dbuf.enabled_slices);
 }
 
-static void icl_dbuf_disable(struct drm_i915_private *dev_priv)
+static void gen9_dbuf_disable(struct drm_i915_private *dev_priv)
 {
-	icl_dbuf_slices_update(dev_priv, 0);
+	gen9_dbuf_slices_update(dev_priv, 0);
 }
 
 static void icl_mbus_init(struct drm_i915_private *dev_priv)
@@ -5127,7 +5132,7 @@ static void icl_display_core_init(struct drm_i915_private *dev_priv,
 	intel_cdclk_init_hw(dev_priv);
 
 	/* 5. Enable DBUF. */
-	icl_dbuf_enable(dev_priv);
+	gen9_dbuf_enable(dev_priv);
 
 	/* 6. Setup MBUS. */
 	icl_mbus_init(dev_priv);
@@ -5150,7 +5155,7 @@ static void icl_display_core_uninit(struct drm_i915_private *dev_priv)
 	/* 1. Disable all display engine functions -> aready done */
 
 	/* 2. Disable DBUF */
-	icl_dbuf_disable(dev_priv);
+	gen9_dbuf_disable(dev_priv);
 
 	/* 3. Disable CD clock */
 	intel_cdclk_uninit_hw(dev_priv);

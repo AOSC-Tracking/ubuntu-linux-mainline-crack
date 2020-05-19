@@ -950,6 +950,13 @@ struct drm_i915_private {
 		struct intel_global_obj obj;
 	} cdclk;
 
+	struct {
+		/* The current hardware dbuf configuration */
+		u8 enabled_slices;
+
+		struct intel_global_obj obj;
+	} dbuf;
+
 	/**
 	 * wq - Driver workqueue for GEM.
 	 *
@@ -1126,11 +1133,11 @@ struct drm_i915_private {
 		 * Set during HW readout of watermarks/DDB.  Some platforms
 		 * need to know when we're still using BIOS-provided values
 		 * (which we don't fully trust).
+		 *
+		 * FIXME get rid of this.
 		 */
 		bool distrust_bios_wm;
 	} wm;
-
-	u8 enabled_dbuf_slices_mask; /* GEN11 has configurable 2 slices */
 
 	struct dram_info {
 		bool valid;
@@ -1658,7 +1665,8 @@ IS_SUBPLATFORM(const struct drm_i915_private *i915,
 #define HAS_DISPLAY(dev_priv) (INTEL_INFO(dev_priv)->pipe_mask != 0)
 
 /* Only valid when HAS_DISPLAY() is true */
-#define INTEL_DISPLAY_ENABLED(dev_priv) (WARN_ON(!HAS_DISPLAY(dev_priv)), !i915_modparams.disable_display)
+#define INTEL_DISPLAY_ENABLED(dev_priv) \
+		(drm_WARN_ON(&(dev_priv)->drm, !HAS_DISPLAY(dev_priv)), !i915_modparams.disable_display)
 
 static inline bool intel_vtd_active(void)
 {
