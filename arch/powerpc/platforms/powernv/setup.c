@@ -129,6 +129,7 @@ static void pnv_setup_rfi_flush(void)
 	 * vulnerable if booted in PowerNV: the vulnerability is P9 specific
 	 */
 	security_ftr_clear(SEC_FTR_L1D_FLUSH_ENTRY);
+	security_ftr_clear(SEC_FTR_L1D_FLUSH_UACCESS);
 
 	enable = security_ftr_enabled(SEC_FTR_FAVOUR_SECURITY) && \
 		 (security_ftr_enabled(SEC_FTR_L1D_FLUSH_PR)   || \
@@ -140,6 +141,10 @@ static void pnv_setup_rfi_flush(void)
 	enable = security_ftr_enabled(SEC_FTR_FAVOUR_SECURITY) &&
 		 security_ftr_enabled(SEC_FTR_L1D_FLUSH_ENTRY);
 	setup_entry_flush(enable);
+
+	enable = security_ftr_enabled(SEC_FTR_FAVOUR_SECURITY) &&
+		 security_ftr_enabled(SEC_FTR_L1D_FLUSH_UACCESS);
+	setup_uaccess_flush(enable);
 }
 
 static void __init pnv_setup_arch(void)
