@@ -106,8 +106,10 @@ static int ufs_bsg_request(struct bsg_job *job)
 		ret = ufs_bsg_verify_query_params(hba, bsg_request, req_len,
 						  reply_len, desc_buff,
 						  &desc_len, desc_op);
-		if (ret)
+		if (ret) {
+			pm_runtime_put_sync(hba->dev);
 			goto out;
+		}
 
 		/* fall through */
 	case UPIU_TRANSACTION_NOP_OUT:
