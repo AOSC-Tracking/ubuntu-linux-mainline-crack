@@ -3823,6 +3823,8 @@ static int cpsw_suspend(struct device *dev)
 	struct net_device	*ndev = dev_get_drvdata(dev);
 	struct cpsw_common	*cpsw = ndev_to_cpsw(ndev);
 
+	rtnl_lock();
+
 	if (cpsw->data.dual_emac) {
 		int i;
 
@@ -3834,6 +3836,8 @@ static int cpsw_suspend(struct device *dev)
 		if (netif_running(ndev))
 			cpsw_ndo_stop(ndev);
 	}
+
+	rtnl_unlock();
 
 	/* Select sleep pin state */
 	pinctrl_pm_select_sleep_state(dev);
