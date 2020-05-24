@@ -120,6 +120,10 @@ static u32 fanotify_group_event_mask(struct fsnotify_iter_info *iter_info,
 		if (!fsnotify_iter_should_report_type(iter_info, type))
 			continue;
 		mark = iter_info->marks[type];
+
+		/* Apply ignore mask regardless of ISDIR and ON_CHILD flags */
+		marks_ignored_mask |= mark->ignored_mask;
+
 		/*
 		 * If the event is on dir and this mark doesn't care about
 		 * events on dir, don't send it!
@@ -137,7 +141,6 @@ static u32 fanotify_group_event_mask(struct fsnotify_iter_info *iter_info,
 			continue;
 
 		marks_mask |= mark->mask;
-		marks_ignored_mask |= mark->ignored_mask;
 	}
 
 	return event_mask & FANOTIFY_OUTGOING_EVENTS & marks_mask &
