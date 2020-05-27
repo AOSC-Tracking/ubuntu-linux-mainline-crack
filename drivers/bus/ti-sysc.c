@@ -946,6 +946,9 @@ set_autoidle:
 		sysc_write(ddata, ddata->offsets[SYSC_SYSCONFIG], reg);
 	}
 
+	/* Flush posted write */
+	sysc_read(ddata, ddata->offsets[SYSC_SYSCONFIG]);
+
 	return 0;
 }
 
@@ -1015,6 +1018,9 @@ set_sidle:
 	    ddata->cfg.sysc_val & BIT(regbits->autoidle_shift))
 		reg |= 1 << regbits->autoidle_shift;
 	sysc_write(ddata, ddata->offsets[SYSC_SYSCONFIG], reg);
+
+	/* Flush posted write */
+	sysc_read(ddata, ddata->offsets[SYSC_SYSCONFIG]);
 
 	return 0;
 }
