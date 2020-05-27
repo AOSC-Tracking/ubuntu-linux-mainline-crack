@@ -1035,7 +1035,8 @@ static int map_lookup_and_delete_elem(union bpf_attr *attr)
 	if (IS_ERR(map))
 		return PTR_ERR(map);
 
-	if (!(f.file->f_mode & FMODE_CAN_WRITE)) {
+	if (!(f.file->f_mode & FMODE_CAN_READ) ||
+	    !(f.file->f_mode & FMODE_CAN_WRITE)) {
 		err = -EPERM;
 		goto err_put;
 	}
