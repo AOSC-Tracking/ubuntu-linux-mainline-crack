@@ -1,0 +1,34 @@
+drm drm-fixes d099f415d50c3980339479f56f124f8bfa6875bc
+	Merge tag 'drm-misc-fixes-2020-05-28' of git://anongit.freedesktop.org/drm/drm-misc into drm-fixes
+drm-misc drm-misc-fixes abf56fadf0e208abfb13ad1ac0094416058da0ad
+	gpu/drm: Ingenic: Fix opaque pointer casted to wrong type
+drm-intel drm-intel-fixes 1f65efb624c4164bfd2e2a025fc25e8bfb651daa
+	drm/i915/gt: Prevent timeslicing into unpreemptable requests
+drm-amd drm-amd-fixes 2b702e72e33bbdec0764cfb6e1dd00fe1142ae55
+	Merge tag 'drm-misc-fixes-2017-09-28-1' of git://anongit.freedesktop.org/git/drm-misc into drm-fixes
+drm drm-next 9ca1f474cea0edc14a1d7ec933e5472c0ff115d3
+	Merge tag 'amd-drm-next-5.8-2020-05-27' of git://people.freedesktop.org/~agd5f/linux into drm-next
+drm-misc drm-misc-next-fixes 6f27e4c287d7bdcad1f24efcaace044617aac2f3
+	drm/vblank: Fix -Wformat compile warnings on some arches
+drm-intel drm-intel-next-fixes 757a9395f33c51c4e6eff2c7c0fbd50226a58224
+	drm/i915/gem: Avoid iterating an empty list
+drm-amd drm-amd-next-fixes 2bd6bf03f4c1c59381d62c61d03f6cc3fe71f66e
+	Linux 4.14-rc1
+drm-misc drm-misc-next 269cb04a40231a9a37e43f67cdfcdd7171c6bbc2
+	drm/gma500: Stop using mode->private_flags
+drm-intel drm-intel-next-queued 2010b7f0a8521fa7463056c8f077277a33a45c5f
+	drm/i915/gt: Start timeslice on partial submission
+drm-intel drm-intel-next 3a36aa237e4ed04553c0998cf5f47eda3e206e4f
+	drm/i915: Update DRIVER_DATE to 20200515
+drm-amd drm-amd-next 754270c7c56292e97d0eff924a5d5d83f92add07
+	Merge branch 'drm-next-4.15' of git://people.freedesktop.org/~agd5f/linux into drm-next
+sound-upstream for-linus 630e36126e420e1756378b3427b42711ce0b9ddd
+	ALSA: hda/realtek - Add new codec supported for ALC287
+sound-upstream for-next 8191743d5f9a34c0665046937eff262bffdad9a9
+	ALSA: usb-audio: Clean up quirk entries with macros
+drm-intel topic/core-for-CI 26145957338c07613fa603bbec798034aa8b56dc
+	perf/core: Only copy-to-user after completely unlocking all locks, v3.
+drm drm-vmwgfx-coherent 0a6cad5df541108cfd3fbd79eef48eb824c89bdc
+	Merge branch 'vmwgfx-coherent' of git://people.freedesktop.org/~thomash/linux into drm-next
+drm-misc topic/phy-compliance 8cdf727119289db3a98835662eb28e1c5ad835f1
+	drm/i915/dp: Program vswing, pre-emphasis, test-pattern
