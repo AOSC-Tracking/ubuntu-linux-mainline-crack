@@ -6043,6 +6043,7 @@ EXPORT_SYMBOL vmlinux 0x00000000	__block_write_full_page
 EXPORT_SYMBOL vmlinux 0x00000000	__blockdev_direct_IO
 EXPORT_SYMBOL vmlinux 0x00000000	__bread_gfp
 EXPORT_SYMBOL vmlinux 0x00000000	__breadahead
+EXPORT_SYMBOL vmlinux 0x00000000	__breadahead_gfp
 EXPORT_SYMBOL vmlinux 0x00000000	__break_lease
 EXPORT_SYMBOL vmlinux 0x00000000	__brelse
 EXPORT_SYMBOL vmlinux 0x00000000	__cachemode2pte_tbl
@@ -8797,6 +8798,7 @@ EXPORT_SYMBOL vmlinux 0x00000000	memdup_user_nul
 EXPORT_SYMBOL vmlinux 0x00000000	memmove
 EXPORT_SYMBOL vmlinux 0x00000000	memory_cgrp_subsys
 EXPORT_SYMBOL vmlinux 0x00000000	memory_read_from_buffer
+EXPORT_SYMBOL vmlinux 0x00000000	memory_read_from_io_buffer
 EXPORT_SYMBOL vmlinux 0x00000000	memparse
 EXPORT_SYMBOL vmlinux 0x00000000	mempool_alloc
 EXPORT_SYMBOL vmlinux 0x00000000	mempool_alloc_pages
