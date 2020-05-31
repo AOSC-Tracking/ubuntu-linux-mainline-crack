@@ -446,6 +446,9 @@ static int queue_prio(const struct intel_engine_execlists *execlists)
 	 * we have to flip the index value to become priority.
 	 */
 	p = to_priolist(rb);
+	if (!I915_USER_PRIORITY_SHIFT)
+		return p->priority;
+
 	return ((p->priority + 1) << I915_USER_PRIORITY_SHIFT) - ffs(p->used);
 }
 
@@ -1402,8 +1405,8 @@ static void kick_siblings(struct i915_request *rq, struct intel_context *ce)
 	struct virtual_engine *ve = container_of(ce, typeof(*ve), context);
 	struct i915_request *next = READ_ONCE(ve->request);
 
-	if (next && next->execution_mask & ~rq->execution_mask)
-		tasklet_schedule(&ve->base.execlists.tasklet);
+	if (next == rq || (next && next->execution_mask & ~rq->execution_mask))
+		tasklet_hi_schedule(&ve->base.execlists.tasklet);
 }
 
 static inline void
@@ -1925,6 +1928,7 @@ need_timeslice(const struct intel_engine_cs *engine,
 	if (!list_is_last(&rq->sched.link, &engine->active.requests))
 		hint = max(hint, rq_prio(list_next_entry(rq, sched.link)));
 
+	GEM_BUG_ON(hint >= I915_PRIORITY_UNPREEMPTABLE);
 	return hint >= effective_prio(rq);
 }
 
@@ -2354,8 +2358,10 @@ static void execlists_dequeue(struct intel_engine_cs *engine)
 				if (last->context == rq->context)
 					goto done;
 
-				if (i915_request_has_sentinel(last))
+				if (i915_request_has_sentinel(last)) {
+					start_timeslice(engine, rq_prio(rq));
 					goto done;
+				}
 
 				/*
 				 * If GVT overrides us we only ever submit
@@ -5578,7 +5584,7 @@ static void virtual_submit_request(struct i915_request *rq)
 		GEM_BUG_ON(!list_empty(virtual_queue(ve)));
 		list_move_tail(&rq->sched.link, virtual_queue(ve));
 
-		tasklet_schedule(&ve->base.execlists.tasklet);
+		tasklet_hi_schedule(&ve->base.execlists.tasklet);
 	}
 
 	spin_unlock_irqrestore(&ve->base.active.lock, flags);
