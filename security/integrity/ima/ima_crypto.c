@@ -657,8 +657,8 @@ static void __init ima_pcrread(u32 idx, struct tpm_digest *d)
 /*
  * Calculate the boot aggregate hash
  */
-static int __init ima_calc_boot_aggregate_tfm(char *digest,
-					      struct crypto_shash *tfm)
+static int ima_calc_boot_aggregate_tfm(char *digest,
+				       struct crypto_shash *tfm)
 {
 	struct tpm_digest d = { .alg_id = TPM_ALG_SHA1, .digest = {0} };
 	int rc;
@@ -682,7 +682,7 @@ static int __init ima_calc_boot_aggregate_tfm(char *digest,
 	return rc;
 }
 
-int __init ima_calc_boot_aggregate(struct ima_digest_data *hash)
+int ima_calc_boot_aggregate(struct ima_digest_data *hash)
 {
 	struct crypto_shash *tfm;
 	int rc;
