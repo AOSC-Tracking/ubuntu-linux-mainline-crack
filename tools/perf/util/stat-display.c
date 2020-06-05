@@ -660,7 +660,7 @@ static void print_aggr(struct perf_stat_config *config,
 	int s;
 	bool first;
 
-	if (!(config->aggr_map || config->aggr_get_id))
+	if (!config->aggr_map || !config->aggr_get_id)
 		return;
 
 	aggr_update_shadow(config, evlist);
@@ -1139,7 +1139,7 @@ static void print_percore(struct perf_stat_config *config,
 	int s;
 	bool first = true;
 
-	if (!(config->aggr_map || config->aggr_get_id))
+	if (!config->aggr_map || !config->aggr_get_id)
 		return;
 
 	for (s = 0; s < config->aggr_map->nr; s++) {
