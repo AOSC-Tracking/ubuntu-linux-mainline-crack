@@ -1,0 +1,32 @@
+drm drm-fixes 1298a549e22abe36c82208406c7069280553c7dd
+	Merge tag 'drm-misc-fixes-2020-07-02' of git://anongit.freedesktop.org/drm/drm-misc into drm-fixes
+drm-misc drm-misc-fixes 17f64701ea6f541db7eb5d7423a830cb929b3052
+	drm/meson: viu: fix setting the OSD burst length in VIU_OSD1_FIFO_CTRL_STAT
+drm-intel drm-intel-fixes 55fd7e0222ea01246ef3e6aae28b5721fdfb790f
+	drm/i915: Include asm sources for {ivb, hsw}_clear_kernel.c
+drm-amd drm-amd-fixes 2b702e72e33bbdec0764cfb6e1dd00fe1142ae55
+	Merge tag 'drm-misc-fixes-2017-09-28-1' of git://anongit.freedesktop.org/git/drm-misc into drm-fixes
+drm drm-next 1cc4af412f40bfe33f4b7e2b014a8d4b140bd8d3
+	Merge tag 'drm-intel-next-2020-07-02' of git://anongit.freedesktop.org/drm/drm-intel into drm-next
+drm-misc drm-misc-next-fixes 291ddeb621e4a9f1ced8302a777fbd7fbda058c6
+	drm/ast: fix missing break in switch statement for format->cpp[0] case 4
+drm-intel drm-intel-next-fixes 3680c2e9f4254d1f033bf00f540e47a51f8f996b
+	drm/i915/display: Only query DP state of a DDI encoder
+drm-amd drm-amd-next-fixes 2bd6bf03f4c1c59381d62c61d03f6cc3fe71f66e
+	Linux 4.14-rc1
+drm-misc drm-misc-next bc84ee948124868e2affaf0492225a365f3943f0
+	drm/meson: crtc: handle commit of Amlogic FBC frames
+drm-intel drm-intel-next-queued 12b07256c22399e10590c994f3e93970b7600053
+	drm/i915: Export ppgtt_bind_vma
+drm-intel drm-intel-next d524b87f77364db096855d7eb714ffacec974ddf
+	drm/i915: Update DRIVER_DATE to 20200702
+drm-amd drm-amd-next 754270c7c56292e97d0eff924a5d5d83f92add07
+	Merge branch 'drm-next-4.15' of git://people.freedesktop.org/~agd5f/linux into drm-next
+sound-upstream for-linus d02b10590953429a6dd2d6245df4d8a0a869df66
+	Merge tag 'asoc-fix-v5.8-rc3' of https://git.kernel.org/pub/scm/linux/kernel/git/broonie/sound into for-linus
+sound-upstream for-next 5ff40e6d0f8ae2f711b0e97d4c0a4d081fdd0dc1
+	ALSA: usb-audio: Fix some typos
+drm-intel topic/core-for-CI 7baab4e528ef38546a32f0a368285289aa2c981f
+	ext4: mballoc: Use this_cpu_read instead of this_cpu_ptr
+drm-misc topic/phy-compliance 8cdf727119289db3a98835662eb28e1c5ad835f1
+	drm/i915/dp: Program vswing, pre-emphasis, test-pattern
