@@ -8640,6 +8640,7 @@ EXPORT_SYMBOL vmlinux 0x00000000	ktime_get_real_ts64
 EXPORT_SYMBOL vmlinux 0x00000000	kvasprintf
 EXPORT_SYMBOL vmlinux 0x00000000	kvasprintf_const
 EXPORT_SYMBOL vmlinux 0x00000000	kvfree
+EXPORT_SYMBOL vmlinux 0x00000000	kvfree_sensitive
 EXPORT_SYMBOL vmlinux 0x00000000	kvmalloc_node
 EXPORT_SYMBOL vmlinux 0x00000000	kzfree
 EXPORT_SYMBOL vmlinux 0x00000000	laptop_mode
@@ -18161,6 +18162,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x00000000	__inet_inherit_port
 EXPORT_SYMBOL_GPL vmlinux 0x00000000	__inet_lookup_established
 EXPORT_SYMBOL_GPL vmlinux 0x00000000	__inet_lookup_listener
 EXPORT_SYMBOL_GPL vmlinux 0x00000000	__inet_twsk_schedule
+EXPORT_SYMBOL_GPL vmlinux 0x00000000	__inode_attach_wb
 EXPORT_SYMBOL_GPL vmlinux 0x00000000	__ioread32_copy
 EXPORT_SYMBOL_GPL vmlinux 0x00000000	__iowrite32_copy
 EXPORT_SYMBOL_GPL vmlinux 0x00000000	__iowrite64_copy
