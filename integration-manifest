@@ -1,0 +1,32 @@
+drm drm-fixes 524d4f71e75503a8f707bfb5d74c7b58fb5eb181
+	Merge tag 'drm-intel-fixes-2020-07-15' of git://anongit.freedesktop.org/drm/drm-intel into drm-fixes
+drm-misc drm-misc-fixes 6348dd291e3653534a9e28e6917569bc9967b35b
+	dmabuf: use spinlock to access dmabuf->name
+drm-intel drm-intel-fixes 92e0575b99835b5b3aaab2132dd551e0e04eb96a
+	drm/i915: Recalculate FBC w/a stride when needed
+drm-amd drm-amd-fixes 2b702e72e33bbdec0764cfb6e1dd00fe1142ae55
+	Merge tag 'drm-misc-fixes-2017-09-28-1' of git://anongit.freedesktop.org/git/drm-misc into drm-fixes
+drm drm-next 1cc4af412f40bfe33f4b7e2b014a8d4b140bd8d3
+	Merge tag 'drm-intel-next-2020-07-02' of git://anongit.freedesktop.org/drm/drm-intel into drm-next
+drm-misc drm-misc-next-fixes 291ddeb621e4a9f1ced8302a777fbd7fbda058c6
+	drm/ast: fix missing break in switch statement for format->cpp[0] case 4
+drm-intel drm-intel-next-fixes 3680c2e9f4254d1f033bf00f540e47a51f8f996b
+	drm/i915/display: Only query DP state of a DDI encoder
+drm-amd drm-amd-next-fixes 2bd6bf03f4c1c59381d62c61d03f6cc3fe71f66e
+	Linux 4.14-rc1
+drm-misc drm-misc-next 2d7865082dd0cff5777bf9c1f075d54f737cc2e3
+	drm/nouveau/kms/nvd9-: Fix disabling CRCs alongside OR reprogramming
+drm-intel drm-intel-next-queued fb6a6ea94f9805ddb19c4446d4c95e1da70d33e7
+	drm/i915: Soften the tasklet flush frequency before waits
+drm-intel drm-intel-next e57bd05ec0d2d82d63725dedf9f5a063f879de25
+	drm/i915: Update DRIVER_DATE to 20200715
+drm-amd drm-amd-next 754270c7c56292e97d0eff924a5d5d83f92add07
+	Merge branch 'drm-next-4.15' of git://people.freedesktop.org/~agd5f/linux into drm-next
+sound-upstream for-linus 5734e509d5d515c187f642937ef2de1e58d7715d
+	ALSA: hda/realtek - fixup for yet another Intel reference board
+sound-upstream for-next 52bedfbd45eb55f914497bef4a74b0d73f8e1957
+	ALSA: usb-audio: Replace blacklist word
+drm-intel topic/core-for-CI 7baab4e528ef38546a32f0a368285289aa2c981f
+	ext4: mballoc: Use this_cpu_read instead of this_cpu_ptr
+drm-misc topic/phy-compliance 8cdf727119289db3a98835662eb28e1c5ad835f1
+	drm/i915/dp: Program vswing, pre-emphasis, test-pattern
