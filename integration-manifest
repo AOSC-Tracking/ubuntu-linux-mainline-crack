@@ -1,0 +1,32 @@
+drm drm-fixes ba47d845d715a010f7b51f6f89bae32845e6acb7
+	Linux 5.8-rc6
+drm-misc drm-misc-fixes f3f90c6db188d437add55aaffadd5ad5bcb8cda6
+	drm/lima: fix wait pp reset timeout
+drm-intel drm-intel-fixes 92e0575b99835b5b3aaab2132dd551e0e04eb96a
+	drm/i915: Recalculate FBC w/a stride when needed
+drm-amd drm-amd-fixes 2b702e72e33bbdec0764cfb6e1dd00fe1142ae55
+	Merge tag 'drm-misc-fixes-2017-09-28-1' of git://anongit.freedesktop.org/git/drm-misc into drm-fixes
+drm drm-next 3ffff3c6855bda1b39eae88f3730d2baddce3bfd
+	Merge tag 'drm-misc-next-2020-07-16' of git://anongit.freedesktop.org/drm/drm-misc into drm-next
+drm-misc drm-misc-next-fixes 291ddeb621e4a9f1ced8302a777fbd7fbda058c6
+	drm/ast: fix missing break in switch statement for format->cpp[0] case 4
+drm-intel drm-intel-next-fixes 3680c2e9f4254d1f033bf00f540e47a51f8f996b
+	drm/i915/display: Only query DP state of a DDI encoder
+drm-amd drm-amd-next-fixes 2bd6bf03f4c1c59381d62c61d03f6cc3fe71f66e
+	Linux 4.14-rc1
+drm-misc drm-misc-next acc0c39a59ccd8161b9066265fb8798b4ee07dc9
+	dt-binding: display: Allow a single port node on rocktech, jh057n00900
+drm-intel drm-intel-next-queued 111822b21be995a3a4a731066db3d820523c57f7
+	drm/i915/rkl: Add Wa_14011224835 for PHY B initialization
+drm-intel drm-intel-next e57bd05ec0d2d82d63725dedf9f5a063f879de25
+	drm/i915: Update DRIVER_DATE to 20200715
+drm-amd drm-amd-next 754270c7c56292e97d0eff924a5d5d83f92add07
+	Merge branch 'drm-next-4.15' of git://people.freedesktop.org/~agd5f/linux into drm-next
+sound-upstream for-linus 568e4e82128aac2c62c2c359ebebb6007fd794f9
+	ALSA: hda/realtek: Fixed ALC298 sound bug by adding quirk for Samsung Notebook Pen S
+sound-upstream for-next 9ab0cb309e7950a1649bffade985e7ccc7aaf675
+	ALSA: Replace the word "slave" in vmaster API
+drm-intel topic/core-for-CI 5a88ca3607993082ad90cac768d50c3b1e2b458e
+	HAX sched/core: Paper over the ttwu() race
+drm-misc topic/phy-compliance 8cdf727119289db3a98835662eb28e1c5ad835f1
+	drm/i915/dp: Program vswing, pre-emphasis, test-pattern
