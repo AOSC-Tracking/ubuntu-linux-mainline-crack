@@ -1,0 +1,32 @@
+drm drm-fixes d8904ca9d338cdaa67e3bd06d7a7d418e426648c
+	Merge tag 'amd-drm-fixes-5.8-2020-07-22' of git://people.freedesktop.org/~agd5f/linux into drm-fixes
+drm-misc drm-misc-fixes f3f90c6db188d437add55aaffadd5ad5bcb8cda6
+	drm/lima: fix wait pp reset timeout
+drm-intel drm-intel-fixes 92e0575b99835b5b3aaab2132dd551e0e04eb96a
+	drm/i915: Recalculate FBC w/a stride when needed
+drm-amd drm-amd-fixes 2b702e72e33bbdec0764cfb6e1dd00fe1142ae55
+	Merge tag 'drm-misc-fixes-2017-09-28-1' of git://anongit.freedesktop.org/git/drm-misc into drm-fixes
+drm drm-next 3afe676684f424d39a44924d3c3e166fc6eb7483
+	Merge tag 'mediatek-drm-next-5.9' of https://git.kernel.org/pub/scm/linux/kernel/git/chunkuang.hu/linux into drm-next
+drm-misc drm-misc-next-fixes 7d98404c8162b7f1d1b22eccce92f5ee7f93cab8
+	drm/omap: Use {} to zero initialize the mode
+drm-intel drm-intel-next-fixes 3680c2e9f4254d1f033bf00f540e47a51f8f996b
+	drm/i915/display: Only query DP state of a DDI encoder
+drm-amd drm-amd-next-fixes 2bd6bf03f4c1c59381d62c61d03f6cc3fe71f66e
+	Linux 4.14-rc1
+drm-misc drm-misc-next 6142b1b82ce43e6f7663f2e148ca48808f9d698f
+	drm/todo: Plumb drm_atomic_state all over
+drm-intel drm-intel-next-queued 56e1e5d0ab6663849b117b9fb6563878cb90bd51
+	drm/i915/selftests: Downgrade severity of CS/SRM frequency scaling tests
+drm-intel drm-intel-next e57bd05ec0d2d82d63725dedf9f5a063f879de25
+	drm/i915: Update DRIVER_DATE to 20200715
+drm-amd drm-amd-next 754270c7c56292e97d0eff924a5d5d83f92add07
+	Merge branch 'drm-next-4.15' of git://people.freedesktop.org/~agd5f/linux into drm-next
+sound-upstream for-linus 3da87ec67a491b9633a82045896c076b794bf938
+	ALSA: usb-audio: Add implicit feedback quirk for SSL2
+sound-upstream for-next 9ab0cb309e7950a1649bffade985e7ccc7aaf675
+	ALSA: Replace the word "slave" in vmaster API
+drm-intel topic/core-for-CI 5a88ca3607993082ad90cac768d50c3b1e2b458e
+	HAX sched/core: Paper over the ttwu() race
+drm-misc topic/phy-compliance 8cdf727119289db3a98835662eb28e1c5ad835f1
+	drm/i915/dp: Program vswing, pre-emphasis, test-pattern
