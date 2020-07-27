@@ -1,0 +1,32 @@
+drm drm-fixes 0d7869805a82b91abdc1a56bddeaa374969af310
+	Merge branch 'linux-5.8' of git://github.com/skeggsb/linux into drm-fixes
+drm-misc drm-misc-fixes 900ab59e2621053b009f707f80b2c19ce0af5dee
+	drm/dbi: Fix SPI Type 1 (9-bit) transfer
+drm-intel drm-intel-fixes 92e0575b99835b5b3aaab2132dd551e0e04eb96a
+	drm/i915: Recalculate FBC w/a stride when needed
+drm-amd drm-amd-fixes 2b702e72e33bbdec0764cfb6e1dd00fe1142ae55
+	Merge tag 'drm-misc-fixes-2017-09-28-1' of git://anongit.freedesktop.org/git/drm-misc into drm-fixes
+drm drm-next 92be42392256b30296843aa4d987ad8d175c0e10
+	Merge tag 'amd-drm-next-5.9-2020-07-24' of git://people.freedesktop.org/~agd5f/linux into drm-next
+drm-misc drm-misc-next-fixes 175233f92e80d09f78be51e5b9abf5ca1fc9dc26
+	drm: Remove redundant NULL check
+drm-intel drm-intel-next-fixes 3680c2e9f4254d1f033bf00f540e47a51f8f996b
+	drm/i915/display: Only query DP state of a DDI encoder
+drm-amd drm-amd-next-fixes 2bd6bf03f4c1c59381d62c61d03f6cc3fe71f66e
+	Linux 4.14-rc1
+drm-misc drm-misc-next 8f22c21dce5b6a8a50049275f77c771c598e5598
+	drm/bridge: nxp-ptn3460: add drm_panel_bridge support
+drm-intel drm-intel-next-queued 56e1e5d0ab6663849b117b9fb6563878cb90bd51
+	drm/i915/selftests: Downgrade severity of CS/SRM frequency scaling tests
+drm-intel drm-intel-next e57bd05ec0d2d82d63725dedf9f5a063f879de25
+	drm/i915: Update DRIVER_DATE to 20200715
+drm-amd drm-amd-next 754270c7c56292e97d0eff924a5d5d83f92add07
+	Merge branch 'drm-next-4.15' of git://people.freedesktop.org/~agd5f/linux into drm-next
+sound-upstream for-linus a6630529aecb5a3e84370c376ed658e892e6261e
+	ALSA: hda: Workaround for spurious wakeups on some Intel platforms
+sound-upstream for-next 2e5a8e1527a8cea26c973ee4aa1840ceb674101e
+	ALSA: usb-audio: endpoint : remove needless check before usb_free_coherent()
+drm-intel topic/core-for-CI 5a88ca3607993082ad90cac768d50c3b1e2b458e
+	HAX sched/core: Paper over the ttwu() race
+drm-misc topic/phy-compliance 8cdf727119289db3a98835662eb28e1c5ad835f1
+	drm/i915/dp: Program vswing, pre-emphasis, test-pattern
