@@ -1,0 +1,32 @@
+drm drm-fixes 887c909dd5d557c203a233ebbe238c18438a680a
+	Merge tag 'amd-drm-fixes-5.8-2020-07-30' of git://people.freedesktop.org/~agd5f/linux into drm-fixes
+drm-misc drm-misc-fixes b5ac98cbb8e5e30c34ebc837d1e5a3982d2b5f5c
+	drm: Added orientation quirk for ASUS tablet model T103HAF
+drm-intel drm-intel-fixes 92ed301919932f777713b9172e525674157e983d
+	Linux 5.8-rc7
+drm-amd drm-amd-fixes 2b702e72e33bbdec0764cfb6e1dd00fe1142ae55
+	Merge tag 'drm-misc-fixes-2017-09-28-1' of git://anongit.freedesktop.org/git/drm-misc into drm-fixes
+drm drm-next dc100bc8fae59aafd2ea2e1a1a43ef1f65f8a8bc
+	Merge tag 'drm-msm-next-2020-07-30' of https://gitlab.freedesktop.org/drm/msm into drm-next
+drm-misc drm-misc-next-fixes a34a0a632dd991a371fec56431d73279f9c54029
+	drm: fix drm_dp_mst_port refcount leaks in drm_dp_mst_allocate_vcpi
+drm-intel drm-intel-next-fixes 6bd0b413618ffb50f900ec770283d8c2217d069f
+	drm/i915: Filter wake_flags passed to default_wake_function
+drm-amd drm-amd-next-fixes 2bd6bf03f4c1c59381d62c61d03f6cc3fe71f66e
+	Linux 4.14-rc1
+drm-misc drm-misc-next ad04fae0de07580359b7ab3e19a678a775fdf07f
+	fbdev: Use fallthrough pseudo-keyword
+drm-intel drm-intel-next-queued ffe881c5ba412a83e2fc9fab03c99a7583f9b710
+	Revert "drm/i915/rkl: Add Wa_14011224835 for PHY B initialization"
+drm-intel drm-intel-next e57bd05ec0d2d82d63725dedf9f5a063f879de25
+	drm/i915: Update DRIVER_DATE to 20200715
+drm-amd drm-amd-next 754270c7c56292e97d0eff924a5d5d83f92add07
+	Merge branch 'drm-next-4.15' of git://people.freedesktop.org/~agd5f/linux into drm-next
+sound-upstream for-linus cd72c317a0a11f64225b9a3f1fe503bb8c7327b5
+	ALSA: hda/hdmi: Add quirk to force connectivity
+sound-upstream for-next cd72c317a0a11f64225b9a3f1fe503bb8c7327b5
+	ALSA: hda/hdmi: Add quirk to force connectivity
+drm-intel topic/core-for-CI 5a88ca3607993082ad90cac768d50c3b1e2b458e
+	HAX sched/core: Paper over the ttwu() race
+drm-misc topic/phy-compliance 8cdf727119289db3a98835662eb28e1c5ad835f1
+	drm/i915/dp: Program vswing, pre-emphasis, test-pattern
