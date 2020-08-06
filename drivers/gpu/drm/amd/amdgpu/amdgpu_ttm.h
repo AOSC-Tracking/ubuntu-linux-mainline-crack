@@ -63,20 +63,22 @@ struct amdgpu_mman {
 
 struct amdgpu_copy_mem {
 	struct ttm_buffer_object	*bo;
-	struct ttm_mem_reg		*mem;
+	struct ttm_resource		*mem;
 	unsigned long			offset;
 };
 
-extern const struct ttm_mem_type_manager_func amdgpu_gtt_mgr_func;
-extern const struct ttm_mem_type_manager_func amdgpu_vram_mgr_func;
+int amdgpu_gtt_mgr_init(struct amdgpu_device *adev, uint64_t gtt_size);
+void amdgpu_gtt_mgr_fini(struct amdgpu_device *adev);
+int amdgpu_vram_mgr_init(struct amdgpu_device *adev);
+void amdgpu_vram_mgr_fini(struct amdgpu_device *adev);
 
-bool amdgpu_gtt_mgr_has_gart_addr(struct ttm_mem_reg *mem);
-uint64_t amdgpu_gtt_mgr_usage(struct ttm_mem_type_manager *man);
-int amdgpu_gtt_mgr_recover(struct ttm_mem_type_manager *man);
+bool amdgpu_gtt_mgr_has_gart_addr(struct ttm_resource *mem);
+uint64_t amdgpu_gtt_mgr_usage(struct ttm_resource_manager *man);
+int amdgpu_gtt_mgr_recover(struct ttm_resource_manager *man);
 
 u64 amdgpu_vram_mgr_bo_visible_size(struct amdgpu_bo *bo);
 int amdgpu_vram_mgr_alloc_sgt(struct amdgpu_device *adev,
-			      struct ttm_mem_reg *mem,
+			      struct ttm_resource *mem,
 			      struct device *dev,
 			      enum dma_data_direction dir,
 			      struct sg_table **sgt);
@@ -84,8 +86,8 @@ void amdgpu_vram_mgr_free_sgt(struct amdgpu_device *adev,
 			      struct device *dev,
 			      enum dma_data_direction dir,
 			      struct sg_table *sgt);
-uint64_t amdgpu_vram_mgr_usage(struct ttm_mem_type_manager *man);
-uint64_t amdgpu_vram_mgr_vis_usage(struct ttm_mem_type_manager *man);
+uint64_t amdgpu_vram_mgr_usage(struct ttm_resource_manager *man);
+uint64_t amdgpu_vram_mgr_vis_usage(struct ttm_resource_manager *man);
 
 int amdgpu_ttm_init(struct amdgpu_device *adev);
 void amdgpu_ttm_late_init(struct amdgpu_device *adev);
@@ -140,9 +142,9 @@ bool amdgpu_ttm_tt_userptr_invalidated(struct ttm_tt *ttm,
 				       int *last_invalidated);
 bool amdgpu_ttm_tt_is_userptr(struct ttm_tt *ttm);
 bool amdgpu_ttm_tt_is_readonly(struct ttm_tt *ttm);
-uint64_t amdgpu_ttm_tt_pde_flags(struct ttm_tt *ttm, struct ttm_mem_reg *mem);
+uint64_t amdgpu_ttm_tt_pde_flags(struct ttm_tt *ttm, struct ttm_resource *mem);
 uint64_t amdgpu_ttm_tt_pte_flags(struct amdgpu_device *adev, struct ttm_tt *ttm,
-				 struct ttm_mem_reg *mem);
+				 struct ttm_resource *mem);
 
 int amdgpu_ttm_debugfs_init(struct amdgpu_device *adev);
 
