@@ -248,12 +248,17 @@ static inline const struct xattr_handler *f2fs_xattr_handler(int index)
 	return handler;
 }
 
-static struct f2fs_xattr_entry *__find_xattr(void *base_addr, int index,
-					size_t len, const char *name)
+static struct f2fs_xattr_entry *__find_xattr(void *base_addr,
+				void *last_base_addr, int index,
+				size_t len, const char *name)
 {
 	struct f2fs_xattr_entry *entry;
 
 	list_for_each_xattr(entry, base_addr) {
+		if ((void *)(entry) + sizeof(__u32) > last_base_addr ||
+		    (void *)XATTR_NEXT_ENTRY(entry) > last_base_addr)
+			return NULL;
+
 		if (entry->e_name_index != index)
 			continue;
 		if (entry->e_name_len != len)
@@ -401,9 +406,10 @@ int f2fs_getxattr(struct inode *inode, int index, const char *name,
 		void *buffer, size_t buffer_size, struct page *ipage)
 {
 	struct f2fs_xattr_entry *entry;
-	void *base_addr;
+	void *base_addr, *last_base_addr;
 	int error = 0;
 	size_t size, len;
+	nid_t xnid = F2FS_I(inode)->i_xattr_nid;
 
 	if (name == NULL)
 		return -EINVAL;
@@ -416,7 +422,9 @@ int f2fs_getxattr(struct inode *inode, int index, const char *name,
 	if (!base_addr)
 		return -ENOMEM;
 
-	entry = __find_xattr(base_addr, index, len, name);
+	last_base_addr = (void *)base_addr + XATTR_SIZE(xnid, inode);
+	
+	entry = __find_xattr(base_addr, last_base_addr, index, len, name);
 	if (IS_XATTR_LAST_ENTRY(entry)) {
 		error = -ENODATA;
 		goto cleanup;
@@ -483,7 +491,9 @@ static int __f2fs_setxattr(struct inode *inode, int index,
 {
 	struct f2fs_inode_info *fi = F2FS_I(inode);
 	struct f2fs_xattr_entry *here, *last;
-	void *base_addr;
+	void *base_addr, *last_base_addr;
+	nid_t xnid = F2FS_I(inode)->i_xattr_nid;
+
 	int found, newsize;
 	size_t len;
 	__u32 new_hsize;
@@ -507,8 +517,14 @@ static int __f2fs_setxattr(struct inode *inode, int index,
 	if (!base_addr)
 		goto exit;
 
+	last_base_addr = (void *)base_addr + XATTR_SIZE(xnid, inode);
+
 	/* find entry with wanted name. */
-	here = __find_xattr(base_addr, index, len, name);
+	here = __find_xattr(base_addr, last_base_addr, index, len, name);
+	if (!here) {
+		error = -EFAULT;
+		goto exit;
+	}
 
 	found = IS_XATTR_LAST_ENTRY(here) ? 0 : 1;
 
