@@ -13686,6 +13686,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x06a5c2c1	devfreq_event_disable_edev
 EXPORT_SYMBOL_GPL vmlinux 0x06af50fb	sysfs_create_file_ns
 EXPORT_SYMBOL_GPL vmlinux 0x06c6c19d	thermal_of_cooling_device_register
 EXPORT_SYMBOL_GPL vmlinux 0x06d549e6	pinctrl_free_gpio
+EXPORT_SYMBOL_GPL vmlinux 0x06ebe794	probe_user_read
 EXPORT_SYMBOL_GPL vmlinux 0x06f6ae7d	xfrm_output
 EXPORT_SYMBOL_GPL vmlinux 0x06fe7f24	pm_schedule_suspend
 EXPORT_SYMBOL_GPL vmlinux 0x07032f9e	trace_seq_to_user
@@ -17314,6 +17315,7 @@ EXPORT_SYMBOL_GPL vmlinux 0xe68019b2	spi_async
 EXPORT_SYMBOL_GPL vmlinux 0xe68a962a	snd_soc_dai_set_tristate
 EXPORT_SYMBOL_GPL vmlinux 0xe69331a3	xfrm_audit_state_add
 EXPORT_SYMBOL_GPL vmlinux 0xe6967b78	srcu_notifier_call_chain
+EXPORT_SYMBOL_GPL vmlinux 0xe6ac97a5	probe_user_write
 EXPORT_SYMBOL_GPL vmlinux 0xe6b955d4	percpu_ida_free_tags
 EXPORT_SYMBOL_GPL vmlinux 0xe6bb7ecc	spi_bus_type
 EXPORT_SYMBOL_GPL vmlinux 0xe6c50740	cpsw_ale_control_get

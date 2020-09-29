@@ -13894,6 +13894,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x13ac2eb2	usb_register_driver
 EXPORT_SYMBOL_GPL vmlinux 0x13ad647f	scatterwalk_bytes_sglen
 EXPORT_SYMBOL_GPL vmlinux 0x13b1f8fc	idr_alloc
 EXPORT_SYMBOL_GPL vmlinux 0x13b21d16	kvm_set_memory_region
+EXPORT_SYMBOL_GPL vmlinux 0x13b65f27	probe_user_read
 EXPORT_SYMBOL_GPL vmlinux 0x13bc83a7	class_dev_iter_init
 EXPORT_SYMBOL_GPL vmlinux 0x13c5e09c	xhci_dbg_trace
 EXPORT_SYMBOL_GPL vmlinux 0x13ce87e8	asn1_ber_decoder
@@ -15776,6 +15777,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x98d91046	debugfs_create_symlink
 EXPORT_SYMBOL_GPL vmlinux 0x98f9f73d	fwnode_property_read_u8_array
 EXPORT_SYMBOL_GPL vmlinux 0x98fa1e20	dm_get_reserved_rq_based_ios
 EXPORT_SYMBOL_GPL vmlinux 0x98fcf128	irq_work_queue_on
+EXPORT_SYMBOL_GPL vmlinux 0x99470a38	probe_user_write
 EXPORT_SYMBOL_GPL vmlinux 0x995d1071	prof_on
 EXPORT_SYMBOL_GPL vmlinux 0x995df26b	subsys_interface_register
 EXPORT_SYMBOL_GPL vmlinux 0x995ffeca	rt_mutex_trylock

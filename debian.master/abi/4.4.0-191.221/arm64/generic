@@ -14011,6 +14011,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x137f5b61	ip_local_out
 EXPORT_SYMBOL_GPL vmlinux 0x137f8f67	kthread_unpark
 EXPORT_SYMBOL_GPL vmlinux 0x138aff76	gnttab_init
 EXPORT_SYMBOL_GPL vmlinux 0x13ad647f	scatterwalk_bytes_sglen
+EXPORT_SYMBOL_GPL vmlinux 0x13b65f27	probe_user_read
 EXPORT_SYMBOL_GPL vmlinux 0x13b89dee	pinctrl_request_gpio
 EXPORT_SYMBOL_GPL vmlinux 0x13ce87e8	asn1_ber_decoder
 EXPORT_SYMBOL_GPL vmlinux 0x13d28843	console_drivers
@@ -16084,6 +16085,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x98fa1e20	dm_get_reserved_rq_based_ios
 EXPORT_SYMBOL_GPL vmlinux 0x98fcf128	irq_work_queue_on
 EXPORT_SYMBOL_GPL vmlinux 0x99316e6d	ehci_hub_control
 EXPORT_SYMBOL_GPL vmlinux 0x993ff86d	debugfs_create_u32_array
+EXPORT_SYMBOL_GPL vmlinux 0x99470a38	probe_user_write
 EXPORT_SYMBOL_GPL vmlinux 0x994c4c15	idr_alloc
 EXPORT_SYMBOL_GPL vmlinux 0x995d1071	prof_on
 EXPORT_SYMBOL_GPL vmlinux 0x9973add9	__cookie_v6_check

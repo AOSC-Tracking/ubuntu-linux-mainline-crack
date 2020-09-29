@@ -14321,6 +14321,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x13a641aa	irq_create_of_mapping
 EXPORT_SYMBOL_GPL vmlinux 0x13a6c856	crypto_aead_setauthsize
 EXPORT_SYMBOL_GPL vmlinux 0x13ad647f	scatterwalk_bytes_sglen
 EXPORT_SYMBOL_GPL vmlinux 0x13b1f8fc	idr_alloc
+EXPORT_SYMBOL_GPL vmlinux 0x13b65f27	probe_user_read
 EXPORT_SYMBOL_GPL vmlinux 0x13bee844	seq_release_net
 EXPORT_SYMBOL_GPL vmlinux 0x13bf4c92	__module_text_address
 EXPORT_SYMBOL_GPL vmlinux 0x13c07b8e	of_rescan_bus
@@ -16318,6 +16319,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x990b12f8	of_get_nand_ecc_strength
 EXPORT_SYMBOL_GPL vmlinux 0x99300390	cpu_bit_bitmap
 EXPORT_SYMBOL_GPL vmlinux 0x99368d65	kvmppc_update_rmap_change
 EXPORT_SYMBOL_GPL vmlinux 0x993d091d	tpm_try_get_ops
+EXPORT_SYMBOL_GPL vmlinux 0x99470a38	probe_user_write
 EXPORT_SYMBOL_GPL vmlinux 0x995d1071	prof_on
 EXPORT_SYMBOL_GPL vmlinux 0x997c4347	unmap_kernel_range
 EXPORT_SYMBOL_GPL vmlinux 0x99840d00	timecounter_init

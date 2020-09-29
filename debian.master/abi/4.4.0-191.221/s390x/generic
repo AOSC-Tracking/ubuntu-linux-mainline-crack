@@ -8299,6 +8299,7 @@ EXPORT_SYMBOL_GPL vmlinux 0xa897e0eb	pm_relax
 EXPORT_SYMBOL_GPL vmlinux 0xa897f66c	debugfs_use_file_start
 EXPORT_SYMBOL_GPL vmlinux 0xa8b76a68	timecounter_cyc2time
 EXPORT_SYMBOL_GPL vmlinux 0xa8d96e74	__sock_recv_ts_and_drops
+EXPORT_SYMBOL_GPL vmlinux 0xa8fabfd3	probe_user_read
 EXPORT_SYMBOL_GPL vmlinux 0xa9132e39	page_endio
 EXPORT_SYMBOL_GPL vmlinux 0xa920afb0	percpu_ida_free_tags
 EXPORT_SYMBOL_GPL vmlinux 0xa92d8576	alloc_page_buffers
@@ -8348,6 +8349,7 @@ EXPORT_SYMBOL_GPL vmlinux 0xace421f7	crypto_unregister_shashes
 EXPORT_SYMBOL_GPL vmlinux 0xad086d44	kvm_is_visible_gfn
 EXPORT_SYMBOL_GPL vmlinux 0xad3dfa13	lgr_info_log
 EXPORT_SYMBOL_GPL vmlinux 0xad57da0c	relay_open
+EXPORT_SYMBOL_GPL vmlinux 0xad68c599	probe_user_write
 EXPORT_SYMBOL_GPL vmlinux 0xad809eb8	sock_update_netprioidx
 EXPORT_SYMBOL_GPL vmlinux 0xad923fc9	uprobe_unregister
 EXPORT_SYMBOL_GPL vmlinux 0xad993906	debugfs_create_x8

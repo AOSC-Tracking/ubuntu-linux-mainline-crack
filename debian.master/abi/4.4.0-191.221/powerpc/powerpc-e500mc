@@ -13747,6 +13747,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x06b923fd	pm_generic_resume_early
 EXPORT_SYMBOL_GPL vmlinux 0x06d0c8ae	regmap_add_irq_chip
 EXPORT_SYMBOL_GPL vmlinux 0x06e357b4	inet_unhash
 EXPORT_SYMBOL_GPL vmlinux 0x06e45be6	ata_do_set_mode
+EXPORT_SYMBOL_GPL vmlinux 0x06ebe794	probe_user_read
 EXPORT_SYMBOL_GPL vmlinux 0x06efa8cd	tc3589x_reg_write
 EXPORT_SYMBOL_GPL vmlinux 0x06fb7965	crypto_register_kpp
 EXPORT_SYMBOL_GPL vmlinux 0x07216756	dev_attr_em_message_type
@@ -17038,6 +17039,7 @@ EXPORT_SYMBOL_GPL vmlinux 0xe651f76e	selinux_is_enabled
 EXPORT_SYMBOL_GPL vmlinux 0xe653c64d	zap_vma_ptes
 EXPORT_SYMBOL_GPL vmlinux 0xe65b6fcd	dm_disk
 EXPORT_SYMBOL_GPL vmlinux 0xe6764c84	uhci_reset_hc
+EXPORT_SYMBOL_GPL vmlinux 0xe6ac97a5	probe_user_write
 EXPORT_SYMBOL_GPL vmlinux 0xe6ae768d	regulator_count_voltages
 EXPORT_SYMBOL_GPL vmlinux 0xe6c10f2d	console_drivers
 EXPORT_SYMBOL_GPL vmlinux 0xe6c68334	ddebug_remove_module

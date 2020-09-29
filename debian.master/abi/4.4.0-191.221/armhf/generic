@@ -13755,6 +13755,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x06a5c2c1	devfreq_event_disable_edev
 EXPORT_SYMBOL_GPL vmlinux 0x06af50fb	sysfs_create_file_ns
 EXPORT_SYMBOL_GPL vmlinux 0x06b59ff6	snd_soc_update_bits
 EXPORT_SYMBOL_GPL vmlinux 0x06d549e6	pinctrl_free_gpio
+EXPORT_SYMBOL_GPL vmlinux 0x06ebe794	probe_user_read
 EXPORT_SYMBOL_GPL vmlinux 0x07032f9e	trace_seq_to_user
 EXPORT_SYMBOL_GPL vmlinux 0x071370cb	devm_reset_control_get
 EXPORT_SYMBOL_GPL vmlinux 0x071bca22	class_unregister
@@ -17317,6 +17318,7 @@ EXPORT_SYMBOL_GPL vmlinux 0xe66f770c	gpiod_direction_input
 EXPORT_SYMBOL_GPL vmlinux 0xe670b54d	pci_reset_bridge_secondary_bus
 EXPORT_SYMBOL_GPL vmlinux 0xe6773781	clk_debugfs_add_file
 EXPORT_SYMBOL_GPL vmlinux 0xe6ac1607	reservation_object_wait_timeout_rcu
+EXPORT_SYMBOL_GPL vmlinux 0xe6ac97a5	probe_user_write
 EXPORT_SYMBOL_GPL vmlinux 0xe6b764ad	__clocksource_register_scale
 EXPORT_SYMBOL_GPL vmlinux 0xe6b955d4	percpu_ida_free_tags
 EXPORT_SYMBOL_GPL vmlinux 0xe6c68334	ddebug_remove_module

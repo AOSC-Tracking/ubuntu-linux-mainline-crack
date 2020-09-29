@@ -14021,6 +14021,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x1390c14a	kvmppc_h_get_tce
 EXPORT_SYMBOL_GPL vmlinux 0x13a39522	tty_init_termios
 EXPORT_SYMBOL_GPL vmlinux 0x13ad647f	scatterwalk_bytes_sglen
 EXPORT_SYMBOL_GPL vmlinux 0x13b1f8fc	idr_alloc
+EXPORT_SYMBOL_GPL vmlinux 0x13b65f27	probe_user_read
 EXPORT_SYMBOL_GPL vmlinux 0x13ce87e8	asn1_ber_decoder
 EXPORT_SYMBOL_GPL vmlinux 0x13d0436e	skb_segment
 EXPORT_SYMBOL_GPL vmlinux 0x13dd4e2f	fb_deferred_io_init
@@ -15968,6 +15969,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x99166475	rio_mport_write_config_8
 EXPORT_SYMBOL_GPL vmlinux 0x9919d44c	skcipher_geniv_free
 EXPORT_SYMBOL_GPL vmlinux 0x992d41b3	list_lru_count_one
 EXPORT_SYMBOL_GPL vmlinux 0x99368d65	kvmppc_update_rmap_change
+EXPORT_SYMBOL_GPL vmlinux 0x99470a38	probe_user_write
 EXPORT_SYMBOL_GPL vmlinux 0x99571ee6	ata_sff_qc_fill_rtf
 EXPORT_SYMBOL_GPL vmlinux 0x995d1071	prof_on
 EXPORT_SYMBOL_GPL vmlinux 0x9973add9	__cookie_v6_check

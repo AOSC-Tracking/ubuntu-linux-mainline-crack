@@ -13744,6 +13744,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x0692665c	crypto_register_pcomp
 EXPORT_SYMBOL_GPL vmlinux 0x06982384	devm_regulator_unregister_notifier
 EXPORT_SYMBOL_GPL vmlinux 0x06d5da32	debugfs_rename
 EXPORT_SYMBOL_GPL vmlinux 0x06d7e159	virtqueue_get_buf
+EXPORT_SYMBOL_GPL vmlinux 0x06ebe794	probe_user_read
 EXPORT_SYMBOL_GPL vmlinux 0x06f1294d	rio_get_asm
 EXPORT_SYMBOL_GPL vmlinux 0x06f9c18c	bpf_prog_select_runtime
 EXPORT_SYMBOL_GPL vmlinux 0x07353155	ping_recvmsg
@@ -16827,6 +16828,7 @@ EXPORT_SYMBOL_GPL vmlinux 0xe653d4fc	usb_match_one_id
 EXPORT_SYMBOL_GPL vmlinux 0xe671f33c	pmac_i2c_get_channel
 EXPORT_SYMBOL_GPL vmlinux 0xe6733343	dev_pm_set_wake_irq
 EXPORT_SYMBOL_GPL vmlinux 0xe6a0572f	gpiod_get
+EXPORT_SYMBOL_GPL vmlinux 0xe6ac97a5	probe_user_write
 EXPORT_SYMBOL_GPL vmlinux 0xe6beed4e	devm_power_supply_register
 EXPORT_SYMBOL_GPL vmlinux 0xe6c68334	ddebug_remove_module
 EXPORT_SYMBOL_GPL vmlinux 0xe6dc298e	blk_add_request_payload
