@@ -187,6 +187,21 @@ struct intel_encoder {
 	 * be set correctly before calling this function. */
 	void (*get_config)(struct intel_encoder *,
 			   struct intel_crtc_state *pipe_config);
+
+	/*
+	 * Optional hook called during init/resume to sync any state
+	 * stored in the encoder (eg. DP link parameters) wrt. the HW state.
+	 */
+	void (*sync_state)(struct intel_encoder *encoder,
+			   const struct intel_crtc_state *crtc_state);
+
+	/*
+	 * Optional hook, returning true if this encoder allows a fastset
+	 * during the initial commit, false otherwise.
+	 */
+	bool (*initial_fastset_check)(struct intel_encoder *encoder,
+				      struct intel_crtc_state *crtc_state);
+
 	/*
 	 * Acquires the power domains needed for an active encoder during
 	 * hardware state readout.
@@ -1183,6 +1198,9 @@ struct intel_plane {
 			   struct intel_plane_state *plane_state);
 	int (*min_cdclk)(const struct intel_crtc_state *crtc_state,
 			 const struct intel_plane_state *plane_state);
+	void (*async_flip)(struct intel_plane *plane,
+			   const struct intel_crtc_state *crtc_state,
+			   const struct intel_plane_state *plane_state);
 };
 
 struct intel_watermark_params {
@@ -1270,7 +1288,6 @@ struct intel_dp {
 	int link_rate;
 	u8 lane_count;
 	u8 sink_count;
-	bool link_mst;
 	bool link_trained;
 	bool has_hdmi_sink;
 	bool has_audio;
@@ -1336,14 +1353,6 @@ struct intel_dp {
 	bool is_mst;
 	int active_mst_links;
 
-	/*
-	 * DP_TP_* registers may be either on port or transcoder register space.
-	 */
-	struct {
-		i915_reg_t dp_tp_ctl;
-		i915_reg_t dp_tp_status;
-	} regs;
-
 	/* connector directly attached - won't be use for modeset in mst world */
 	struct intel_connector *attached_connector;
 
@@ -1363,13 +1372,19 @@ struct intel_dp {
 	i915_reg_t (*aux_ch_data_reg)(struct intel_dp *dp, int index);
 
 	/* This is called before a link training is starterd */
-	void (*prepare_link_retrain)(struct intel_dp *intel_dp);
-	void (*set_link_train)(struct intel_dp *intel_dp, u8 dp_train_pat);
-	void (*set_idle_link_train)(struct intel_dp *intel_dp);
-	void (*set_signal_levels)(struct intel_dp *intel_dp);
+	void (*prepare_link_retrain)(struct intel_dp *intel_dp,
+				     const struct intel_crtc_state *crtc_state);
+	void (*set_link_train)(struct intel_dp *intel_dp,
+			       const struct intel_crtc_state *crtc_state,
+			       u8 dp_train_pat);
+	void (*set_idle_link_train)(struct intel_dp *intel_dp,
+				    const struct intel_crtc_state *crtc_state);
+	void (*set_signal_levels)(struct intel_dp *intel_dp,
+				  const struct intel_crtc_state *crtc_state);
 
 	u8 (*preemph_max)(struct intel_dp *intel_dp);
-	u8 (*voltage_max)(struct intel_dp *intel_dp);
+	u8 (*voltage_max)(struct intel_dp *intel_dp,
+			  const struct intel_crtc_state *crtc_state);
 
 	/* Displayport compliance testing */
 	struct intel_dp_compliance compliance;
