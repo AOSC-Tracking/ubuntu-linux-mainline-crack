@@ -1,0 +1,32 @@
+drm drm-fixes d10285a25e29f13353bbf7760be8980048c1ef2f
+	drm/nouveau/mem: guard against NULL pointer access in mem_del
+drm-misc drm-misc-fixes 27204b99b08289d0993cb77c22470034b5eb974d
+	drm: drm_dsc.h: fix a kernel-doc markup
+drm-intel drm-intel-fixes 549738f15da0e5a00275977623be199fbbf7df50
+	Linux 5.9-rc8
+drm-amd drm-amd-fixes 2b702e72e33bbdec0764cfb6e1dd00fe1142ae55
+	Merge tag 'drm-misc-fixes-2017-09-28-1' of git://anongit.freedesktop.org/git/drm-misc into drm-fixes
+drm drm-next edb899841c4e4c52cd78257029929bd9c6ab011d
+	drm/vmwgfx: fix regression in thp code due to ttm init refactor.
+drm-misc drm-misc-next-fixes a3fb64c00d44a3ce869c0ca8210f95f99497aa9e
+	Revert "gpu/drm: ingenic: Add option to mmap GEM buffers cached"
+drm-intel drm-intel-next-fixes c60b93cd4862d108214a14e655358ea714d7a12a
+	drm/i915: Avoid mixing integer types during batch copies
+drm-amd drm-amd-next-fixes 2bd6bf03f4c1c59381d62c61d03f6cc3fe71f66e
+	Linux 4.14-rc1
+drm-misc drm-misc-next 82e1b93ad8b95a1667708164220ed137d6f3adfb
+	dma-buf: use struct_size macro
+drm-intel drm-intel-next-queued 67807f52e395be751fb665511d1a9a5e6a93f1f7
+	drm/i915/dg1: provide port/phy mapping for vbt
+drm-intel drm-intel-next 8fea92536e3efff14fa4cde7ed37c595b40a52b5
+	drm/i915: Update DRIVER_DATE to 20200917
+drm-amd drm-amd-next 754270c7c56292e97d0eff924a5d5d83f92add07
+	Merge branch 'drm-next-4.15' of git://people.freedesktop.org/~agd5f/linux into drm-next
+sound-upstream for-linus b41c15f4e1c1f1657da15c482fa837c1b7384452
+	ALSA: bebob: potential info leak in hwdep_read()
+sound-upstream for-next 7dcd56123e312e8b17f85a597b33552a704ce45f
+	ALSA: hdspm: Fix typo arbitary
+drm-intel topic/core-for-CI c082b170b61f96f6148481ae69b69f66664839eb
+	mm: do not rely on mm == current->mm in __get_user_pages_locked
+drm-intel drm-intel-gt-next bf9bd6a5128a2a366b5a13e916c1f76393ff7ba8
+	drm/i915/gt: Track the most recent pulse for the heartbeat
