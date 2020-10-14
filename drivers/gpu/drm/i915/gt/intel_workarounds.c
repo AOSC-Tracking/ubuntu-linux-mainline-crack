@@ -1212,7 +1212,7 @@ icl_gt_workarounds_init(struct drm_i915_private *i915, struct i915_wa_list *wal)
 
 	/* Wa_1607087056:icl,ehl,jsl */
 	if (IS_ICELAKE(i915) ||
-	    IS_EHL_REVID(i915, EHL_REVID_A0, EHL_REVID_A0)) {
+		IS_JSL_EHL_REVID(i915, EHL_REVID_A0, EHL_REVID_A0)) {
 		wa_write_or(wal,
 			    SLICE_UNIT_LEVEL_CLKGATE,
 			    L3_CLKGATE_DIS | L3_CR2X_CLKGATE_DIS);
@@ -1839,7 +1839,7 @@ rcs_engine_wa_init(struct intel_engine_cs *engine, struct i915_wa_list *wal)
 			    GEN12_FF_TESSELATION_DOP_GATE_DISABLE);
 
 		/* Wa_22010271021:ehl */
-		if (IS_ELKHARTLAKE(i915))
+		if (IS_JSL_EHL(i915))
 			wa_masked_en(wal,
 				     GEN9_CS_DEBUG_MODE1,
 				     FF_DOP_CLOCK_GATE_DISABLE);
@@ -2031,10 +2031,12 @@ err_obj:
 	return ERR_PTR(err);
 }
 
-static const struct {
+struct mcr_range {
 	u32 start;
 	u32 end;
-} mcr_ranges_gen8[] = {
+};
+
+static const struct mcr_range mcr_ranges_gen8[] = {
 	{ .start = 0x5500, .end = 0x55ff },
 	{ .start = 0x7000, .end = 0x7fff },
 	{ .start = 0x9400, .end = 0x97ff },
@@ -2043,11 +2045,25 @@ static const struct {
 	{},
 };
 
+static const struct mcr_range mcr_ranges_gen12[] = {
+	{ .start =  0x8150, .end =  0x815f },
+	{ .start =  0x9520, .end =  0x955f },
+	{ .start =  0xb100, .end =  0xb3ff },
+	{ .start =  0xde80, .end =  0xe8ff },
+	{ .start = 0x24a00, .end = 0x24a7f },
+	{},
+};
+
 static bool mcr_range(struct drm_i915_private *i915, u32 offset)
 {
+	const struct mcr_range *mcr_ranges;
 	int i;
 
-	if (INTEL_GEN(i915) < 8)
+	if (INTEL_GEN(i915) >= 12)
+		mcr_ranges = mcr_ranges_gen12;
+	else if (INTEL_GEN(i915) >= 8)
+		mcr_ranges = mcr_ranges_gen8;
+	else
 		return false;
 
 	/*
@@ -2055,9 +2071,9 @@ static bool mcr_range(struct drm_i915_private *i915, u32 offset)
 	 * which only controls CPU initiated MMIO. Routing does not
 	 * work for CS access so we cannot verify them on this path.
 	 */
-	for (i = 0; mcr_ranges_gen8[i].start; i++)
-		if (offset >= mcr_ranges_gen8[i].start &&
-		    offset <= mcr_ranges_gen8[i].end)
+	for (i = 0; mcr_ranges[i].start; i++)
+		if (offset >= mcr_ranges[i].start &&
+		    offset <= mcr_ranges[i].end)
 			return true;
 
 	return false;
