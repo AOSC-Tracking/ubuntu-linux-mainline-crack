@@ -1,0 +1,32 @@
+drm drm-fixes dded93ffbb8c4a578adf13b54cd62519908a23f8
+	Merge tag 'amd-drm-fixes-5.9-2020-10-08' of git://people.freedesktop.org/~agd5f/linux into drm-fixes
+drm-misc drm-misc-fixes 27204b99b08289d0993cb77c22470034b5eb974d
+	drm: drm_dsc.h: fix a kernel-doc markup
+drm-intel drm-intel-fixes bbf5c979011a099af5dc76498918ed7df445635b
+	Linux 5.9
+drm-amd drm-amd-fixes 2b702e72e33bbdec0764cfb6e1dd00fe1142ae55
+	Merge tag 'drm-misc-fixes-2017-09-28-1' of git://anongit.freedesktop.org/git/drm-misc into drm-fixes
+drm drm-next b45b6fbc671c60f56fd119c443e5570f83175928
+	Merge tag 'drm-intel-next-fixes-2020-10-22' of git://anongit.freedesktop.org/drm/drm-intel into drm-next
+drm-misc drm-misc-next-fixes 2580a493a97da4a302cb66251b558bfc04c16e68
+	dt-binding: display: Require two resets on mantix panel
+drm-intel drm-intel-next-fixes 5c6c13cd1102caf92d006a3cf4591c0229019daf
+	drm/i915: Drop runtime-pm assert from vgpu io accessors
+drm-amd drm-amd-next-fixes 2bd6bf03f4c1c59381d62c61d03f6cc3fe71f66e
+	Linux 4.14-rc1
+drm-misc drm-misc-next ef52d5853bf1d0ac1254a8d44e5b8f4edc274960
+	drm/komeda: Convert to DEFINE_SHOW_ATTRIBUTE
+drm-intel drm-intel-next-queued b18c1eb975ce181996310a526582a3ddbc6735e9
+	drm/i915/dg1: invert HPD pins
+drm-intel drm-intel-next 8fea92536e3efff14fa4cde7ed37c595b40a52b5
+	drm/i915: Update DRIVER_DATE to 20200917
+drm-amd drm-amd-next 754270c7c56292e97d0eff924a5d5d83f92add07
+	Merge branch 'drm-next-4.15' of git://people.freedesktop.org/~agd5f/linux into drm-next
+sound-upstream for-linus 033e4040d453f1f7111e5957a54f3019eb089cc6
+	ALSA: hda - Fix the return value if cb func is already registered
+sound-upstream for-next 033e4040d453f1f7111e5957a54f3019eb089cc6
+	ALSA: hda - Fix the return value if cb func is already registered
+drm-intel topic/core-for-CI c082b170b61f96f6148481ae69b69f66664839eb
+	mm: do not rely on mm == current->mm in __get_user_pages_locked
+drm-intel drm-intel-gt-next 6e7a21e7ab27dd5e42e212155200c1c84bbadbc7
+	drm/i915/selftests: Exercise intel_timeline_read_hwsp()
