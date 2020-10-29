@@ -1,0 +1,32 @@
+drm drm-fixes 3650b228f83adda7e5ee532e2b90429c03f7b9ec
+	Linux 5.10-rc1
+drm-misc drm-misc-fixes f49a51bfdc8ea717c97ccd4cc98b7e6daaa5553a
+	drm/shme-helpers: Fix dma_buf_mmap forwarding bug
+drm-intel drm-intel-fixes d13208a88f413e17d32c171bff31c03996eb7111
+	lockdep: Fix nr_unused_locks
+drm-amd drm-amd-fixes 2b702e72e33bbdec0764cfb6e1dd00fe1142ae55
+	Merge tag 'drm-misc-fixes-2017-09-28-1' of git://anongit.freedesktop.org/git/drm-misc into drm-fixes
+drm drm-next b45b6fbc671c60f56fd119c443e5570f83175928
+	Merge tag 'drm-intel-next-fixes-2020-10-22' of git://anongit.freedesktop.org/drm/drm-intel into drm-next
+drm-misc drm-misc-next-fixes 2580a493a97da4a302cb66251b558bfc04c16e68
+	dt-binding: display: Require two resets on mantix panel
+drm-intel drm-intel-next-fixes b45b6fbc671c60f56fd119c443e5570f83175928
+	Merge tag 'drm-intel-next-fixes-2020-10-22' of git://anongit.freedesktop.org/drm/drm-intel into drm-next
+drm-amd drm-amd-next-fixes 2bd6bf03f4c1c59381d62c61d03f6cc3fe71f66e
+	Linux 4.14-rc1
+drm-misc drm-misc-next 5144eead3f8c80ac7f913c07139442fede94003e
+	drm: xlnx: Use dma_request_chan for DMA channel request
+drm-intel drm-intel-next-queued 00e5deb5c4f5fe367311465e720e65cfa1178792
+	drm/i915: Fix encoder lookup during PSR atomic check
+drm-intel drm-intel-next 8fea92536e3efff14fa4cde7ed37c595b40a52b5
+	drm/i915: Update DRIVER_DATE to 20200917
+drm-amd drm-amd-next 754270c7c56292e97d0eff924a5d5d83f92add07
+	Merge branch 'drm-next-4.15' of git://people.freedesktop.org/~agd5f/linux into drm-next
+sound-upstream for-linus 9fc149c3bce7bdbb94948a8e6bd025e3b3538603
+	ALSA: hda: Reinstate runtime_allow() for all hda controllers
+sound-upstream for-next ad26098970b637f4565b110df929d74eb2c2652e
+	ALSA: remove unneeded break
+drm-intel topic/core-for-CI 0cde87f8d8e421ecbb923bc84c60e45e3e43522f
+	rcu/tree: Drop the lock before entering to page allocator
+drm-intel drm-intel-gt-next c071ab8c20748873183d5f210aa105d6a3e2d56a
+	drm/i915/gem: Avoid synchronous binds deep within locks
