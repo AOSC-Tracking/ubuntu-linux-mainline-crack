@@ -1,0 +1,32 @@
+drm drm-fixes f95dddc9f4051b04a02677eb3df0b25962f12dfc
+	Merge tag 'amd-drm-fixes-5.10-2020-11-18' of git://people.freedesktop.org/~agd5f/linux into drm-fixes
+drm-misc drm-misc-fixes 9fa1d7e60ad5ad2f7859ea8912d7b0b57821a5b7
+	drm/vc4: hdmi: Disable Wifi Frequencies
+drm-intel drm-intel-fixes be33805c65297611971003d72e7f9235e23ec84d
+	drm/i915/gt: Fixup tgl mocs for PTE tracking
+drm-amd drm-amd-fixes 2b702e72e33bbdec0764cfb6e1dd00fe1142ae55
+	Merge tag 'drm-misc-fixes-2017-09-28-1' of git://anongit.freedesktop.org/git/drm-misc into drm-fixes
+drm drm-next 31b05212360cbf3af3c2e1b7f42e176e0eebedb5
+	Merge branch 'linux-5.11' of git://github.com/skeggsb/linux into drm-next
+drm-misc drm-misc-next-fixes 2580a493a97da4a302cb66251b558bfc04c16e68
+	dt-binding: display: Require two resets on mantix panel
+drm-intel drm-intel-next-fixes b45b6fbc671c60f56fd119c443e5570f83175928
+	Merge tag 'drm-intel-next-fixes-2020-10-22' of git://anongit.freedesktop.org/drm/drm-intel into drm-next
+drm-amd drm-amd-next-fixes 2bd6bf03f4c1c59381d62c61d03f6cc3fe71f66e
+	Linux 4.14-rc1
+drm-misc drm-misc-next 3e3e59ef0cbe9bfbe8e55c4c8165dd98148decf2
+	drm/ttm: fix DMA32 handling in the global page pool
+drm-intel drm-intel-next-queued afd4cf78a189fa3376fe0f6ceddb91be17a2ba68
+	drm/i915/display: Whitespace cleanups
+drm-intel drm-intel-next 8fea92536e3efff14fa4cde7ed37c595b40a52b5
+	drm/i915: Update DRIVER_DATE to 20200917
+drm-amd drm-amd-next 754270c7c56292e97d0eff924a5d5d83f92add07
+	Merge branch 'drm-next-4.15' of git://people.freedesktop.org/~agd5f/linux into drm-next
+sound-upstream for-linus aecd1fbe7784e75226682afe7a9c3a34af35aa3e
+	Merge tag 'asoc-fix-v5.10-rc4' of https://git.kernel.org/pub/scm/linux/kernel/git/broonie/sound into for-linus
+sound-upstream for-next 8461352ddf076712350eeded350c13385c80ff38
+	ALSA: firewire: fix comparison to bool warning
+drm-intel topic/core-for-CI 8505596179bd827637a4bcd785198cfc98dee683
+	HAX x86/rapl: Treat Tigerlake like Icelake
+drm-intel drm-intel-gt-next da7ac715d339d53dfb4e6ce325de842e80897814
+	drm/i915: Show timeline dependencies for debug
