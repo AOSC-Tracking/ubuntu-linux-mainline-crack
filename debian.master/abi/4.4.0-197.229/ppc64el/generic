@@ -5401,6 +5401,7 @@ EXPORT_SYMBOL vmlinux 0x2b9da7a4	genl_lock
 EXPORT_SYMBOL vmlinux 0x2ba707a8	sysctl_tcp_low_latency
 EXPORT_SYMBOL vmlinux 0x2ba83c48	netpoll_send_skb_on_dev
 EXPORT_SYMBOL vmlinux 0x2bb489a5	freeze_bdev
+EXPORT_SYMBOL vmlinux 0x2bc3e91f	uaccess_flush_key
 EXPORT_SYMBOL vmlinux 0x2bd52f2f	__find_get_block
 EXPORT_SYMBOL vmlinux 0x2bd9abbc	input_release_device
 EXPORT_SYMBOL vmlinux 0x2bdccf75	get_phy_device
@@ -6128,6 +6129,7 @@ EXPORT_SYMBOL vmlinux 0x553c03d5	path_put
 EXPORT_SYMBOL vmlinux 0x5541ea93	on_each_cpu
 EXPORT_SYMBOL vmlinux 0x554beba1	skb_page_frag_refill
 EXPORT_SYMBOL vmlinux 0x5567c227	kernel_cpustat
+EXPORT_SYMBOL vmlinux 0x55686530	__arch_clear_user
 EXPORT_SYMBOL vmlinux 0x5568c553	complete
 EXPORT_SYMBOL vmlinux 0x5577ef9e	udp_table
 EXPORT_SYMBOL vmlinux 0x55813ef4	mipi_dsi_driver_unregister
@@ -6194,6 +6196,7 @@ EXPORT_SYMBOL vmlinux 0x58d7659e	pci_choose_state
 EXPORT_SYMBOL vmlinux 0x58e3306d	bit_wait_io
 EXPORT_SYMBOL vmlinux 0x58e6c63f	__netdev_alloc_skb
 EXPORT_SYMBOL vmlinux 0x5911811f	xfrm_stateonly_find
+EXPORT_SYMBOL vmlinux 0x591a912b	__clear_user
 EXPORT_SYMBOL vmlinux 0x591e7c0f	tcp_enter_memory_pressure
 EXPORT_SYMBOL vmlinux 0x5926f796	tcf_hash_check
 EXPORT_SYMBOL vmlinux 0x5927bdac	flow_get_u32_dst
@@ -6610,6 +6613,7 @@ EXPORT_SYMBOL vmlinux 0x72082811	of_find_node_by_phandle
 EXPORT_SYMBOL vmlinux 0x7225e13a	blk_queue_max_write_same_sectors
 EXPORT_SYMBOL vmlinux 0x72336acd	inode_reclaim_rsv_space
 EXPORT_SYMBOL vmlinux 0x72572101	kernel_read
+EXPORT_SYMBOL vmlinux 0x72608c0e	do_uaccess_flush
 EXPORT_SYMBOL vmlinux 0x72617e24	idr_remove
 EXPORT_SYMBOL vmlinux 0x727548e5	scsi_is_target_device
 EXPORT_SYMBOL vmlinux 0x727915ab	ppp_unregister_compressor
@@ -8851,7 +8855,6 @@ EXPORT_SYMBOL vmlinux 0xf30622a6	register_qdisc
 EXPORT_SYMBOL vmlinux 0xf3062a02	__task_pid_nr_ns
 EXPORT_SYMBOL vmlinux 0xf313da4e	sha_transform
 EXPORT_SYMBOL vmlinux 0xf322a206	bit_waitqueue
-EXPORT_SYMBOL vmlinux 0xf3341268	__clear_user
 EXPORT_SYMBOL vmlinux 0xf3390532	xfrm_policy_hash_rebuild
 EXPORT_SYMBOL vmlinux 0xf346231f	seq_list_start_head
 EXPORT_SYMBOL vmlinux 0xf34a47a0	mb_cache_entry_touch

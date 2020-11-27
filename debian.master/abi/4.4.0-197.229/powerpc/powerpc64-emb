@@ -6094,6 +6094,7 @@ EXPORT_SYMBOL vmlinux 0x551bd071	__rb_erase_color
 EXPORT_SYMBOL vmlinux 0x552a7112	simple_open
 EXPORT_SYMBOL vmlinux 0x5541ea93	on_each_cpu
 EXPORT_SYMBOL vmlinux 0x5567c227	kernel_cpustat
+EXPORT_SYMBOL vmlinux 0x55686530	__arch_clear_user
 EXPORT_SYMBOL vmlinux 0x5568c553	complete
 EXPORT_SYMBOL vmlinux 0x5577ef9e	udp_table
 EXPORT_SYMBOL vmlinux 0x5579894e	seq_open_private
@@ -6154,6 +6155,7 @@ EXPORT_SYMBOL vmlinux 0x58da63e7	set_device_ro
 EXPORT_SYMBOL vmlinux 0x58e3306d	bit_wait_io
 EXPORT_SYMBOL vmlinux 0x58e74981	nf_afinfo
 EXPORT_SYMBOL vmlinux 0x58f8e795	mmc_put_card
+EXPORT_SYMBOL vmlinux 0x591a912b	__clear_user
 EXPORT_SYMBOL vmlinux 0x5921186e	kill_fasync
 EXPORT_SYMBOL vmlinux 0x5927bdac	flow_get_u32_dst
 EXPORT_SYMBOL vmlinux 0x5932b12d	clkdev_drop
@@ -8839,7 +8841,6 @@ EXPORT_SYMBOL vmlinux 0xf313da4e	sha_transform
 EXPORT_SYMBOL vmlinux 0xf322a206	bit_waitqueue
 EXPORT_SYMBOL vmlinux 0xf32959ac	bitmap_end_sync
 EXPORT_SYMBOL vmlinux 0xf33136a4	tso_build_hdr
-EXPORT_SYMBOL vmlinux 0xf3341268	__clear_user
 EXPORT_SYMBOL vmlinux 0xf33b7dd3	seq_lseek
 EXPORT_SYMBOL vmlinux 0xf3447f67	vlan_vid_del
 EXPORT_SYMBOL vmlinux 0xf346231f	seq_list_start_head

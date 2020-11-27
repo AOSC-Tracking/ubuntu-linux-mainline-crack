@@ -5478,6 +5478,7 @@ EXPORT_SYMBOL vmlinux 0x2b565f67	vlan_vid_del
 EXPORT_SYMBOL vmlinux 0x2b7302cd	__ethtool_get_settings
 EXPORT_SYMBOL vmlinux 0x2b9da7a4	genl_lock
 EXPORT_SYMBOL vmlinux 0x2ba707a8	sysctl_tcp_low_latency
+EXPORT_SYMBOL vmlinux 0x2bc3e91f	uaccess_flush_key
 EXPORT_SYMBOL vmlinux 0x2bcd8018	seq_open
 EXPORT_SYMBOL vmlinux 0x2be86a40	netdev_notify_peers
 EXPORT_SYMBOL vmlinux 0x2c035a85	__xfrm_state_destroy
@@ -6236,6 +6237,7 @@ EXPORT_SYMBOL vmlinux 0x551bd071	__rb_erase_color
 EXPORT_SYMBOL vmlinux 0x552a445f	inet_accept
 EXPORT_SYMBOL vmlinux 0x5541ea93	on_each_cpu
 EXPORT_SYMBOL vmlinux 0x5567c227	kernel_cpustat
+EXPORT_SYMBOL vmlinux 0x55686530	__arch_clear_user
 EXPORT_SYMBOL vmlinux 0x5568c553	complete
 EXPORT_SYMBOL vmlinux 0x5569a6a0	lwtunnel_input
 EXPORT_SYMBOL vmlinux 0x556fac4b	vm_mmap
@@ -6307,6 +6309,7 @@ EXPORT_SYMBOL vmlinux 0x58ea59a3	down_write_trylock
 EXPORT_SYMBOL vmlinux 0x58f22328	tcp_v4_destroy_sock
 EXPORT_SYMBOL vmlinux 0x58ff1659	linkwatch_fire_event
 EXPORT_SYMBOL vmlinux 0x59076f87	generic_pipe_buf_confirm
+EXPORT_SYMBOL vmlinux 0x591a912b	__clear_user
 EXPORT_SYMBOL vmlinux 0x5927bdac	flow_get_u32_dst
 EXPORT_SYMBOL vmlinux 0x594bf15b	ioport_map
 EXPORT_SYMBOL vmlinux 0x595d0946	empty_zero_page
@@ -6750,6 +6753,7 @@ EXPORT_SYMBOL vmlinux 0x71efda55	phy_mac_interrupt
 EXPORT_SYMBOL vmlinux 0x7200d57f	f_setown
 EXPORT_SYMBOL vmlinux 0x7215423b	rtnl_configure_link
 EXPORT_SYMBOL vmlinux 0x721905c7	phy_connect
+EXPORT_SYMBOL vmlinux 0x72608c0e	do_uaccess_flush
 EXPORT_SYMBOL vmlinux 0x72617e24	idr_remove
 EXPORT_SYMBOL vmlinux 0x7285db95	iw_handler_set_thrspy
 EXPORT_SYMBOL vmlinux 0x728a7364	__xfrm_decode_session
@@ -9070,7 +9074,6 @@ EXPORT_SYMBOL vmlinux 0xf313da4e	sha_transform
 EXPORT_SYMBOL vmlinux 0xf31b869f	unregister_shrinker
 EXPORT_SYMBOL vmlinux 0xf31ca5b2	pci_bus_assign_resources
 EXPORT_SYMBOL vmlinux 0xf322a206	bit_waitqueue
-EXPORT_SYMBOL vmlinux 0xf3341268	__clear_user
 EXPORT_SYMBOL vmlinux 0xf346231f	seq_list_start_head
 EXPORT_SYMBOL vmlinux 0xf349501e	tcp_recvmsg
 EXPORT_SYMBOL vmlinux 0xf34a47a0	mb_cache_entry_touch
