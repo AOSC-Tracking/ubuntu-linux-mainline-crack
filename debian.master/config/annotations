@@ -80,6 +80,9 @@ CONFIG_ISA                                      policy<{'i386': 'y', 'powerpc-po
 
 # Menu: Bus options (PCI etc.) >> Architecture: powerpc
 CONFIG_FSL_LBC                                  policy<{'powerpc': 'y', 'ppc64el': 'y'}>
+CONFIG_PPC_RTAS_FILTER                          policy<{'powerpc-powerpc-smp': 'y', 'powerpc-powerpc64-smp': 'y', 'ppc64el': 'y'}>
+#
+CONFIG_PPC_RTAS_FILTER                          mark<ENFORCED> note<CVE-2020-27777>
 
 # Menu: Bus options (PCI etc.) >> Architecture: s390
 CONFIG_QDIO                                     policy<{'s390x': 'm'}>
