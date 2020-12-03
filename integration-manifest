@@ -1,0 +1,32 @@
+drm drm-fixes b65054597872ce3aefbc6a666385eabdf9e288da
+	Linux 5.10-rc6
+drm-misc drm-misc-fixes fd4e788e971ce763e50762d7b1a0048992949dd0
+	drm/omap: sdi: fix bridge enable/disable
+drm-intel drm-intel-fixes f2f2b21feadcb1eb08687a8b20dcf6442d22be18
+	drm/i915/display: Defer initial modeset until after GGTT is initialised
+drm-amd drm-amd-fixes 2b702e72e33bbdec0764cfb6e1dd00fe1142ae55
+	Merge tag 'drm-misc-fixes-2017-09-28-1' of git://anongit.freedesktop.org/git/drm-misc into drm-fixes
+drm drm-next 22f8c80566c4a29a0d8b5ebf24aa1fd1679b39e5
+	Merge tag 'drm-misc-next-2020-11-18' of ssh://git.freedesktop.org/git/drm/drm-misc into drm-next
+drm-misc drm-misc-next-fixes 2580a493a97da4a302cb66251b558bfc04c16e68
+	dt-binding: display: Require two resets on mantix panel
+drm-intel drm-intel-next-fixes b45b6fbc671c60f56fd119c443e5570f83175928
+	Merge tag 'drm-intel-next-fixes-2020-10-22' of git://anongit.freedesktop.org/drm/drm-intel into drm-next
+drm-amd drm-amd-next-fixes 2bd6bf03f4c1c59381d62c61d03f6cc3fe71f66e
+	Linux 4.14-rc1
+drm-misc drm-misc-next a7e2e1c50450c6a0f020b35960edecbe25dde520
+	drm: document that user-space should force-probe connectors
+drm-intel drm-intel-next-queued 829270e4552e9e6a0534d4d195f671363cb39e3e
+	drm/i915/display: Record the plane update times for debugging
+drm-intel drm-intel-next 8fea92536e3efff14fa4cde7ed37c595b40a52b5
+	drm/i915: Update DRIVER_DATE to 20200917
+drm-amd drm-amd-next 754270c7c56292e97d0eff924a5d5d83f92add07
+	Merge branch 'drm-next-4.15' of git://people.freedesktop.org/~agd5f/linux into drm-next
+sound-upstream for-linus aeedad2504997be262c98f6e3228173225a8d868
+	ALSA: hda/realtek: Add mute LED quirk to yet another HP x360 model
+sound-upstream for-next 2c854e5c63ac56e7e0633fb6140c1bdf4d3dad96
+	ALSA: usb-audio: Add quirk for Pioneer DJ DDJ-SR2
+drm-intel topic/core-for-CI 7180f4ea3cf92eb57f125a99f02c5855d31514fe
+	HAX sound: Disable probing snd_hda with DG1
+drm-intel drm-intel-gt-next 7d1a31e128d3cb939cd70c95f898c13f85155571
+	Revert "drm/i915/lmem: Limit block size to 4G"
