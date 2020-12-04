@@ -1,0 +1,32 @@
+drm drm-fixes de9b485d1dc993f1fb579b5d15a8176284627f4a
+	Merge tag 'drm-misc-fixes-2020-12-03' of git://anongit.freedesktop.org/drm/drm-misc into drm-fixes
+drm-misc drm-misc-fixes fd4e788e971ce763e50762d7b1a0048992949dd0
+	drm/omap: sdi: fix bridge enable/disable
+drm-intel drm-intel-fixes ccc9e67ab26feda7e62749bb54c05d7abe07dca9
+	drm/i915/display: Defer initial modeset until after GGTT is initialised
+drm-amd drm-amd-fixes 2b702e72e33bbdec0764cfb6e1dd00fe1142ae55
+	Merge tag 'drm-misc-fixes-2017-09-28-1' of git://anongit.freedesktop.org/git/drm-misc into drm-fixes
+drm drm-next 5eb3c85e343ae62ed47fa3c9816d79f95809fe27
+	Merge branch 'etnaviv/next' of https://git.pengutronix.de/git/lst/linux into drm-next
+drm-misc drm-misc-next-fixes 2580a493a97da4a302cb66251b558bfc04c16e68
+	dt-binding: display: Require two resets on mantix panel
+drm-intel drm-intel-next-fixes b45b6fbc671c60f56fd119c443e5570f83175928
+	Merge tag 'drm-intel-next-fixes-2020-10-22' of git://anongit.freedesktop.org/drm/drm-intel into drm-next
+drm-amd drm-amd-next-fixes 2bd6bf03f4c1c59381d62c61d03f6cc3fe71f66e
+	Linux 4.14-rc1
+drm-misc drm-misc-next 552a77bab3ff86dfe3f6c5d2db75880bc625373d
+	drm/hisilicon: Delete the entire file hibmc_ttm.c
+drm-intel drm-intel-next-queued 9d8fddf8579a2a20d0e8a8b631547069a62b953e
+	drm/i915: Disable outputs during unregister
+drm-intel drm-intel-next 97ffcd0d1eeca8b123453a900e7768d07408ebf9
+	drm/i915: Add VRR_CTL_LINE_COUNT field to VRR_CTL register def
+drm-amd drm-amd-next 754270c7c56292e97d0eff924a5d5d83f92add07
+	Merge branch 'drm-next-4.15' of git://people.freedesktop.org/~agd5f/linux into drm-next
+sound-upstream for-linus aeedad2504997be262c98f6e3228173225a8d868
+	ALSA: hda/realtek: Add mute LED quirk to yet another HP x360 model
+sound-upstream for-next 2c854e5c63ac56e7e0633fb6140c1bdf4d3dad96
+	ALSA: usb-audio: Add quirk for Pioneer DJ DDJ-SR2
+drm-intel topic/core-for-CI 7180f4ea3cf92eb57f125a99f02c5855d31514fe
+	HAX sound: Disable probing snd_hda with DG1
+drm-intel drm-intel-gt-next f867b66e47973dfa420afd00d8f9f7498287bb60
+	drm/i915/gt: Clear the execlists timers upon reset
