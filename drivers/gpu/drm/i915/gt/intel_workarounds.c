@@ -229,38 +229,36 @@ wa_masked_dis(struct i915_wa_list *wal, i915_reg_t reg, u32 val)
 	wa_add(wal, reg, 0, _MASKED_BIT_DISABLE(val), val);
 }
 
-#define WA_SET_BIT_MASKED(addr, mask) \
-	wa_masked_en(wal, (addr), (mask))
-
-#define WA_CLR_BIT_MASKED(addr, mask) \
-	wa_masked_dis(wal, (addr), (mask))
-
-#define WA_SET_FIELD_MASKED(addr, mask, value) \
-	wa_write_masked_or(wal, (addr), 0, _MASKED_FIELD((mask), (value)))
+static void
+wa_masked_field_set(struct i915_wa_list *wal, i915_reg_t reg,
+		    u32 mask, u32 val)
+{
+	wa_write_masked_or(wal, reg, 0, _MASKED_FIELD(mask, val));
+}
 
 static void gen6_ctx_workarounds_init(struct intel_engine_cs *engine,
 				      struct i915_wa_list *wal)
 {
-	WA_SET_BIT_MASKED(INSTPM, INSTPM_FORCE_ORDERING);
+	wa_masked_en(wal, INSTPM, INSTPM_FORCE_ORDERING);
 }
 
 static void gen7_ctx_workarounds_init(struct intel_engine_cs *engine,
 				      struct i915_wa_list *wal)
 {
-	WA_SET_BIT_MASKED(INSTPM, INSTPM_FORCE_ORDERING);
+	wa_masked_en(wal, INSTPM, INSTPM_FORCE_ORDERING);
 }
 
 static void gen8_ctx_workarounds_init(struct intel_engine_cs *engine,
 				      struct i915_wa_list *wal)
 {
-	WA_SET_BIT_MASKED(INSTPM, INSTPM_FORCE_ORDERING);
+	wa_masked_en(wal, INSTPM, INSTPM_FORCE_ORDERING);
 
 	/* WaDisableAsyncFlipPerfMode:bdw,chv */
-	WA_SET_BIT_MASKED(MI_MODE, ASYNC_FLIP_PERF_DISABLE);
+	wa_masked_en(wal, MI_MODE, ASYNC_FLIP_PERF_DISABLE);
 
 	/* WaDisablePartialInstShootdown:bdw,chv */
-	WA_SET_BIT_MASKED(GEN8_ROW_CHICKEN,
-			  PARTIAL_INSTRUCTION_SHOOTDOWN_DISABLE);
+	wa_masked_en(wal, GEN8_ROW_CHICKEN,
+		     PARTIAL_INSTRUCTION_SHOOTDOWN_DISABLE);
 
 	/* Use Force Non-Coherent whenever executing a 3D context. This is a
 	 * workaround for for a possible hang in the unlikely event a TLB
@@ -268,9 +266,9 @@ static void gen8_ctx_workarounds_init(struct intel_engine_cs *engine,
 	 */
 	/* WaForceEnableNonCoherent:bdw,chv */
 	/* WaHdcDisableFetchWhenMasked:bdw,chv */
-	WA_SET_BIT_MASKED(HDC_CHICKEN0,
-			  HDC_DONOT_FETCH_MEM_WHEN_MASKED |
-			  HDC_FORCE_NON_COHERENT);
+	wa_masked_en(wal, HDC_CHICKEN0,
+		     HDC_DONOT_FETCH_MEM_WHEN_MASKED |
+		     HDC_FORCE_NON_COHERENT);
 
 	/* From the Haswell PRM, Command Reference: Registers, CACHE_MODE_0:
 	 * "The Hierarchical Z RAW Stall Optimization allows non-overlapping
@@ -280,10 +278,10 @@ static void gen8_ctx_workarounds_init(struct intel_engine_cs *engine,
 	 *
 	 * This optimization is off by default for BDW and CHV; turn it on.
 	 */
-	WA_CLR_BIT_MASKED(CACHE_MODE_0_GEN7, HIZ_RAW_STALL_OPT_DISABLE);
+	wa_masked_dis(wal, CACHE_MODE_0_GEN7, HIZ_RAW_STALL_OPT_DISABLE);
 
 	/* Wa4x4STCOptimizationDisable:bdw,chv */
-	WA_SET_BIT_MASKED(CACHE_MODE_1, GEN8_4x4_STC_OPTIMIZATION_DISABLE);
+	wa_masked_en(wal, CACHE_MODE_1, GEN8_4x4_STC_OPTIMIZATION_DISABLE);
 
 	/*
 	 * BSpec recommends 8x4 when MSAA is used,
@@ -293,7 +291,7 @@ static void gen8_ctx_workarounds_init(struct intel_engine_cs *engine,
 	 * disable bit, which we don't touch here, but it's good
 	 * to keep in mind (see 3DSTATE_PS and 3DSTATE_WM).
 	 */
-	WA_SET_FIELD_MASKED(GEN7_GT_MODE,
+	wa_masked_field_set(wal, GEN7_GT_MODE,
 			    GEN6_WIZ_HASHING_MASK,
 			    GEN6_WIZ_HASHING_16x4);
 }
@@ -306,24 +304,24 @@ static void bdw_ctx_workarounds_init(struct intel_engine_cs *engine,
 	gen8_ctx_workarounds_init(engine, wal);
 
 	/* WaDisableThreadStallDopClockGating:bdw (pre-production) */
-	WA_SET_BIT_MASKED(GEN8_ROW_CHICKEN, STALL_DOP_GATING_DISABLE);
+	wa_masked_en(wal, GEN8_ROW_CHICKEN, STALL_DOP_GATING_DISABLE);
 
 	/* WaDisableDopClockGating:bdw
 	 *
 	 * Also see the related UCGTCL1 write in bdw_init_clock_gating()
 	 * to disable EUTC clock gating.
 	 */
-	WA_SET_BIT_MASKED(GEN7_ROW_CHICKEN2,
-			  DOP_CLOCK_GATING_DISABLE);
+	wa_masked_en(wal, GEN7_ROW_CHICKEN2,
+		     DOP_CLOCK_GATING_DISABLE);
 
-	WA_SET_BIT_MASKED(HALF_SLICE_CHICKEN3,
-			  GEN8_SAMPLER_POWER_BYPASS_DIS);
+	wa_masked_en(wal, HALF_SLICE_CHICKEN3,
+		     GEN8_SAMPLER_POWER_BYPASS_DIS);
 
-	WA_SET_BIT_MASKED(HDC_CHICKEN0,
-			  /* WaForceContextSaveRestoreNonCoherent:bdw */
-			  HDC_FORCE_CONTEXT_SAVE_RESTORE_NON_COHERENT |
-			  /* WaDisableFenceDestinationToSLM:bdw (pre-prod) */
-			  (IS_BDW_GT3(i915) ? HDC_FENCE_DEST_SLM_DISABLE : 0));
+	wa_masked_en(wal, HDC_CHICKEN0,
+		     /* WaForceContextSaveRestoreNonCoherent:bdw */
+		     HDC_FORCE_CONTEXT_SAVE_RESTORE_NON_COHERENT |
+		     /* WaDisableFenceDestinationToSLM:bdw (pre-prod) */
+		     (IS_BDW_GT3(i915) ? HDC_FENCE_DEST_SLM_DISABLE : 0));
 }
 
 static void chv_ctx_workarounds_init(struct intel_engine_cs *engine,
@@ -332,10 +330,10 @@ static void chv_ctx_workarounds_init(struct intel_engine_cs *engine,
 	gen8_ctx_workarounds_init(engine, wal);
 
 	/* WaDisableThreadStallDopClockGating:chv */
-	WA_SET_BIT_MASKED(GEN8_ROW_CHICKEN, STALL_DOP_GATING_DISABLE);
+	wa_masked_en(wal, GEN8_ROW_CHICKEN, STALL_DOP_GATING_DISABLE);
 
 	/* Improve HiZ throughput on CHV. */
-	WA_SET_BIT_MASKED(HIZ_CHICKEN, CHV_HZ_8X8_MODE_IN_1X);
+	wa_masked_en(wal, HIZ_CHICKEN, CHV_HZ_8X8_MODE_IN_1X);
 }
 
 static void gen9_ctx_workarounds_init(struct intel_engine_cs *engine,
@@ -349,38 +347,38 @@ static void gen9_ctx_workarounds_init(struct intel_engine_cs *engine,
 		 * Must match Display Engine. See
 		 * WaCompressedResourceDisplayNewHashMode.
 		 */
-		WA_SET_BIT_MASKED(COMMON_SLICE_CHICKEN2,
-				  GEN9_PBE_COMPRESSED_HASH_SELECTION);
-		WA_SET_BIT_MASKED(GEN9_HALF_SLICE_CHICKEN7,
-				  GEN9_SAMPLER_HASH_COMPRESSED_READ_ADDR);
+		wa_masked_en(wal, COMMON_SLICE_CHICKEN2,
+			     GEN9_PBE_COMPRESSED_HASH_SELECTION);
+		wa_masked_en(wal, GEN9_HALF_SLICE_CHICKEN7,
+			     GEN9_SAMPLER_HASH_COMPRESSED_READ_ADDR);
 	}
 
 	/* WaClearFlowControlGpgpuContextSave:skl,bxt,kbl,glk,cfl */
 	/* WaDisablePartialInstShootdown:skl,bxt,kbl,glk,cfl */
-	WA_SET_BIT_MASKED(GEN8_ROW_CHICKEN,
-			  FLOW_CONTROL_ENABLE |
-			  PARTIAL_INSTRUCTION_SHOOTDOWN_DISABLE);
+	wa_masked_en(wal, GEN8_ROW_CHICKEN,
+		     FLOW_CONTROL_ENABLE |
+		     PARTIAL_INSTRUCTION_SHOOTDOWN_DISABLE);
 
 	/* WaEnableYV12BugFixInHalfSliceChicken7:skl,bxt,kbl,glk,cfl */
 	/* WaEnableSamplerGPGPUPreemptionSupport:skl,bxt,kbl,cfl */
-	WA_SET_BIT_MASKED(GEN9_HALF_SLICE_CHICKEN7,
-			  GEN9_ENABLE_YV12_BUGFIX |
-			  GEN9_ENABLE_GPGPU_PREEMPTION);
+	wa_masked_en(wal, GEN9_HALF_SLICE_CHICKEN7,
+		     GEN9_ENABLE_YV12_BUGFIX |
+		     GEN9_ENABLE_GPGPU_PREEMPTION);
 
 	/* Wa4x4STCOptimizationDisable:skl,bxt,kbl,glk,cfl */
 	/* WaDisablePartialResolveInVc:skl,bxt,kbl,cfl */
-	WA_SET_BIT_MASKED(CACHE_MODE_1,
-			  GEN8_4x4_STC_OPTIMIZATION_DISABLE |
-			  GEN9_PARTIAL_RESOLVE_IN_VC_DISABLE);
+	wa_masked_en(wal, CACHE_MODE_1,
+		     GEN8_4x4_STC_OPTIMIZATION_DISABLE |
+		     GEN9_PARTIAL_RESOLVE_IN_VC_DISABLE);
 
 	/* WaCcsTlbPrefetchDisable:skl,bxt,kbl,glk,cfl */
-	WA_CLR_BIT_MASKED(GEN9_HALF_SLICE_CHICKEN5,
-			  GEN9_CCS_TLB_PREFETCH_ENABLE);
+	wa_masked_dis(wal, GEN9_HALF_SLICE_CHICKEN5,
+		      GEN9_CCS_TLB_PREFETCH_ENABLE);
 
 	/* WaForceContextSaveRestoreNonCoherent:skl,bxt,kbl,cfl */
-	WA_SET_BIT_MASKED(HDC_CHICKEN0,
-			  HDC_FORCE_CONTEXT_SAVE_RESTORE_NON_COHERENT |
-			  HDC_FORCE_CSR_NON_COHERENT_OVR_DISABLE);
+	wa_masked_en(wal, HDC_CHICKEN0,
+		     HDC_FORCE_CONTEXT_SAVE_RESTORE_NON_COHERENT |
+		     HDC_FORCE_CSR_NON_COHERENT_OVR_DISABLE);
 
 	/* WaForceEnableNonCoherent and WaDisableHDCInvalidation are
 	 * both tied to WaForceContextSaveRestoreNonCoherent
@@ -396,19 +394,19 @@ static void gen9_ctx_workarounds_init(struct intel_engine_cs *engine,
 	 */
 
 	/* WaForceEnableNonCoherent:skl,bxt,kbl,cfl */
-	WA_SET_BIT_MASKED(HDC_CHICKEN0,
-			  HDC_FORCE_NON_COHERENT);
+	wa_masked_en(wal, HDC_CHICKEN0,
+		     HDC_FORCE_NON_COHERENT);
 
 	/* WaDisableSamplerPowerBypassForSOPingPong:skl,bxt,kbl,cfl */
 	if (IS_SKYLAKE(i915) ||
 	    IS_KABYLAKE(i915) ||
 	    IS_COFFEELAKE(i915) ||
 	    IS_COMETLAKE(i915))
-		WA_SET_BIT_MASKED(HALF_SLICE_CHICKEN3,
-				  GEN8_SAMPLER_POWER_BYPASS_DIS);
+		wa_masked_en(wal, HALF_SLICE_CHICKEN3,
+			     GEN8_SAMPLER_POWER_BYPASS_DIS);
 
 	/* WaDisableSTUnitPowerOptimization:skl,bxt,kbl,glk,cfl */
-	WA_SET_BIT_MASKED(HALF_SLICE_CHICKEN2, GEN8_ST_PO_DISABLE);
+	wa_masked_en(wal, HALF_SLICE_CHICKEN2, GEN8_ST_PO_DISABLE);
 
 	/*
 	 * Supporting preemption with fine-granularity requires changes in the
@@ -422,16 +420,16 @@ static void gen9_ctx_workarounds_init(struct intel_engine_cs *engine,
 	 */
 
 	/* WaDisable3DMidCmdPreemption:skl,bxt,glk,cfl,[cnl] */
-	WA_CLR_BIT_MASKED(GEN8_CS_CHICKEN1, GEN9_PREEMPT_3D_OBJECT_LEVEL);
+	wa_masked_dis(wal, GEN8_CS_CHICKEN1, GEN9_PREEMPT_3D_OBJECT_LEVEL);
 
 	/* WaDisableGPGPUMidCmdPreemption:skl,bxt,blk,cfl,[cnl] */
-	WA_SET_FIELD_MASKED(GEN8_CS_CHICKEN1,
+	wa_masked_field_set(wal, GEN8_CS_CHICKEN1,
 			    GEN9_PREEMPT_GPGPU_LEVEL_MASK,
 			    GEN9_PREEMPT_GPGPU_COMMAND_LEVEL);
 
 	/* WaClearHIZ_WM_CHICKEN3:bxt,glk */
 	if (IS_GEN9_LP(i915))
-		WA_SET_BIT_MASKED(GEN9_WM_CHICKEN3, GEN9_FACTOR_IN_CLR_VAL_HIZ);
+		wa_masked_en(wal, GEN9_WM_CHICKEN3, GEN9_FACTOR_IN_CLR_VAL_HIZ);
 }
 
 static void skl_tune_iz_hashing(struct intel_engine_cs *engine,
@@ -465,7 +463,7 @@ static void skl_tune_iz_hashing(struct intel_engine_cs *engine,
 		return;
 
 	/* Tune IZ hashing. See intel_device_info_runtime_init() */
-	WA_SET_FIELD_MASKED(GEN7_GT_MODE,
+	wa_masked_field_set(wal, GEN7_GT_MODE,
 			    GEN9_IZ_HASHING_MASK(2) |
 			    GEN9_IZ_HASHING_MASK(1) |
 			    GEN9_IZ_HASHING_MASK(0),
@@ -487,12 +485,12 @@ static void bxt_ctx_workarounds_init(struct intel_engine_cs *engine,
 	gen9_ctx_workarounds_init(engine, wal);
 
 	/* WaDisableThreadStallDopClockGating:bxt */
-	WA_SET_BIT_MASKED(GEN8_ROW_CHICKEN,
-			  STALL_DOP_GATING_DISABLE);
+	wa_masked_en(wal, GEN8_ROW_CHICKEN,
+		     STALL_DOP_GATING_DISABLE);
 
 	/* WaToEnableHwFixForPushConstHWBug:bxt */
-	WA_SET_BIT_MASKED(COMMON_SLICE_CHICKEN2,
-			  GEN8_SBE_DISABLE_REPLAY_BUF_OPTIMIZATION);
+	wa_masked_en(wal, COMMON_SLICE_CHICKEN2,
+		     GEN8_SBE_DISABLE_REPLAY_BUF_OPTIMIZATION);
 }
 
 static void kbl_ctx_workarounds_init(struct intel_engine_cs *engine,
@@ -504,12 +502,12 @@ static void kbl_ctx_workarounds_init(struct intel_engine_cs *engine,
 
 	/* WaToEnableHwFixForPushConstHWBug:kbl */
 	if (IS_KBL_GT_REVID(i915, KBL_REVID_C0, REVID_FOREVER))
-		WA_SET_BIT_MASKED(COMMON_SLICE_CHICKEN2,
-				  GEN8_SBE_DISABLE_REPLAY_BUF_OPTIMIZATION);
+		wa_masked_en(wal, COMMON_SLICE_CHICKEN2,
+			     GEN8_SBE_DISABLE_REPLAY_BUF_OPTIMIZATION);
 
 	/* WaDisableSbeCacheDispatchPortSharing:kbl */
-	WA_SET_BIT_MASKED(GEN7_HALF_SLICE_CHICKEN1,
-			  GEN7_SBE_SS_CACHE_DISPATCH_PORT_SHARING_DISABLE);
+	wa_masked_en(wal, GEN7_HALF_SLICE_CHICKEN1,
+		     GEN7_SBE_SS_CACHE_DISPATCH_PORT_SHARING_DISABLE);
 }
 
 static void glk_ctx_workarounds_init(struct intel_engine_cs *engine,
@@ -518,8 +516,8 @@ static void glk_ctx_workarounds_init(struct intel_engine_cs *engine,
 	gen9_ctx_workarounds_init(engine, wal);
 
 	/* WaToEnableHwFixForPushConstHWBug:glk */
-	WA_SET_BIT_MASKED(COMMON_SLICE_CHICKEN2,
-			  GEN8_SBE_DISABLE_REPLAY_BUF_OPTIMIZATION);
+	wa_masked_en(wal, COMMON_SLICE_CHICKEN2,
+		     GEN8_SBE_DISABLE_REPLAY_BUF_OPTIMIZATION);
 }
 
 static void cfl_ctx_workarounds_init(struct intel_engine_cs *engine,
@@ -528,41 +526,41 @@ static void cfl_ctx_workarounds_init(struct intel_engine_cs *engine,
 	gen9_ctx_workarounds_init(engine, wal);
 
 	/* WaToEnableHwFixForPushConstHWBug:cfl */
-	WA_SET_BIT_MASKED(COMMON_SLICE_CHICKEN2,
-			  GEN8_SBE_DISABLE_REPLAY_BUF_OPTIMIZATION);
+	wa_masked_en(wal, COMMON_SLICE_CHICKEN2,
+		     GEN8_SBE_DISABLE_REPLAY_BUF_OPTIMIZATION);
 
 	/* WaDisableSbeCacheDispatchPortSharing:cfl */
-	WA_SET_BIT_MASKED(GEN7_HALF_SLICE_CHICKEN1,
-			  GEN7_SBE_SS_CACHE_DISPATCH_PORT_SHARING_DISABLE);
+	wa_masked_en(wal, GEN7_HALF_SLICE_CHICKEN1,
+		     GEN7_SBE_SS_CACHE_DISPATCH_PORT_SHARING_DISABLE);
 }
 
 static void cnl_ctx_workarounds_init(struct intel_engine_cs *engine,
 				     struct i915_wa_list *wal)
 {
 	/* WaForceContextSaveRestoreNonCoherent:cnl */
-	WA_SET_BIT_MASKED(CNL_HDC_CHICKEN0,
-			  HDC_FORCE_CONTEXT_SAVE_RESTORE_NON_COHERENT);
+	wa_masked_en(wal, CNL_HDC_CHICKEN0,
+		     HDC_FORCE_CONTEXT_SAVE_RESTORE_NON_COHERENT);
 
 	/* WaDisableReplayBufferBankArbitrationOptimization:cnl */
-	WA_SET_BIT_MASKED(COMMON_SLICE_CHICKEN2,
-			  GEN8_SBE_DISABLE_REPLAY_BUF_OPTIMIZATION);
+	wa_masked_en(wal, COMMON_SLICE_CHICKEN2,
+		     GEN8_SBE_DISABLE_REPLAY_BUF_OPTIMIZATION);
 
 	/* WaPushConstantDereferenceHoldDisable:cnl */
-	WA_SET_BIT_MASKED(GEN7_ROW_CHICKEN2, PUSH_CONSTANT_DEREF_DISABLE);
+	wa_masked_en(wal, GEN7_ROW_CHICKEN2, PUSH_CONSTANT_DEREF_DISABLE);
 
 	/* FtrEnableFastAnisoL1BankingFix:cnl */
-	WA_SET_BIT_MASKED(HALF_SLICE_CHICKEN3, CNL_FAST_ANISO_L1_BANKING_FIX);
+	wa_masked_en(wal, HALF_SLICE_CHICKEN3, CNL_FAST_ANISO_L1_BANKING_FIX);
 
 	/* WaDisable3DMidCmdPreemption:cnl */
-	WA_CLR_BIT_MASKED(GEN8_CS_CHICKEN1, GEN9_PREEMPT_3D_OBJECT_LEVEL);
+	wa_masked_dis(wal, GEN8_CS_CHICKEN1, GEN9_PREEMPT_3D_OBJECT_LEVEL);
 
 	/* WaDisableGPGPUMidCmdPreemption:cnl */
-	WA_SET_FIELD_MASKED(GEN8_CS_CHICKEN1,
+	wa_masked_field_set(wal, GEN8_CS_CHICKEN1,
 			    GEN9_PREEMPT_GPGPU_LEVEL_MASK,
 			    GEN9_PREEMPT_GPGPU_COMMAND_LEVEL);
 
 	/* WaDisableEarlyEOT:cnl */
-	WA_SET_BIT_MASKED(GEN8_ROW_CHICKEN, DISABLE_EARLY_EOT);
+	wa_masked_en(wal, GEN8_ROW_CHICKEN, DISABLE_EARLY_EOT);
 }
 
 static void icl_ctx_workarounds_init(struct intel_engine_cs *engine,
@@ -580,8 +578,8 @@ static void icl_ctx_workarounds_init(struct intel_engine_cs *engine,
 	 * Formerly known as WaPushConstantDereferenceHoldDisable
 	 */
 	if (IS_ICL_REVID(i915, ICL_REVID_A0, ICL_REVID_B0))
-		WA_SET_BIT_MASKED(GEN7_ROW_CHICKEN2,
-				  PUSH_CONSTANT_DEREF_DISABLE);
+		wa_masked_en(wal, GEN7_ROW_CHICKEN2,
+			     PUSH_CONSTANT_DEREF_DISABLE);
 
 	/* WaForceEnableNonCoherent:icl
 	 * This is not the same workaround as in early Gen9 platforms, where
@@ -590,19 +588,19 @@ static void icl_ctx_workarounds_init(struct intel_engine_cs *engine,
 	 * (the register is whitelisted in hardware now, so UMDs can opt in
 	 * for coherency if they have a good reason).
 	 */
-	WA_SET_BIT_MASKED(ICL_HDC_MODE, HDC_FORCE_NON_COHERENT);
+	wa_masked_en(wal, ICL_HDC_MODE, HDC_FORCE_NON_COHERENT);
 
 	/* Wa_2006611047:icl (pre-prod)
 	 * Formerly known as WaDisableImprovedTdlClkGating
 	 */
 	if (IS_ICL_REVID(i915, ICL_REVID_A0, ICL_REVID_A0))
-		WA_SET_BIT_MASKED(GEN7_ROW_CHICKEN2,
-				  GEN11_TDL_CLOCK_GATING_FIX_DISABLE);
+		wa_masked_en(wal, GEN7_ROW_CHICKEN2,
+			     GEN11_TDL_CLOCK_GATING_FIX_DISABLE);
 
 	/* Wa_2006665173:icl (pre-prod) */
 	if (IS_ICL_REVID(i915, ICL_REVID_A0, ICL_REVID_A0))
-		WA_SET_BIT_MASKED(GEN11_COMMON_SLICE_CHICKEN3,
-				  GEN11_BLEND_EMB_FIX_DISABLE_IN_RCC);
+		wa_masked_en(wal, GEN11_COMMON_SLICE_CHICKEN3,
+			     GEN11_BLEND_EMB_FIX_DISABLE_IN_RCC);
 
 	/* WaEnableFloatBlendOptimization:icl */
 	wa_write_masked_or(wal,
@@ -611,13 +609,13 @@ static void icl_ctx_workarounds_init(struct intel_engine_cs *engine,
 			   _MASKED_BIT_ENABLE(FLOAT_BLEND_OPTIMIZATION_ENABLE));
 
 	/* WaDisableGPGPUMidThreadPreemption:icl */
-	WA_SET_FIELD_MASKED(GEN8_CS_CHICKEN1,
+	wa_masked_field_set(wal, GEN8_CS_CHICKEN1,
 			    GEN9_PREEMPT_GPGPU_LEVEL_MASK,
 			    GEN9_PREEMPT_GPGPU_THREAD_GROUP_LEVEL);
 
 	/* allow headerless messages for preemptible GPGPU context */
-	WA_SET_BIT_MASKED(GEN10_SAMPLER_MODE,
-			  GEN11_SAMPLER_ENABLE_HEADLESS_MSG);
+	wa_masked_en(wal, GEN10_SAMPLER_MODE,
+		     GEN11_SAMPLER_ENABLE_HEADLESS_MSG);
 
 	/* Wa_1604278689:icl,ehl */
 	wa_write(wal, IVB_FBC_RT_BASE, 0xFFFFFFFF & ~ILK_FBC_RT_VALID);
@@ -643,11 +641,11 @@ static void gen12_ctx_workarounds_init(struct intel_engine_cs *engine,
 	 * Wa_14010443199:rkl
 	 * Wa_14010698770:rkl
 	 */
-	WA_SET_BIT_MASKED(GEN11_COMMON_SLICE_CHICKEN3,
-			  GEN12_DISABLE_CPS_AWARE_COLOR_PIPE);
+	wa_masked_en(wal, GEN11_COMMON_SLICE_CHICKEN3,
+		     GEN12_DISABLE_CPS_AWARE_COLOR_PIPE);
 
 	/* WaDisableGPGPUMidThreadPreemption:gen12 */
-	WA_SET_FIELD_MASKED(GEN8_CS_CHICKEN1,
+	wa_masked_field_set(wal, GEN8_CS_CHICKEN1,
 			    GEN9_PREEMPT_GPGPU_LEVEL_MASK,
 			    GEN9_PREEMPT_GPGPU_THREAD_GROUP_LEVEL);
 }
@@ -680,12 +678,22 @@ static void dg1_ctx_workarounds_init(struct intel_engine_cs *engine,
 	gen12_ctx_workarounds_init(engine, wal);
 
 	/* Wa_1409044764 */
-	WA_CLR_BIT_MASKED(GEN11_COMMON_SLICE_CHICKEN3,
-			  DG1_FLOAT_POINT_BLEND_OPT_STRICT_MODE_EN);
+	wa_masked_dis(wal, GEN11_COMMON_SLICE_CHICKEN3,
+		      DG1_FLOAT_POINT_BLEND_OPT_STRICT_MODE_EN);
 
 	/* Wa_22010493298 */
-	WA_SET_BIT_MASKED(HIZ_CHICKEN,
-			  DG1_HZ_READ_SUPPRESSION_OPTIMIZATION_DISABLE);
+	wa_masked_en(wal, HIZ_CHICKEN,
+		     DG1_HZ_READ_SUPPRESSION_OPTIMIZATION_DISABLE);
+
+	/*
+	 * Wa_16011163337
+	 *
+	 * Like in tgl_ctx_workarounds_init(), read verification is ignored due
+	 * to Wa_1608008084.
+	 */
+	wa_add(wal,
+	       FF_MODE2,
+	       FF_MODE2_GS_TIMER_MASK, FF_MODE2_GS_TIMER_224, 0);
 }
 
 static void
@@ -1770,6 +1778,19 @@ rcs_engine_wa_init(struct intel_engine_cs *engine, struct i915_wa_list *wal)
 		 */
 		wa_write_or(wal, GEN7_FF_THREAD_MODE,
 			    GEN12_FF_TESSELATION_DOP_GATE_DISABLE);
+
+		/*
+		 * Wa_1606700617:tgl,dg1
+		 * Wa_22010271021:tgl,rkl,dg1
+		 */
+		wa_masked_en(wal,
+			     GEN9_CS_DEBUG_MODE1,
+			     FF_DOP_CLOCK_GATE_DISABLE);
+
+		/* Wa_1406941453:tgl,rkl,dg1 */
+		wa_masked_en(wal,
+			     GEN10_SAMPLER_MODE,
+			     ENABLE_SMALLPL);
 	}
 
 	if (IS_DG1_REVID(i915, DG1_REVID_A0, DG1_REVID_A0) ||
@@ -1798,21 +1819,6 @@ rcs_engine_wa_init(struct intel_engine_cs *engine, struct i915_wa_list *wal)
 			     GEN6_RC_SLEEP_PSMI_CONTROL,
 			     GEN12_WAIT_FOR_EVENT_POWER_DOWN_DISABLE |
 			     GEN8_RC_SEMA_IDLE_MSG_DISABLE);
-
-		/*
-		 * Wa_1606700617:tgl
-		 * Wa_22010271021:tgl,rkl
-		 */
-		wa_masked_en(wal,
-			     GEN9_CS_DEBUG_MODE1,
-			     FF_DOP_CLOCK_GATE_DISABLE);
-	}
-
-	if (IS_GEN(i915, 12)) {
-		/* Wa_1406941453:gen12 */
-		wa_masked_en(wal,
-			     GEN10_SAMPLER_MODE,
-			     ENABLE_SMALLPL);
 	}
 
 	if (IS_GEN(i915, 11)) {
