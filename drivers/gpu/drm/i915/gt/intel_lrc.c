@@ -1116,8 +1116,10 @@ __unwind_incomplete_requests(struct intel_engine_cs *engine)
 	list_for_each_entry_safe_reverse(rq, rn,
 					 &engine->active.requests,
 					 sched.link) {
-		if (i915_request_completed(rq))
-			continue; /* XXX */
+		if (i915_request_completed(rq)) {
+			list_del_init(&rq->sched.link);
+			continue;
+		}
 
 		__i915_request_unsubmit(rq);
 
@@ -1308,7 +1310,7 @@ static void reset_active(struct i915_request *rq,
 static void st_update_runtime_underflow(struct intel_context *ce, s32 dt)
 {
 #if IS_ENABLED(CONFIG_DRM_I915_SELFTEST)
-	ce->runtime.num_underflow += dt < 0;
+	ce->runtime.num_underflow++;
 	ce->runtime.max_underflow = max_t(u32, ce->runtime.max_underflow, -dt);
 #endif
 }
@@ -1325,7 +1327,7 @@ static void intel_context_update_runtime(struct intel_context *ce)
 	ce->runtime.last = intel_context_get_runtime(ce);
 	dt = ce->runtime.last - old;
 
-	if (unlikely(dt <= 0)) {
+	if (unlikely(dt < 0)) {
 		CE_TRACE(ce, "runtime underflow: last=%u, new=%u, delta=%d\n",
 			 old, ce->runtime.last, dt);
 		st_update_runtime_underflow(ce, dt);
@@ -1837,16 +1839,6 @@ static void virtual_xfer_context(struct virtual_engine *ve,
 	}
 }
 
-#define for_each_waiter(p__, rq__) \
-	list_for_each_entry_lockless(p__, \
-				     &(rq__)->sched.waiters_list, \
-				     wait_link)
-
-#define for_each_signaler(p__, rq__) \
-	list_for_each_entry_rcu(p__, \
-				&(rq__)->sched.signalers_list, \
-				signal_link)
-
 static void defer_request(struct i915_request *rq, struct list_head * const pl)
 {
 	LIST_HEAD(list);
@@ -2149,12 +2141,9 @@ static void execlists_dequeue(struct intel_engine_cs *engine)
 	 */
 
 	if ((last = *active)) {
-		if (need_preempt(engine, last, rb)) {
-			if (i915_request_completed(last)) {
-				tasklet_hi_schedule(&execlists->tasklet);
-				return;
-			}
-
+		if (i915_request_completed(last)) {
+			goto check_secondary;
+		} else if (need_preempt(engine, last, rb)) {
 			ENGINE_TRACE(engine,
 				     "preempting last=%llx:%lld, prio=%d, hint=%d\n",
 				     last->fence.context,
@@ -2182,11 +2171,6 @@ static void execlists_dequeue(struct intel_engine_cs *engine)
 			last = NULL;
 		} else if (need_timeslice(engine, last, rb) &&
 			   timeslice_expired(execlists, last)) {
-			if (i915_request_completed(last)) {
-				tasklet_hi_schedule(&execlists->tasklet);
-				return;
-			}
-
 			ENGINE_TRACE(engine,
 				     "expired last=%llx:%lld, prio=%d, hint=%d, yield?=%s\n",
 				     last->fence.context,
@@ -2222,6 +2206,7 @@ static void execlists_dequeue(struct intel_engine_cs *engine)
 			 * we hopefully coalesce several updates into a single
 			 * submission.
 			 */
+check_secondary:
 			if (!list_is_last(&last->sched.link,
 					  &engine->active.requests)) {
 				/*
@@ -2465,6 +2450,11 @@ cancel_port_requests(struct intel_engine_execlists * const execlists)
 
 	smp_wmb(); /* complete the seqlock for execlists_active() */
 	WRITE_ONCE(execlists->active, execlists->inflight);
+
+	/* Having cancelled all outstanding process_csb(), stop their timers */
+	GEM_BUG_ON(execlists->pending[0]);
+	cancel_timer(&execlists->timer);
+	cancel_timer(&execlists->preempt);
 }
 
 static inline void
@@ -6032,8 +6022,9 @@ int intel_virtual_engine_attach_bond(struct intel_engine_cs *engine,
 void intel_execlists_show_requests(struct intel_engine_cs *engine,
 				   struct drm_printer *m,
 				   void (*show_request)(struct drm_printer *m,
-							struct i915_request *rq,
-							const char *prefix),
+							const struct i915_request *rq,
+							const char *prefix,
+							int indent),
 				   unsigned int max)
 {
 	const struct intel_engine_execlists *execlists = &engine->execlists;
@@ -6048,7 +6039,7 @@ void intel_execlists_show_requests(struct intel_engine_cs *engine,
 	count = 0;
 	list_for_each_entry(rq, &engine->active.requests, sched.link) {
 		if (count++ < max - 1)
-			show_request(m, rq, "\t\tE ");
+			show_request(m, rq, "\t\t", 0);
 		else
 			last = rq;
 	}
@@ -6058,7 +6049,7 @@ void intel_execlists_show_requests(struct intel_engine_cs *engine,
 				   "\t\t...skipping %d executing requests...\n",
 				   count - max);
 		}
-		show_request(m, last, "\t\tE ");
+		show_request(m, last, "\t\t", 0);
 	}
 
 	if (execlists->switch_priority_hint != INT_MIN)
@@ -6076,7 +6067,7 @@ void intel_execlists_show_requests(struct intel_engine_cs *engine,
 
 		priolist_for_each_request(rq, p, i) {
 			if (count++ < max - 1)
-				show_request(m, rq, "\t\tQ ");
+				show_request(m, rq, "\t\t", 0);
 			else
 				last = rq;
 		}
@@ -6087,7 +6078,7 @@ void intel_execlists_show_requests(struct intel_engine_cs *engine,
 				   "\t\t...skipping %d queued requests...\n",
 				   count - max);
 		}
-		show_request(m, last, "\t\tQ ");
+		show_request(m, last, "\t\t", 0);
 	}
 
 	last = NULL;
@@ -6099,7 +6090,7 @@ void intel_execlists_show_requests(struct intel_engine_cs *engine,
 
 		if (rq) {
 			if (count++ < max - 1)
-				show_request(m, rq, "\t\tV ");
+				show_request(m, rq, "\t\t", 0);
 			else
 				last = rq;
 		}
@@ -6110,7 +6101,7 @@ void intel_execlists_show_requests(struct intel_engine_cs *engine,
 				   "\t\t...skipping %d virtual requests...\n",
 				   count - max);
 		}
-		show_request(m, last, "\t\tV ");
+		show_request(m, last, "\t\t", 0);
 	}
 
 	spin_unlock_irqrestore(&engine->active.lock, flags);
