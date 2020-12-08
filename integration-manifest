@@ -1,0 +1,32 @@
+drm drm-fixes 0477e92881850d44910a7e94fc2c46f96faa131f
+	Linux 5.10-rc7
+drm-misc drm-misc-fixes fd4e788e971ce763e50762d7b1a0048992949dd0
+	drm/omap: sdi: fix bridge enable/disable
+drm-intel drm-intel-fixes 7c5c15dffe1e3c42f44735ce9552afb7207f1584
+	drm/i915/gt: Declare gen9 has 64 mocs entries!
+drm-amd drm-amd-fixes 2b702e72e33bbdec0764cfb6e1dd00fe1142ae55
+	Merge tag 'drm-misc-fixes-2017-09-28-1' of git://anongit.freedesktop.org/git/drm-misc into drm-fixes
+drm drm-next 5eb3c85e343ae62ed47fa3c9816d79f95809fe27
+	Merge branch 'etnaviv/next' of https://git.pengutronix.de/git/lst/linux into drm-next
+drm-misc drm-misc-next-fixes 2580a493a97da4a302cb66251b558bfc04c16e68
+	dt-binding: display: Require two resets on mantix panel
+drm-intel drm-intel-next-fixes b45b6fbc671c60f56fd119c443e5570f83175928
+	Merge tag 'drm-intel-next-fixes-2020-10-22' of git://anongit.freedesktop.org/drm/drm-intel into drm-next
+drm-amd drm-amd-next-fixes 2bd6bf03f4c1c59381d62c61d03f6cc3fe71f66e
+	Linux 4.14-rc1
+drm-misc drm-misc-next 604057e984c969cf9f45ded572823e68f4c4b825
+	video: fbdev: sis: Drop useless call to SiS_GetResInfo()
+drm-intel drm-intel-next d371d6ea92ad2a47f42bbcaa786ee5f6069c9c14
+	drm/i915/display/dp: Compute the correct slice count for VDSC on DP
+drm-intel drm-intel-next-queued 9d8fddf8579a2a20d0e8a8b631547069a62b953e
+	drm/i915: Disable outputs during unregister
+drm-amd drm-amd-next 754270c7c56292e97d0eff924a5d5d83f92add07
+	Merge branch 'drm-next-4.15' of git://people.freedesktop.org/~agd5f/linux into drm-next
+sound-upstream for-linus 5cfca59604e423f720297e30a9dc493eea623493
+	ALSA: hda/realtek - Enable headset mic of ASUS X430UN with ALC256
+sound-upstream for-next ac2250ab723c16df4ff9934f736670bf0c12f96b
+	ALSA: hda/ca0132 - Unmute surround when speaker output is selected.
+drm-intel topic/core-for-CI c65d85496e329eadf1337d4a87740fb92f3610aa
+	HAX sound: Disable probing snd_hda with DG1
+drm-intel drm-intel-gt-next e9f4829f95ec09eb0780c8bfc989d99259511cb9
+	drm/i915/gem: Drop false !i915_vma_is_closed assertion
