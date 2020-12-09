@@ -1,0 +1,32 @@
+drm drm-fixes 0477e92881850d44910a7e94fc2c46f96faa131f
+	Linux 5.10-rc7
+drm-misc drm-misc-fixes fd4e788e971ce763e50762d7b1a0048992949dd0
+	drm/omap: sdi: fix bridge enable/disable
+drm-intel drm-intel-fixes 7c5c15dffe1e3c42f44735ce9552afb7207f1584
+	drm/i915/gt: Declare gen9 has 64 mocs entries!
+drm-amd drm-amd-fixes 2b702e72e33bbdec0764cfb6e1dd00fe1142ae55
+	Merge tag 'drm-misc-fixes-2017-09-28-1' of git://anongit.freedesktop.org/git/drm-misc into drm-fixes
+drm drm-next 60f2f74978e69fdb63e7a26179cbd5c50d4845c2
+	Merge tag 'drm-msm-next-2020-12-07' of https://gitlab.freedesktop.org/drm/msm into drm-next
+drm-misc drm-misc-next-fixes 2580a493a97da4a302cb66251b558bfc04c16e68
+	dt-binding: display: Require two resets on mantix panel
+drm-intel drm-intel-next-fixes b45b6fbc671c60f56fd119c443e5570f83175928
+	Merge tag 'drm-intel-next-fixes-2020-10-22' of git://anongit.freedesktop.org/drm/drm-intel into drm-next
+drm-amd drm-amd-next-fixes 2bd6bf03f4c1c59381d62c61d03f6cc3fe71f66e
+	Linux 4.14-rc1
+drm-misc drm-misc-next 9a27d37aa8c7f8095e3df7c3af9368b1db988729
+	drm/hisilicon: Delete unused local parameters
+drm-intel drm-intel-next d371d6ea92ad2a47f42bbcaa786ee5f6069c9c14
+	drm/i915/display/dp: Compute the correct slice count for VDSC on DP
+drm-intel drm-intel-next-queued 9d8fddf8579a2a20d0e8a8b631547069a62b953e
+	drm/i915: Disable outputs during unregister
+drm-amd drm-amd-next 754270c7c56292e97d0eff924a5d5d83f92add07
+	Merge branch 'drm-next-4.15' of git://people.freedesktop.org/~agd5f/linux into drm-next
+sound-upstream for-linus 7e413528474d5895e3e315c019fb0c43522eb6d9
+	ALSA: hda/realtek - Enable headset mic of ASUS Q524UQK with ALC255
+sound-upstream for-next 5a7e054ef49cec6cbe1bf287e02eb57ca39a2971
+	ALSA: hda: Fix regressions on clear and reconfig sysfs
+drm-intel topic/core-for-CI c65d85496e329eadf1337d4a87740fb92f3610aa
+	HAX sound: Disable probing snd_hda with DG1
+drm-intel drm-intel-gt-next 51c87fa64f9867139542b02a1f38c051cb6f8bac
+	drm/i915/gt: Remove uninterruptible parameter from intel_gt_wait_for_idle
