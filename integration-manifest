@@ -1,0 +1,32 @@
+drm drm-fixes 2c85ebc57b3e1817b6ce1a6b703928e113a90442
+	Linux 5.10
+drm-misc drm-misc-fixes fd4e788e971ce763e50762d7b1a0048992949dd0
+	drm/omap: sdi: fix bridge enable/disable
+drm-intel drm-intel-fixes 7c5c15dffe1e3c42f44735ce9552afb7207f1584
+	drm/i915/gt: Declare gen9 has 64 mocs entries!
+drm-amd drm-amd-fixes 2b702e72e33bbdec0764cfb6e1dd00fe1142ae55
+	Merge tag 'drm-misc-fixes-2017-09-28-1' of git://anongit.freedesktop.org/git/drm-misc into drm-fixes
+drm drm-next b10733527bfd864605c33ab2e9a886eec317ec39
+	Merge tag 'amd-drm-next-5.11-2020-12-09' of git://people.freedesktop.org/~agd5f/linux into drm-next
+drm-misc drm-misc-next-fixes 05faf1559de52465f1e753e31883aa294e6179c1
+	drm/imx/dcss: allow using nearest neighbor interpolation scaling
+drm-intel drm-intel-next-fixes b45b6fbc671c60f56fd119c443e5570f83175928
+	Merge tag 'drm-intel-next-fixes-2020-10-22' of git://anongit.freedesktop.org/drm/drm-intel into drm-next
+drm-amd drm-amd-next-fixes 2bd6bf03f4c1c59381d62c61d03f6cc3fe71f66e
+	Linux 4.14-rc1
+drm-misc drm-misc-next 8c392cd5f1c638f953ebf2c6f4baca9df9e699f4
+	drm/amdkfd: fix ttm size refactor fallout
+drm-intel drm-intel-next 7cb917b2b7bbc10cc53f6375f173e8b353593525
+	drm/i915/display/tc: Only WARN once for bogus tc port flag
+drm-intel drm-intel-next-queued 9d8fddf8579a2a20d0e8a8b631547069a62b953e
+	drm/i915: Disable outputs during unregister
+drm-amd drm-amd-next 754270c7c56292e97d0eff924a5d5d83f92add07
+	Merge branch 'drm-next-4.15' of git://people.freedesktop.org/~agd5f/linux into drm-next
+sound-upstream for-linus 598100be3053fef628adf3ad6ee4f828ad308f64
+	Merge tag 'asoc-v5.11' of https://git.kernel.org/pub/scm/linux/kernel/git/broonie/sound into for-linus
+sound-upstream for-next 598100be3053fef628adf3ad6ee4f828ad308f64
+	Merge tag 'asoc-v5.11' of https://git.kernel.org/pub/scm/linux/kernel/git/broonie/sound into for-linus
+drm-intel topic/core-for-CI 321ee3d4b7643a0936e80b91a79f96f14eaf0028
+	HAX sound: Disable probing snd_hda with DG1
+drm-intel drm-intel-gt-next c41ce8199dfebe3b3a12e8e4e4a988f9907ff4da
+	drm/i915/pmu: Remove !CONFIG_PM code
