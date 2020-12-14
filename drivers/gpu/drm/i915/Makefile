@@ -82,6 +82,7 @@ gt-y += \
 	gt/gen6_engine_cs.o \
 	gt/gen6_ppgtt.o \
 	gt/gen7_renderclear.o \
+	gt/gen8_engine_cs.o \
 	gt/gen8_ppgtt.o \
 	gt/intel_breadcrumbs.o \
 	gt/intel_context.o \
@@ -91,6 +92,7 @@ gt-y += \
 	gt/intel_engine_heartbeat.o \
 	gt/intel_engine_pm.o \
 	gt/intel_engine_user.o \
+	gt/intel_execlists_submission.o \
 	gt/intel_ggtt.o \
 	gt/intel_ggtt_fencing.o \
 	gt/intel_gt.o \
@@ -102,7 +104,6 @@ gt-y += \
 	gt/intel_gt_requests.o \
 	gt/intel_gtt.o \
 	gt/intel_llc.o \
-	gt/intel_lrc.o \
 	gt/intel_mocs.o \
 	gt/intel_ppgtt.o \
 	gt/intel_rc6.o \

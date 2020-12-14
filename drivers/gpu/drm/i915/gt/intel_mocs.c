@@ -24,8 +24,8 @@
 
 #include "intel_engine.h"
 #include "intel_gt.h"
+#include "intel_lrc_reg.h"
 #include "intel_mocs.h"
-#include "intel_lrc.h"
 #include "intel_ring.h"
 
 /* structures required */
@@ -360,7 +360,7 @@ static unsigned int get_mocs_settings(const struct drm_i915_private *i915,
 	if (IS_DG1(i915)) {
 		table->size = ARRAY_SIZE(dg1_mocs_table);
 		table->table = dg1_mocs_table;
-		table->n_entries = GEN11_NUM_MOCS_ENTRIES;
+		table->n_entries = GEN9_NUM_MOCS_ENTRIES;
 	} else if (INTEL_GEN(i915) >= 12) {
 		table->size  = ARRAY_SIZE(tgl_mocs_table);
 		table->table = tgl_mocs_table;
