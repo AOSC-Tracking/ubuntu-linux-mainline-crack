@@ -77,7 +77,6 @@ struct vc4_dev {
 	struct vc4_hvs *hvs;
 	struct vc4_v3d *v3d;
 	struct vc4_dpi *dpi;
-	struct vc4_dsi *dsi1;
 	struct vc4_vec *vec;
 	struct vc4_txp *txp;
 
@@ -214,8 +213,6 @@ struct vc4_dev {
 		struct timer_list timer;
 		struct work_struct reset_work;
 	} hangcheck;
-
-	struct semaphore async_modeset;
 
 	struct drm_modeset_lock ctm_state_lock;
 	struct drm_private_obj ctm_manager;
