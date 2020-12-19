@@ -198,6 +198,8 @@
 #include "gem/i915_gem_context.h"
 #include "gt/intel_engine_pm.h"
 #include "gt/intel_engine_user.h"
+#include "gt/intel_execlists_submission.h"
+#include "gt/intel_gpu_commands.h"
 #include "gt/intel_gt.h"
 #include "gt/intel_lrc_reg.h"
 #include "gt/intel_ring.h"
@@ -4374,7 +4376,7 @@ void i915_perf_init(struct drm_i915_private *i915)
 			RUNTIME_INFO(i915)->cs_timestamp_frequency_hz / 2;
 
 		mutex_init(&perf->metrics_lock);
-		idr_init(&perf->metrics_idr);
+		idr_init_base(&perf->metrics_idr, 1);
 
 		/* We set up some ratelimit state to potentially throttle any
 		 * _NOTES about spurious, invalid OA reports which we don't
