@@ -35,7 +35,6 @@
 #include <drm/drm_ioctl.h>
 #include <drm/drm_sysfs.h>
 #include <drm/ttm/ttm_bo_driver.h>
-#include <drm/ttm/ttm_module.h>
 #include <drm/ttm/ttm_placement.h>
 
 #include "ttm_object.h"
@@ -652,6 +651,7 @@ static int vmw_driver_load(struct drm_device *dev, unsigned long chipset)
 	enum vmw_res_type i;
 	bool refuse_dma = false;
 	char host_log[100] = {0};
+	struct pci_dev *pdev = to_pci_dev(dev->dev);
 
 	dev_priv = kzalloc(sizeof(*dev_priv), GFP_KERNEL);
 	if (unlikely(!dev_priv)) {
@@ -659,7 +659,7 @@ static int vmw_driver_load(struct drm_device *dev, unsigned long chipset)
 		return -ENOMEM;
 	}
 
-	pci_set_master(dev->pdev);
+	pci_set_master(pdev);
 
 	dev_priv->dev = dev;
 	dev_priv->vmw_chipset = chipset;
@@ -688,9 +688,9 @@ static int vmw_driver_load(struct drm_device *dev, unsigned long chipset)
 
 	dev_priv->used_memory_size = 0;
 
-	dev_priv->io_start = pci_resource_start(dev->pdev, 0);
-	dev_priv->vram_start = pci_resource_start(dev->pdev, 1);
-	dev_priv->mmio_start = pci_resource_start(dev->pdev, 2);
+	dev_priv->io_start = pci_resource_start(pdev, 0);
+	dev_priv->vram_start = pci_resource_start(pdev, 1);
+	dev_priv->mmio_start = pci_resource_start(pdev, 2);
 
 	dev_priv->assume_16bpp = !!vmw_assume_16bpp;
 
@@ -840,7 +840,7 @@ static int vmw_driver_load(struct drm_device *dev, unsigned long chipset)
 
 	dev->dev_private = dev_priv;
 
-	ret = pci_request_regions(dev->pdev, "vmwgfx probe");
+	ret = pci_request_regions(pdev, "vmwgfx probe");
 	dev_priv->stealth = (ret != 0);
 	if (dev_priv->stealth) {
 		/**
@@ -849,7 +849,7 @@ static int vmw_driver_load(struct drm_device *dev, unsigned long chipset)
 
 		DRM_INFO("It appears like vesafb is loaded. "
 			 "Ignore above error if any.\n");
-		ret = pci_request_region(dev->pdev, 2, "vmwgfx stealth probe");
+		ret = pci_request_region(pdev, 2, "vmwgfx stealth probe");
 		if (unlikely(ret != 0)) {
 			DRM_ERROR("Failed reserving the SVGA MMIO resource.\n");
 			goto out_no_device;
@@ -857,7 +857,7 @@ static int vmw_driver_load(struct drm_device *dev, unsigned long chipset)
 	}
 
 	if (dev_priv->capabilities & SVGA_CAP_IRQMASK) {
-		ret = vmw_irq_install(dev, dev->pdev->irq);
+		ret = vmw_irq_install(dev, pdev->irq);
 		if (ret != 0) {
 			DRM_ERROR("Failed installing irq: %d\n", ret);
 			goto out_no_irq;
@@ -1003,9 +1003,9 @@ out_no_fman:
 		vmw_irq_uninstall(dev_priv->dev);
 out_no_irq:
 	if (dev_priv->stealth)
-		pci_release_region(dev->pdev, 2);
+		pci_release_region(pdev, 2);
 	else
-		pci_release_regions(dev->pdev);
+		pci_release_regions(pdev);
 out_no_device:
 	ttm_object_device_release(&dev_priv->tdev);
 out_err4:
@@ -1023,6 +1023,7 @@ out_err0:
 static void vmw_driver_unload(struct drm_device *dev)
 {
 	struct vmw_private *dev_priv = vmw_priv(dev);
+	struct pci_dev *pdev = to_pci_dev(dev->dev);
 	enum vmw_res_type i;
 
 	unregister_pm_notifier(&dev_priv->pm_nb);
@@ -1054,9 +1055,9 @@ static void vmw_driver_unload(struct drm_device *dev)
 	if (dev_priv->capabilities & SVGA_CAP_IRQMASK)
 		vmw_irq_uninstall(dev_priv->dev);
 	if (dev_priv->stealth)
-		pci_release_region(dev->pdev, 2);
+		pci_release_region(pdev, 2);
 	else
-		pci_release_regions(dev->pdev);
+		pci_release_regions(pdev);
 
 	ttm_object_device_release(&dev_priv->tdev);
 	memunmap(dev_priv->mmio_virt);
@@ -1409,7 +1410,7 @@ static int vmw_pm_freeze(struct device *kdev)
 
 	vmw_fence_fifo_down(dev_priv->fman);
 	__vmw_svga_disable(dev_priv);
-	
+
 	vmw_release_device_late(dev_priv);
 	return 0;
 }
@@ -1520,7 +1521,6 @@ static int vmw_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 		goto err_pci_disable_device;
 	}
 
-	dev->pdev = pdev;
 	pci_set_drvdata(pdev, dev);
 
 	ret = vmw_driver_load(dev, ent->driver_data);
