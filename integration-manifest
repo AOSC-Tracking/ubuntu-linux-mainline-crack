@@ -1,0 +1,32 @@
+drm drm-fixes 29f95f20581c4bb4e58c1cc1cb15bff9b931cad9
+	Merge tag 'drm-misc-fixes-2021-01-08' of git://anongit.freedesktop.org/drm/drm-misc into drm-fixes
+drm-misc drm-misc-fixes a73858ef4d5e1d425e171f0f6a52864176a6a979
+	drm/ttm: unexport ttm_pool_init/fini
+drm-intel drm-intel-fixes 9397d66212cdf7a21c66523f1583e5d63a609e84
+	drm/i915/dp: Track pm_qos per connector
+drm-amd drm-amd-fixes 2b702e72e33bbdec0764cfb6e1dd00fe1142ae55
+	Merge tag 'drm-misc-fixes-2017-09-28-1' of git://anongit.freedesktop.org/git/drm-misc into drm-fixes
+drm drm-next cb3cfbf79aff7decb4e5ee69a7c74864497f61dc
+	Merge tag 'drm-misc-next-2021-01-06' of git://anongit.freedesktop.org/drm/drm-misc into drm-next
+drm-misc drm-misc-next-fixes be3e477effba636ad25dcd244db264c6cd5c1f36
+	drm/komeda: Fix bit check to import to value of proper type
+drm-intel drm-intel-next-fixes 046f70d31ddb2069941aec54966fec5b7fbc7b7b
+	drm/i915/tgl: Fix REVID macros for TGL to fetch correct stepping
+drm-amd drm-amd-next-fixes 2bd6bf03f4c1c59381d62c61d03f6cc3fe71f66e
+	Linux 4.14-rc1
+drm-misc drm-misc-next 2b405ec0e1c4b4c490b95da7ac3c9934c7675da6
+	drm/mipi-dbi: Switch to new kerneldoc syntax for named variable macro argument
+drm-intel drm-intel-next 19fe4ac6f0e7163daf9375a4d39947389ae465fa
+	drm/i915: Disable RPM wakeref assertions during driver shutdown
+drm-intel drm-intel-next-queued 9d8fddf8579a2a20d0e8a8b631547069a62b953e
+	drm/i915: Disable outputs during unregister
+drm-amd drm-amd-next 754270c7c56292e97d0eff924a5d5d83f92add07
+	Merge branch 'drm-next-4.15' of git://people.freedesktop.org/~agd5f/linux into drm-next
+sound-upstream for-linus 167c9dc84ec384c0940359e067301883ad2b42a8
+	ALSA: usb-audio: Fix implicit feedback sync setup for Pioneer devices
+sound-upstream for-next 75b1a8f9d62e50f05d0e4e9f3c8bcde32527ffc1
+	ALSA: Convert strlcpy to strscpy when return value is unused
+drm-intel topic/core-for-CI f21118d876413ac0166c2db7423b0d6ffdb515f4
+	HAX net/phy: Suppress WARN for calling stop while halted
+drm-intel drm-intel-gt-next baa7c2cd99c6326b4d1dece6046479b183533943
+	drm/i915: Refactor marking a request as EIO
