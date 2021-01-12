@@ -506,7 +506,8 @@ static int igt_reset_nop_engine(void *arg)
 			}
 			err = intel_engine_reset(engine, NULL);
 			if (err) {
-				pr_err("i915_reset_engine failed\n");
+				pr_err("intel_engine_reset(%s) failed, err:%d\n",
+				       engine->name, err);
 				break;
 			}
 
@@ -608,7 +609,8 @@ static int __igt_reset_engine(struct intel_gt *gt, bool active)
 
 			err = intel_engine_reset(engine, NULL);
 			if (err) {
-				pr_err("i915_reset_engine failed\n");
+				pr_err("intel_engine_reset(%s) failed, err:%d\n",
+				       engine->name, err);
 				break;
 			}
 
@@ -1576,12 +1578,17 @@ static int __igt_atomic_reset_engine(struct intel_engine_cs *engine,
 		  engine->name, mode, p->name);
 
 	tasklet_disable(t);
+	if (strcmp(p->name, "softirq"))
+		local_bh_disable();
 	p->critical_section_begin();
 
-	err = intel_engine_reset(engine, NULL);
+	err = __intel_engine_reset_bh(engine, NULL);
 
 	p->critical_section_end();
+	if (strcmp(p->name, "softirq"))
+		local_bh_enable();
 	tasklet_enable(t);
+	tasklet_hi_schedule(t);
 
 	if (err)
 		pr_err("i915_reset_engine(%s:%s) failed under %s\n",
