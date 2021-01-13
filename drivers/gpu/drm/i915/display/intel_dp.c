@@ -480,6 +480,13 @@ int intel_dp_get_link_train_fallback_values(struct intel_dp *intel_dp,
 		return -1;
 	}
 
+	if (intel_dp_is_edp(intel_dp) && !intel_dp->use_max_params) {
+		drm_dbg_kms(&i915->drm,
+			    "Retrying Link training for eDP with max parameters\n");
+		intel_dp->use_max_params = true;
+		return 0;
+	}
+
 	index = intel_dp_rate_index(intel_dp->common_rates,
 				    intel_dp->num_common_rates,
 				    link_rate);
@@ -895,9 +902,7 @@ pps_lock(struct intel_dp *intel_dp)
 	 * See intel_power_sequencer_reset() why we need
 	 * a power domain reference here.
 	 */
-	wakeref = intel_display_power_get(dev_priv,
-					  intel_aux_power_domain(dp_to_dig_port(intel_dp)));
-
+	wakeref = intel_display_power_get(dev_priv, POWER_DOMAIN_DISPLAY_CORE);
 	mutex_lock(&dev_priv->pps_mutex);
 
 	return wakeref;
@@ -909,9 +914,7 @@ pps_unlock(struct intel_dp *intel_dp, intel_wakeref_t wakeref)
 	struct drm_i915_private *dev_priv = dp_to_i915(intel_dp);
 
 	mutex_unlock(&dev_priv->pps_mutex);
-	intel_display_power_put(dev_priv,
-				intel_aux_power_domain(dp_to_dig_port(intel_dp)),
-				wakeref);
+	intel_display_power_put(dev_priv, POWER_DOMAIN_DISPLAY_CORE, wakeref);
 	return 0;
 }
 
@@ -2290,6 +2293,44 @@ intel_dp_compute_link_config_wide(struct intel_dp *intel_dp,
 	return -EINVAL;
 }
 
+/* Optimize link config in order: max bpp, min lanes, min clock */
+static int
+intel_dp_compute_link_config_fast(struct intel_dp *intel_dp,
+				  struct intel_crtc_state *pipe_config,
+				  const struct link_config_limits *limits)
+{
+	const struct drm_display_mode *adjusted_mode = &pipe_config->hw.adjusted_mode;
+	int bpp, clock, lane_count;
+	int mode_rate, link_clock, link_avail;
+
+	for (bpp = limits->max_bpp; bpp >= limits->min_bpp; bpp -= 2 * 3) {
+		int output_bpp = intel_dp_output_bpp(pipe_config->output_format, bpp);
+
+		mode_rate = intel_dp_link_required(adjusted_mode->crtc_clock,
+						   output_bpp);
+
+		for (lane_count = limits->min_lane_count;
+		     lane_count <= limits->max_lane_count;
+		     lane_count <<= 1) {
+			for (clock = limits->min_clock; clock <= limits->max_clock; clock++) {
+				link_clock = intel_dp->common_rates[clock];
+				link_avail = intel_dp_max_data_rate(link_clock,
+								    lane_count);
+
+				if (mode_rate <= link_avail) {
+					pipe_config->lane_count = lane_count;
+					pipe_config->pipe_bpp = bpp;
+					pipe_config->port_clock = link_clock;
+
+					return 0;
+				}
+			}
+		}
+	}
+
+	return -EINVAL;
+}
+
 static int intel_dp_dsc_compute_bpp(struct intel_dp *intel_dp, u8 dsc_max_bpc)
 {
 	int i, num_bpc;
@@ -2513,13 +2554,14 @@ intel_dp_compute_link_config(struct intel_encoder *encoder,
 	limits.min_bpp = intel_dp_min_bpp(pipe_config->output_format);
 	limits.max_bpp = intel_dp_max_bpp(intel_dp, pipe_config);
 
-	if (intel_dp_is_edp(intel_dp)) {
+	if (intel_dp->use_max_params) {
 		/*
 		 * Use the maximum clock and number of lanes the eDP panel
-		 * advertizes being capable of. The panels are generally
+		 * advertizes being capable of in case the initial fast
+		 * optimal params failed us. The panels are generally
 		 * designed to support only a single clock and lane
-		 * configuration, and typically these values correspond to the
-		 * native resolution of the panel.
+		 * configuration, and typically on older panels these
+		 * values correspond to the native resolution of the panel.
 		 */
 		limits.min_lane_count = limits.max_lane_count;
 		limits.min_clock = limits.max_clock;
@@ -2538,11 +2580,22 @@ intel_dp_compute_link_config(struct intel_encoder *encoder,
 	    intel_dp_can_bigjoiner(intel_dp))
 		pipe_config->bigjoiner = true;
 
-	/*
-	 * Optimize for slow and wide. This is the place to add alternative
-	 * optimization policy.
-	 */
-	ret = intel_dp_compute_link_config_wide(intel_dp, pipe_config, &limits);
+	if (intel_dp_is_edp(intel_dp))
+		/*
+		 * Optimize for fast and narrow. eDP 1.3 section 3.3 and eDP 1.4
+		 * section A.1: "It is recommended that the minimum number of
+		 * lanes be used, using the minimum link rate allowed for that
+		 * lane configuration."
+		 *
+		 * Note that we fall back to the max clock and lane count for eDP
+		 * panels that fail with the fast optimal settings (see
+		 * intel_dp->use_max_params), in which case the fast vs. wide
+		 * choice doesn't matter.
+		 */
+		ret = intel_dp_compute_link_config_fast(intel_dp, pipe_config, &limits);
+	else
+		/* Optimize for slow and wide. */
+		ret = intel_dp_compute_link_config_wide(intel_dp, pipe_config, &limits);
 
 	/* enable compression if the mode doesn't fit available BW */
 	drm_dbg_kms(&i915->drm, "Force DSC en = %d\n", intel_dp->force_dsc_en);
@@ -5007,24 +5060,6 @@ ivb_cpu_edp_set_signal_levels(struct intel_dp *intel_dp,
 	intel_de_posting_read(dev_priv, intel_dp->output_reg);
 }
 
-void intel_dp_set_signal_levels(struct intel_dp *intel_dp,
-				const struct intel_crtc_state *crtc_state)
-{
-	struct drm_i915_private *dev_priv = dp_to_i915(intel_dp);
-	u8 train_set = intel_dp->train_set[0];
-
-	drm_dbg_kms(&dev_priv->drm, "Using vswing level %d%s\n",
-		    train_set & DP_TRAIN_VOLTAGE_SWING_MASK,
-		    train_set & DP_TRAIN_MAX_SWING_REACHED ? " (max)" : "");
-	drm_dbg_kms(&dev_priv->drm, "Using pre-emphasis level %d%s\n",
-		    (train_set & DP_TRAIN_PRE_EMPHASIS_MASK) >>
-		    DP_TRAIN_PRE_EMPHASIS_SHIFT,
-		    train_set & DP_TRAIN_MAX_PRE_EMPHASIS_REACHED ?
-		    " (max)" : "");
-
-	intel_dp->set_signal_levels(intel_dp, crtc_state);
-}
-
 void
 intel_dp_program_link_training_pattern(struct intel_dp *intel_dp,
 				       const struct intel_crtc_state *crtc_state,
@@ -6079,7 +6114,7 @@ static void intel_dp_process_phy_request(struct intel_dp *intel_dp,
 
 	intel_dp_autotest_phy_ddi_disable(intel_dp, crtc_state);
 
-	intel_dp_set_signal_levels(intel_dp, crtc_state);
+	intel_dp_set_signal_levels(intel_dp, crtc_state, DP_PHY_DPRX);
 
 	intel_dp_phy_pattern_update(intel_dp, crtc_state);
 
@@ -6152,6 +6187,17 @@ update_status:
 			    "Could not write test response to sink\n");
 }
 
+static void
+intel_dp_mst_hpd_irq(struct intel_dp *intel_dp, u8 *esi, bool *handled)
+{
+		drm_dp_mst_hpd_irq(&intel_dp->mst_mgr, esi, handled);
+
+		if (esi[1] & DP_CP_IRQ) {
+			intel_hdcp_handle_cp_irq(intel_dp->attached_connector);
+			*handled = true;
+		}
+}
+
 /**
  * intel_dp_check_mst_status - service any pending MST interrupts, check link status
  * @intel_dp: Intel DP struct
@@ -6196,7 +6242,8 @@ intel_dp_check_mst_status(struct intel_dp *intel_dp)
 
 		drm_dbg_kms(&i915->drm, "got esi %3ph\n", esi);
 
-		drm_dp_mst_hpd_irq(&intel_dp->mst_mgr, esi, &handled);
+		intel_dp_mst_hpd_irq(intel_dp, esi, &handled);
+
 		if (!handled)
 			break;
 
