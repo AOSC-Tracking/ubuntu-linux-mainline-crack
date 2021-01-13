@@ -1,0 +1,34 @@
+drm drm-fixes 7c53f6b671f4aba70ff15e1b05148b10d58c2837
+	Linux 5.11-rc3
+drm-misc drm-misc-fixes bb52cb0dec8d2fecdb22843a805131478a180728
+	drm/ttm: make the pool shrinker lock a mutex
+drm-intel drm-intel-fixes 984cadea032b103c5824a5f29d0a36b3e9df6333
+	drm/i915: Allow the sysadmin to override security mitigations
+drm-amd drm-amd-fixes 2b702e72e33bbdec0764cfb6e1dd00fe1142ae55
+	Merge tag 'drm-misc-fixes-2017-09-28-1' of git://anongit.freedesktop.org/git/drm-misc into drm-fixes
+drm drm-next cb3cfbf79aff7decb4e5ee69a7c74864497f61dc
+	Merge tag 'drm-misc-next-2021-01-06' of git://anongit.freedesktop.org/drm/drm-misc into drm-next
+drm-misc drm-misc-next-fixes be3e477effba636ad25dcd244db264c6cd5c1f36
+	drm/komeda: Fix bit check to import to value of proper type
+drm-intel drm-intel-next-fixes 046f70d31ddb2069941aec54966fec5b7fbc7b7b
+	drm/i915/tgl: Fix REVID macros for TGL to fetch correct stepping
+drm-amd drm-amd-next-fixes 2bd6bf03f4c1c59381d62c61d03f6cc3fe71f66e
+	Linux 4.14-rc1
+drm-misc drm-misc-next 42dceab0502751ecb9b41ca10eac2b474b824554
+	drm/panfrost: Use delayed timer as default in devfreq profile
+drm-intel drm-intel-next 67fba3f1c73b83569d171ae1fa463a537bbfe0a8
+	drm/i915/dp: Fix LTTPR vswing/pre-emp setting in non-transparent mode
+drm-intel drm-intel-next-queued 9d8fddf8579a2a20d0e8a8b631547069a62b953e
+	drm/i915: Disable outputs during unregister
+drm-amd drm-amd-next 754270c7c56292e97d0eff924a5d5d83f92add07
+	Merge branch 'drm-next-4.15' of git://people.freedesktop.org/~agd5f/linux into drm-next
+sound-upstream for-linus e4ea77f8e53f9accb9371fba34c189d0447ecce0
+	ALSA: usb-audio: Always apply the hw constraints for implicit fb sync
+sound-upstream for-next 75b1a8f9d62e50f05d0e4e9f3c8bcde32527ffc1
+	ALSA: Convert strlcpy to strscpy when return value is unused
+drm-intel topic/core-for-CI f21118d876413ac0166c2db7423b0d6ffdb515f4
+	HAX net/phy: Suppress WARN for calling stop while halted
+drm-intel drm-intel-gt-next 64362bc6a90dbec8648a71d582f9e5e3d9f3b73e
+	drm/i915/gt: Replace open-coded intel_engine_stop_cs()
+drm topic/iomem-mmap-vs-gup 85482fbab59eeb802af167510c5804dd6f521112
+	PCI: Revoke mappings like devmem
