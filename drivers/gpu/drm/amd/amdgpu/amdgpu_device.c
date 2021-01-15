@@ -3034,7 +3034,7 @@ bool amdgpu_device_asic_has_dc_support(enum amd_asic_type asic_type)
 #endif
 	default:
 		if (amdgpu_dc > 0)
-			DRM_INFO("Display Core has been requested via kernel parameter "
+			DRM_INFO_ONCE("Display Core has been requested via kernel parameter "
 					 "but isn't supported by ASIC, ignoring\n");
 		return false;
 	}
@@ -4155,8 +4155,8 @@ bool amdgpu_device_has_job_running(struct amdgpu_device *adev)
 			continue;
 
 		spin_lock(&ring->sched.job_list_lock);
-		job = list_first_entry_or_null(&ring->sched.ring_mirror_list,
-				struct drm_sched_job, node);
+		job = list_first_entry_or_null(&ring->sched.pending_list,
+					       struct drm_sched_job, list);
 		spin_unlock(&ring->sched.job_list_lock);
 		if (job)
 			return true;
