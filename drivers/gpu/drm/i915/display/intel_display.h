@@ -630,6 +630,8 @@ u32 skl_plane_ctl_crtc(const struct intel_crtc_state *crtc_state);
 u32 skl_plane_stride(const struct intel_plane_state *plane_state,
 		     int plane);
 int skl_check_plane_surface(struct intel_plane_state *plane_state);
+int skl_calc_main_surface_offset(const struct intel_plane_state *plane_state,
+				 int *x, int *y, u32 *offset);
 int skl_format_to_fourcc(int format, bool rgb_order, bool alpha);
 int bdw_get_pipemisc_bpp(struct intel_crtc *crtc);
 unsigned int intel_plane_fence_y_offset(const struct intel_plane_state *plane_state);
@@ -641,7 +643,7 @@ void intel_display_print_error_state(struct drm_i915_error_state_buf *e,
 
 bool
 intel_format_info_is_yuv_semiplanar(const struct drm_format_info *info,
-				    uint64_t modifier);
+				    u64 modifier);
 
 int intel_plane_compute_gtt(struct intel_plane_state *plane_state);
 u32 intel_plane_compute_aligned_offset(int *x, int *y,

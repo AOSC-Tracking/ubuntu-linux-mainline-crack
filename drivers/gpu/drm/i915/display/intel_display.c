@@ -1954,7 +1954,7 @@ int intel_main_to_aux_plane(const struct drm_framebuffer *fb, int main_plane)
 
 bool
 intel_format_info_is_yuv_semiplanar(const struct drm_format_info *info,
-				    uint64_t modifier)
+				    u64 modifier)
 {
 	return info->is_yuv &&
 	       info->num_planes == (is_ccs_modifier(modifier) ? 4 : 2);
@@ -3752,33 +3752,19 @@ static int intel_plane_max_height(struct intel_plane *plane,
 		return INT_MAX;
 }
 
-static int skl_check_main_surface(struct intel_plane_state *plane_state)
+int skl_calc_main_surface_offset(const struct intel_plane_state *plane_state,
+				 int *x, int *y, u32 *offset)
 {
 	struct intel_plane *plane = to_intel_plane(plane_state->uapi.plane);
 	struct drm_i915_private *dev_priv = to_i915(plane->base.dev);
 	const struct drm_framebuffer *fb = plane_state->hw.fb;
-	unsigned int rotation = plane_state->hw.rotation;
-	int x = plane_state->uapi.src.x1 >> 16;
-	int y = plane_state->uapi.src.y1 >> 16;
-	int w = drm_rect_width(&plane_state->uapi.src) >> 16;
-	int h = drm_rect_height(&plane_state->uapi.src) >> 16;
-	int min_width = intel_plane_min_width(plane, fb, 0, rotation);
-	int max_width = intel_plane_max_width(plane, fb, 0, rotation);
-	int max_height = intel_plane_max_height(plane, fb, 0, rotation);
-	int aux_plane = intel_main_to_aux_plane(fb, 0);
-	u32 aux_offset = plane_state->color_plane[aux_plane].offset;
-	u32 alignment, offset;
+	const int aux_plane = intel_main_to_aux_plane(fb, 0);
+	const u32 aux_offset = plane_state->color_plane[aux_plane].offset;
+	const u32 alignment = intel_surf_alignment(fb, 0);
+	const int w = drm_rect_width(&plane_state->uapi.src) >> 16;
 
-	if (w > max_width || w < min_width || h > max_height) {
-		drm_dbg_kms(&dev_priv->drm,
-			    "requested Y/RGB source size %dx%d outside limits (min: %dx1 max: %dx%d)\n",
-			    w, h, min_width, max_width, max_height);
-		return -EINVAL;
-	}
-
-	intel_add_fb_offsets(&x, &y, plane_state, 0);
-	offset = intel_plane_compute_aligned_offset(&x, &y, plane_state, 0);
-	alignment = intel_surf_alignment(fb, 0);
+	intel_add_fb_offsets(x, y, plane_state, 0);
+	*offset = intel_plane_compute_aligned_offset(x, y, plane_state, 0);
 	if (drm_WARN_ON(&dev_priv->drm, alignment && !is_power_of_2(alignment)))
 		return -EINVAL;
 
@@ -3787,9 +3773,10 @@ static int skl_check_main_surface(struct intel_plane_state *plane_state)
 	 * main surface offset, and it must be non-negative. Make
 	 * sure that is what we will get.
 	 */
-	if (aux_plane && offset > aux_offset)
-		offset = intel_plane_adjust_aligned_offset(&x, &y, plane_state, 0,
-							   offset, aux_offset & ~(alignment - 1));
+	if (aux_plane && *offset > aux_offset)
+		*offset = intel_plane_adjust_aligned_offset(x, y, plane_state, 0,
+							    *offset,
+							    aux_offset & ~(alignment - 1));
 
 	/*
 	 * When using an X-tiled surface, the plane blows up
@@ -3800,17 +3787,50 @@ static int skl_check_main_surface(struct intel_plane_state *plane_state)
 	if (fb->modifier == I915_FORMAT_MOD_X_TILED) {
 		int cpp = fb->format->cpp[0];
 
-		while ((x + w) * cpp > plane_state->color_plane[0].stride) {
-			if (offset == 0) {
+		while ((*x + w) * cpp > plane_state->color_plane[0].stride) {
+			if (*offset == 0) {
 				drm_dbg_kms(&dev_priv->drm,
 					    "Unable to find suitable display surface offset due to X-tiling\n");
 				return -EINVAL;
 			}
 
-			offset = intel_plane_adjust_aligned_offset(&x, &y, plane_state, 0,
-								   offset, offset - alignment);
+			*offset = intel_plane_adjust_aligned_offset(x, y, plane_state, 0,
+								    *offset,
+								    *offset - alignment);
 		}
 	}
+
+	return 0;
+}
+
+static int skl_check_main_surface(struct intel_plane_state *plane_state)
+{
+	struct intel_plane *plane = to_intel_plane(plane_state->uapi.plane);
+	struct drm_i915_private *dev_priv = to_i915(plane->base.dev);
+	const struct drm_framebuffer *fb = plane_state->hw.fb;
+	const unsigned int rotation = plane_state->hw.rotation;
+	int x = plane_state->uapi.src.x1 >> 16;
+	int y = plane_state->uapi.src.y1 >> 16;
+	const int w = drm_rect_width(&plane_state->uapi.src) >> 16;
+	const int h = drm_rect_height(&plane_state->uapi.src) >> 16;
+	const int min_width = intel_plane_min_width(plane, fb, 0, rotation);
+	const int max_width = intel_plane_max_width(plane, fb, 0, rotation);
+	const int max_height = intel_plane_max_height(plane, fb, 0, rotation);
+	const int aux_plane = intel_main_to_aux_plane(fb, 0);
+	const u32 alignment = intel_surf_alignment(fb, 0);
+	u32 offset;
+	int ret;
+
+	if (w > max_width || w < min_width || h > max_height) {
+		drm_dbg_kms(&dev_priv->drm,
+			    "requested Y/RGB source size %dx%d outside limits (min: %dx1 max: %dx%d)\n",
+			    w, h, min_width, max_width, max_height);
+		return -EINVAL;
+	}
+
+	ret = skl_calc_main_surface_offset(plane_state, &x, &y, &offset);
+	if (ret)
+		return ret;
 
 	/*
 	 * CCS AUX surface doesn't have its own x/y offsets, we must make sure
@@ -5790,7 +5810,7 @@ static void cnl_program_nearest_filter_coefs(struct drm_i915_private *dev_priv,
 	intel_de_write_fw(dev_priv, CNL_PS_COEF_INDEX_SET(pipe, id, set), 0);
 }
 
-inline u32 skl_scaler_get_filter_select(enum drm_scaling_filter filter, int set)
+u32 skl_scaler_get_filter_select(enum drm_scaling_filter filter, int set)
 {
 	if (filter == DRM_SCALING_FILTER_NEAREST_NEIGHBOR) {
 		return (PS_FILTER_PROGRAMMED |
@@ -10931,8 +10951,6 @@ static bool hsw_get_pipe_config(struct intel_crtc *crtc,
 	struct intel_display_power_domain_set power_domain_set = { };
 	bool active;
 	u32 tmp;
-
-	pipe_config->master_transcoder = INVALID_TRANSCODER;
 
 	if (!intel_display_power_get_in_set_if_enabled(dev_priv, &power_domain_set,
 						       POWER_DOMAIN_PIPE(crtc->pipe)))
