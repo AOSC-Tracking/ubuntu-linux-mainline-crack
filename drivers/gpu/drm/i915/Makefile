@@ -59,6 +59,7 @@ i915-y += i915_drv.o \
 
 # core library code
 i915-y += \
+	dma_resv_utils.o \
 	i915_memcpy.o \
 	i915_mm.o \
 	i915_sw_fence.o \
@@ -83,6 +84,7 @@ gt-y += \
 	gt/gen6_engine_cs.o \
 	gt/gen6_ppgtt.o \
 	gt/gen7_renderclear.o \
+	gt/gen8_engine_cs.o \
 	gt/gen8_ppgtt.o \
 	gt/intel_breadcrumbs.o \
 	gt/intel_context.o \
@@ -92,6 +94,7 @@ gt-y += \
 	gt/intel_engine_heartbeat.o \
 	gt/intel_engine_pm.o \
 	gt/intel_engine_user.o \
+	gt/intel_execlists_submission.o \
 	gt/intel_ggtt.o \
 	gt/intel_ggtt_fencing.o \
 	gt/intel_gt.o \
@@ -107,6 +110,7 @@ gt-y += \
 	gt/intel_mocs.o \
 	gt/intel_ppgtt.o \
 	gt/intel_rc6.o \
+	gt/intel_region_lmem.o \
 	gt/intel_renderstate.o \
 	gt/intel_reset.o \
 	gt/intel_ring.o \
@@ -167,7 +171,6 @@ i915-y += \
 	  i915_scheduler.o \
 	  i915_trace_points.o \
 	  i915_vma.o \
-	  intel_region_lmem.o \
 	  intel_wopcm.o
 
 # general-purpose microcontroller (GuC) support

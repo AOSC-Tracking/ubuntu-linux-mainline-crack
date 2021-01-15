@@ -159,30 +159,7 @@ static void ring_setup_status_page(struct intel_engine_cs *engine)
 
 static bool stop_ring(struct intel_engine_cs *engine)
 {
-	struct drm_i915_private *dev_priv = engine->i915;
-
-	if (INTEL_GEN(dev_priv) > 2) {
-		ENGINE_WRITE(engine,
-			     RING_MI_MODE, _MASKED_BIT_ENABLE(STOP_RING));
-		if (intel_wait_for_register(engine->uncore,
-					    RING_MI_MODE(engine->mmio_base),
-					    MODE_IDLE,
-					    MODE_IDLE,
-					    1000)) {
-			drm_err(&dev_priv->drm,
-				"%s : timed out trying to stop ring\n",
-				engine->name);
-
-			/*
-			 * Sometimes we observe that the idle flag is not
-			 * set even though the ring is empty. So double
-			 * check before giving up.
-			 */
-			if (ENGINE_READ(engine, RING_HEAD) !=
-			    ENGINE_READ(engine, RING_TAIL))
-				return false;
-		}
-	}
+	intel_engine_stop_cs(engine);
 
 	ENGINE_WRITE(engine, RING_HEAD, ENGINE_READ(engine, RING_TAIL));
 
@@ -212,9 +189,16 @@ static void set_pp_dir(struct intel_engine_cs *engine)
 {
 	struct i915_address_space *vm = vm_alias(engine->gt->vm);
 
-	if (vm) {
-		ENGINE_WRITE(engine, RING_PP_DIR_DCLV, PP_DIR_DCLV_2G);
-		ENGINE_WRITE(engine, RING_PP_DIR_BASE, pp_dir(vm));
+	if (!vm)
+		return;
+
+	ENGINE_WRITE(engine, RING_PP_DIR_DCLV, PP_DIR_DCLV_2G);
+	ENGINE_WRITE(engine, RING_PP_DIR_BASE, pp_dir(vm));
+
+	if (INTEL_GEN(engine->i915) >= 7) {
+		ENGINE_WRITE(engine,
+			     RING_MODE_GEN7,
+			     _MASKED_BIT_ENABLE(GFX_PPGTT_ENABLE));
 	}
 }
 
@@ -320,6 +304,39 @@ out:
 	intel_uncore_forcewake_put(engine->uncore, FORCEWAKE_ALL);
 
 	return ret;
+}
+
+static void sanitize_hwsp(struct intel_engine_cs *engine)
+{
+	struct intel_timeline *tl;
+
+	list_for_each_entry(tl, &engine->status_page.timelines, engine_link)
+		intel_timeline_reset_seqno(tl);
+}
+
+static void xcs_sanitize(struct intel_engine_cs *engine)
+{
+	/*
+	 * Poison residual state on resume, in case the suspend didn't!
+	 *
+	 * We have to assume that across suspend/resume (or other loss
+	 * of control) that the contents of our pinned buffers has been
+	 * lost, replaced by garbage. Since this doesn't always happen,
+	 * let's poison such state so that we more quickly spot when
+	 * we falsely assume it has been preserved.
+	 */
+	if (IS_ENABLED(CONFIG_DRM_I915_DEBUG_GEM))
+		memset(engine->status_page.addr, POISON_INUSE, PAGE_SIZE);
+
+	/*
+	 * The kernel_context HWSP is stored in the status_page. As above,
+	 * that may be lost on resume/initialisation, and so we need to
+	 * reset the value in the HWSP.
+	 */
+	sanitize_hwsp(engine);
+
+	/* And scrub the dirty cachelines for the HWSP */
+	clflush_cache_range(engine->status_page.addr, PAGE_SIZE);
 }
 
 static void reset_prepare(struct intel_engine_cs *engine)
@@ -441,10 +458,8 @@ static void reset_cancel(struct intel_engine_cs *engine)
 	spin_lock_irqsave(&engine->active.lock, flags);
 
 	/* Mark all submitted requests as skipped. */
-	list_for_each_entry(request, &engine->active.requests, sched.link) {
-		i915_request_set_error_once(request, -EIO);
-		i915_request_mark_complete(request);
-	}
+	list_for_each_entry(request, &engine->active.requests, sched.link)
+		i915_request_mark_eio(request);
 	intel_engine_signal_breadcrumbs(engine);
 
 	/* Remaining _unready_ requests will be nop'ed when submitted */
@@ -603,6 +618,7 @@ static int ring_context_pin(struct intel_context *ce, void *unused)
 static void ring_context_reset(struct intel_context *ce)
 {
 	intel_ring_reset(ce->ring, ce->ring->emit);
+	clear_bit(CONTEXT_VALID_BIT, &ce->flags);
 }
 
 static const struct intel_context_ops ring_context_ops = {
@@ -654,9 +670,9 @@ static int load_pd_dir(struct i915_request *rq,
 	return rq->engine->emit_flush(rq, EMIT_FLUSH);
 }
 
-static inline int mi_set_context(struct i915_request *rq,
-				 struct intel_context *ce,
-				 u32 flags)
+static int mi_set_context(struct i915_request *rq,
+			  struct intel_context *ce,
+			  u32 flags)
 {
 	struct intel_engine_cs *engine = rq->engine;
 	struct drm_i915_private *i915 = engine->i915;
@@ -1071,6 +1087,8 @@ static void setup_common(struct intel_engine_cs *engine)
 	setup_irq(engine);
 
 	engine->resume = xcs_resume;
+	engine->sanitize = xcs_sanitize;
+
 	engine->reset.prepare = reset_prepare;
 	engine->reset.rewind = reset_rewind;
 	engine->reset.cancel = reset_cancel;
