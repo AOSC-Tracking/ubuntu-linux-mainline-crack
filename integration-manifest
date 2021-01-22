@@ -1,0 +1,38 @@
+drm drm-fixes 06ee38dc2aab3b5a09feb74128cf7326a490b788
+	Merge tag 'amd-drm-fixes-5.11-2021-01-21' of https://gitlab.freedesktop.org/agd5f/linux into drm-fixes
+drm-misc drm-misc-fixes a37eef63bc9e16e06361b539e528058146af80ab
+	drm/syncobj: Fix use-after-free
+drm-intel drm-intel-fixes 1c4995b0a576d24bb7ead991fb037c8b47ab6e32
+	drm/i915: Only enable DFP 4:4:4->4:2:0 conversion when outputting YCbCr 4:4:4
+drm-amd drm-amd-fixes 2b702e72e33bbdec0764cfb6e1dd00fe1142ae55
+	Merge tag 'drm-misc-fixes-2017-09-28-1' of git://anongit.freedesktop.org/git/drm-misc into drm-fixes
+drm drm-next d82afcf9caaac26ce2642511115bca9dacf30f41
+	Merge tag 'drm-intel-gt-next-2021-01-21-1' of git://anongit.freedesktop.org/drm/drm-intel into drm-next
+drm-misc drm-misc-next-fixes be3e477effba636ad25dcd244db264c6cd5c1f36
+	drm/komeda: Fix bit check to import to value of proper type
+drm-intel drm-intel-next-fixes 046f70d31ddb2069941aec54966fec5b7fbc7b7b
+	drm/i915/tgl: Fix REVID macros for TGL to fetch correct stepping
+drm-amd drm-amd-next-fixes 2bd6bf03f4c1c59381d62c61d03f6cc3fe71f66e
+	Linux 4.14-rc1
+drm-misc drm-misc-next 25e524bfbda19b3d9c7fdb234e3fe2fba10e28f7
+	dt-bindings: display: mxsfb: Add compatible for i.MX8MM
+drm-intel drm-intel-next d1e2775e9b9690b3f4488ee8e44773b580654d68
+	drm/i915/tgl: Add Clear Color support for TGL Render Decompression
+drm-intel drm-intel-next-queued 9d8fddf8579a2a20d0e8a8b631547069a62b953e
+	drm/i915: Disable outputs during unregister
+drm-amd drm-amd-next 754270c7c56292e97d0eff924a5d5d83f92add07
+	Merge branch 'drm-next-4.15' of git://people.freedesktop.org/~agd5f/linux into drm-next
+sound-upstream for-linus 5de3b9430221b11a5e1fc2f5687af80777c8392a
+	ALSA: hda/realtek: Enable headset of ASUS B1400CEPE with ALC256
+sound-upstream for-next 85db1cfb13e37d24be225739dc0e2da478dd2c1c
+	ALSA: usb-audio: Fix "RANGE setting not yet supported" errors
+drm-intel topic/core-for-CI 4a25de48cb4a28994172165e41a8b75e256a5e17
+	HAX net/phy: Suppress WARN from phy_error
+drm-intel drm-intel-gt-next 44162ba2d4955f11ffb39a0175fcd2d84554d5f6
+	drm/i915/gem: consolidate 2big error checking for object sizes
+drm topic/iomem-mmap-vs-gup 74b30195395c406c787280a77ae55aed82dbbfc7
+	sysfs: Support zapping of binary attr mmaps
+drm topic/nouveau-ampere-modeset 584265dfec70e78ce2085b82ed389f27e06fbca0
+	Merge branch '04.01-ampere-lite' of git://github.com/skeggsb/linux into topic/nouveau-ampere-modeset
+drm-intel topic/adl-s-enabling 0883d63b19bbd6bb09f27786e768c1af09aa0ede
+	drm/i915/adl_s: Add ADL-S platform info and PCI ids
