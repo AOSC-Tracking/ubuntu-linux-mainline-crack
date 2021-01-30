@@ -1,6 +1,5 @@
+/* SPDX-License-Identifier: MIT */
 /*
- * SPDX-License-Identifier: MIT
- *
  * Copyright © 2019 Intel Corporation
  */
 
@@ -517,11 +516,6 @@ struct intel_engine_cs {
 		 * @active: Number of contexts currently scheduled in.
 		 */
 		unsigned int active;
-
-		/**
-		 * @lock: Lock protecting the below fields.
-		 */
-		seqcount_t lock;
 
 		/**
 		 * @total: Total time this engine was busy.
