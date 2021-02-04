@@ -311,7 +311,7 @@ i915_request_create(struct intel_context *ce);
 
 void __i915_request_skip(struct i915_request *rq);
 void i915_request_set_error_once(struct i915_request *rq, int error);
-void i915_request_mark_eio(struct i915_request *rq);
+struct i915_request *i915_request_mark_eio(struct i915_request *rq);
 
 struct i915_request *__i915_request_commit(struct i915_request *request);
 void __i915_request_queue(struct i915_request *rq,
@@ -614,6 +614,11 @@ i915_request_active_timeline(const struct i915_request *rq)
 	 */
 	return rcu_dereference_protected(rq->timeline,
 					 lockdep_is_held(&rq->engine->active.lock));
+}
+
+static inline bool i915_request_use_scheduler(const struct i915_request *rq)
+{
+	return intel_engine_has_scheduler(rq->engine);
 }
 
 #endif /* I915_REQUEST_H */
