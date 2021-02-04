@@ -209,8 +209,7 @@ static void intel_hpd_init_pins(struct drm_i915_private *dev_priv)
 
 	if (HAS_PCH_DG1(dev_priv))
 		hpd->pch_hpd = hpd_sde_dg1;
-	else if (HAS_PCH_TGP(dev_priv) || HAS_PCH_JSP(dev_priv) ||
-		 HAS_PCH_ICP(dev_priv) || HAS_PCH_MCC(dev_priv))
+	else if (INTEL_PCH_TYPE(dev_priv) >= PCH_ICP)
 		hpd->pch_hpd = hpd_icp;
 	else if (HAS_PCH_CNP(dev_priv) || HAS_PCH_SPT(dev_priv))
 		hpd->pch_hpd = hpd_spt;
@@ -2290,7 +2289,7 @@ static u32 gen8_de_port_aux_mask(struct drm_i915_private *dev_priv)
 
 static u32 gen8_de_pipe_fault_mask(struct drm_i915_private *dev_priv)
 {
-	if (IS_ROCKETLAKE(dev_priv))
+	if (HAS_D12_PLANE_MINIMIZATION(dev_priv))
 		return RKL_DE_PIPE_IRQ_FAULT_ERRORS;
 	else if (INTEL_GEN(dev_priv) >= 11)
 		return GEN11_DE_PIPE_IRQ_FAULT_ERRORS;
@@ -4392,7 +4391,7 @@ static void intel_irq_postinstall(struct drm_i915_private *dev_priv)
  */
 int intel_irq_install(struct drm_i915_private *dev_priv)
 {
-	int irq = dev_priv->drm.pdev->irq;
+	int irq = to_pci_dev(dev_priv->drm.dev)->irq;
 	int ret;
 
 	/*
@@ -4427,7 +4426,7 @@ int intel_irq_install(struct drm_i915_private *dev_priv)
  */
 void intel_irq_uninstall(struct drm_i915_private *dev_priv)
 {
-	int irq = dev_priv->drm.pdev->irq;
+	int irq = to_pci_dev(dev_priv->drm.dev)->irq;
 
 	/*
 	 * FIXME we can get called twice during driver probe
@@ -4487,5 +4486,5 @@ bool intel_irqs_enabled(struct drm_i915_private *dev_priv)
 
 void intel_synchronize_irq(struct drm_i915_private *i915)
 {
-	synchronize_irq(i915->drm.pdev->irq);
+	synchronize_irq(to_pci_dev(i915->drm.dev)->irq);
 }
