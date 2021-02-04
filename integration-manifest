@@ -1,0 +1,40 @@
+drm drm-fixes 6fc5e3022f0edd8243a9e53ab187a3787bf2d108
+	Merge tag 'drm-misc-fixes-2021-02-02' of git://anongit.freedesktop.org/drm/drm-misc into drm-fixes
+drm-misc drm-misc-fixes 873e5bb9fbd99e4a26c448b5c7af942a6d7aa60d
+	drm/dp_mst: Don't report ports connected if nothing is attached to them
+drm-intel drm-intel-fixes 88ebe1f572e284ecfe088648e0ae93803a75a459
+	drm/i915/dp: Fix LTTPR vswing/pre-emp setting in non-transparent mode
+drm-amd drm-amd-fixes 2b702e72e33bbdec0764cfb6e1dd00fe1142ae55
+	Merge tag 'drm-misc-fixes-2017-09-28-1' of git://anongit.freedesktop.org/git/drm-misc into drm-fixes
+drm drm-next 54c820d05ee8156b1379ca0efd011b77e23cabb2
+	Merge tag 'mediatek-drm-next-5.12' of https://git.kernel.org/pub/scm/linux/kernel/git/chunkuang.hu/linux into drm-next
+drm-misc drm-misc-next-fixes be3e477effba636ad25dcd244db264c6cd5c1f36
+	drm/komeda: Fix bit check to import to value of proper type
+drm-intel drm-intel-next-fixes 046f70d31ddb2069941aec54966fec5b7fbc7b7b
+	drm/i915/tgl: Fix REVID macros for TGL to fetch correct stepping
+drm-amd drm-amd-next-fixes 2bd6bf03f4c1c59381d62c61d03f6cc3fe71f66e
+	Linux 4.14-rc1
+drm-misc drm-misc-next 6fec777c11968b5ed770ca9c37306f66387bdfd3
+	drm/dp_mst: Use DP_MST_LOGICAL_PORT_0 instead of magic number
+drm-intel drm-intel-next 7962893ecb853aa7c8925ce237ab6c4274cfc1c7
+	drm/i915: Disable runtime power management during shutdown
+drm-intel drm-intel-next-queued 9d8fddf8579a2a20d0e8a8b631547069a62b953e
+	drm/i915: Disable outputs during unregister
+drm-amd drm-amd-next 754270c7c56292e97d0eff924a5d5d83f92add07
+	Merge branch 'drm-next-4.15' of git://people.freedesktop.org/~agd5f/linux into drm-next
+sound-upstream for-linus 4841b8e6318a7f0ae57c4e5ec09032ea057c97a8
+	ALSA: hda/realtek: modify EAPD in the ALC886
+sound-upstream for-next 3c4ab49ec59b94651dea7c7b0104c781c79c62b5
+	ALSA: core: Fix the debugfs removal at snd_card_free()
+drm-intel topic/core-for-CI be9bde5a8b7b5cff58bd01c8ca094d571295c40b
+	Revert "rtc: mc146818: Detect and handle broken RTCs"
+drm-intel drm-intel-gt-next deaaa934cdea538e3ceb521ff3f81f794062e48a
+	drm/i915/gtt/dg1: add PTE_LM plumbing for GGTT
+drm topic/iomem-mmap-vs-gup 74b30195395c406c787280a77ae55aed82dbbfc7
+	sysfs: Support zapping of binary attr mmaps
+drm topic/nouveau-ampere-modeset 584265dfec70e78ce2085b82ed389f27e06fbca0
+	Merge branch '04.01-ampere-lite' of git://github.com/skeggsb/linux into topic/nouveau-ampere-modeset
+drm-intel topic/adl-s-enabling 4043277ad18fc7cb9a79d0d043063fb5f42a6f06
+	drm/i915/adl_s: Add GT and CTX WAs for ADL-S
+drm-intel topic/drm-device-pdev 9ff06c38530099b197b6389193e8cc34ab60288f
+	drm/i915/gvt: Remove references to struct drm_device.pdev
