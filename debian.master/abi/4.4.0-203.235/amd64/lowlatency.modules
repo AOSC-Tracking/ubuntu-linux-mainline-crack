@@ -440,7 +440,6 @@ bcma
 bcma-hcd
 bd6107
 bdc
-bdc_pci
 be2iscsi
 be2net
 befs
