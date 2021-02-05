@@ -14,18 +14,13 @@
 #include "i915_scheduler_types.h"
 
 struct drm_printer;
+struct intel_engine_cs;
 
-#define priolist_for_each_request(it, plist, idx) \
-	for (idx = 0; idx < ARRAY_SIZE((plist)->requests); idx++) \
-		list_for_each_entry(it, &(plist)->requests[idx], sched.link)
+#define priolist_for_each_request(it, plist) \
+	list_for_each_entry(it, &(plist)->requests, sched.link)
 
-#define priolist_for_each_request_consume(it, n, plist, idx) \
-	for (; \
-	     (plist)->used ? (idx = __ffs((plist)->used)), 1 : 0; \
-	     (plist)->used &= ~BIT(idx)) \
-		list_for_each_entry_safe(it, n, \
-					 &(plist)->requests[idx], \
-					 sched.link)
+#define priolist_for_each_request_consume(it, n, plist) \
+	list_for_each_entry_safe(it, n, &(plist)->requests, sched.link)
 
 void i915_sched_node_init(struct i915_sched_node *node);
 void i915_sched_node_reinit(struct i915_sched_node *node);
@@ -39,15 +34,28 @@ int i915_sched_node_add_dependency(struct i915_sched_node *node,
 				   struct i915_sched_node *signal,
 				   unsigned long flags);
 
-void i915_sched_node_fini(struct i915_sched_node *node);
+void i915_sched_node_retire(struct i915_sched_node *node);
 
-void i915_schedule(struct i915_request *request,
-		   const struct i915_sched_attr *attr);
+void i915_sched_init_ipi(struct i915_sched_ipi *ipi);
 
-void i915_schedule_bump_priority(struct i915_request *rq, unsigned int bump);
+void i915_request_set_priority(struct i915_request *request, int prio);
 
-struct list_head *
-i915_sched_lookup_priolist(struct intel_engine_cs *engine, int prio);
+void i915_request_enqueue(struct i915_request *request);
+
+struct i915_request *
+__i915_sched_rewind_requests(struct intel_engine_cs *engine);
+void __i915_sched_defer_request(struct intel_engine_cs *engine,
+				struct i915_request *request);
+
+bool __i915_sched_suspend_request(struct intel_engine_cs *engine,
+				  struct i915_request *rq);
+void __i915_sched_resume_request(struct intel_engine_cs *engine,
+				 struct i915_request *request);
+
+bool i915_sched_suspend_request(struct intel_engine_cs *engine,
+				struct i915_request *request);
+void i915_sched_resume_request(struct intel_engine_cs *engine,
+			       struct i915_request *rq);
 
 void __i915_priolist_free(struct i915_priolist *p);
 static inline void i915_priolist_free(struct i915_priolist *p)
