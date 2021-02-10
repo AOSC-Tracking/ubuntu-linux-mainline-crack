@@ -1,0 +1,38 @@
+drm drm-fixes 92bf22614b21a2706f4993b278017e437f7785b3
+	Linux 5.11-rc7
+drm-misc drm-misc-fixes 873e5bb9fbd99e4a26c448b5c7af942a6d7aa60d
+	drm/dp_mst: Don't report ports connected if nothing is attached to them
+drm-intel drm-intel-fixes 2f51312bebb77962a518b4c6de777dd378b6110a
+	drm/i915/tgl+: Make sure TypeC FIA is powered up when initializing it
+drm-amd drm-amd-fixes 2b702e72e33bbdec0764cfb6e1dd00fe1142ae55
+	Merge tag 'drm-misc-fixes-2017-09-28-1' of git://anongit.freedesktop.org/git/drm-misc into drm-fixes
+drm drm-next 4c3a3292730c56591472717d8c5c0faf74f6c6bb
+	drm/amd/display: fix unused variable warning
+drm-misc drm-misc-next-fixes 4b8878eefa0a3b65e2e016db49014ea66fb9fd45
+	drm/dp_mst: Don't cache EDIDs for physical ports
+drm-intel drm-intel-next-fixes 7a6c6243b44a439bda4bf099032be35ebcf53406
+	drm/i915: Reject 446-480MHz HDMI clock on GLK
+drm-amd drm-amd-next-fixes 2bd6bf03f4c1c59381d62c61d03f6cc3fe71f66e
+	Linux 4.14-rc1
+drm-misc drm-misc-next bce724fa58e67d24fe9eddb40ebb665fbe4bd7e8
+	drm/aspeed: Use dt matching for default register values
+drm-intel drm-intel-next 5ffb9afaa909f1a254adab67f2d0557a5cead2e9
+	drm/i915: Warn when releasing a frontbuffer while in use
+drm-intel drm-intel-gt-next 862abd07682dba074b62ef479181e79186ffe66b
+	drm/i915: Wrap i915_request_use_semaphores()
+drm-amd drm-amd-next 754270c7c56292e97d0eff924a5d5d83f92add07
+	Merge branch 'drm-next-4.15' of git://people.freedesktop.org/~agd5f/linux into drm-next
+sound-upstream for-linus 4841b8e6318a7f0ae57c4e5ec09032ea057c97a8
+	ALSA: hda/realtek: modify EAPD in the ALC886
+sound-upstream for-next 5427c7d6296ee574037c4a6649ac45a9474d1f13
+	ALSA: hda: intel-dsp-config: Add SND_INTEL_BYT_PREFER_SOF Kconfig option
+drm-intel topic/core-for-CI be9bde5a8b7b5cff58bd01c8ca094d571295c40b
+	Revert "rtc: mc146818: Detect and handle broken RTCs"
+drm topic/iomem-mmap-vs-gup 74b30195395c406c787280a77ae55aed82dbbfc7
+	sysfs: Support zapping of binary attr mmaps
+drm topic/nouveau-ampere-modeset 584265dfec70e78ce2085b82ed389f27e06fbca0
+	Merge branch '04.01-ampere-lite' of git://github.com/skeggsb/linux into topic/nouveau-ampere-modeset
+drm-intel topic/adl-s-enabling 4043277ad18fc7cb9a79d0d043063fb5f42a6f06
+	drm/i915/adl_s: Add GT and CTX WAs for ADL-S
+drm-intel topic/drm-device-pdev 9ff06c38530099b197b6389193e8cc34ab60288f
+	drm/i915/gvt: Remove references to struct drm_device.pdev
