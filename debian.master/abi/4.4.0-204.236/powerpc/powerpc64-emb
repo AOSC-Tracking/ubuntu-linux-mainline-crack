@@ -14906,6 +14906,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x5a847d5d	blk_mq_freeze_queue
 EXPORT_SYMBOL_GPL vmlinux 0x5aa3869a	irq_gc_mask_set_bit
 EXPORT_SYMBOL_GPL vmlinux 0x5ab9738a	evm_verifyxattr
 EXPORT_SYMBOL_GPL vmlinux 0x5aba1ac9	ahash_register_instance
+EXPORT_SYMBOL_GPL vmlinux 0x5adecfc5	input_ff_flush
 EXPORT_SYMBOL_GPL vmlinux 0x5ae131d2	fat_sync_inode
 EXPORT_SYMBOL_GPL vmlinux 0x5b028936	usb_bus_list_lock
 EXPORT_SYMBOL_GPL vmlinux 0x5b21caff	cm_notify_event

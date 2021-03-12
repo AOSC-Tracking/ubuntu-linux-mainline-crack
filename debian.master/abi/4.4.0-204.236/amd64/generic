@@ -18457,6 +18457,7 @@ EXPORT_SYMBOL_GPL vmlinux 0xdc0b58ab	shmem_file_setup
 EXPORT_SYMBOL_GPL vmlinux 0xdc0e5479	gpiochip_add_pingroup_range
 EXPORT_SYMBOL_GPL vmlinux 0xdc14a211	xen_hvm_evtchn_do_upcall
 EXPORT_SYMBOL_GPL vmlinux 0xdc221885	set_cpus_allowed_ptr
+EXPORT_SYMBOL_GPL vmlinux 0xdc2971f7	input_ff_flush
 EXPORT_SYMBOL_GPL vmlinux 0xdc2d002f	regulator_bulk_get
 EXPORT_SYMBOL_GPL vmlinux 0xdc355427	efivars_kobject
 EXPORT_SYMBOL_GPL vmlinux 0xdc359b25	devm_acpi_dma_controller_register

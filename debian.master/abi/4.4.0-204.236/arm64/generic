@@ -14436,6 +14436,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x30c18f68	ip6_datagram_connect
 EXPORT_SYMBOL_GPL vmlinux 0x30ceade4	dm_internal_resume
 EXPORT_SYMBOL_GPL vmlinux 0x30eb1d56	splice_to_pipe
 EXPORT_SYMBOL_GPL vmlinux 0x3109b751	cpu_clock
+EXPORT_SYMBOL_GPL vmlinux 0x31157bf6	input_ff_flush
 EXPORT_SYMBOL_GPL vmlinux 0x31266931	con_debug_leave
 EXPORT_SYMBOL_GPL vmlinux 0x312d8c25	pci_try_reset_bus
 EXPORT_SYMBOL_GPL vmlinux 0x3148e65b	scsi_queue_work

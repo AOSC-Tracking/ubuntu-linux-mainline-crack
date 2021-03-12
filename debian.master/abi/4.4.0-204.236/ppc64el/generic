@@ -14397,6 +14397,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x2e8b3828	transport_add_device
 EXPORT_SYMBOL_GPL vmlinux 0x2e95d7d4	devfreq_event_set_event
 EXPORT_SYMBOL_GPL vmlinux 0x2ea2a1aa	serial8250_rpm_get
 EXPORT_SYMBOL_GPL vmlinux 0x2ebe3135	cpu_is_hotpluggable
+EXPORT_SYMBOL_GPL vmlinux 0x2eea2ed9	input_ff_flush
 EXPORT_SYMBOL_GPL vmlinux 0x2efbb55a	fat_detach
 EXPORT_SYMBOL_GPL vmlinux 0x2f0d9053	usb_otg_state_string
 EXPORT_SYMBOL_GPL vmlinux 0x2f105562	debugfs_create_devm_seqfile

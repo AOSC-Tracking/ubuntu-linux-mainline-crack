@@ -15816,6 +15816,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x3822f3d1	vfs_setlease
 EXPORT_SYMBOL_GPL vmlinux 0x3845b1ea	cpuidle_unregister_driver
 EXPORT_SYMBOL_GPL vmlinux 0x385f5a6e	regulator_bulk_unregister_supply_alias
 EXPORT_SYMBOL_GPL vmlinux 0x38722f80	kernel_fpu_end
+EXPORT_SYMBOL_GPL vmlinux 0x389bc0cf	input_ff_flush
 EXPORT_SYMBOL_GPL vmlinux 0x38a2a7f5	regmap_async_complete
 EXPORT_SYMBOL_GPL vmlinux 0x38a9c2c7	input_ff_effect_from_user
 EXPORT_SYMBOL_GPL vmlinux 0x38ae3baf	crypto_spawn_tfm2
