@@ -17081,6 +17081,7 @@ EXPORT_SYMBOL_GPL vmlinux 0xe8d90a36	pci_dev_run_wake
 EXPORT_SYMBOL_GPL vmlinux 0xe8e95e7c	usb_for_each_dev
 EXPORT_SYMBOL_GPL vmlinux 0xe915bcdf	sysfs_create_mount_point
 EXPORT_SYMBOL_GPL vmlinux 0xe9388204	gpiod_direction_output_raw
+EXPORT_SYMBOL_GPL vmlinux 0xe93a5084	input_ff_flush
 EXPORT_SYMBOL_GPL vmlinux 0xe93e49c3	devres_free
 EXPORT_SYMBOL_GPL vmlinux 0xe9474bde	dst_cache_init
 EXPORT_SYMBOL_GPL vmlinux 0xe95ced0d	sysfs_remove_link

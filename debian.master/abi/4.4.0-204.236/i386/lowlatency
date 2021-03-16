@@ -17582,6 +17582,7 @@ EXPORT_SYMBOL_GPL vmlinux 0xa7396f1f	simple_attr_read
 EXPORT_SYMBOL_GPL vmlinux 0xa7451533	key_type_encrypted
 EXPORT_SYMBOL_GPL vmlinux 0xa7458926	irq_set_chained_handler_and_data
 EXPORT_SYMBOL_GPL vmlinux 0xa74a2d5c	trace_event_buffer_commit
+EXPORT_SYMBOL_GPL vmlinux 0xa7521def	input_ff_flush
 EXPORT_SYMBOL_GPL vmlinux 0xa760c59d	ata_bmdma_start
 EXPORT_SYMBOL_GPL vmlinux 0xa799c267	blkg_rwstat_recursive_sum
 EXPORT_SYMBOL_GPL vmlinux 0xa79b4300	crypto_larval_kill

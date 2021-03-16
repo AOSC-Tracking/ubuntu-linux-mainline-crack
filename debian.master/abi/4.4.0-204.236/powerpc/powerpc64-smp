@@ -16693,6 +16693,7 @@ EXPORT_SYMBOL_GPL vmlinux 0xb34208ef	wm5102_i2c_regmap
 EXPORT_SYMBOL_GPL vmlinux 0xb347bb2c	work_busy
 EXPORT_SYMBOL_GPL vmlinux 0xb355bef7	cpu_device_create
 EXPORT_SYMBOL_GPL vmlinux 0xb379deb6	console_drivers
+EXPORT_SYMBOL_GPL vmlinux 0xb37bacf6	input_ff_flush
 EXPORT_SYMBOL_GPL vmlinux 0xb38970f6	flush_kthread_work
 EXPORT_SYMBOL_GPL vmlinux 0xb39d8928	device_store_ulong
 EXPORT_SYMBOL_GPL vmlinux 0xb3dc0210	__blkg_prfill_rwstat

@@ -14159,6 +14159,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x24d3b366	regmap_add_irq_chip
 EXPORT_SYMBOL_GPL vmlinux 0x24eb7e32	leds_list
 EXPORT_SYMBOL_GPL vmlinux 0x24f39c39	reset_control_reset
 EXPORT_SYMBOL_GPL vmlinux 0x24f81f23	xhci_init_driver
+EXPORT_SYMBOL_GPL vmlinux 0x2503284e	input_ff_flush
 EXPORT_SYMBOL_GPL vmlinux 0x25034e36	ipv6_stub
 EXPORT_SYMBOL_GPL vmlinux 0x251f6614	ktime_get_snapshot
 EXPORT_SYMBOL_GPL vmlinux 0x253092df	virtqueue_add_outbuf

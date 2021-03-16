@@ -14662,6 +14662,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x42a9419f	xfrm_audit_policy_delete
 EXPORT_SYMBOL_GPL vmlinux 0x42c06fae	devm_hwrng_register
 EXPORT_SYMBOL_GPL vmlinux 0x42ce227d	snd_soc_unregister_component
 EXPORT_SYMBOL_GPL vmlinux 0x42d16fa3	__spi_register_driver
+EXPORT_SYMBOL_GPL vmlinux 0x42d5fedf	input_ff_flush
 EXPORT_SYMBOL_GPL vmlinux 0x42ff6006	of_irq_parse_and_map_pci
 EXPORT_SYMBOL_GPL vmlinux 0x430528a5	list_lru_walk_one
 EXPORT_SYMBOL_GPL vmlinux 0x430d700c	usb_phy_set_event
