@@ -112,7 +112,7 @@ static int proc_notify_change(struct dentry *dentry, struct iattr *iattr)
 	    !kgid_has_mapping(s_user_ns, inode->i_gid))
 		return -EPERM;
 
-	error = inode_change_ok(inode, iattr);
+	error = setattr_prepare(dentry, iattr);
 	if (error)
 		return error;
 

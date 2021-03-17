@@ -764,7 +764,7 @@ static int proc_sys_setattr(struct dentry *dentry, struct iattr *attr)
 	    !kgid_has_mapping(s_user_ns, inode->i_gid))
 		return -EPERM;
 
-	error = inode_change_ok(inode, attr);
+	error = setattr_prepare(dentry, attr);
 	if (error)
 		return error;
 
