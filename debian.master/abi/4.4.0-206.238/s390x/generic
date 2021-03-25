@@ -7124,6 +7124,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x255249dc	tty_put_char
 EXPORT_SYMBOL_GPL vmlinux 0x2570f2bd	tty_buffer_space_avail
 EXPORT_SYMBOL_GPL vmlinux 0x258ffa99	device_property_match_string
 EXPORT_SYMBOL_GPL vmlinux 0x25955779	pm_wakeup_event
+EXPORT_SYMBOL_GPL vmlinux 0x25b9fcf7	sysfs_emit_at
 EXPORT_SYMBOL_GPL vmlinux 0x2607a61d	css_chsc_characteristics
 EXPORT_SYMBOL_GPL vmlinux 0x262f20a8	local_clock
 EXPORT_SYMBOL_GPL vmlinux 0x26345d6c	seq_release_net
@@ -7925,6 +7926,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x807f35f2	__rt_mutex_init
 EXPORT_SYMBOL_GPL vmlinux 0x808ec1a3	crypto_alg_tested
 EXPORT_SYMBOL_GPL vmlinux 0x8096d598	inet_unhash
 EXPORT_SYMBOL_GPL vmlinux 0x809819a7	single_open_net
+EXPORT_SYMBOL_GPL vmlinux 0x80b14da5	sysfs_emit
 EXPORT_SYMBOL_GPL vmlinux 0x80c06ae8	__ip_route_output_key_hash
 EXPORT_SYMBOL_GPL vmlinux 0x80c68137	nf_log_buf_close
 EXPORT_SYMBOL_GPL vmlinux 0x80d5e57a	mpi_free
