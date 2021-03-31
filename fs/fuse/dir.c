@@ -1769,7 +1769,7 @@ static int fuse_setattr(struct dentry *entry, struct iattr *attr)
 	if (!attr->ia_valid)
 		return 0;
 
-	ret = fuse_do_setattr(inode, attr, file);
+	ret = fuse_do_setattr(entry, attr, file);
 	if (!ret) {
 		/* Directory mode changed, may need to revalidate access */
 		if (d_is_dir(entry) && (attr->ia_valid & ATTR_MODE))
