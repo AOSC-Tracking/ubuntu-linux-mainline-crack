@@ -142,7 +142,7 @@ vfs_setxattr(struct dentry *dentry, const char *name, const void *value,
 
 	error = xattr_permission(inode, name, MAY_WRITE);
 	if (error)
-		return error;
+		goto out_free;
 
 	mutex_lock(&inode->i_mutex);
 	error = security_inode_setxattr(dentry, name, value, size, flags);
@@ -153,6 +153,7 @@ vfs_setxattr(struct dentry *dentry, const char *name, const void *value,
 
 out:
 	mutex_unlock(&inode->i_mutex);
+out_free:
 	if (value != orig_value)
 		kfree(value);
 
