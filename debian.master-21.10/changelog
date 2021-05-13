@@ -1,3 +1,9 @@
+linux (5.11.0-18.19) impish; urgency=medium
+
+  * Empty entry.
+
+ -- Seth Forshee <seth.forshee@canonical.com>  Thu, 13 May 2021 13:40:45 -0500
+
 linux (5.11.0-18.19) hirsute; urgency=medium
 
   * hirsute/linux: 5.11.0-18.19 -proposed tracker (LP: #1927578)
