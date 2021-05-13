@@ -25,6 +25,8 @@ TEST_GEN_FILES += fin_ack_lat
 TEST_GEN_PROGS = reuseport_bpf reuseport_bpf_cpu reuseport_bpf_numa
 TEST_GEN_PROGS += reuseport_dualstack reuseaddr_conflict tls
 
+TEST_FILES := settings
+
 KSFT_KHDR_INSTALL := 1
 include ../lib.mk
 
