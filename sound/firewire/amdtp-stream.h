@@ -112,7 +112,8 @@ typedef unsigned int (*amdtp_stream_process_ctx_payloads_t)(
 struct amdtp_domain;
 struct amdtp_stream {
 	struct fw_unit *unit;
-	enum cip_flags flags;
+	// The combination of cip_flags enumeration-constants.
+	unsigned int flags;
 	enum amdtp_stream_direction direction;
 	struct mutex mutex;
 
@@ -146,7 +147,6 @@ struct amdtp_stream {
 
 			// To generate constant hardware IRQ.
 			unsigned int event_count;
-			unsigned int events_per_period;
 		} rx;
 	} ctx_data;
 
@@ -167,10 +167,12 @@ struct amdtp_stream {
 	snd_pcm_uframes_t pcm_buffer_pointer;
 	unsigned int pcm_period_pointer;
 
-	/* To wait for first packet. */
-	bool callbacked;
-	wait_queue_head_t callback_wait;
-	u32 start_cycle;
+	// To start processing content of packets at the same cycle in several contexts for
+	// each direction.
+	bool callbacked:1;
+	bool ready_processing:1;
+	wait_queue_head_t ready_wait;
+	unsigned int next_cycle;
 
 	/* For backends to process data blocks. */
 	void *protocol;
@@ -184,7 +186,7 @@ struct amdtp_stream {
 };
 
 int amdtp_stream_init(struct amdtp_stream *s, struct fw_unit *unit,
-		      enum amdtp_stream_direction dir, enum cip_flags flags,
+		      enum amdtp_stream_direction dir, unsigned int flags,
 		      unsigned int fmt,
 		      amdtp_stream_process_ctx_payloads_t process_ctx_payloads,
 		      unsigned int protocol_size);
@@ -259,21 +261,6 @@ static inline bool cip_sfc_is_base_44100(enum cip_sfc sfc)
 	return sfc & 1;
 }
 
-/**
- * amdtp_stream_wait_callback - sleep till callbacked or timeout
- * @s: the AMDTP stream
- * @timeout: msec till timeout
- *
- * If this function return false, the AMDTP stream should be stopped.
- */
-static inline bool amdtp_stream_wait_callback(struct amdtp_stream *s,
-					      unsigned int timeout)
-{
-	return wait_event_timeout(s->callback_wait,
-				  s->callbacked,
-				  msecs_to_jiffies(timeout)) > 0;
-}
-
 struct seq_desc {
 	unsigned int syt_offset;
 	unsigned int data_blocks;
@@ -287,9 +274,17 @@ struct amdtp_domain {
 
 	struct amdtp_stream *irq_target;
 
-	struct seq_desc *seq_descs;
-	unsigned int seq_size;
-	unsigned int seq_tail;
+	struct {
+		unsigned int tx_init_skip;
+		unsigned int tx_start;
+		unsigned int rx_start;
+	} processing_cycle;
+
+	struct {
+		struct seq_desc *descs;
+		unsigned int size;
+		unsigned int tail;
+	} seq;
 
 	unsigned int data_block_state;
 	unsigned int syt_offset_state;
@@ -302,7 +297,7 @@ void amdtp_domain_destroy(struct amdtp_domain *d);
 int amdtp_domain_add_stream(struct amdtp_domain *d, struct amdtp_stream *s,
 			    int channel, int speed);
 
-int amdtp_domain_start(struct amdtp_domain *d, unsigned int ir_delay_cycle);
+int amdtp_domain_start(struct amdtp_domain *d, unsigned int tx_init_skip_cycles);
 void amdtp_domain_stop(struct amdtp_domain *d);
 
 static inline int amdtp_domain_set_events_per_period(struct amdtp_domain *d,
@@ -318,5 +313,26 @@ static inline int amdtp_domain_set_events_per_period(struct amdtp_domain *d,
 unsigned long amdtp_domain_stream_pcm_pointer(struct amdtp_domain *d,
 					      struct amdtp_stream *s);
 int amdtp_domain_stream_pcm_ack(struct amdtp_domain *d, struct amdtp_stream *s);
+
+/**
+ * amdtp_domain_wait_ready - sleep till being ready to process packets or timeout
+ * @d: the AMDTP domain
+ * @timeout_ms: msec till timeout
+ *
+ * If this function return false, the AMDTP domain should be stopped.
+ */
+static inline bool amdtp_domain_wait_ready(struct amdtp_domain *d, unsigned int timeout_ms)
+{
+	struct amdtp_stream *s;
+
+	list_for_each_entry(s, &d->streams, list) {
+		unsigned int j = msecs_to_jiffies(timeout_ms);
+
+		if (wait_event_interruptible_timeout(s->ready_wait, s->ready_processing, j) <= 0)
+			return false;
+	}
+
+	return true;
+}
 
 #endif
