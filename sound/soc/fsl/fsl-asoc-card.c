@@ -608,6 +608,7 @@ static int fsl_asoc_card_probe(struct platform_device *pdev)
 	/* Initialize sound card */
 	priv->pdev = pdev;
 	priv->card.dev = &pdev->dev;
+	priv->card.owner = THIS_MODULE;
 	priv->card.name = priv->name;
 	priv->card.dai_link = priv->dai_link;
 	priv->card.dapm_routes = fsl_asoc_card_is_ac97(priv) ?
