@@ -671,13 +671,12 @@ static void tls_device_resync_rx(struct tls_context *tls_ctx,
 {
 	struct net_device *netdev;
 
-	if (WARN_ON(test_and_set_bit(TLS_RX_SYNC_RUNNING, &tls_ctx->flags)))
-		return;
+	rcu_read_lock();
 	netdev = READ_ONCE(tls_ctx->netdev);
 	if (netdev)
 		netdev->tlsdev_ops->tls_dev_resync(netdev, sk, seq, rcd_sn,
 						   TLS_OFFLOAD_CTX_DIR_RX);
-	clear_bit_unlock(TLS_RX_SYNC_RUNNING, &tls_ctx->flags);
+	rcu_read_unlock();
 }
 
 void tls_device_rx_resync_new_rec(struct sock *sk, u32 rcd_len, u32 seq)
@@ -1203,9 +1202,7 @@ static int tls_device_down(struct net_device *netdev)
 			netdev->tlsdev_ops->tls_dev_del(netdev, ctx,
 							TLS_OFFLOAD_CTX_DIR_RX);
 		WRITE_ONCE(ctx->netdev, NULL);
-		smp_mb__before_atomic(); /* pairs with test_and_set_bit() */
-		while (test_bit(TLS_RX_SYNC_RUNNING, &ctx->flags))
-			usleep_range(10, 200);
+		synchronize_net();
 		dev_put(netdev);
 		list_del_init(&ctx->list);
 
