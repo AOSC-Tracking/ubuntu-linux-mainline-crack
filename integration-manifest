@@ -1,0 +1,26 @@
+drm drm-fixes 614124bea77e452aa6df7a8714e8bc820b489922
+	Linux 5.13-rc5
+drm-misc drm-misc-fixes c336a5ee984708db4826ef9e47d184e638e29717
+	drm: Lock pointer access in drm_master_release()
+drm-intel drm-intel-fixes 614124bea77e452aa6df7a8714e8bc820b489922
+	Linux 5.13-rc5
+drm drm-next c707b73f0cfb1acc94a20389aecde65e6385349b
+	Merge tag 'amd-drm-next-5.14-2021-06-09' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm-misc drm-misc-next-fixes b9d79e4ca4ff23543d6b33c736ba07c1f0a9dcb1
+	fbmem: Mark proc_fb_seq_ops as __maybe_unused
+drm-intel drm-intel-next-fixes c7b397e9ca4d6828e3e3f504c80bcb1fe535c348
+	Merge tag 'gvt-next-fixes-2021-04-29' of https://github.com/intel/gvt-linux into drm-intel-next-fixes
+drm-misc drm-misc-next a3a5f9d0fb15da90820254ba735491887cc12099
+	drm/panel: db7430: Add driver for Samsung DB7430
+drm-intel drm-intel-next a3af0140663dc335e5c18277a61bb99bfcb60694
+	drm/i915: apply WaEnableVGAAccessThroughIOPort as needed
+drm-intel drm-intel-gt-next 47c65b3853f88d105017ef512a521794db51bfeb
+	drm/i915/uc: Use platform specific defaults for GuC/HuC enabling
+sound-upstream for-linus 83e197a8414c0ba545e7e3916ce05f836f349273
+	ALSA: seq: Fix race of snd_seq_timer_open()
+sound-upstream for-next 83fbcaed24d797528de00c024674fd58e8f1634f
+	ALSA: core: Fix build error due to missing PAGE_SIZE
+drm-intel topic/core-for-CI 62f7e7988fa44b40cfea5db004118554723273cb
+	rtc: cmos: Disable irq around direct invocation of cmos_interrupt()
+drm topic/nouveau-ampere-modeset 584265dfec70e78ce2085b82ed389f27e06fbca0
+	Merge branch '04.01-ampere-lite' of git://github.com/skeggsb/linux into topic/nouveau-ampere-modeset
