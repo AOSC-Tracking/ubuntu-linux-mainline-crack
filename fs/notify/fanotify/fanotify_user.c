@@ -354,7 +354,7 @@ static ssize_t copy_event_to_user(struct fsnotify_group *group,
 					fne->name, fne->name_len,
 					buf, count);
 		if (ret < 0)
-			return ret;
+			goto out_close_fd;
 
 		buf += ret;
 		count -= ret;
@@ -365,7 +365,7 @@ static ssize_t copy_event_to_user(struct fsnotify_group *group,
 					fanotify_event_object_fh(event),
 					NULL, 0, buf, count);
 		if (ret < 0)
-			return ret;
+			goto out_close_fd;
 
 		buf += ret;
 		count -= ret;
