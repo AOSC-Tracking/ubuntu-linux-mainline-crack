@@ -25,10 +25,8 @@
 #include "i915_gem_clflush.h"
 #include "i915_gem_context.h"
 #include "i915_gem_ioctls.h"
-#include "i915_sw_fence_work.h"
 #include "i915_trace.h"
 #include "i915_user_extensions.h"
-#include "i915_memcpy.h"
 
 struct eb_vma {
 	struct i915_vma *vma;
@@ -290,7 +288,6 @@ struct i915_execbuffer {
 	struct intel_context *reloc_context;
 
 	u64 invalid_flags; /** Set of execobj.flags that are invalid */
-	u32 context_flags; /** Set of execobj.flags to insert from the ctx */
 
 	u64 batch_len; /** Length of batch within object */
 	u32 batch_start_offset; /** Location within object of batch */
@@ -541,9 +538,6 @@ eb_validate_vma(struct i915_execbuffer *eb,
 			entry->flags |= EXEC_OBJECT_NEEDS_GTT | __EXEC_OBJECT_NEEDS_MAP;
 	}
 
-	if (!(entry->flags & EXEC_OBJECT_PINNED))
-		entry->flags |= eb->context_flags;
-
 	return 0;
 }
 
@@ -743,16 +737,12 @@ static int eb_select_context(struct i915_execbuffer *eb)
 	struct i915_gem_context *ctx;
 
 	ctx = i915_gem_context_lookup(eb->file->driver_priv, eb->args->rsvd1);
-	if (unlikely(!ctx))
-		return -ENOENT;
+	if (unlikely(IS_ERR(ctx)))
+		return PTR_ERR(ctx);
 
 	eb->gem_context = ctx;
 	if (rcu_access_pointer(ctx->vm))
 		eb->invalid_flags |= EXEC_OBJECT_NEEDS_GTT;
-
-	eb->context_flags = 0;
-	if (test_bit(UCONTEXT_NO_ZEROMAP, &ctx->user_flags))
-		eb->context_flags |= __EXEC_OBJECT_NEEDS_BIAS;
 
 	return 0;
 }
@@ -922,6 +912,23 @@ err:
 	return err;
 }
 
+static int eb_lock_vmas(struct i915_execbuffer *eb)
+{
+	unsigned int i;
+	int err;
+
+	for (i = 0; i < eb->buffer_count; i++) {
+		struct eb_vma *ev = &eb->vma[i];
+		struct i915_vma *vma = ev->vma;
+
+		err = i915_gem_object_lock(vma->obj, &eb->ww);
+		if (err)
+			return err;
+	}
+
+	return 0;
+}
+
 static int eb_validate_vmas(struct i915_execbuffer *eb)
 {
 	unsigned int i;
@@ -929,14 +936,14 @@ static int eb_validate_vmas(struct i915_execbuffer *eb)
 
 	INIT_LIST_HEAD(&eb->unbound);
 
+	err = eb_lock_vmas(eb);
+	if (err)
+		return err;
+
 	for (i = 0; i < eb->buffer_count; i++) {
 		struct drm_i915_gem_exec_object2 *entry = &eb->exec[i];
 		struct eb_vma *ev = &eb->vma[i];
 		struct i915_vma *vma = ev->vma;
-
-		err = i915_gem_object_lock(vma->obj, &eb->ww);
-		if (err)
-			return err;
 
 		err = eb_pin_vma(eb, entry, ev);
 		if (err == -EDEADLK)
@@ -994,7 +1001,7 @@ eb_get_vma(const struct i915_execbuffer *eb, unsigned long handle)
 	}
 }
 
-static void eb_release_vmas(struct i915_execbuffer *eb, bool final, bool release_userptr)
+static void eb_release_vmas(struct i915_execbuffer *eb, bool final)
 {
 	const unsigned int count = eb->buffer_count;
 	unsigned int i;
@@ -1007,11 +1014,6 @@ static void eb_release_vmas(struct i915_execbuffer *eb, bool final, bool release
 			break;
 
 		eb_unreserve_vma(ev);
-
-		if (release_userptr && ev->flags & __EXEC_OBJECT_USERPTR_INIT) {
-			ev->flags &= ~__EXEC_OBJECT_USERPTR_INIT;
-			i915_gem_object_userptr_submit_fini(vma->obj);
-		}
 
 		if (final)
 			i915_vma_put(vma);
@@ -1455,6 +1457,10 @@ static u32 *reloc_gpu(struct i915_execbuffer *eb,
 	if (unlikely(!cache->rq)) {
 		int err;
 		struct intel_engine_cs *engine = eb->engine;
+
+		/* If we need to copy for the cmdparser, we will stall anyway */
+		if (eb_use_cmdparser(eb))
+			return ERR_PTR(-EWOULDBLOCK);
 
 		if (!reloc_can_use_engine(engine)) {
 			engine = engine->gt->engine_class[COPY_ENGINE_CLASS][0];
@@ -1990,7 +1996,7 @@ repeat:
 	}
 
 	/* We may process another execbuffer during the unlock... */
-	eb_release_vmas(eb, false, true);
+	eb_release_vmas(eb, false);
 	i915_gem_ww_ctx_fini(&eb->ww);
 
 	if (rq) {
@@ -2059,9 +2065,7 @@ repeat_validate:
 
 	list_for_each_entry(ev, &eb->relocs, reloc_link) {
 		if (!have_copy) {
-			pagefault_disable();
 			err = eb_relocate_vma(eb, ev);
-			pagefault_enable();
 			if (err)
 				break;
 		} else {
@@ -2094,7 +2098,7 @@ repeat_validate:
 
 err:
 	if (err == -EDEADLK) {
-		eb_release_vmas(eb, false, false);
+		eb_release_vmas(eb, false);
 		err = i915_gem_ww_ctx_backoff(&eb->ww);
 		if (!err)
 			goto repeat_validate;
@@ -2191,7 +2195,7 @@ retry:
 
 err:
 	if (err == -EDEADLK) {
-		eb_release_vmas(eb, false, false);
+		eb_release_vmas(eb, false);
 		err = i915_gem_ww_ctx_backoff(&eb->ww);
 		if (!err)
 			goto retry;
@@ -2268,7 +2272,7 @@ static int eb_move_to_gpu(struct i915_execbuffer *eb)
 
 #ifdef CONFIG_MMU_NOTIFIER
 	if (!err && (eb->args->flags & __EXEC_USERPTR_USED)) {
-		spin_lock(&eb->i915->mm.notifier_lock);
+		read_lock(&eb->i915->mm.notifier_lock);
 
 		/*
 		 * count is always at least 1, otherwise __EXEC_USERPTR_USED
@@ -2286,7 +2290,7 @@ static int eb_move_to_gpu(struct i915_execbuffer *eb)
 				break;
 		}
 
-		spin_unlock(&eb->i915->mm.notifier_lock);
+		read_unlock(&eb->i915->mm.notifier_lock);
 	}
 #endif
 
@@ -2370,217 +2374,6 @@ shadow_batch_pin(struct i915_execbuffer *eb,
 		return ERR_PTR(err);
 
 	return vma;
-}
-
-struct eb_parse_work {
-	struct dma_fence_work base;
-	struct intel_engine_cs *engine;
-	struct i915_vma *batch;
-	struct i915_vma *shadow;
-	struct i915_vma *trampoline;
-	unsigned long batch_offset;
-	unsigned long batch_length;
-	unsigned long *jump_whitelist;
-	const void *batch_map;
-	void *shadow_map;
-};
-
-static int __eb_parse(struct dma_fence_work *work)
-{
-	struct eb_parse_work *pw = container_of(work, typeof(*pw), base);
-	int ret;
-	bool cookie;
-
-	cookie = dma_fence_begin_signalling();
-	ret = intel_engine_cmd_parser(pw->engine,
-				      pw->batch,
-				      pw->batch_offset,
-				      pw->batch_length,
-				      pw->shadow,
-				      pw->jump_whitelist,
-				      pw->shadow_map,
-				      pw->batch_map);
-	dma_fence_end_signalling(cookie);
-
-	return ret;
-}
-
-static void __eb_parse_release(struct dma_fence_work *work)
-{
-	struct eb_parse_work *pw = container_of(work, typeof(*pw), base);
-
-	if (!IS_ERR_OR_NULL(pw->jump_whitelist))
-		kfree(pw->jump_whitelist);
-
-	if (pw->batch_map)
-		i915_gem_object_unpin_map(pw->batch->obj);
-	else
-		i915_gem_object_unpin_pages(pw->batch->obj);
-
-	i915_gem_object_unpin_map(pw->shadow->obj);
-
-	if (pw->trampoline)
-		i915_active_release(&pw->trampoline->active);
-	i915_active_release(&pw->shadow->active);
-	i915_active_release(&pw->batch->active);
-}
-
-static const struct dma_fence_work_ops eb_parse_ops = {
-	.name = "eb_parse",
-	.work = __eb_parse,
-	.release = __eb_parse_release,
-};
-
-static inline int
-__parser_mark_active(struct i915_vma *vma,
-		     struct intel_timeline *tl,
-		     struct dma_fence *fence)
-{
-	struct intel_gt_buffer_pool_node *node = vma->private;
-
-	return i915_active_ref(&node->active, tl->fence_context, fence);
-}
-
-static int
-parser_mark_active(struct eb_parse_work *pw, struct intel_timeline *tl)
-{
-	int err;
-
-	mutex_lock(&tl->mutex);
-
-	err = __parser_mark_active(pw->shadow, tl, &pw->base.dma);
-	if (err)
-		goto unlock;
-
-	if (pw->trampoline) {
-		err = __parser_mark_active(pw->trampoline, tl, &pw->base.dma);
-		if (err)
-			goto unlock;
-	}
-
-unlock:
-	mutex_unlock(&tl->mutex);
-	return err;
-}
-
-static int eb_parse_pipeline(struct i915_execbuffer *eb,
-			     struct i915_vma *shadow,
-			     struct i915_vma *trampoline)
-{
-	struct eb_parse_work *pw;
-	struct drm_i915_gem_object *batch = eb->batch->vma->obj;
-	bool needs_clflush;
-	int err;
-
-	GEM_BUG_ON(overflows_type(eb->batch_start_offset, pw->batch_offset));
-	GEM_BUG_ON(overflows_type(eb->batch_len, pw->batch_length));
-
-	pw = kzalloc(sizeof(*pw), GFP_KERNEL);
-	if (!pw)
-		return -ENOMEM;
-
-	err = i915_active_acquire(&eb->batch->vma->active);
-	if (err)
-		goto err_free;
-
-	err = i915_active_acquire(&shadow->active);
-	if (err)
-		goto err_batch;
-
-	if (trampoline) {
-		err = i915_active_acquire(&trampoline->active);
-		if (err)
-			goto err_shadow;
-	}
-
-	pw->shadow_map = i915_gem_object_pin_map(shadow->obj, I915_MAP_WB);
-	if (IS_ERR(pw->shadow_map)) {
-		err = PTR_ERR(pw->shadow_map);
-		goto err_trampoline;
-	}
-
-	needs_clflush =
-		!(batch->cache_coherent & I915_BO_CACHE_COHERENT_FOR_READ);
-
-	pw->batch_map = ERR_PTR(-ENODEV);
-	if (needs_clflush && i915_has_memcpy_from_wc())
-		pw->batch_map = i915_gem_object_pin_map(batch, I915_MAP_WC);
-
-	if (IS_ERR(pw->batch_map)) {
-		err = i915_gem_object_pin_pages(batch);
-		if (err)
-			goto err_unmap_shadow;
-		pw->batch_map = NULL;
-	}
-
-	pw->jump_whitelist =
-		intel_engine_cmd_parser_alloc_jump_whitelist(eb->batch_len,
-							     trampoline);
-	if (IS_ERR(pw->jump_whitelist)) {
-		err = PTR_ERR(pw->jump_whitelist);
-		goto err_unmap_batch;
-	}
-
-	dma_fence_work_init(&pw->base, &eb_parse_ops);
-
-	pw->engine = eb->engine;
-	pw->batch = eb->batch->vma;
-	pw->batch_offset = eb->batch_start_offset;
-	pw->batch_length = eb->batch_len;
-	pw->shadow = shadow;
-	pw->trampoline = trampoline;
-
-	/* Mark active refs early for this worker, in case we get interrupted */
-	err = parser_mark_active(pw, eb->context->timeline);
-	if (err)
-		goto err_commit;
-
-	err = dma_resv_reserve_shared(pw->batch->resv, 1);
-	if (err)
-		goto err_commit;
-
-	err = dma_resv_reserve_shared(shadow->resv, 1);
-	if (err)
-		goto err_commit;
-
-	/* Wait for all writes (and relocs) into the batch to complete */
-	err = i915_sw_fence_await_reservation(&pw->base.chain,
-					      pw->batch->resv, NULL, false,
-					      0, I915_FENCE_GFP);
-	if (err < 0)
-		goto err_commit;
-
-	/* Keep the batch alive and unwritten as we parse */
-	dma_resv_add_shared_fence(pw->batch->resv, &pw->base.dma);
-
-	/* Force execution to wait for completion of the parser */
-	dma_resv_add_excl_fence(shadow->resv, &pw->base.dma);
-
-	dma_fence_work_commit_imm(&pw->base);
-	return 0;
-
-err_commit:
-	i915_sw_fence_set_error_once(&pw->base.chain, err);
-	dma_fence_work_commit_imm(&pw->base);
-	return err;
-
-err_unmap_batch:
-	if (pw->batch_map)
-		i915_gem_object_unpin_map(batch);
-	else
-		i915_gem_object_unpin_pages(batch);
-err_unmap_shadow:
-	i915_gem_object_unpin_map(shadow->obj);
-err_trampoline:
-	if (trampoline)
-		i915_active_release(&trampoline->active);
-err_shadow:
-	i915_active_release(&shadow->active);
-err_batch:
-	i915_active_release(&eb->batch->vma->active);
-err_free:
-	kfree(pw);
-	return err;
 }
 
 static struct i915_vma *eb_dispatch_secure(struct i915_execbuffer *eb, struct i915_vma *vma)
@@ -2672,7 +2465,15 @@ static int eb_parse(struct i915_execbuffer *eb)
 		goto err_trampoline;
 	}
 
-	err = eb_parse_pipeline(eb, shadow, trampoline);
+	err = dma_resv_reserve_shared(shadow->resv, 1);
+	if (err)
+		goto err_trampoline;
+
+	err = intel_engine_cmd_parser(eb->engine,
+				      eb->batch->vma,
+				      eb->batch_start_offset,
+				      eb->batch_len,
+				      shadow, trampoline);
 	if (err)
 		goto err_unpin_batch;
 
@@ -3433,7 +3234,7 @@ i915_gem_do_execbuffer(struct drm_device *dev,
 
 	err = eb_lookup_vmas(&eb);
 	if (err) {
-		eb_release_vmas(&eb, true, true);
+		eb_release_vmas(&eb, true);
 		goto err_engine;
 	}
 
@@ -3466,11 +3267,20 @@ i915_gem_do_execbuffer(struct drm_device *dev,
 		goto err_vma;
 	}
 
+	if (unlikely(eb.gem_context->syncobj)) {
+		struct dma_fence *fence;
+
+		fence = drm_syncobj_fence_get(eb.gem_context->syncobj);
+		err = i915_request_await_dma_fence(eb.request, fence);
+		dma_fence_put(fence);
+		if (err)
+			goto err_ext;
+	}
+
 	if (in_fence) {
 		if (args->flags & I915_EXEC_FENCE_SUBMIT)
 			err = i915_request_await_execution(eb.request,
-							   in_fence,
-							   eb.engine->bond_execute);
+							   in_fence);
 		else
 			err = i915_request_await_dma_fence(eb.request,
 							   in_fence);
@@ -3523,10 +3333,16 @@ err_request:
 			fput(out_fence->file);
 		}
 	}
+
+	if (unlikely(eb.gem_context->syncobj)) {
+		drm_syncobj_replace_fence(eb.gem_context->syncobj,
+					  &eb.request->fence);
+	}
+
 	i915_request_put(eb.request);
 
 err_vma:
-	eb_release_vmas(&eb, true, true);
+	eb_release_vmas(&eb, true);
 	if (eb.trampoline)
 		i915_vma_unpin(eb.trampoline);
 	WARN_ON(err == -EDEADLK);
