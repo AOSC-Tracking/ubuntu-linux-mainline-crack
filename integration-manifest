@@ -1,0 +1,28 @@
+drm drm-fixes ff1176468d368232b684f75e82563369208bc371
+	Linux 5.14-rc3
+drm-misc drm-misc-fixes 44379b986424b02acfa6e8c85ec5d68d89d3ccc4
+	drm/panel: panel-simple: Fix proper bpc for ytc700tlag_05_201c
+drm-intel drm-intel-fixes 6e0b6528d783b2b87bd9e1bea97cf4dac87540d7
+	drm/i915: Correct the docs for intel_engine_cmd_parser
+drm drm-next 8da49a33dda7294c1af508f8aa81cd638d0afd62
+	Merge tag 'drm-misc-next-2021-07-22' of git://anongit.freedesktop.org/drm/drm-misc into drm-next
+drm-misc drm-misc-next-fixes e73f0f0ee7541171d89f2e2491130c7771ba58d3
+	Linux 5.14-rc1
+drm-intel drm-intel-next-fixes 21c355b09711e95f8f0e7c1890b343c6cd350042
+	Merge tag 'drm-misc-next-fixes-2021-07-01' of git://anongit.freedesktop.org/drm/drm-misc into drm-next
+drm-misc drm-misc-next 03b7c552d081b73ba814eefc257c704b4d096d93
+	maintainers: Update freedesktop.org IRC channels
+drm-intel drm-intel-next ec387b8ff8d757561369be9a280cf63f23bbb926
+	drm/i915/display: split DISPLAY_VER 9 and 10 in intel_setup_outputs()
+drm-intel drm-intel-gt-next bfac1e2b6e2d6b3fdb3d8f997187d6f1c63ea965
+	drm/i915/xehp: Xe_HP forcewake support
+sound-upstream for-linus 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+sound-upstream for-next 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+drm-intel topic/core-for-CI fae352efb12196e7110f98bc1297ce533472764d
+	drm/i915: allow DG1 autoprobe for CONFIG_BROKEN
+drm topic/nouveau-ampere-modeset 584265dfec70e78ce2085b82ed389f27e06fbca0
+	Merge branch '04.01-ampere-lite' of git://github.com/skeggsb/linux into topic/nouveau-ampere-modeset
+drm-misc topic/i915-ttm cf3e3e86d77970211e0983130e896ae242601003
+	drm/i915: Use ttm mmap handling for ttm bo's.
