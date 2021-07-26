@@ -1033,13 +1033,13 @@ void amdgpu_acpi_detect(void)
 
 #if IS_ENABLED(CONFIG_SUSPEND)
 /**
- * amdgpu_acpi_is_s0ix_supported
+ * amdgpu_acpi_is_s0ix_active
  *
  * @adev: amdgpu_device_pointer
  *
  * returns true if supported, false if not.
  */
-bool amdgpu_acpi_is_s0ix_supported(struct amdgpu_device *adev)
+bool amdgpu_acpi_is_s0ix_active(struct amdgpu_device *adev)
 {
 	if (!(adev->flags & AMD_IS_APU) ||
 	    (pm_suspend_target_state != PM_SUSPEND_TO_IDLE))
