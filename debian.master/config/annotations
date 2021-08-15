@@ -1647,6 +1647,7 @@ CONFIG_EDAC_SBRIDGE                             policy<{'amd64': 'm'}>
 CONFIG_EDAC_SKX                                 policy<{'amd64': 'm'}>
 CONFIG_EDAC_I10NM                               policy<{'amd64': 'm'}>
 CONFIG_EDAC_PND2                                policy<{'amd64': 'm'}>
+CONFIG_EDAC_IGEN6                               policy<{'amd64': 'm'}>
 CONFIG_EDAC_LAYERSCAPE                          policy<{'arm64': 'm'}>
 CONFIG_EDAC_CPC925                              policy<{'ppc64el': 'm'}>
 CONFIG_EDAC_HIGHBANK_MC                         policy<{'armhf': 'm'}>
@@ -4350,7 +4351,7 @@ CONFIG_RFD_FTL                                  policy<{'amd64': 'm', 'arm64': '
 CONFIG_SSFDC                                    policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
 CONFIG_SM_FTL                                   policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
 CONFIG_MTD_OOPS                                 policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
-CONFIG_MTD_PSTORE                               policy<{'amd64': '-', 'arm64': '-', 'armhf': '-', 'ppc64el': '-'}>
+CONFIG_MTD_PSTORE                               policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
 CONFIG_MTD_SWAP                                 policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
 CONFIG_MTD_PARTITIONED_MASTER                   policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n'}>
 #
@@ -7793,7 +7794,9 @@ CONFIG_TI_K3_R5_REMOTEPROC                      policy<{'arm64': 'm'}>
 CONFIG_RESET_CONTROLLER                         policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'n'}>
 CONFIG_RESET_BERLIN                             policy<{'arm64': 'y', 'armhf': 'y'}>
 CONFIG_RESET_BRCMSTB                            policy<{'arm64': 'm'}>
+CONFIG_RESET_BRCMSTB_RESCAL                     policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y'}>
 CONFIG_RESET_IMX7                               policy<{'arm64': 'y', 'armhf-generic': 'y'}>
+CONFIG_RESET_INTEL_GW                           policy<{'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y'}>
 CONFIG_RESET_MESON                              policy<{'arm64': 'y', 'armhf': 'y'}>
 CONFIG_RESET_MESON_AUDIO_ARB                    policy<{'arm64': 'm', 'armhf': 'm'}>
 CONFIG_RESET_NPCM                               policy<{'armhf': 'y'}>
@@ -8731,14 +8734,14 @@ CONFIG_SND_SOC_INTEL_CNL                        policy<{'amd64': 'n'}>
 CONFIG_SND_SOC_INTEL_CFL                        policy<{'amd64': 'n'}>
 CONFIG_SND_SOC_INTEL_CML_H                      policy<{'amd64': 'n'}>
 CONFIG_SND_SOC_INTEL_CML_LP                     policy<{'amd64': 'n'}>
-CONFIG_SND_SOC_INTEL_SKYLAKE_HDAUDIO_CODEC      policy<{'amd64': 'y'}>
+CONFIG_SND_SOC_INTEL_SKYLAKE_HDAUDIO_CODEC      policy<{'amd64': 'n'}>
 #
 CONFIG_SND_SOC_INTEL_SKYLAKE                    mark<ENFORCED> note<deprecated>
 CONFIG_SND_SOC_INTEL_CNL                        mark<ENFORCED> note<deprecated>
 CONFIG_SND_SOC_INTEL_CFL                        mark<ENFORCED> note<deprecated>
 CONFIG_SND_SOC_INTEL_CML_H                      mark<ENFORCED> note<deprecated>
 CONFIG_SND_SOC_INTEL_CML_LP                     mark<ENFORCED> note<deprecated>
-CONFIG_SND_SOC_INTEL_SKYLAKE_HDAUDIO_CODEC		mark<ENFORCED> note<LP:1915117>
+CONFIG_SND_SOC_INTEL_SKYLAKE_HDAUDIO_CODEC      mark<ENFORCED> note<deprecated>
 
 # Menu: Device Drivers >> Sound card support >> Advanced Linux Sound Architecture >> ALSA for SoC audio support >> Intel ASoC SST drivers >> Intel Machine drivers
 CONFIG_SND_SOC_INTEL_MACH                       policy<{'amd64': 'y'}>
@@ -10624,7 +10627,11 @@ CONFIG_PSTORE_FTRACE                            policy<{'amd64': 'n', 'arm64': '
 CONFIG_PSTORE_RAM                               policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'y', 'ppc64el': 'm'}>
 
 # Menu: File systems >> Miscellaneous filesystems >> Persistent store support >> Log panic/oops to a block device
-CONFIG_PSTORE_BLK                               policy<{'amd64': '-', 'arm64': '-', 'armhf': '-', 'ppc64el': '-'}>
+CONFIG_PSTORE_BLK                               policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
+CONFIG_PSTORE_BLK_BLKDEV                        policy<{'amd64': '""', 'arm64': '""', 'armhf': '""', 'ppc64el': '""'}>
+CONFIG_PSTORE_BLK_KMSG_SIZE                     policy<{'amd64': '64', 'arm64': '64', 'armhf': '64', 'ppc64el': '64'}>
+CONFIG_PSTORE_BLK_MAX_REASON                    policy<{'amd64': '2', 'arm64': '2', 'armhf': '2', 'ppc64el': '2'}>
+CONFIG_PSTORE_BLK_CONSOLE_SIZE                  policy<{'armhf': '64'}>
 
 # Menu: File systems >> Miscellaneous filesystems >> RomFS backing stores
 CONFIG_ROMFS_BACKED_BY_BLOCK                    policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y'}>
