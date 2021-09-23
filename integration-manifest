@@ -1,0 +1,30 @@
+drm drm-fixes e4e737bb5c170df6135a127739a9e6148ee3da82
+	Linux 5.15-rc2
+drm-misc drm-misc-fixes 3027c77774acceb32edbd026505f4e7a903d763b
+	dt-bindings: panel: ili9341: correct indentation
+drm-intel drm-intel-fixes b875fb313a10bf816b5d49d8d7642d1cc9905f2f
+	drm/i915: Free all DMC payloads
+drm drm-next 0dfc70818a3c4bbab647a0683cc6ed448f5cdbea
+	Merge tag 'drm-misc-next-2021-09-16' of git://anongit.freedesktop.org/drm/drm-misc into drm-next
+drm-misc drm-misc-next-fixes 70982eef4d7eebb47a3b1ef25ec1bc742f3a21cf
+	drm/ttm: Fix a deadlock if the target BO is not idle during swap
+drm-intel drm-intel-next-fixes fb43ebc83e069625cfeeb2490efc3ffa0013bfa4
+	drm/i915/selftest: Fix use of err in igt_reset_{fail, nop}_engine()
+drm-misc drm-misc-next 13afcdd7277eff9ab5c92dc0d8d21335d132ab2f
+	drm/bridge: parade-ps8640: Add support for AUX channel
+drm-intel drm-intel-next ab98ebb9a99aa0a9970d973fb7511e33f774f797
+	drm/i915: Fix HPLL watermark readout for g4x
+drm-intel drm-intel-gt-next 017792a041183c4f5ec595f386e76a40ed728cfc
+	drm/i915/guc, docs: Fix pdfdocs build error by removing nested grid
+sound-upstream for-linus 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+sound-upstream for-next 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+drm-intel topic/core-for-CI b4dd0381f66d0bddc2c4bfc75e18a8a6b8a0d4b7
+	component: do not leave master devres group open after bind
+drm topic/nouveau-ampere-modeset 584265dfec70e78ce2085b82ed389f27e06fbca0
+	Merge branch '04.01-ampere-lite' of git://github.com/skeggsb/linux into topic/nouveau-ampere-modeset
+drm-misc topic/i915-ttm cf3e3e86d77970211e0983130e896ae242601003
+	drm/i915: Use ttm mmap handling for ttm bo's.
+drm-intel topic/pxp 316346243be6df12799c0b64b788e06bad97c30b
+	Merge branch 'gcc-min-version-5.1' (make gcc-5.1 the minimum version)
