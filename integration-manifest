@@ -1,0 +1,30 @@
+drm drm-fixes ef88d7a8a5c94d063311a5581d9a8f0c0e3a99cb
+	Merge tag 'drm-intel-fixes-2021-09-23' of git://anongit.freedesktop.org/drm/drm-intel into drm-fixes
+drm-misc drm-misc-fixes 19bd6cdb9ce0522023e93b8ac065f19e59759536
+	drm/panel: abt-y030xx067a: yellow tint fix
+drm-intel drm-intel-fixes 4b8bcaf8a6d6ab5db51e30865def5cb694eb2966
+	drm/i915: Remove warning from the rps worker
+drm drm-next f602a96e025272d237a61df455b12893aa782d33
+	Merge tag 'drm-misc-next-2021-09-23' of git://anongit.freedesktop.org/drm/drm-misc into drm-next
+drm-misc drm-misc-next-fixes 70982eef4d7eebb47a3b1ef25ec1bc742f3a21cf
+	drm/ttm: Fix a deadlock if the target BO is not idle during swap
+drm-intel drm-intel-next-fixes fb43ebc83e069625cfeeb2490efc3ffa0013bfa4
+	drm/i915/selftest: Fix use of err in igt_reset_{fail, nop}_engine()
+drm-misc drm-misc-next 116e5947d7bf49cf5a29e1eb30deec12ed8b53f8
+	drm/edid: Fix drm_edid_encode_panel_id() kerneldoc warning
+drm-intel drm-intel-next c6b40ee330fe09b332715bb7ec1467e4fcbe2e65
+	drm/i915/audio: Use BIOS provided value for RKL HDA link
+drm-intel drm-intel-gt-next d576b31bdece7b5034047cbe21170e948198d32f
+	drm/i915: remember to call i915_sw_fence_fini
+sound-upstream for-linus 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+sound-upstream for-next 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+drm-intel topic/core-for-CI b4dd0381f66d0bddc2c4bfc75e18a8a6b8a0d4b7
+	component: do not leave master devres group open after bind
+drm topic/nouveau-ampere-modeset 584265dfec70e78ce2085b82ed389f27e06fbca0
+	Merge branch '04.01-ampere-lite' of git://github.com/skeggsb/linux into topic/nouveau-ampere-modeset
+drm-misc topic/i915-ttm cf3e3e86d77970211e0983130e896ae242601003
+	drm/i915: Use ttm mmap handling for ttm bo's.
+drm-intel topic/pxp e4e737bb5c170df6135a127739a9e6148ee3da82
+	Linux 5.15-rc2
