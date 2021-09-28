@@ -644,7 +644,7 @@ static int init_aliasing_ppgtt(struct i915_ggtt *ggtt)
 	struct i915_ppgtt *ppgtt;
 	int err;
 
-	ppgtt = i915_ppgtt_create(ggtt->vm.gt);
+	ppgtt = i915_ppgtt_create(ggtt->vm.gt, 0);
 	if (IS_ERR(ppgtt))
 		return PTR_ERR(ppgtt);
 
@@ -727,7 +727,6 @@ static void ggtt_cleanup_hw(struct i915_ggtt *ggtt)
 
 	atomic_set(&ggtt->vm.open, 0);
 
-	rcu_barrier(); /* flush the RCU'ed__i915_vm_release */
 	flush_workqueue(ggtt->vm.i915->wq);
 
 	mutex_lock(&ggtt->vm.mutex);
@@ -910,6 +909,7 @@ static int gen8_gmch_probe(struct i915_ggtt *ggtt)
 		size = gen8_get_total_gtt_size(snb_gmch_ctl);
 
 	ggtt->vm.alloc_pt_dma = alloc_pt_dma;
+	ggtt->vm.lmem_pt_obj_flags = I915_BO_ALLOC_PM_EARLY;
 
 	ggtt->vm.total = (size / sizeof(gen8_pte_t)) * I915_GTT_PAGE_SIZE;
 	ggtt->vm.cleanup = gen6_gmch_remove;
