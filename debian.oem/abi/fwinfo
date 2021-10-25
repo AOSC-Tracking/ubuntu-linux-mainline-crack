@@ -818,7 +818,7 @@ firmware:       hfi1_dc8051.fw
 firmware:       hfi1_fabric.fw
 firmware:       hfi1_pcie.fw
 firmware:       hfi1_sbus.fw
-firmware:       i915/adlp_dmc_ver2_10.bin
+firmware:       i915/adlp_dmc_ver2_12.bin
 firmware:       i915/adls_dmc_ver2_01.bin
 firmware:       i915/bxt_dmc_ver1_07.bin
 firmware:       i915/bxt_guc_49.0.1.bin
