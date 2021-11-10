@@ -687,6 +687,7 @@ static int iwl_mvm_start_get_nvm(struct iwl_mvm *mvm)
 {
 	int ret;
 
+	wiphy_lock(mvm->hw->wiphy);
 	mutex_lock(&mvm->mutex);
 
 	ret = iwl_run_init_mvm_ucode(mvm);
@@ -697,6 +698,7 @@ static int iwl_mvm_start_get_nvm(struct iwl_mvm *mvm)
 	if (!iwlmvm_mod_params.init_dbg || !ret)
 		iwl_mvm_stop_device(mvm);
 
+	wiphy_unlock(mvm->hw->wiphy);
 	mutex_unlock(&mvm->mutex);
 
 	if (ret < 0)
