@@ -725,6 +725,7 @@ int msm_ioctl_gem_submit(struct drm_device *dev, void *data,
 		                                args->syncobj_stride);
 		if (IS_ERR(post_deps)) {
 			ret = PTR_ERR(post_deps);
+			post_deps = NULL;
 			goto out_post_unlock;
 		}
 	}
