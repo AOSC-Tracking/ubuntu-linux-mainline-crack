@@ -43,7 +43,6 @@ enum {
 #define SOF_SDW_PCH_DMIC		BIT(4)
 #define SOF_SSP_PORT(x)		(((x) & GENMASK(5, 0)) << 5)
 #define SOF_SSP_GET_PORT(quirk)	(((quirk) >> 5) & GENMASK(5, 0))
-#define SOF_RT715_DAI_ID_FIX		BIT(11)
 #define SOF_SDW_NO_AGGREGATION		BIT(12)
 
 /* BT audio offload: reserve 3 bits for future */
