@@ -2381,6 +2381,9 @@ ks0108
 ks0127
 ks7010
 ks8842
+ks8851_common
+ks8851_par
+ks8851_spi
 ksz8795
 ksz8795_spi
 ksz884x
@@ -4114,6 +4117,8 @@ rtw88_8822c
 rtw88_8822ce
 rtw88_core
 rtw88_pci
+rtw89_core
+rtw89_pci
 rx51_battery
 rxrpc
 s1d13xxxfb
