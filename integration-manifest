@@ -1,0 +1,28 @@
+drm drm-fixes a687efed194bdc185fd7cb33920fe8b4e60ecb9e
+	Merge tag 'drm-intel-fixes-2021-12-02' of git://anongit.freedesktop.org/drm/drm-intel into drm-fixes
+drm-misc drm-misc-fixes b19926d4f3a660a8b76e5d989ffd1168e619a5c4
+	drm/syncobj: Deal with signalled fences in drm_syncobj_find_fence.
+drm-intel drm-intel-fixes 9cdb54be3e463f5c0607fcac045d5a9c67575775
+	drm/i915: Fix error pointer dereference in i915_gem_do_execbuffer()
+drm drm-next c305ae99dfd4d0fe70c7fdf13ef5f7650a804ea7
+	Merge tag 'drm-intel-next-2021-11-30' of git://anongit.freedesktop.org/drm/drm-intel into drm-next
+drm-misc drm-misc-next-fixes bcae3af286f49bf4f6cda03f165fbe530f4a6bed
+	drm/locking: fix __stack_depot_* name conflict
+drm-intel drm-intel-next-fixes fa55b7dcdc43c1aa1ba12bca9d2dd4318c2a0dbf
+	Linux 5.16-rc1
+drm-misc drm-misc-next 03848335b5b1faa4a4641fcf30b7c233579a45aa
+	drm/bridge: sn65dsi86: defer if there is no dsi host
+drm-intel drm-intel-next e08a7d5611b876bf9da3ef7c185d26dcadf24dc9
+	drm/i915/dmc: Update DMC to v2.14 on ADL-P
+drm-intel drm-intel-gt-next 20cddfcc82e642e4682c48af91f0702fbbd623a0
+	drm/i915/gt: Use hw_engine_masks as reset_domains
+sound-upstream for-linus 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+sound-upstream for-next 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+drm-intel topic/core-for-CI 4c82fd0506b4cc196a375d1200361fb0c5439acd
+	drm/i915: Add relocation exceptions for two other platforms
+drm topic/nouveau-ampere-modeset 584265dfec70e78ce2085b82ed389f27e06fbca0
+	Merge branch '04.01-ampere-lite' of git://github.com/skeggsb/linux into topic/nouveau-ampere-modeset
+drm-misc topic/i915-ttm 1e3944578b749449bd7fa6bf0bae4c3d3f5f1733
+	Merge tag 'amd-drm-next-5.16-2021-09-27' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
