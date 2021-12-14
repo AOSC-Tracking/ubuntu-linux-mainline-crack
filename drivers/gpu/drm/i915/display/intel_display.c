@@ -2197,26 +2197,6 @@ unlock:
 	clear_bit_unlock(I915_RESET_MODESET, &dev_priv->gt.reset.flags);
 }
 
-static bool underrun_recovery_supported(const struct intel_crtc_state *crtc_state)
-{
-	if (crtc_state->pch_pfit.enabled &&
-	    (crtc_state->pipe_src_w > drm_rect_width(&crtc_state->pch_pfit.dst) ||
-	     crtc_state->pipe_src_h > drm_rect_height(&crtc_state->pch_pfit.dst) ||
-	     crtc_state->output_format == INTEL_OUTPUT_FORMAT_YCBCR420))
-		return false;
-
-	if (crtc_state->dsc.compression_enable)
-		return false;
-
-	if (crtc_state->has_psr2)
-		return false;
-
-	if (crtc_state->splitter.enable)
-		return false;
-
-	return true;
-}
-
 static void icl_set_pipe_chicken(const struct intel_crtc_state *crtc_state)
 {
 	struct intel_crtc *crtc = to_intel_crtc(crtc_state->uapi.crtc);
@@ -2240,12 +2220,11 @@ static void icl_set_pipe_chicken(const struct intel_crtc_state *crtc_state)
 	 */
 	tmp |= PIXEL_ROUNDING_TRUNC_FB_PASSTHRU;
 
-	if (DISPLAY_VER(dev_priv) >= 13) {
-		if (underrun_recovery_supported(crtc_state))
-			tmp &= ~UNDERRUN_RECOVERY_DISABLE_ADLP;
-		else
-			tmp |= UNDERRUN_RECOVERY_DISABLE_ADLP;
-	}
+	/*
+	 * Underrun recovery must always be disabled on display 13+.
+	 */
+	if (DISPLAY_VER(dev_priv) >= 13)
+		tmp |= UNDERRUN_RECOVERY_DISABLE_ADLP;
 
 	intel_de_write(dev_priv, PIPE_CHICKEN(pipe), tmp);
 }
