@@ -23730,6 +23730,7 @@ EXPORT_SYMBOL_GPL	 vmlinux 0xa4c31397	platform_device_add_data
 EXPORT_SYMBOL_GPL	 vmlinux 0xa4c96294	md_stop
 EXPORT_SYMBOL_GPL	 vmlinux 0xa4c9f657	sfp_bus_add_upstream
 EXPORT_SYMBOL_GPL	 vmlinux 0xa4cbb264	__raw_v6_lookup
+EXPORT_SYMBOL_GPL	 vmlinux 0xa4d55fee	pci_find_host_bridge
 EXPORT_SYMBOL_GPL	 vmlinux 0xa4eb5793	sbitmap_weight
 EXPORT_SYMBOL_GPL	 vmlinux 0xa4ecba1e	simple_attr_read
 EXPORT_SYMBOL_GPL	 vmlinux 0xa4fff78d	synchronize_srcu
