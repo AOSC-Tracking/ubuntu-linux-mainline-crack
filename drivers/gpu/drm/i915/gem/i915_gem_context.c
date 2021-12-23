@@ -564,15 +564,12 @@ set_proto_ctx_engines_parallel_submit(struct i915_user_extension __user *base,
 		container_of_user(base, typeof(*ext), base);
 	const struct set_proto_ctx_engines *set = data;
 	struct drm_i915_private *i915 = set->i915;
+	struct i915_engine_class_instance prev_engine;
 	u64 flags;
 	int err = 0, n, i, j;
 	u16 slot, width, num_siblings;
 	struct intel_engine_cs **siblings = NULL;
 	intel_engine_mask_t prev_mask;
-
-	/* FIXME: This is NIY for execlists */
-	if (!(intel_uc_uses_guc_submission(&to_gt(i915)->uc)))
-		return -ENODEV;
 
 	if (get_user(slot, &ext->engine_index))
 		return -EFAULT;
@@ -582,6 +579,13 @@ set_proto_ctx_engines_parallel_submit(struct i915_user_extension __user *base,
 
 	if (get_user(num_siblings, &ext->num_siblings))
 		return -EFAULT;
+
+	if (!intel_uc_uses_guc_submission(&to_gt(i915)->uc) &&
+	    num_siblings != 1) {
+		drm_dbg(&i915->drm, "Only 1 sibling (%d) supported in non-GuC mode\n",
+			num_siblings);
+		return -EINVAL;
+	}
 
 	if (slot >= set->num_engines) {
 		drm_dbg(&i915->drm, "Invalid placement value, %d >= %d\n",
@@ -629,7 +633,6 @@ set_proto_ctx_engines_parallel_submit(struct i915_user_extension __user *base,
 	/* Create contexts / engines */
 	for (i = 0; i < width; ++i) {
 		intel_engine_mask_t current_mask = 0;
-		struct i915_engine_class_instance prev_engine;
 
 		for (j = 0; j < num_siblings; ++j) {
 			struct i915_engine_class_instance ci;
