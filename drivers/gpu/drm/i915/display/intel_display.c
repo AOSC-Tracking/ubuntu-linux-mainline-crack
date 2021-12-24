@@ -3593,6 +3593,7 @@ static void intel_plane_disable_noatomic(struct intel_crtc *crtc,
 		intel_set_cpu_fifo_underrun_reporting(dev_priv, crtc->pipe, false);
 
 	intel_disable_plane(plane, crtc_state);
+	intel_wait_for_vblank(dev_priv, crtc->pipe);
 }
 
 static struct intel_frontbuffer *
