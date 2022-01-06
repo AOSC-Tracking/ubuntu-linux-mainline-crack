@@ -1274,6 +1274,8 @@ struct mlx5_esw_bridge_offloads *mlx5_esw_bridge_init(struct mlx5_eswitch *esw)
 {
 	struct mlx5_esw_bridge_offloads *br_offloads;
 
+	ASSERT_RTNL();
+
 	br_offloads = kvzalloc(sizeof(*br_offloads), GFP_KERNEL);
 	if (!br_offloads)
 		return ERR_PTR(-ENOMEM);
@@ -1288,6 +1290,8 @@ struct mlx5_esw_bridge_offloads *mlx5_esw_bridge_init(struct mlx5_eswitch *esw)
 void mlx5_esw_bridge_cleanup(struct mlx5_eswitch *esw)
 {
 	struct mlx5_esw_bridge_offloads *br_offloads = esw->br_offloads;
+
+	ASSERT_RTNL();
 
 	if (!br_offloads)
 		return;
