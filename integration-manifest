@@ -1,0 +1,28 @@
+drm drm-fixes 26291c54e111ff6ba87a164d85d4a4e134b7315c
+	Linux 5.17-rc2
+drm-misc drm-misc-fixes 1b777d4d9e383d2744fc9b3a09af6ec1893c8b1a
+	drm/nouveau: fix off by one in BIOS boundary checking
+drm-intel drm-intel-fixes ea33c6d63f87e34b14dba6f2804990a5fc5a60d7
+	drm/i915/pmu: Fix KMD and GuC race on accessing busyness
+drm drm-next 26291c54e111ff6ba87a164d85d4a4e134b7315c
+	Linux 5.17-rc2
+drm-misc drm-misc-next-fixes d3cbc6e323c9299d10c8d2e4127c77c7d05d07b1
+	drm: panel-orientation-quirks: Add quirk for the 1Netbook OneXPlayer
+drm-intel drm-intel-next-fixes e26602be4869c74dd8a0f66f718b8a0ce120edb4
+	drm/i915/display/adlp: Implement new step in the TC voltage swing prog sequence
+drm-misc drm-misc-next d80976d9ffd9d7f89a26134a299b236910477f3b
+	dma-resv: some doc polish for iterators
+drm-intel drm-intel-next 063565aca3734de4e73639a0e460a58d9418b3cd
+	Merge drm/drm-next into drm-intel-next
+drm-intel drm-intel-gt-next ef6e871af3126850b429f68e8bd5b657042139f0
+	drm/i915/dg2: s/engine->i915/i915/ for engine workarounds
+sound-upstream for-linus 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+sound-upstream for-next 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+drm-intel topic/core-for-CI 4c82fd0506b4cc196a375d1200361fb0c5439acd
+	drm/i915: Add relocation exceptions for two other platforms
+drm topic/nouveau-ampere-modeset 584265dfec70e78ce2085b82ed389f27e06fbca0
+	Merge branch '04.01-ampere-lite' of git://github.com/skeggsb/linux into topic/nouveau-ampere-modeset
+drm-misc topic/i915-ttm 1e3944578b749449bd7fa6bf0bae4c3d3f5f1733
+	Merge tag 'amd-drm-next-5.16-2021-09-27' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
