@@ -124,8 +124,8 @@ int icl_pcode_restrict_qgv_points(struct drm_i915_private *dev_priv,
 	/* bspec says to keep retrying for at least 1 ms */
 	ret = skl_pcode_request(dev_priv, ICL_PCODE_SAGV_DE_MEM_SS_CONFIG,
 				points_mask,
-				ICL_PCODE_POINTS_RESTRICTED_MASK,
-				ICL_PCODE_POINTS_RESTRICTED,
+				ICL_PCODE_REP_QGV_MASK | ADLS_PCODE_REP_PSF_MASK,
+				ICL_PCODE_REP_QGV_SAFE | ADLS_PCODE_REP_PSF_SAFE,
 				1);
 
 	if (ret < 0) {
@@ -820,7 +820,7 @@ static u16 icl_qgv_points_mask(struct drm_i915_private *i915)
 {
 	unsigned int num_psf_gv_points = i915->max_bw[0].num_psf_gv_points;
 	unsigned int num_qgv_points = i915->max_bw[0].num_qgv_points;
-	u16 mask = 0;
+	u16 qgv_points = 0, psf_points = 0;
 
 	/*
 	 * We can _not_ use the whole ADLS_QGV_PT_MASK here, as PCode rejects
@@ -828,12 +828,12 @@ static u16 icl_qgv_points_mask(struct drm_i915_private *i915)
 	 * So need to operate only with those returned from PCode.
 	 */
 	if (num_qgv_points > 0)
-		mask |= REG_GENMASK(num_qgv_points - 1, 0);
+		qgv_points = GENMASK(num_qgv_points - 1, 0);
 
 	if (num_psf_gv_points > 0)
-		mask |= REG_GENMASK(num_psf_gv_points - 1, 0) << ADLS_PSF_PT_SHIFT;
+		psf_points = GENMASK(num_psf_gv_points - 1, 0);
 
-	return mask;
+	return ICL_PCODE_REQ_QGV_PT(qgv_points) | ADLS_PCODE_REQ_PSF_PT(psf_points);
 }
 
 static int intel_bw_check_data_rate(struct intel_atomic_state *state, bool *changed)
@@ -890,7 +890,7 @@ int intel_bw_atomic_check(struct intel_atomic_state *state)
 	unsigned int data_rate;
 	unsigned int num_active_planes;
 	int i, ret;
-	u32 allowed_points = 0;
+	u16 qgv_points = 0, psf_points = 0;
 	unsigned int max_bw_point = 0, max_bw = 0;
 	unsigned int num_qgv_points = dev_priv->max_bw[0].num_qgv_points;
 	unsigned int num_psf_gv_points = dev_priv->max_bw[0].num_psf_gv_points;
@@ -948,7 +948,7 @@ int intel_bw_atomic_check(struct intel_atomic_state *state)
 			max_bw = max_data_rate;
 		}
 		if (max_data_rate >= data_rate)
-			allowed_points |= REG_FIELD_PREP(ADLS_QGV_PT_MASK, BIT(i));
+			qgv_points |= BIT(i);
 
 		drm_dbg_kms(&dev_priv->drm, "QGV point %d: max bw %d required %d\n",
 			    i, max_data_rate, data_rate);
@@ -958,7 +958,7 @@ int intel_bw_atomic_check(struct intel_atomic_state *state)
 		unsigned int max_data_rate = adl_psf_bw(dev_priv, i);
 
 		if (max_data_rate >= data_rate)
-			allowed_points |= REG_FIELD_PREP(ADLS_PSF_PT_MASK, BIT(i));
+			psf_points |= BIT(i);
 
 		drm_dbg_kms(&dev_priv->drm, "PSF GV point %d: max bw %d"
 			    " required %d\n",
@@ -970,20 +970,18 @@ int intel_bw_atomic_check(struct intel_atomic_state *state)
 	 * left, so if we couldn't - simply reject the configuration for obvious
 	 * reasons.
 	 */
-	if ((allowed_points & ADLS_QGV_PT_MASK) == 0) {
+	if (qgv_points == 0) {
 		drm_dbg_kms(&dev_priv->drm, "No QGV points provide sufficient memory"
 			    " bandwidth %d for display configuration(%d active planes).\n",
 			    data_rate, num_active_planes);
 		return -EINVAL;
 	}
 
-	if (num_psf_gv_points > 0) {
-		if ((allowed_points & ADLS_PSF_PT_MASK) == 0) {
-			drm_dbg_kms(&dev_priv->drm, "No PSF GV points provide sufficient memory"
-				    " bandwidth %d for display configuration(%d active planes).\n",
-				    data_rate, num_active_planes);
-			return -EINVAL;
-		}
+	if (num_psf_gv_points > 0 && psf_points == 0) {
+		drm_dbg_kms(&dev_priv->drm, "No PSF GV points provide sufficient memory"
+			    " bandwidth %d for display configuration(%d active planes).\n",
+			    data_rate, num_active_planes);
+		return -EINVAL;
 	}
 
 	/*
@@ -992,15 +990,18 @@ int intel_bw_atomic_check(struct intel_atomic_state *state)
 	 * cause.
 	 */
 	if (!intel_can_enable_sagv(dev_priv, new_bw_state)) {
-		allowed_points = BIT(max_bw_point);
+		qgv_points = BIT(max_bw_point);
 		drm_dbg_kms(&dev_priv->drm, "No SAGV, using single QGV point %d\n",
 			    max_bw_point);
 	}
+
 	/*
 	 * We store the ones which need to be masked as that is what PCode
 	 * actually accepts as a parameter.
 	 */
-	new_bw_state->qgv_points_mask = ~allowed_points &
+	new_bw_state->qgv_points_mask =
+		~(ICL_PCODE_REQ_QGV_PT(qgv_points) |
+		  ADLS_PCODE_REQ_PSF_PT(psf_points)) &
 		icl_qgv_points_mask(dev_priv);
 
 	/*

@@ -26,6 +26,7 @@
  */
 
 #include <linux/module.h>
+#include <linux/string_helpers.h>
 #include <linux/pm_runtime.h>
 
 #include <drm/drm_atomic_helper.h>
@@ -55,6 +56,8 @@
 #include "intel_pm.h"
 #include "vlv_sideband.h"
 #include "../../../platform/x86/intel_ips.h"
+
+static void skl_sagv_disable(struct drm_i915_private *dev_priv);
 
 struct drm_i915_clock_gating_funcs {
 	void (*init_clock_gating)(struct drm_i915_private *i915);
@@ -418,8 +421,8 @@ static bool _intel_set_memory_cxsr(struct drm_i915_private *dev_priv, bool enabl
 	trace_intel_memory_cxsr(dev_priv, was_enabled, enable);
 
 	drm_dbg_kms(&dev_priv->drm, "memory self-refresh is %s (was %s)\n",
-		    enableddisabled(enable),
-		    enableddisabled(was_enabled));
+		    str_enabled_disabled(enable),
+		    str_enabled_disabled(was_enabled));
 
 	return was_enabled;
 }
@@ -3669,8 +3672,8 @@ intel_has_sagv(struct drm_i915_private *dev_priv)
 		dev_priv->sagv_status != I915_SAGV_NOT_CONTROLLED;
 }
 
-static void
-skl_setup_sagv_block_time(struct drm_i915_private *dev_priv)
+static u32
+intel_sagv_block_time(struct drm_i915_private *dev_priv)
 {
 	if (DISPLAY_VER(dev_priv) >= 12) {
 		u32 val = 0;
@@ -3679,27 +3682,48 @@ skl_setup_sagv_block_time(struct drm_i915_private *dev_priv)
 		ret = snb_pcode_read(dev_priv,
 				     GEN12_PCODE_READ_SAGV_BLOCK_TIME_US,
 				     &val, NULL);
-		if (!ret) {
-			dev_priv->sagv_block_time_us = val;
-			return;
+		if (ret) {
+			drm_dbg_kms(&dev_priv->drm, "Couldn't read SAGV block time!\n");
+			return 0;
 		}
 
-		drm_dbg(&dev_priv->drm, "Couldn't read SAGV block time!\n");
+		return val;
 	} else if (DISPLAY_VER(dev_priv) == 11) {
-		dev_priv->sagv_block_time_us = 10;
-		return;
-	} else if (DISPLAY_VER(dev_priv) == 10) {
-		dev_priv->sagv_block_time_us = 20;
-		return;
-	} else if (DISPLAY_VER(dev_priv) == 9) {
-		dev_priv->sagv_block_time_us = 30;
-		return;
+		return 10;
+	} else if (DISPLAY_VER(dev_priv) == 9 && !IS_LP(dev_priv)) {
+		return 30;
 	} else {
-		MISSING_CASE(DISPLAY_VER(dev_priv));
+		return 0;
 	}
+}
 
-	/* Default to an unusable block time */
-	dev_priv->sagv_block_time_us = -1;
+static void intel_sagv_init(struct drm_i915_private *i915)
+{
+	if (!intel_has_sagv(i915))
+		i915->sagv_status = I915_SAGV_NOT_CONTROLLED;
+
+	/*
+	 * Probe to see if we have working SAGV control.
+	 * For icl+ this was already determined by intel_bw_init_hw().
+	 */
+	if (DISPLAY_VER(i915) < 11)
+		skl_sagv_disable(i915);
+
+	drm_WARN_ON(&i915->drm, i915->sagv_status == I915_SAGV_UNKNOWN);
+
+	i915->sagv_block_time_us = intel_sagv_block_time(i915);
+
+	drm_dbg_kms(&i915->drm, "SAGV supported: %s, original SAGV block time: %u us\n",
+		    str_yes_no(intel_has_sagv(i915)), i915->sagv_block_time_us);
+
+	/* avoid overflow when adding with wm0 latency/etc. */
+	if (drm_WARN(&i915->drm, i915->sagv_block_time_us > U16_MAX,
+		     "Excessive SAGV block time %u, ignoring\n",
+		     i915->sagv_block_time_us))
+		i915->sagv_block_time_us = 0;
+
+	if (!intel_has_sagv(i915))
+		i915->sagv_block_time_us = 0;
 }
 
 /*
@@ -3713,16 +3737,15 @@ skl_setup_sagv_block_time(struct drm_i915_private *dev_priv)
  *  - All planes can enable watermarks for latencies >= SAGV engine block time
  *  - We're not using an interlaced display configuration
  */
-static int
-intel_enable_sagv(struct drm_i915_private *dev_priv)
+static void skl_sagv_enable(struct drm_i915_private *dev_priv)
 {
 	int ret;
 
 	if (!intel_has_sagv(dev_priv))
-		return 0;
+		return;
 
 	if (dev_priv->sagv_status == I915_SAGV_ENABLED)
-		return 0;
+		return;
 
 	drm_dbg_kms(&dev_priv->drm, "Enabling SAGV\n");
 	ret = snb_pcode_write(dev_priv, GEN9_PCODE_SAGV_CONTROL,
@@ -3737,26 +3760,24 @@ intel_enable_sagv(struct drm_i915_private *dev_priv)
 	if (IS_SKYLAKE(dev_priv) && ret == -ENXIO) {
 		drm_dbg(&dev_priv->drm, "No SAGV found on system, ignoring\n");
 		dev_priv->sagv_status = I915_SAGV_NOT_CONTROLLED;
-		return 0;
+		return;
 	} else if (ret < 0) {
 		drm_err(&dev_priv->drm, "Failed to enable SAGV\n");
-		return ret;
+		return;
 	}
 
 	dev_priv->sagv_status = I915_SAGV_ENABLED;
-	return 0;
 }
 
-static int
-intel_disable_sagv(struct drm_i915_private *dev_priv)
+static void skl_sagv_disable(struct drm_i915_private *dev_priv)
 {
 	int ret;
 
 	if (!intel_has_sagv(dev_priv))
-		return 0;
+		return;
 
 	if (dev_priv->sagv_status == I915_SAGV_DISABLED)
-		return 0;
+		return;
 
 	drm_dbg_kms(&dev_priv->drm, "Disabling SAGV\n");
 	/* bspec says to keep retrying for at least 1 ms */
@@ -3771,14 +3792,13 @@ intel_disable_sagv(struct drm_i915_private *dev_priv)
 	if (IS_SKYLAKE(dev_priv) && ret == -ENXIO) {
 		drm_dbg(&dev_priv->drm, "No SAGV found on system, ignoring\n");
 		dev_priv->sagv_status = I915_SAGV_NOT_CONTROLLED;
-		return 0;
+		return;
 	} else if (ret < 0) {
 		drm_err(&dev_priv->drm, "Failed to disable SAGV (%d)\n", ret);
-		return ret;
+		return;
 	}
 
 	dev_priv->sagv_status = I915_SAGV_DISABLED;
-	return 0;
 }
 
 static void skl_sagv_pre_plane_update(struct intel_atomic_state *state)
@@ -3791,7 +3811,7 @@ static void skl_sagv_pre_plane_update(struct intel_atomic_state *state)
 		return;
 
 	if (!intel_can_enable_sagv(i915, new_bw_state))
-		intel_disable_sagv(i915);
+		skl_sagv_disable(i915);
 }
 
 static void skl_sagv_post_plane_update(struct intel_atomic_state *state)
@@ -3804,7 +3824,7 @@ static void skl_sagv_post_plane_update(struct intel_atomic_state *state)
 		return;
 
 	if (intel_can_enable_sagv(i915, new_bw_state))
-		intel_enable_sagv(i915);
+		skl_sagv_enable(i915);
 }
 
 static void icl_sagv_pre_plane_update(struct intel_atomic_state *state)
@@ -5409,6 +5429,7 @@ skl_compute_wm_params(const struct intel_crtc_state *crtc_state,
 	}
 
 	wp->y_tiled = modifier == I915_FORMAT_MOD_Y_TILED ||
+		      modifier == I915_FORMAT_MOD_4_TILED ||
 		      modifier == I915_FORMAT_MOD_Yf_TILED ||
 		      modifier == I915_FORMAT_MOD_Y_TILED_CCS ||
 		      modifier == I915_FORMAT_MOD_Yf_TILED_CCS;
@@ -5645,7 +5666,7 @@ static void skl_compute_plane_wm(const struct intel_crtc_state *crtc_state,
 	result->min_ddb_alloc = max(min_ddb_alloc, blocks) + 1;
 	result->enable = true;
 
-	if (DISPLAY_VER(dev_priv) < 12)
+	if (DISPLAY_VER(dev_priv) < 12 && dev_priv->sagv_block_time_us)
 		result->can_sagv = latency >= dev_priv->sagv_block_time_us;
 }
 
@@ -5678,7 +5699,10 @@ static void tgl_compute_sagv_wm(const struct intel_crtc_state *crtc_state,
 	struct drm_i915_private *dev_priv = to_i915(crtc_state->uapi.crtc->dev);
 	struct skl_wm_level *sagv_wm = &plane_wm->sagv.wm0;
 	struct skl_wm_level *levels = plane_wm->wm;
-	unsigned int latency = dev_priv->wm.skl_latency[0] + dev_priv->sagv_block_time_us;
+	unsigned int latency = 0;
+
+	if (dev_priv->sagv_block_time_us)
+		latency = dev_priv->sagv_block_time_us + dev_priv->wm.skl_latency[0];
 
 	skl_compute_plane_wm(crtc_state, plane, 0, latency,
 			     wm_params, &levels[0],
@@ -5924,7 +5948,7 @@ static void skl_write_wm_level(struct drm_i915_private *dev_priv,
 		val |= PLANE_WM_EN;
 	if (level->ignore_lines)
 		val |= PLANE_WM_IGNORE_LINES;
-	val |= level->blocks;
+	val |= REG_FIELD_PREP(PLANE_WM_BLOCKS_MASK, level->blocks);
 	val |= REG_FIELD_PREP(PLANE_WM_LINES_MASK, level->lines);
 
 	intel_de_write_fw(dev_priv, reg, val);
@@ -6184,8 +6208,8 @@ skl_compute_ddb(struct intel_atomic_state *state)
 			    old_dbuf_state->enabled_slices,
 			    new_dbuf_state->enabled_slices,
 			    INTEL_INFO(dev_priv)->dbuf.slice_mask,
-			    yesno(old_dbuf_state->joined_mbus),
-			    yesno(new_dbuf_state->joined_mbus));
+			    str_yes_no(old_dbuf_state->joined_mbus),
+			    str_yes_no(new_dbuf_state->joined_mbus));
 	}
 
 	for_each_new_intel_crtc_in_state(state, crtc, new_crtc_state, i) {
@@ -6572,7 +6596,7 @@ static void skl_wm_level_from_reg_val(u32 val, struct skl_wm_level *level)
 {
 	level->enable = val & PLANE_WM_EN;
 	level->ignore_lines = val & PLANE_WM_IGNORE_LINES;
-	level->blocks = val & PLANE_WM_BLOCKS_MASK;
+	level->blocks = REG_FIELD_GET(PLANE_WM_BLOCKS_MASK, val);
 	level->lines = REG_FIELD_GET(PLANE_WM_LINES_MASK, val);
 }
 
@@ -6687,7 +6711,7 @@ void skl_wm_get_hw_state(struct drm_i915_private *dev_priv)
 			    crtc->base.base.id, crtc->base.name,
 			    dbuf_state->slices[pipe], dbuf_state->ddb[pipe].start,
 			    dbuf_state->ddb[pipe].end, dbuf_state->active_pipes,
-			    yesno(dbuf_state->joined_mbus));
+			    str_yes_no(dbuf_state->joined_mbus));
 	}
 
 	dbuf_state->enabled_slices = dev_priv->dbuf.enabled_slices;
@@ -6998,7 +7022,8 @@ void g4x_wm_get_hw_state(struct drm_i915_private *dev_priv)
 		    "Initial HPLL watermarks: plane=%d, SR cursor=%d fbc=%d\n",
 		    wm->hpll.plane, wm->hpll.cursor, wm->hpll.fbc);
 	drm_dbg_kms(&dev_priv->drm, "Initial SR=%s HPLL=%s FBC=%s\n",
-		    yesno(wm->cxsr), yesno(wm->hpll_en), yesno(wm->fbc_en));
+		    str_yes_no(wm->cxsr), str_yes_no(wm->hpll_en),
+		    str_yes_no(wm->fbc_en));
 }
 
 void g4x_wm_sanitize(struct drm_i915_private *dev_priv)
@@ -8173,8 +8198,7 @@ void intel_init_pm(struct drm_i915_private *dev_priv)
 	else if (GRAPHICS_VER(dev_priv) == 5)
 		ilk_get_mem_freq(dev_priv);
 
-	if (intel_has_sagv(dev_priv))
-		skl_setup_sagv_block_time(dev_priv);
+	intel_sagv_init(dev_priv);
 
 	/* For FIFO watermark updates */
 	if (DISPLAY_VER(dev_priv) >= 9) {
