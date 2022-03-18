@@ -96,6 +96,12 @@ int intel_gt_assign_ggtt(struct intel_gt *gt)
 	return gt->ggtt ? 0 : -ENOMEM;
 }
 
+static const char * const intel_steering_types[] = {
+	"L3BANK",
+	"MSLICE",
+	"LNCF",
+};
+
 static const struct intel_mmio_range icl_l3bank_steering_table[] = {
 	{ 0x00B100, 0x00B3FF },
 	{},
@@ -712,6 +718,11 @@ int intel_gt_init(struct intel_gt *gt)
 	if (err)
 		goto err_uc_init;
 
+	err = intel_gt_init_hwconfig(gt);
+	if (err)
+		drm_err(&gt->i915->drm, "Failed to retrieve hwconfig table: %pe\n",
+			ERR_PTR(err));
+
 	err = __engines_record_defaults(gt);
 	if (err)
 		goto err_gt;
@@ -793,6 +804,7 @@ void intel_gt_driver_release(struct intel_gt *gt)
 	intel_gt_pm_fini(gt);
 	intel_gt_fini_scratch(gt);
 	intel_gt_fini_buffer_pool(gt);
+	intel_gt_fini_hwconfig(gt);
 }
 
 void intel_gt_driver_late_release(struct intel_gt *gt)
@@ -913,6 +925,35 @@ u32 intel_gt_read_register_fw(struct intel_gt *gt, i915_reg_t reg)
 	return intel_uncore_read_fw(gt->uncore, reg);
 }
 
+/**
+ * intel_gt_get_valid_steering_for_reg - get a valid steering for a register
+ * @gt: GT structure
+ * @reg: register for which the steering is required
+ * @sliceid: return variable for slice steering
+ * @subsliceid: return variable for subslice steering
+ *
+ * This function returns a slice/subslice pair that is guaranteed to work for
+ * read steering of the given register. Note that a value will be returned even
+ * if the register is not replicated and therefore does not actually require
+ * steering.
+ */
+void intel_gt_get_valid_steering_for_reg(struct intel_gt *gt, i915_reg_t reg,
+					 u8 *sliceid, u8 *subsliceid)
+{
+	int type;
+
+	for (type = 0; type < NUM_STEERING_TYPES; type++) {
+		if (intel_gt_reg_needs_read_steering(gt, reg, type)) {
+			intel_gt_get_valid_steering(gt, type, sliceid,
+						    subsliceid);
+			return;
+		}
+	}
+
+	*sliceid = gt->default_steering.groupid;
+	*subsliceid = gt->default_steering.instanceid;
+}
+
 u32 intel_gt_read_register(struct intel_gt *gt, i915_reg_t reg)
 {
 	int type;
@@ -930,6 +971,46 @@ u32 intel_gt_read_register(struct intel_gt *gt, i915_reg_t reg)
 	}
 
 	return intel_uncore_read(gt->uncore, reg);
+}
+
+static void report_steering_type(struct drm_printer *p,
+				 struct intel_gt *gt,
+				 enum intel_steering_type type,
+				 bool dump_table)
+{
+	const struct intel_mmio_range *entry;
+	u8 slice, subslice;
+
+	BUILD_BUG_ON(ARRAY_SIZE(intel_steering_types) != NUM_STEERING_TYPES);
+
+	if (!gt->steering_table[type]) {
+		drm_printf(p, "%s steering: uses default steering\n",
+			   intel_steering_types[type]);
+		return;
+	}
+
+	intel_gt_get_valid_steering(gt, type, &slice, &subslice);
+	drm_printf(p, "%s steering: sliceid=0x%x, subsliceid=0x%x\n",
+		   intel_steering_types[type], slice, subslice);
+
+	if (!dump_table)
+		return;
+
+	for (entry = gt->steering_table[type]; entry->end; entry++)
+		drm_printf(p, "\t0x%06x - 0x%06x\n", entry->start, entry->end);
+}
+
+void intel_gt_report_steering(struct drm_printer *p, struct intel_gt *gt,
+			      bool dump_table)
+{
+	drm_printf(p, "Default steering: sliceid=0x%x, subsliceid=0x%x\n",
+		   gt->default_steering.groupid,
+		   gt->default_steering.instanceid);
+
+	if (HAS_MSLICES(gt->i915)) {
+		report_steering_type(p, gt, MSLICE, dump_table);
+		report_steering_type(p, gt, LNCF, dump_table);
+	}
 }
 
 void intel_gt_info_print(const struct intel_gt_info *info,
