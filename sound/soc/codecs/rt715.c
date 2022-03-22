@@ -95,6 +95,13 @@ static const struct dmi_system_id micmute_led_dmi_table[] = {
 			DMI_MATCH(DMI_PRODUCT_SKU, "0A3E"),
 		},
 	},
+	{
+		.callback = dmi_matched,
+		.matches = {
+			DMI_MATCH(DMI_SYS_VENDOR, "Dell Inc."),
+			DMI_MATCH(DMI_PRODUCT_SKU, "0B14"),
+		},
+	},
 	{},
 };
 
