@@ -1,0 +1,26 @@
+drm drm-fixes f443e374ae131c168a065ea1748feac6b2e76613
+	Linux 5.17
+drm-misc drm-misc-fixes d14eb80e27795b7b20060f7b151cdfe39722a813
+	drm/panel: ili9341: fix optional regulator handling
+drm-intel drm-intel-fixes 09688c0166e76ce2fb85e86b9d99be8b0084cdf9
+	Linux 5.17-rc8
+drm drm-next 2a81dba4b577099717cea86d429f053e85e74d96
+	fbdev: Fix cfb_imageblit() for arbitrary image widths
+drm-misc drm-misc-next-fixes 519f490db07e1a539490612f376487f61e48e39c
+	dma-buf/sync-file: fix warning about fence containers
+drm-intel drm-intel-next-fixes 00f4150d27d2c01eaeffe1091fc311a7c0872c69
+	drm/i915: Fix renamed struct field
+drm-misc drm-misc-next 59ab4ee012f0166873ae15d235b2450f21dcb5e7
+	drm/qxl: fix qxl can't use in arm64
+drm-intel drm-intel-next 54903c7a6b40e34c3b0da3a3a5bb93f909295ce3
+	drm/i915: s/enable/active/ for DRRS
+drm-intel drm-intel-gt-next c0c73850637c6ad6a56a6b5ee181897cb35c6c31
+	drm/i915/guc: Correctly free guc capture struct on error
+sound-upstream for-linus 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+sound-upstream for-next 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+drm-intel topic/core-for-CI c8fa81010ba0974bd56cfa7696ec1595fd04898f
+	sound/hda/hdac_i915: reduce the timeout for component binding
+drm-misc topic/i915-ttm 1e3944578b749449bd7fa6bf0bae4c3d3f5f1733
+	Merge tag 'amd-drm-next-5.16-2021-09-27' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
