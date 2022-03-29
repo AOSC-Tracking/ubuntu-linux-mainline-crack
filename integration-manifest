@@ -1,0 +1,26 @@
+drm drm-fixes f443e374ae131c168a065ea1748feac6b2e76613
+	Linux 5.17
+drm-misc drm-misc-fixes d14eb80e27795b7b20060f7b151cdfe39722a813
+	drm/panel: ili9341: fix optional regulator handling
+drm-intel drm-intel-fixes 09688c0166e76ce2fb85e86b9d99be8b0084cdf9
+	Linux 5.17-rc8
+drm drm-next 2a81dba4b577099717cea86d429f053e85e74d96
+	fbdev: Fix cfb_imageblit() for arbitrary image widths
+drm-misc drm-misc-next-fixes c42ee39c1e78224d3a81bdbe0600abe4581226ed
+	dma-buf: handle empty dma_fence_arrays gracefully
+drm-intel drm-intel-next-fixes 00f4150d27d2c01eaeffe1091fc311a7c0872c69
+	drm/i915: Fix renamed struct field
+drm-misc drm-misc-next ec57376fba5abc0e571617ff88e2ade7970c2e4b
+	drm/panel-edp: Add AUO B133UAN01
+drm-intel drm-intel-next 412c942bdfae114bd3e1570936cef59d5aeb4f54
+	drm/i915/ats-m: add ATS-M platform info
+drm-intel drm-intel-gt-next 552caa1fdbb8624d98964e3f0200fe78f4906a1a
+	drm/i915/migrate: move the sanity check
+sound-upstream for-linus 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+sound-upstream for-next 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+drm-intel topic/core-for-CI 37a3f9f59ed3e3ad758b7d01f0114fa2356949bc
+	topic/core-for-CI: Add ATS-M PCI IDs
+drm-misc topic/i915-ttm 1e3944578b749449bd7fa6bf0bae4c3d3f5f1733
+	Merge tag 'amd-drm-next-5.16-2021-09-27' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
