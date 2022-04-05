@@ -1,0 +1,26 @@
+drm drm-fixes 3123109284176b1532874591f7c81f3837bbdc17
+	Linux 5.18-rc1
+drm-misc drm-misc-fixes 13043d1a12c54d8b6605bbead5e177e9fb98a287
+	Merge drm-misc/drm-misc-next-fixes into drm-misc-fixes
+drm-intel drm-intel-fixes 3123109284176b1532874591f7c81f3837bbdc17
+	Linux 5.18-rc1
+drm drm-next 3123109284176b1532874591f7c81f3837bbdc17
+	Linux 5.18-rc1
+drm-misc drm-misc-next-fixes 67bae5f28c895f8737a1974c3f31cf12b9170b14
+	drm: of: Properly try all possible cases for bridge/panel detection
+drm-intel drm-intel-next-fixes 00f4150d27d2c01eaeffe1091fc311a7c0872c69
+	drm/i915: Fix renamed struct field
+drm-misc drm-misc-next 21d139a95682c6ade89a2151e44012c9797c0309
+	drm: bridge: icn6211: Fix DSI-to-DPI PLL configuration
+drm-intel drm-intel-next 92bc908af5cd6633a167638c4ff432d9fe107fa7
+	drm/i915/dsb: modified to drm_info in dsb_prepare()
+drm-intel drm-intel-gt-next 055634e4b62f109a47727c2c50586e2e318595a9
+	drm/i915: Expose client engine utilisation via fdinfo
+sound-upstream for-linus 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+sound-upstream for-next 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+drm-intel topic/core-for-CI bca8f652e1a0cd97d4d4559d1c1565ae2d12dcd6
+	topic/core-for-CI: Add ATS-M PCI IDs
+drm-misc topic/i915-ttm 1e3944578b749449bd7fa6bf0bae4c3d3f5f1733
+	Merge tag 'amd-drm-next-5.16-2021-09-27' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
