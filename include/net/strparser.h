@@ -68,6 +68,7 @@ struct sk_skb_cb {
 	struct _strp_msg strp;
 	struct tls_msg {
 		u8 control;
+		u8 decrypted;
 	} tls;
 };
 
