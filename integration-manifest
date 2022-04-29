@@ -1,0 +1,26 @@
+drm drm-fixes 9d9f720733b7e8d11e4cc53b53f461b117dab839
+	Merge tag 'amd-drm-fixes-5.18-2022-04-27' of https://gitlab.freedesktop.org/agd5f/linux into drm-fixes
+drm-misc drm-misc-fixes dc3ae06c5f2170d879ff58696f629d8c3868aec3
+	drm/sun4i: Remove obsolete references to PHYS_OFFSET
+drm-intel drm-intel-fixes f7e1089f43761ca221914aea9a755b23dc7cbc33
+	drm/i915/fbc: Consult hw.crtc instead of uapi.crtc
+drm drm-next 9bda072a7bec278c424ad660373e69d8e4a3385d
+	Merge tag 'drm-intel-gt-next-2022-04-27' of git://anongit.freedesktop.org/drm/drm-intel into drm-next
+drm-misc drm-misc-next-fixes 67bae5f28c895f8737a1974c3f31cf12b9170b14
+	drm: of: Properly try all possible cases for bridge/panel detection
+drm-intel drm-intel-next-fixes 00f4150d27d2c01eaeffe1091fc311a7c0872c69
+	drm/i915: Fix renamed struct field
+drm-misc drm-misc-next 1e6b8d5df017aa7a0cbff4555d1803ea3e8b3d8e
+	drm/dp_mst: Lower down debug info level when receive NAK
+drm-intel drm-intel-next 1bc4ae0ccbc661b58d3e8f7b633c7786eaf7929f
+	drm/i915: Add first set of DG2 PCI IDs
+drm-intel drm-intel-gt-next ad6ade8e34df62e8b876ca40509bfa2ca8ad3262
+	drm/i915/pmu: Use existing uncore helper to read gpm_timestamp
+sound-upstream for-linus 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+sound-upstream for-next 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+drm-intel topic/core-for-CI ed8616a003376adcda3d7a265d1de5677c8fe960
+	ALSA: hda/i915: Fix one too many pci_dev_put()
+drm-misc topic/i915-ttm 1e3944578b749449bd7fa6bf0bae4c3d3f5f1733
+	Merge tag 'amd-drm-next-5.16-2021-09-27' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
