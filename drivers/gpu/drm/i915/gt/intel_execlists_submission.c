@@ -661,6 +661,16 @@ static inline void execlists_schedule_out(struct i915_request *rq)
 	i915_request_put(rq);
 }
 
+static u32 map_i915_prio_to_lrc_desc_prio(int prio)
+{
+	if (prio > I915_PRIORITY_NORMAL)
+		return GEN12_CTX_PRIORITY_HIGH;
+	else if (prio < I915_PRIORITY_NORMAL)
+		return GEN12_CTX_PRIORITY_LOW;
+	else
+		return GEN12_CTX_PRIORITY_NORMAL;
+}
+
 static u64 execlists_update_context(struct i915_request *rq)
 {
 	struct intel_context *ce = rq->context;
@@ -669,7 +679,7 @@ static u64 execlists_update_context(struct i915_request *rq)
 
 	desc = ce->lrc.desc;
 	if (rq->engine->flags & I915_ENGINE_HAS_EU_PRIORITY)
-		desc |= lrc_desc_priority(rq_prio(rq));
+		desc |= map_i915_prio_to_lrc_desc_prio(rq_prio(rq));
 
 	/*
 	 * WaIdleLiteRestore:bdw,skl
@@ -3433,10 +3443,17 @@ logical_ring_default_vfuncs(struct intel_engine_cs *engine)
 		}
 	}
 
-	if (intel_engine_has_preemption(engine))
-		engine->emit_bb_start = gen8_emit_bb_start;
-	else
-		engine->emit_bb_start = gen8_emit_bb_start_noarb;
+	if (GRAPHICS_VER_FULL(engine->i915) >= IP_VER(12, 50)) {
+		if (intel_engine_has_preemption(engine))
+			engine->emit_bb_start = gen125_emit_bb_start;
+		else
+			engine->emit_bb_start = gen125_emit_bb_start_noarb;
+	} else {
+		if (intel_engine_has_preemption(engine))
+			engine->emit_bb_start = gen8_emit_bb_start;
+		else
+			engine->emit_bb_start = gen8_emit_bb_start_noarb;
+	}
 
 	engine->busyness = execlists_engine_busyness;
 }

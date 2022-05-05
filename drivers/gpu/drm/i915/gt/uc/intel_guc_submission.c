@@ -1200,20 +1200,6 @@ static u32 gpm_timestamp_shift(struct intel_gt *gt)
 	return 3 - shift;
 }
 
-static u64 gpm_timestamp(struct intel_gt *gt)
-{
-	u32 lo, hi, old_hi, loop = 0;
-
-	hi = intel_uncore_read(gt->uncore, MISC_STATUS1);
-	do {
-		lo = intel_uncore_read(gt->uncore, MISC_STATUS0);
-		old_hi = hi;
-		hi = intel_uncore_read(gt->uncore, MISC_STATUS1);
-	} while (old_hi != hi && loop++ < 2);
-
-	return ((u64)hi << 32) | lo;
-}
-
 static void guc_update_pm_timestamp(struct intel_guc *guc, ktime_t *now)
 {
 	struct intel_gt *gt = guc_to_gt(guc);
@@ -1223,7 +1209,8 @@ static void guc_update_pm_timestamp(struct intel_guc *guc, ktime_t *now)
 	lockdep_assert_held(&guc->timestamp.lock);
 
 	gt_stamp_hi = upper_32_bits(guc->timestamp.gt_stamp);
-	gpm_ts = gpm_timestamp(gt) >> guc->timestamp.shift;
+	gpm_ts = intel_uncore_read64_2x32(gt->uncore, MISC_STATUS0,
+					  MISC_STATUS1) >> guc->timestamp.shift;
 	gt_stamp_lo = lower_32_bits(gpm_ts);
 	*now = ktime_get();
 
@@ -2407,6 +2394,26 @@ static int guc_context_policy_init(struct intel_context *ce, bool loop)
 	return ret;
 }
 
+static u32 map_guc_prio_to_lrc_desc_prio(u8 prio)
+{
+	/*
+	 * this matches the mapping we do in map_i915_prio_to_guc_prio()
+	 * (e.g. prio < I915_PRIORITY_NORMAL maps to GUC_CLIENT_PRIORITY_NORMAL)
+	 */
+	switch (prio) {
+	default:
+		MISSING_CASE(prio);
+		fallthrough;
+	case GUC_CLIENT_PRIORITY_KMD_NORMAL:
+		return GEN12_CTX_PRIORITY_NORMAL;
+	case GUC_CLIENT_PRIORITY_NORMAL:
+		return GEN12_CTX_PRIORITY_LOW;
+	case GUC_CLIENT_PRIORITY_HIGH:
+	case GUC_CLIENT_PRIORITY_KMD_HIGH:
+		return GEN12_CTX_PRIORITY_HIGH;
+	}
+}
+
 static void prepare_context_registration_info(struct intel_context *ce,
 					      struct guc_ctxt_registration_info *info)
 {
@@ -2433,6 +2440,8 @@ static void prepare_context_registration_info(struct intel_context *ce,
 	 */
 	info->hwlrca_lo = lower_32_bits(ce->lrc.lrca);
 	info->hwlrca_hi = upper_32_bits(ce->lrc.lrca);
+	if (engine->flags & I915_ENGINE_HAS_EU_PRIORITY)
+		info->hwlrca_lo |= map_guc_prio_to_lrc_desc_prio(ce->guc_state.prio);
 	info->flags = CONTEXT_REGISTRATION_FLAG_KMD;
 
 	/*
@@ -3910,6 +3919,8 @@ static void guc_default_vfuncs(struct intel_engine_cs *engine)
 	 */
 
 	engine->emit_bb_start = gen8_emit_bb_start;
+	if (GRAPHICS_VER_FULL(engine->i915) >= IP_VER(12, 50))
+		engine->emit_bb_start = gen125_emit_bb_start;
 }
 
 static void rcs_submission_override(struct intel_engine_cs *engine)
