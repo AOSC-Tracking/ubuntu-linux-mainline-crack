@@ -1,0 +1,26 @@
+drm drm-fixes 5727375215b0915f28806c337a7ba9835efd340b
+	Merge tag 'drm-msm-fixes-2022-04-30' of https://gitlab.freedesktop.org/drm/msm into drm-fixes
+drm-misc drm-misc-fixes ab244be47a8f111bc82496a8a20c907236e37f95
+	drm/nouveau: Fix a potential theorical leak in nouveau_get_backlight_name()
+drm-intel drm-intel-fixes f7e1089f43761ca221914aea9a755b23dc7cbc33
+	drm/i915/fbc: Consult hw.crtc instead of uapi.crtc
+drm drm-next 98bcaafd7fb06647529227561ee72e37d3f00ff0
+	Merge tag 'mediatek-drm-next-5.19' of https://git.kernel.org/pub/scm/linux/kernel/git/chunkuang.hu/linux into drm-next
+drm-misc drm-misc-next-fixes 67bae5f28c895f8737a1974c3f31cf12b9170b14
+	drm: of: Properly try all possible cases for bridge/panel detection
+drm-intel drm-intel-next-fixes 00f4150d27d2c01eaeffe1091fc311a7c0872c69
+	drm/i915: Fix renamed struct field
+drm-misc drm-misc-next 16c8d76abe83d75b578d72ee22d25a52c764e14a
+	dt-bindings: display: bridge: ldb: Fill in reg property
+drm-intel drm-intel-next 949665a6e237a6fd49ff207e3876d71b20b7e9f2
+	drm/i915: Respect VBT seamless DRRS min refresh rate
+drm-intel drm-intel-gt-next b15a7357a84f091fde8ce35bf2fd494150ad4bd0
+	drm/i915: Drop has_psr from device info
+sound-upstream for-linus 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+sound-upstream for-next 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+drm-intel topic/core-for-CI 6c0d9d4135a43b71cd4fea25856ac069b6a75666
+	topic/core-for-CI: Add remaining DG2 and ATS-M device IDs
+drm-misc topic/i915-ttm 1e3944578b749449bd7fa6bf0bae4c3d3f5f1733
+	Merge tag 'amd-drm-next-5.16-2021-09-27' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
