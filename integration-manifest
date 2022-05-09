@@ -1,0 +1,26 @@
+drm drm-fixes c5eb0a61238dd6faf37f58c9ce61c9980aaffd7a
+	Linux 5.18-rc6
+drm-misc drm-misc-fixes 1b5853dfab7fdde450f00f145327342238135c8a
+	fbdev: efifb: Fix a use-after-free due early fb_info cleanup
+drm-intel drm-intel-fixes 3220c3b2115102bb35f8f07d90d2989a3f5eb452
+	drm/i915: Fix race in __i915_vma_remove_closed
+drm drm-next 98bcaafd7fb06647529227561ee72e37d3f00ff0
+	Merge tag 'mediatek-drm-next-5.19' of https://git.kernel.org/pub/scm/linux/kernel/git/chunkuang.hu/linux into drm-next
+drm-misc drm-misc-next-fixes 67bae5f28c895f8737a1974c3f31cf12b9170b14
+	drm: of: Properly try all possible cases for bridge/panel detection
+drm-intel drm-intel-next-fixes 00f4150d27d2c01eaeffe1091fc311a7c0872c69
+	drm/i915: Fix renamed struct field
+drm-misc drm-misc-next 3507932390bbfcf7c69dff9843f1c9da6ed4b861
+	drm/ttm: move default BO destructor into VMWGFX v2
+drm-intel drm-intel-next 949665a6e237a6fd49ff207e3876d71b20b7e9f2
+	drm/i915: Respect VBT seamless DRRS min refresh rate
+drm-intel drm-intel-gt-next b499914eb83765a27e3b43f216e9d1bdf4265418
+	drm/i915: Only setup private tmpfs mount when needed and fix logging
+sound-upstream for-linus 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+sound-upstream for-next 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+drm-intel topic/core-for-CI 6c0d9d4135a43b71cd4fea25856ac069b6a75666
+	topic/core-for-CI: Add remaining DG2 and ATS-M device IDs
+drm-misc topic/i915-ttm 1e3944578b749449bd7fa6bf0bae4c3d3f5f1733
+	Merge tag 'amd-drm-next-5.16-2021-09-27' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
