@@ -1654,9 +1654,9 @@ __unwind_incomplete_requests(struct intel_context *ce)
 	spin_unlock_irqrestore(&sched_engine->lock, flags);
 }
 
-static void __guc_reset_context(struct intel_context *ce, bool stalled)
+static void __guc_reset_context(struct intel_context *ce, intel_engine_mask_t stalled)
 {
-	bool local_stalled;
+	bool guilty;
 	struct i915_request *rq;
 	unsigned long flags;
 	u32 head;
@@ -1684,7 +1684,7 @@ static void __guc_reset_context(struct intel_context *ce, bool stalled)
 		if (!intel_context_is_pinned(ce))
 			goto next_context;
 
-		local_stalled = false;
+		guilty = false;
 		rq = intel_context_find_active_request(ce);
 		if (!rq) {
 			head = ce->ring->tail;
@@ -1692,14 +1692,14 @@ static void __guc_reset_context(struct intel_context *ce, bool stalled)
 		}
 
 		if (i915_request_started(rq))
-			local_stalled = true;
+			guilty = stalled & ce->engine->mask;
 
 		GEM_BUG_ON(i915_active_is_idle(&ce->active));
 		head = intel_ring_wrap(ce->ring, rq->head);
 
-		__i915_request_reset(rq, local_stalled && stalled);
+		__i915_request_reset(rq, guilty);
 out_replay:
-		guc_reset_state(ce, head, local_stalled && stalled);
+		guc_reset_state(ce, head, guilty);
 next_context:
 		if (i != number_children)
 			ce = list_next_entry(ce, parallel.child_link);
@@ -1709,7 +1709,7 @@ next_context:
 	intel_context_put(parent);
 }
 
-void intel_guc_submission_reset(struct intel_guc *guc, bool stalled)
+void intel_guc_submission_reset(struct intel_guc *guc, intel_engine_mask_t stalled)
 {
 	struct intel_context *ce;
 	unsigned long index;
@@ -2394,6 +2394,26 @@ static int guc_context_policy_init(struct intel_context *ce, bool loop)
 	return ret;
 }
 
+static u32 map_guc_prio_to_lrc_desc_prio(u8 prio)
+{
+	/*
+	 * this matches the mapping we do in map_i915_prio_to_guc_prio()
+	 * (e.g. prio < I915_PRIORITY_NORMAL maps to GUC_CLIENT_PRIORITY_NORMAL)
+	 */
+	switch (prio) {
+	default:
+		MISSING_CASE(prio);
+		fallthrough;
+	case GUC_CLIENT_PRIORITY_KMD_NORMAL:
+		return GEN12_CTX_PRIORITY_NORMAL;
+	case GUC_CLIENT_PRIORITY_NORMAL:
+		return GEN12_CTX_PRIORITY_LOW;
+	case GUC_CLIENT_PRIORITY_HIGH:
+	case GUC_CLIENT_PRIORITY_KMD_HIGH:
+		return GEN12_CTX_PRIORITY_HIGH;
+	}
+}
+
 static void prepare_context_registration_info(struct intel_context *ce,
 					      struct guc_ctxt_registration_info *info)
 {
@@ -2420,6 +2440,8 @@ static void prepare_context_registration_info(struct intel_context *ce,
 	 */
 	info->hwlrca_lo = lower_32_bits(ce->lrc.lrca);
 	info->hwlrca_hi = upper_32_bits(ce->lrc.lrca);
+	if (engine->flags & I915_ENGINE_HAS_EU_PRIORITY)
+		info->hwlrca_lo |= map_guc_prio_to_lrc_desc_prio(ce->guc_state.prio);
 	info->flags = CONTEXT_REGISTRATION_FLAG_KMD;
 
 	/*
@@ -4206,7 +4228,7 @@ static void guc_context_replay(struct intel_context *ce)
 {
 	struct i915_sched_engine *sched_engine = ce->engine->sched_engine;
 
-	__guc_reset_context(ce, true);
+	__guc_reset_context(ce, ce->engine->mask);
 	tasklet_hi_schedule(&sched_engine->tasklet);
 }
 
