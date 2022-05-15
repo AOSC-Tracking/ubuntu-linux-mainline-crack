@@ -1,0 +1,26 @@
+drm drm-fixes eb7bac3973d209e5227d1783676362ee5a8a7127
+	Merge tag 'drm-misc-fixes-2022-05-13' of git://anongit.freedesktop.org/drm/drm-misc into drm-fixes
+drm-misc drm-misc-fixes 370704e707a5f2d3c9a1d4ed8bd8cd67507d7bb5
+	dma-buf: ensure unique directory name for dmabuf stats
+drm-intel drm-intel-fixes 3220c3b2115102bb35f8f07d90d2989a3f5eb452
+	drm/i915: Fix race in __i915_vma_remove_closed
+drm drm-next f83493f7d34da258310ecd3d07f0cc78f884c954
+	Merge tag 'drm-msm-next-2022-05-09' of https://gitlab.freedesktop.org/drm/msm into drm-next
+drm-misc drm-misc-next-fixes 6071c4c2a319da360b0bf2bc397d4fefad10b2c8
+	drm/qxl: add drm_gem_plane_helper_prepare_fb
+drm-intel drm-intel-next-fixes f83493f7d34da258310ecd3d07f0cc78f884c954
+	Merge tag 'drm-msm-next-2022-05-09' of https://gitlab.freedesktop.org/drm/msm into drm-next
+drm-misc drm-misc-next 98526c5bbe3267d447ddd076b685439e3e1396c6
+	drm/rockchip: vop2: unlock on error path in vop2_crtc_atomic_enable()
+drm-intel drm-intel-next 945ae909aa76f55ac8c9e95feb3683512d39134a
+	drm/i915/audio: fix audio code enable/disable pipe logging
+drm-intel drm-intel-gt-next ca10b9d60f8c9556720bad8b1ec7d522e353a01d
+	drm/i915/guc/rc: Use i915_probe_error instead of drm_error
+sound-upstream for-linus 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+sound-upstream for-next 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+drm-intel topic/core-for-CI 6c0d9d4135a43b71cd4fea25856ac069b6a75666
+	topic/core-for-CI: Add remaining DG2 and ATS-M device IDs
+drm-misc topic/i915-ttm 1e3944578b749449bd7fa6bf0bae4c3d3f5f1733
+	Merge tag 'amd-drm-next-5.16-2021-09-27' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
