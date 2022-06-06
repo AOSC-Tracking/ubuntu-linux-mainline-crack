@@ -89,7 +89,7 @@ endif
 ifneq ($(filter autopkgtest,$(DEB_BUILD_PROFILES)),)
 	flavours := $(firstword $(flavours))
 	disable_d_i=true
-	$(foreach _m,$(all_dkms_modules),$(eval do_$(_m) = false))
+        $(foreach _m,$(all_dkms_modules),$(eval do_$(_m) = false))
 endif
 
 # Being used to build a mainline build -- turn off things which do not work.
