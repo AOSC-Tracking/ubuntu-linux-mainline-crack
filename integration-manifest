@@ -1,0 +1,26 @@
+drm drm-fixes 4b0986a3613c92f4ec1bdc7f60ec66fea135991f
+	Linux 5.18
+drm-misc drm-misc-fixes e54a4424925a27ed94dff046db3ce5caf4b1e748
+	drm/atomic: Force bridge self-refresh-exit on CRTC switch
+drm-intel drm-intel-fixes f2906aa863381afb0015a9eb7fefad885d4e5a56
+	Linux 5.19-rc1
+drm drm-next f2906aa863381afb0015a9eb7fefad885d4e5a56
+	Linux 5.19-rc1
+drm-misc drm-misc-next-fixes 5ee8c8f930ba7d20717c4fc2d9f1ce0e757d1155
+	drm/rockchip: Change register space names in vop2
+drm-intel drm-intel-next-fixes f2906aa863381afb0015a9eb7fefad885d4e5a56
+	Linux 5.19-rc1
+drm-misc drm-misc-next dfa687bffc8a4a21ed929c7dececf01b8f1f52ee
+	drm/bridge: lt9611uxc: Cancel only driver's work
+drm-intel drm-intel-next 4464bd825dd56c2f900038c5922408d70aab01fc
+	drm/i915: remove noisy logs in intel_dp_dsc_get_output_bpp()
+drm-intel drm-intel-gt-next 81298056a78c5163b216f17d17c43736e7069961
+	drm/i915/dg2: Correct DSS check for Wa_1308578152
+sound-upstream for-linus 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+sound-upstream for-next 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+drm-intel topic/core-for-CI f7d7dddaab81eeae4508197b5f38f0b974d97b8c
+	topic/core-for-CI: Add remaining DG2 and ATS-M device IDs
+drm-misc topic/i915-ttm 1e3944578b749449bd7fa6bf0bae4c3d3f5f1733
+	Merge tag 'amd-drm-next-5.16-2021-09-27' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
