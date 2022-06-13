@@ -1490,11 +1490,11 @@ static void psr2_man_trk_ctl_calc(struct intel_crtc_state *crtc_state,
 	u32 val = PSR2_MAN_TRK_CTL_ENABLE;
 
 	if (full_update) {
-		if (IS_ALDERLAKE_P(dev_priv))
-			val |= ADLP_PSR2_MAN_TRK_CTL_SF_SINGLE_FULL_FRAME;
-		else
-			val |= PSR2_MAN_TRK_CTL_SF_SINGLE_FULL_FRAME;
-
+		/*
+		 * Not applying Wa_14014971508:adlp as we do not support the
+		 * feature that requires this workaround.
+		 */
+		val |= man_trk_ctl_single_full_frame_bit_get(dev_priv);
 		goto exit;
 	}
 
