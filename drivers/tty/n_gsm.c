@@ -2561,12 +2561,15 @@ static unsigned int gsmld_poll(struct tty_struct *tty, struct file *file,
 
 	poll_wait(file, &tty->read_wait, wait);
 	poll_wait(file, &tty->write_wait, wait);
+
+	if (gsm->dead)
+		mask |= POLLHUP;
 	if (tty_hung_up_p(file))
+		mask |= POLLHUP;
+	if (test_bit(TTY_OTHER_CLOSED, &tty->flags))
 		mask |= POLLHUP;
 	if (!tty_is_writelocked(tty) && tty_write_room(tty) > 0)
 		mask |= POLLOUT | POLLWRNORM;
-	if (gsm->dead)
-		mask |= POLLHUP;
 	return mask;
 }
 
