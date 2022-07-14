@@ -1,0 +1,28 @@
+drm drm-fixes 3590b44b9434af1b9c81c3f40189087ed4fe3635
+	Merge tag 'drm-misc-fixes-2022-07-07-1' of ssh://git.freedesktop.org/git/drm/drm-misc into drm-fixes
+drm-misc drm-misc-fixes 925b6e59138cefa47275c67891c65d48d3266d57
+	Revert "drm/amdgpu: add drm buddy support to amdgpu"
+drm-intel drm-intel-fixes 333991c4e66b3d4b5613315f18016da80344f659
+	drm/i915/selftests: fix subtraction overflow bug
+drm drm-next 0180290abb5ce5c870f84a00ffeda5802f641dce
+	Merge tag 'topic/nouveau-misc-2022-07-13-1' of git://anongit.freedesktop.org/drm/drm into drm-next
+drm-misc drm-misc-next-fixes c96cfaf8fc02d4bb70727dfa7ce7841a3cff9be2
+	drm/nouveau: Don't pm_runtime_put_sync(), only pm_runtime_put_autosuspend()
+drm-intel drm-intel-next-fixes f2906aa863381afb0015a9eb7fefad885d4e5a56
+	Linux 5.19-rc1
+drm-misc drm-misc-next 887ddf3251928dc39bfc58c5c62083d38a633c14
+	drm/vc4: v3d: Switch to devm_pm_runtime_enable
+drm-intel drm-intel-next 81cb44274c654e49f55e6690079540b0bd177db0
+	drm/i915: Add Wa_14016291713
+drm-intel drm-intel-gt-next 17cd10a44a8962860ff4ba351b2a290e752dbbde
+	drm/i915: Add lmem_bar_size modparam
+sound-upstream for-linus 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+sound-upstream for-next 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+drm-intel topic/core-for-CI c10ab299f4c8758563311265f1b05da8c3dfd6ba
+	HAX net/phy: Suppress WARN from phy_error
+drm-misc topic/i915-ttm 1e3944578b749449bd7fa6bf0bae4c3d3f5f1733
+	Merge tag 'amd-drm-next-5.16-2021-09-27' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm topic/nouveau-misc 89ed996b888faaf11c69bb4cbc19f21475c9050e
+	drm/nouveau/kms/nv50-: remove unused functions
