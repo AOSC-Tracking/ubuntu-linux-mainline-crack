@@ -1,0 +1,28 @@
+drm drm-fixes ff6992735ade75aae3e35d16b17da1008d753d28
+	Linux 5.19-rc7
+drm-misc drm-misc-fixes 02c87df2480ac855d88ee308ce3fa857d9bd55a8
+	drm/imx/dcss: Add missing of_node_put() in fail path
+drm-intel drm-intel-fixes 443148858f26ee0fea6ad1b292d49d884dce92d1
+	drm/i915/guc: support v69 in parallel to v70
+drm drm-next 891ce1c9623f36194587d02774ac3d8c30c3ca72
+	Merge tag 'drm-misc-next-fixes-2022-07-14' of git://anongit.freedesktop.org/drm/drm-misc into drm-next
+drm-misc drm-misc-next-fixes 6f2c8d5f16594a13295d153245e0bb8166db7ac9
+	drm/amdgpu: Fix for drm buddy memory corruption
+drm-intel drm-intel-next-fixes f2906aa863381afb0015a9eb7fefad885d4e5a56
+	Linux 5.19-rc1
+drm-misc drm-misc-next b68735e8ef58be6df7a6f511c60186e6051d9fb6
+	drm/panel-edp: Add panel entry for B120XAN01.0
+drm-intel drm-intel-next 9899834ae5f26649da09e0cae72d8d9eb8a07aab
+	drm/i915/display: Add debug print for scaler filter
+drm-intel drm-intel-gt-next a4a4307003307220321f946892829a5364433809
+	drm/i915/guc: Don't use pr_err when not necessary
+sound-upstream for-linus 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+sound-upstream for-next 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+drm-intel topic/core-for-CI c10ab299f4c8758563311265f1b05da8c3dfd6ba
+	HAX net/phy: Suppress WARN from phy_error
+drm-misc topic/i915-ttm 1e3944578b749449bd7fa6bf0bae4c3d3f5f1733
+	Merge tag 'amd-drm-next-5.16-2021-09-27' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm topic/nouveau-misc 89ed996b888faaf11c69bb4cbc19f21475c9050e
+	drm/nouveau/kms/nv50-: remove unused functions
