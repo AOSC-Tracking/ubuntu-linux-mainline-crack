@@ -75,6 +75,11 @@ enum intel_submission_method {
 	INTEL_SUBMISSION_GUC,
 };
 
+struct gt_defaults {
+	u32 min_freq;
+	u32 max_freq;
+};
+
 struct intel_gt {
 	struct drm_i915_private *i915;
 	struct intel_uncore *uncore;
@@ -235,6 +240,10 @@ struct intel_gt {
 
 	/* gt/gtN sysfs */
 	struct kobject sysfs_gt;
+
+	/* sysfs defaults per gt */
+	struct gt_defaults defaults;
+	struct kobject *sysfs_defaults;
 };
 
 enum intel_gt_scratch_field {
