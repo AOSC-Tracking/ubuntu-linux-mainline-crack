@@ -1,0 +1,28 @@
+drm drm-fixes e0dccc3b76fb35bb257b4118367a883073d7390e
+	Linux 5.19-rc8
+drm-misc drm-misc-fixes 0c09bc33aa8e9dc867300acaadc318c2f0d85a1e
+	drm/simpledrm: Fix return type of simpledrm_simple_display_pipe_mode_valid()
+drm-intel drm-intel-fixes a7a47a5dfa9a9692a41764ee9ab4054f12924a42
+	drm/i915/reset: Add additional steps for Wa_22011802037 for execlist backend
+drm drm-next 417c1c1963549e9a48b83ada59d90258e38c6594
+	Merge tag 'drm-intel-gt-next-2022-07-13' of git://anongit.freedesktop.org/drm/drm-intel into drm-next
+drm-misc drm-misc-next-fixes 6f2c8d5f16594a13295d153245e0bb8166db7ac9
+	drm/amdgpu: Fix for drm buddy memory corruption
+drm-intel drm-intel-next-fixes 891ce1c9623f36194587d02774ac3d8c30c3ca72
+	Merge tag 'drm-misc-next-fixes-2022-07-14' of git://anongit.freedesktop.org/drm/drm-misc into drm-next
+drm-misc drm-misc-next a4d847df8b440cc667c18f99abe84ccaa83afac4
+	drm/fsl-dcu: Use drm_plane_helper_destroy()
+drm-intel drm-intel-next 9899834ae5f26649da09e0cae72d8d9eb8a07aab
+	drm/i915/display: Add debug print for scaler filter
+drm-intel drm-intel-gt-next b25c377a5b26f107ea831af05919fc3782aabebc
+	drm/i915/selftests: Fix comment typo
+sound-upstream for-linus 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+sound-upstream for-next 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+drm-intel topic/core-for-CI c10ab299f4c8758563311265f1b05da8c3dfd6ba
+	HAX net/phy: Suppress WARN from phy_error
+drm-misc topic/i915-ttm 1e3944578b749449bd7fa6bf0bae4c3d3f5f1733
+	Merge tag 'amd-drm-next-5.16-2021-09-27' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm topic/nouveau-misc dfc4005f8c172eea359f9db08c3b2b0ff0153699
+	drm/nouveau/disp: move DAC load detection method
