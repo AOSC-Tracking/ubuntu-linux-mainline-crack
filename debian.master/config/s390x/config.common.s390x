@@ -443,7 +443,6 @@ CONFIG_PCIEPORTBUS=y
 # CONFIG_PCI_PASID is not set
 # CONFIG_PCI_PRI is not set
 # CONFIG_PCI_QUIRKS is not set
-# CONFIG_PCS_XPCS is not set
 # CONFIG_PECI is not set
 CONFIG_PGTABLE_LEVELS=5
 # CONFIG_PHANTOM is not set
@@ -603,7 +602,6 @@ CONFIG_VIRT_CPU_ACCOUNTING_NATIVE=y
 # CONFIG_VME_BUS is not set
 # CONFIG_VMXNET3 is not set
 # CONFIG_VXFS_FS is not set
-# CONFIG_VXGE is not set
 # CONFIG_W1 is not set
 # CONFIG_WAN is not set
 # CONFIG_WDTPCI is not set
