@@ -12,7 +12,6 @@
 # CONFIG_ALTERA_STAPL is not set
 # CONFIG_ALTERA_TSE is not set
 # CONFIG_AMIGA_PARTITION is not set
-# CONFIG_ANDROID is not set
 # CONFIG_APDS9802ALS is not set
 # CONFIG_APPLICOM is not set
 # CONFIG_AQTION is not set
@@ -38,7 +37,6 @@ CONFIG_AUTOFS_FS=y
 # CONFIG_BFS_FS is not set
 # CONFIG_BLK_DEV_3W_XXXX_RAID is not set
 # CONFIG_BLK_DEV_PCIESSD_MTIP32XX is not set
-# CONFIG_BLK_DEV_SX8 is not set
 # CONFIG_BSD_DISKLABEL is not set
 # CONFIG_C2PORT is not set
 # CONFIG_CADENCE_WATCHDOG is not set
@@ -443,7 +441,6 @@ CONFIG_PCIEPORTBUS=y
 # CONFIG_PCI_PASID is not set
 # CONFIG_PCI_PRI is not set
 # CONFIG_PCI_QUIRKS is not set
-# CONFIG_PCS_XPCS is not set
 # CONFIG_PECI is not set
 CONFIG_PGTABLE_LEVELS=5
 # CONFIG_PHANTOM is not set
@@ -600,10 +597,8 @@ CONFIG_VFIO_PCI_CORE=m
 CONFIG_VFIO_VIRQFD=m
 # CONFIG_VIRTIO_MMIO is not set
 CONFIG_VIRT_CPU_ACCOUNTING_NATIVE=y
-# CONFIG_VME_BUS is not set
 # CONFIG_VMXNET3 is not set
 # CONFIG_VXFS_FS is not set
-# CONFIG_VXGE is not set
 # CONFIG_W1 is not set
 # CONFIG_WAN is not set
 # CONFIG_WDTPCI is not set
