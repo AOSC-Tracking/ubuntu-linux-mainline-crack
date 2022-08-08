@@ -1,0 +1,28 @@
+drm drm-fixes 3d7cb6b04c3f3115719235cc6866b10326de34cd
+	Linux 5.19
+drm-misc drm-misc-fixes 91b3c8dbe898df158fd2a84675f3a284ff6666f7
+	drm/meson: Fix refcount bugs in meson_vpu_has_available_connectors()
+drm-intel drm-intel-fixes 3d7cb6b04c3f3115719235cc6866b10326de34cd
+	Linux 5.19
+drm drm-next 5493ee1919eae4f49d62276cf5986b7f7c7aa8f6
+	Merge tag 'amd-drm-next-5.20-2022-07-29' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm-misc drm-misc-next-fixes 6f2c8d5f16594a13295d153245e0bb8166db7ac9
+	drm/amdgpu: Fix for drm buddy memory corruption
+drm-intel drm-intel-next-fixes 9d50bff40e3e366886ec37299fc317edf84be0c9
+	drm/i915: pass a pointer for tlb seqno at vma_invalidate_tlb()
+drm-misc drm-misc-next 730c2bf4ad395acf0aa0820535fdb8ea6abe5df1
+	drm/panfrost: Add support for devcoredump
+drm-intel drm-intel-next fc30eea1542dd787c6aa46e970014e97e390c5b2
+	Merge drm/drm-next into drm-intel-next
+drm-intel drm-intel-gt-next 3d037d99e61a1e7a3ae3d214146d88db349dd19f
+	drm/i915: pass a pointer for tlb seqno at vma_invalidate_tlb()
+sound-upstream for-linus 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+sound-upstream for-next 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+drm-intel topic/core-for-CI c10ab299f4c8758563311265f1b05da8c3dfd6ba
+	HAX net/phy: Suppress WARN from phy_error
+drm-misc topic/i915-ttm 1e3944578b749449bd7fa6bf0bae4c3d3f5f1733
+	Merge tag 'amd-drm-next-5.16-2021-09-27' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm topic/nouveau-misc dfc4005f8c172eea359f9db08c3b2b0ff0153699
+	drm/nouveau/disp: move DAC load detection method
