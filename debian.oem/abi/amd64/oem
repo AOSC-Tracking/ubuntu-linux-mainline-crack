@@ -22748,6 +22748,7 @@ EXPORT_SYMBOL_GPL	 vmlinux 0x7c9175e3	fuse_dev_fiq_ops
 EXPORT_SYMBOL_GPL	 vmlinux 0x7c983a5d	dmi_walk
 EXPORT_SYMBOL_GPL	 vmlinux 0x7c9a7371	clk_prepare
 EXPORT_SYMBOL_GPL	 vmlinux 0x7ca85256	ms_hyperv
+EXPORT_SYMBOL_GPL	 vmlinux 0x7cb01cfa	fbcon_modechange_possible
 EXPORT_SYMBOL_GPL	 vmlinux 0x7cb3eccf	acpi_kobj
 EXPORT_SYMBOL_GPL	 vmlinux 0x7cb803de	btree_grim_visitor
 EXPORT_SYMBOL_GPL	 vmlinux 0x7cc92252	mptcp_subflow_request_sock_ops
