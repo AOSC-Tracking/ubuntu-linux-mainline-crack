@@ -1,0 +1,28 @@
+drm drm-fixes bfe632f6d0a1371784dd9a11fa5a9aa2dbf53bf1
+	Merge tag 'drm-intel-fixes-2022-09-01' of git://anongit.freedesktop.org/drm/drm-intel into drm-fixes
+drm-misc drm-misc-fixes c7943bb324e503baeeba3df2bc5ca8a377111bfa
+	drm/edid: Handle EDID 1.4 range descriptor h/vfreq offsets
+drm-intel drm-intel-fixes 0211c2a0ea600e25db3044daaeff4fe41c3ed6d9
+	drm/i915: Skip wm/ddb readout for disabled pipes
+drm drm-next 2c2d7a67defa198a8b8148dbaddc9e5554efebc8
+	Merge tag 'drm-intel-gt-next-2022-08-24' of git://anongit.freedesktop.org/drm/drm-intel into drm-next
+drm-misc drm-misc-next-fixes 2939deac1fa220bc82b89235f146df1d9b52e876
+	drm/gem: Properly annotate WW context on drm_gem_lock_reservations() error
+drm-intel drm-intel-next-fixes 9d50bff40e3e366886ec37299fc317edf84be0c9
+	drm/i915: pass a pointer for tlb seqno at vma_invalidate_tlb()
+drm-misc drm-misc-next ce9564cfc9aea65e68eb343c599317633bc2321a
+	drm/bridge: chrontel-ch7033: Add byteswap order setting
+drm-intel drm-intel-next 483e3d87a37e804588ac8224aadd20a84593cafd
+	Revert "drm/i915/display: Re-add check for low voltage sku for max dp source rate"
+drm-intel drm-intel-gt-next 018a7bdbb090b9155a6509a0d1a684db4afaa5b1
+	drm/i915/slpc: Let's fix the PCODE min freq table setup for SLPC
+sound-upstream for-linus 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+sound-upstream for-next 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+drm-intel topic/core-for-CI 71c564ea758b4d4c64f29dd09a192e9039d37e98
+	scsi: sd: Revert "Rework asynchronous resume support"
+drm-misc topic/i915-ttm 1e3944578b749449bd7fa6bf0bae4c3d3f5f1733
+	Merge tag 'amd-drm-next-5.16-2021-09-27' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm topic/nouveau-misc dfc4005f8c172eea359f9db08c3b2b0ff0153699
+	drm/nouveau/disp: move DAC load detection method
