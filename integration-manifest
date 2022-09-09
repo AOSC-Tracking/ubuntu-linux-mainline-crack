@@ -1,0 +1,28 @@
+drm drm-fixes 2edb79a5fb303dff577d6a0c7d571c3bab1d1455
+	Merge tag 'drm-intel-fixes-2022-09-08' of git://anongit.freedesktop.org/drm/drm-intel into drm-fixes
+drm-misc drm-misc-fixes 35b513a74eabf09bd718e04fd9e62b09c022807f
+	drm/rockchip: vop2: Fix eDP/HDMI sync polarities
+drm-intel drm-intel-fixes 151e0e0fdb4d6365305598af3b9072d44e896ef0
+	drm/i915: consider HAS_FLAT_CCS() in needs_ccs_pages
+drm drm-next 8284bae723f025cb6a8431566757a3854a3c53eb
+	Merge tag 'drm-misc-next-2022-08-20-1' of git://anongit.freedesktop.org/drm/drm-misc into drm-next
+drm-misc drm-misc-next-fixes 2939deac1fa220bc82b89235f146df1d9b52e876
+	drm/gem: Properly annotate WW context on drm_gem_lock_reservations() error
+drm-intel drm-intel-next-fixes 9d50bff40e3e366886ec37299fc317edf84be0c9
+	drm/i915: pass a pointer for tlb seqno at vma_invalidate_tlb()
+drm-misc drm-misc-next 0173ce114dc4df73e0ee3e1eafea156b7b26e719
+	drm/format: Split into more granular test cases
+drm-intel drm-intel-next 3fecf93c86087d1e1a9db28d3423db276639e776
+	drm/i915: Use REG_FIELD_GET() to extract skl+ wm latencies
+drm-intel drm-intel-gt-next 04f78bfda9e007cd2c210342fbbdd614d0256578
+	drm/i915/mtl: Hook up interrupts for standalone media
+sound-upstream for-linus 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+sound-upstream for-next 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+drm-intel topic/core-for-CI 71c564ea758b4d4c64f29dd09a192e9039d37e98
+	scsi: sd: Revert "Rework asynchronous resume support"
+drm-misc topic/i915-ttm 1e3944578b749449bd7fa6bf0bae4c3d3f5f1733
+	Merge tag 'amd-drm-next-5.16-2021-09-27' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm topic/nouveau-misc dfc4005f8c172eea359f9db08c3b2b0ff0153699
+	drm/nouveau/disp: move DAC load detection method
