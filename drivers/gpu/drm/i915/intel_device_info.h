@@ -37,6 +37,7 @@
 
 struct drm_printer;
 struct drm_i915_private;
+struct intel_gt_definition;
 
 /* Keep in gen based order, and chronological order within a gen */
 enum intel_platform {
@@ -171,6 +172,7 @@ enum intel_ppgtt_type {
 	func(has_runtime_pm); \
 	func(has_snoop); \
 	func(has_coherent_ggtt); \
+	func(tuning_thread_rr_after_dep); \
 	func(unfenced_needs_alignment); \
 	func(hws_needs_physical);
 
@@ -250,6 +252,8 @@ struct intel_device_info {
 	enum intel_platform platform;
 
 	unsigned int dma_mask_size; /* available DMA address bits */
+
+	const struct intel_gt_definition *extra_gt_list;
 
 	u8 gt; /* GT number, 0 if undefined */
 
