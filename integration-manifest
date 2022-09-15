@@ -1,0 +1,28 @@
+drm drm-fixes 80e78fcce86de0288793a0ef0f6acf37656ee4cf
+	Linux 6.0-rc5
+drm-misc drm-misc-fixes b0b9408f132623dc88e78adb5282f74e4b64bb57
+	drm/rockchip: Fix return type of cdn_dp_connector_mode_valid
+drm-intel drm-intel-fixes 8787f6fab41380189865f5751c0f15b0c298b923
+	Revert "drm/i915/display: Re-add check for low voltage sku for max dp source rate"
+drm drm-next d1e2d6b78ffc0317b41e1465b47e325e2765e5e0
+	Merge tag 'drm-intel-next-2022-08-29' of git://anongit.freedesktop.org/drm/drm-intel into drm-next
+drm-misc drm-misc-next-fixes 2939deac1fa220bc82b89235f146df1d9b52e876
+	drm/gem: Properly annotate WW context on drm_gem_lock_reservations() error
+drm-intel drm-intel-next-fixes 9d50bff40e3e366886ec37299fc317edf84be0c9
+	drm/i915: pass a pointer for tlb seqno at vma_invalidate_tlb()
+drm-misc drm-misc-next 98a65e6d498c46b0beec7a40aac4b3e404642993
+	drm/rockchip: remove vop_writel from vop1 driver
+drm-intel drm-intel-next 21f0b7dabf9c358e75a539b5554c0375bf1abe0a
+	drm/i915: Fix return type of mode_valid function hook
+drm-intel drm-intel-gt-next 542110f21d811f0fbc661bcc9365e45e23e8d422
+	drm/i915: Invert if/else ladder for stolen init
+sound-upstream for-linus 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+sound-upstream for-next 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+drm-intel topic/core-for-CI 331aea456ebd09b0954e9944f7e15ffa156f4480
+	HAX net/phy: Suppress WARN from phy_error
+drm-misc topic/i915-ttm 1e3944578b749449bd7fa6bf0bae4c3d3f5f1733
+	Merge tag 'amd-drm-next-5.16-2021-09-27' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm topic/nouveau-misc dfc4005f8c172eea359f9db08c3b2b0ff0153699
+	drm/nouveau/disp: move DAC load detection method
