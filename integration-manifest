@@ -1,0 +1,28 @@
+drm drm-fixes 25100377a21ad40dae8be5a3ed361b87acec1479
+	Merge tag 'drm-intel-fixes-2022-09-15' of git://anongit.freedesktop.org/drm/drm-intel into drm-fixes
+drm-misc drm-misc-fixes b0b9408f132623dc88e78adb5282f74e4b64bb57
+	drm/rockchip: Fix return type of cdn_dp_connector_mode_valid
+drm-intel drm-intel-fixes 8787f6fab41380189865f5751c0f15b0c298b923
+	Revert "drm/i915/display: Re-add check for low voltage sku for max dp source rate"
+drm drm-next d1e2d6b78ffc0317b41e1465b47e325e2765e5e0
+	Merge tag 'drm-intel-next-2022-08-29' of git://anongit.freedesktop.org/drm/drm-intel into drm-next
+drm-misc drm-misc-next-fixes 2939deac1fa220bc82b89235f146df1d9b52e876
+	drm/gem: Properly annotate WW context on drm_gem_lock_reservations() error
+drm-intel drm-intel-next-fixes 9d50bff40e3e366886ec37299fc317edf84be0c9
+	drm/i915: pass a pointer for tlb seqno at vma_invalidate_tlb()
+drm-misc drm-misc-next e10ea7b9b90219da305a16b3c1252169715a807b
+	drm: panel-orientation-quirks: Add quirk for Aya Neo Air
+drm-intel drm-intel-next 21f0b7dabf9c358e75a539b5554c0375bf1abe0a
+	drm/i915: Fix return type of mode_valid function hook
+drm-intel drm-intel-gt-next 01f0ce3e859619ea84104d668a87ace924bd12df
+	drm/i915/guc: Fix release build bug in 'remove log size module parameters'
+sound-upstream for-linus 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+sound-upstream for-next 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+drm-intel topic/core-for-CI bc79ef6d5a223ea59acf874f0493b79c835b17d4
+	Revert "iommu/dma: Fix race condition during iova_domain initialization"
+drm-misc topic/i915-ttm 1e3944578b749449bd7fa6bf0bae4c3d3f5f1733
+	Merge tag 'amd-drm-next-5.16-2021-09-27' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm topic/nouveau-misc dfc4005f8c172eea359f9db08c3b2b0ff0153699
+	drm/nouveau/disp: move DAC load detection method
