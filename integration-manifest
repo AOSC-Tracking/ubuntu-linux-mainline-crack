@@ -1,0 +1,28 @@
+drm drm-fixes f76349cf41451c5c42a99f18a9163377e4b364ff
+	Linux 6.0-rc7
+drm-misc drm-misc-fixes cc62d98bd56d45de4531844ca23913a15136c05b
+	Revert "drm: bridge: analogix/dp: add panel prepare/unprepare in suspend/resume time"
+drm-intel drm-intel-fixes 7738be973fc4e2ba22154fafd3a5d7b9666f9abf
+	drm/i915/gt: Perf_limit_reasons are only available for Gen11+
+drm drm-next e8573000f4bbb7bfe48da5de5981e5dca048c433
+	Merge tag 'amd-drm-next-6.1-2022-09-23' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm-misc drm-misc-next-fixes 2939deac1fa220bc82b89235f146df1d9b52e876
+	drm/gem: Properly annotate WW context on drm_gem_lock_reservations() error
+drm-intel drm-intel-next-fixes 20e377e7b2e7c327039f10db80ba5bcc1f6c882d
+	drm/i915/gt: Use i915_vm_put on ppgtt_create error paths
+drm-misc drm-misc-next 2ab69739209c843a47af82c0620036b233c83688
+	drm/bridge: lt8912b: fix corrupted image output
+drm-intel drm-intel-next 3dbf20e483cf3f31e287ad3152ffadd15a482e4f
+	drm/i915: Allow alternate fixed modes always for LVDS
+drm-intel drm-intel-gt-next b801d71493bbb9ec8dd4526bbec41f709621cb97
+	drm/i915: Remove unwanted pointer unpacking
+sound-upstream for-linus 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+sound-upstream for-next 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+drm-intel topic/core-for-CI bc79ef6d5a223ea59acf874f0493b79c835b17d4
+	Revert "iommu/dma: Fix race condition during iova_domain initialization"
+drm-misc topic/i915-ttm 1e3944578b749449bd7fa6bf0bae4c3d3f5f1733
+	Merge tag 'amd-drm-next-5.16-2021-09-27' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm topic/nouveau-misc dfc4005f8c172eea359f9db08c3b2b0ff0153699
+	drm/nouveau/disp: move DAC load detection method
