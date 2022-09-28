@@ -1,0 +1,28 @@
+drm drm-fixes f76349cf41451c5c42a99f18a9163377e4b364ff
+	Linux 6.0-rc7
+drm-misc drm-misc-fixes cc62d98bd56d45de4531844ca23913a15136c05b
+	Revert "drm: bridge: analogix/dp: add panel prepare/unprepare in suspend/resume time"
+drm-intel drm-intel-fixes 6ef7d362123ecb5bf6d163bb9c7fd6ba2d8c968c
+	drm/i915/gt: Restrict forced preemption to the active context
+drm drm-next 320305923c88258ce50c75bf721e9bf2e420ab27
+	Merge tag 'du-next-20220907' of git://linuxtv.org/pinchartl/media into drm-next
+drm-misc drm-misc-next-fixes 2939deac1fa220bc82b89235f146df1d9b52e876
+	drm/gem: Properly annotate WW context on drm_gem_lock_reservations() error
+drm-intel drm-intel-next-fixes 20e377e7b2e7c327039f10db80ba5bcc1f6c882d
+	drm/i915/gt: Use i915_vm_put on ppgtt_create error paths
+drm-misc drm-misc-next 45eb009f8d1d3cc38de9c3b5be20301a2aa9cec0
+	drm/format-helper: Add KUnit tests for drm_fb_xrgb8888_to_gray8()
+drm-intel drm-intel-next abf46db341bd87261d0b3128bac9bdc204570284
+	drm/i915/pxp: Add firmware status when ARB session fails
+drm-intel drm-intel-gt-next 1e88da4f6d8938bef42b3bc6e9c68c795b46ce0f
+	drm/i915/guc: Enable compute scheduling on DG2
+sound-upstream for-linus 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+sound-upstream for-next 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+drm-intel topic/core-for-CI bc79ef6d5a223ea59acf874f0493b79c835b17d4
+	Revert "iommu/dma: Fix race condition during iova_domain initialization"
+drm-misc topic/i915-ttm 1e3944578b749449bd7fa6bf0bae4c3d3f5f1733
+	Merge tag 'amd-drm-next-5.16-2021-09-27' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm topic/nouveau-misc dfc4005f8c172eea359f9db08c3b2b0ff0153699
+	drm/nouveau/disp: move DAC load detection method
