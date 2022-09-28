@@ -410,6 +410,7 @@ static int smu_v13_0_0_setup_pptable(struct smu_context *smu)
 {
 	struct smu_table_context *smu_table = &smu->smu_table;
 	struct amdgpu_device *adev = smu->adev;
+	uint32_t pptable_id;
 	int ret = 0;
 
 	ret = smu_v13_0_0_get_pptable_from_pmfw(smu,
