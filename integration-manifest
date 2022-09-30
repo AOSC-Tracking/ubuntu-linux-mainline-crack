@@ -1,0 +1,28 @@
+drm drm-fixes 6643b3836f3908c4f77883b2fae72451e85cf3ca
+	Merge tag 'drm-intel-fixes-2022-09-29' of git://anongit.freedesktop.org/drm/drm-intel into drm-fixes
+drm-misc drm-misc-fixes cc62d98bd56d45de4531844ca23913a15136c05b
+	Revert "drm: bridge: analogix/dp: add panel prepare/unprepare in suspend/resume time"
+drm-intel drm-intel-fixes 7738be973fc4e2ba22154fafd3a5d7b9666f9abf
+	drm/i915/gt: Perf_limit_reasons are only available for Gen11+
+drm drm-next 7860d720a84c74b2761c6b7995392a798ab0a3cb
+	drm/msm: Fix build break with recent mm tree
+drm-misc drm-misc-next-fixes 2939deac1fa220bc82b89235f146df1d9b52e876
+	drm/gem: Properly annotate WW context on drm_gem_lock_reservations() error
+drm-intel drm-intel-next-fixes 20e377e7b2e7c327039f10db80ba5bcc1f6c882d
+	drm/i915/gt: Use i915_vm_put on ppgtt_create error paths
+drm-misc drm-misc-next 08fb97de03aa2205c6791301bd83a095abc1949c
+	drm/sched: Add FIFO sched policy to run queue
+drm-intel drm-intel-next 0c31611437b7155f115919a24f31673ffe94deee
+	drm/i915: Add some debug prints for intel_modeset_all_pipes()
+drm-intel drm-intel-gt-next dbb2ffbfd708b2d0f1b7fe0083c5e3333d0fe35b
+	drm/i915/mtl: enable local stolen memory
+sound-upstream for-linus 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+sound-upstream for-next 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+drm-intel topic/core-for-CI bc79ef6d5a223ea59acf874f0493b79c835b17d4
+	Revert "iommu/dma: Fix race condition during iova_domain initialization"
+drm-misc topic/i915-ttm 1e3944578b749449bd7fa6bf0bae4c3d3f5f1733
+	Merge tag 'amd-drm-next-5.16-2021-09-27' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm topic/nouveau-misc dfc4005f8c172eea359f9db08c3b2b0ff0153699
+	drm/nouveau/disp: move DAC load detection method
