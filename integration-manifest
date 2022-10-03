@@ -1,0 +1,28 @@
+drm drm-fixes 414208e48963fdb136240d7f59c15e627832d288
+	Merge tag 'amd-drm-fixes-6.0-2022-09-30-1' of https://gitlab.freedesktop.org/agd5f/linux into drm-fixes
+drm-misc drm-misc-fixes cc62d98bd56d45de4531844ca23913a15136c05b
+	Revert "drm: bridge: analogix/dp: add panel prepare/unprepare in suspend/resume time"
+drm-intel drm-intel-fixes 7738be973fc4e2ba22154fafd3a5d7b9666f9abf
+	drm/i915/gt: Perf_limit_reasons are only available for Gen11+
+drm drm-next 7860d720a84c74b2761c6b7995392a798ab0a3cb
+	drm/msm: Fix build break with recent mm tree
+drm-misc drm-misc-next-fixes 2939deac1fa220bc82b89235f146df1d9b52e876
+	drm/gem: Properly annotate WW context on drm_gem_lock_reservations() error
+drm-intel drm-intel-next-fixes cdf6428dd518435a05739abf7659589de30970f4
+	drm/i915: Reject excessive dotclocks early
+drm-misc drm-misc-next 353b6bf2c4f14f0049cc8db5c2cca26882ff76b4
+	drm/panel: ws2401: Silent no spi_device_id warning
+drm-intel drm-intel-next 9519c86523ea136e981ceff30489cdb7b2ecae08
+	drm/i915: Fix locking in DRRS debugfs
+drm-intel drm-intel-gt-next a70eebb80022148dfd4d5f60fffd1914ff8e3683
+	drm/i915/huc: define gsc-compatible HuC fw for DG2
+sound-upstream for-linus 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+sound-upstream for-next 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+drm-intel topic/core-for-CI bc79ef6d5a223ea59acf874f0493b79c835b17d4
+	Revert "iommu/dma: Fix race condition during iova_domain initialization"
+drm-misc topic/i915-ttm 1e3944578b749449bd7fa6bf0bae4c3d3f5f1733
+	Merge tag 'amd-drm-next-5.16-2021-09-27' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm topic/nouveau-misc dfc4005f8c172eea359f9db08c3b2b0ff0153699
+	drm/nouveau/disp: move DAC load detection method
