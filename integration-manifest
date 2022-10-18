@@ -1,0 +1,28 @@
+drm drm-fixes 9abf2313adc1ca1b6180c508c25f22f9395cc780
+	Linux 6.1-rc1
+drm-misc drm-misc-fixes 4190e8bbcbc77a9c36724681801cedc5229e7fc2
+	drm/vc4: hdmi: Check the HSM rate at runtime_resume
+drm-intel drm-intel-fixes 9abf2313adc1ca1b6180c508c25f22f9395cc780
+	Linux 6.1-rc1
+drm drm-next 9abf2313adc1ca1b6180c508c25f22f9395cc780
+	Linux 6.1-rc1
+drm-misc drm-misc-next-fixes 39dd0cc2e5bd0d5188dd69f27e18783cea7ff06a
+	drm/amdgpu: Fix VRAM eviction issue
+drm-intel drm-intel-next-fixes ea19684afb545605bbcb690c49a91ce2c8e596dd
+	drm/i915/display: consider DG2_RC_CCS_CC when migrating buffers
+drm-misc drm-misc-next 28743e25fa1c867675bd8ff976eb92d4251f13a1
+	dma-buf: Remove obsoleted internal lock
+drm-intel drm-intel-next f74354670fc6dfc2ac3fcf2ec2c4e5ae9155433c
+	drm/i915: fix clear mask in GEN7_MISCCPCTL update
+drm-intel drm-intel-gt-next 21f213e67ecb7488c0fda145d7956e09ecdd43a9
+	drm/i915/huc: bump timeout for delayed load and reduce print verbosity
+sound-upstream for-linus 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+sound-upstream for-next 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+drm-intel topic/core-for-CI a9c65b965c5dadf8ce1fed53138431a46b3a75c7
+	Restore "iommu/dma: Fix race condition during iova_domain initialization"
+drm-misc topic/i915-ttm 1e3944578b749449bd7fa6bf0bae4c3d3f5f1733
+	Merge tag 'amd-drm-next-5.16-2021-09-27' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm topic/nouveau-misc dfc4005f8c172eea359f9db08c3b2b0ff0153699
+	drm/nouveau/disp: move DAC load detection method
