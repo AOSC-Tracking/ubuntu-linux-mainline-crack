@@ -1,0 +1,28 @@
+drm drm-fixes 9abf2313adc1ca1b6180c508c25f22f9395cc780
+	Linux 6.1-rc1
+drm-misc drm-misc-fixes 4190e8bbcbc77a9c36724681801cedc5229e7fc2
+	drm/vc4: hdmi: Check the HSM rate at runtime_resume
+drm-intel drm-intel-fixes 9abf2313adc1ca1b6180c508c25f22f9395cc780
+	Linux 6.1-rc1
+drm drm-next 9abf2313adc1ca1b6180c508c25f22f9395cc780
+	Linux 6.1-rc1
+drm-misc drm-misc-next-fixes 39dd0cc2e5bd0d5188dd69f27e18783cea7ff06a
+	drm/amdgpu: Fix VRAM eviction issue
+drm-intel drm-intel-next-fixes ea19684afb545605bbcb690c49a91ce2c8e596dd
+	drm/i915/display: consider DG2_RC_CCS_CC when migrating buffers
+drm-misc drm-misc-next b389286d0234e1edbaf62ed8bc0892a568c33662
+	drm/mgag200: Fix PLL setup for G200_SE_A rev >=4
+drm-intel drm-intel-next 66eb93e71a7a6695b7c5eb682e3ca1c980cf9d58
+	drm/i915/dgfx: Keep PCI autosuspend control 'on' by default on all dGPU
+drm-intel drm-intel-gt-next 2d3093fd5ea0e79cc6ca0e80ca56280ea7b4d0bf
+	drm/i915/pvc: Update forcewake domain for CCS register ranges
+sound-upstream for-linus 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+sound-upstream for-next 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+drm-intel topic/core-for-CI 93c0f09fd06bc3a6e3307beec1e1c280994b226f
+	iommu/vt-d: Use rcu_lock in get_resv_regions
+drm-misc topic/i915-ttm 1e3944578b749449bd7fa6bf0bae4c3d3f5f1733
+	Merge tag 'amd-drm-next-5.16-2021-09-27' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm topic/nouveau-misc dfc4005f8c172eea359f9db08c3b2b0ff0153699
+	drm/nouveau/disp: move DAC load detection method
