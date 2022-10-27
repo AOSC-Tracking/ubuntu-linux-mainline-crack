@@ -1,0 +1,28 @@
+drm drm-fixes 247f34f7b80357943234f93f247a1ae6b6c3a740
+	Linux 6.1-rc2
+drm-misc drm-misc-fixes e0ba1a39b8dfe4f005bebdd85daa89e7382e26b7
+	fbdev/core: Avoid uninitialized read in aperture_remove_conflicting_pci_device()
+drm-intel drm-intel-fixes 63720a561b3c98199adf0c73e152807f15cc3b7f
+	drm/i915/dp: Reset frl trained flag before restarting FRL training
+drm drm-next 7f7a942c0a338c4a2a7b359bdb2b68e9896122ec
+	Merge tag 'drm-next-20221025' of git://linuxtv.org/pinchartl/media into drm-next
+drm-misc drm-misc-next-fixes 39dd0cc2e5bd0d5188dd69f27e18783cea7ff06a
+	drm/amdgpu: Fix VRAM eviction issue
+drm-intel drm-intel-next-fixes ea19684afb545605bbcb690c49a91ce2c8e596dd
+	drm/i915/display: consider DG2_RC_CCS_CC when migrating buffers
+drm-misc drm-misc-next 3e4a21a29dd924995f1135cd50e8b7e0d023729c
+	drm/bridge: it6505: Fix return value check for pm_runtime_get_sync
+drm-intel drm-intel-next 8388eb067cd6db7ea514235d84798dd73872208a
+	drm/i915/sdvo: Extract intel_sdvo_has_audio()
+drm-intel drm-intel-gt-next 07b444f57f12177e5df639f55dc1d747f4a635c8
+	drm/i915/perf: Enable OA for DG2
+sound-upstream for-linus 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+sound-upstream for-next 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+drm-intel topic/core-for-CI 0e31710232be46824bbf92afd5d9390cac17a364
+	freezer,sched: Rewrite core freezer logic fix
+drm-misc topic/i915-ttm 1e3944578b749449bd7fa6bf0bae4c3d3f5f1733
+	Merge tag 'amd-drm-next-5.16-2021-09-27' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm topic/nouveau-misc dfc4005f8c172eea359f9db08c3b2b0ff0153699
+	drm/nouveau/disp: move DAC load detection method
