@@ -1382,18 +1382,34 @@ int __net_init ip_vs_conn_net_init(struct netns_ipvs *ipvs)
 {
 	atomic_set(&ipvs->conn_count, 0);
 
-	proc_create("ip_vs_conn", 0, ipvs->net->proc_net, &ip_vs_conn_fops);
-	proc_create("ip_vs_conn_sync", 0, ipvs->net->proc_net,
-		    &ip_vs_conn_sync_fops);
+#ifdef CONFIG_PROC_FS
+	if (!proc_create("ip_vs_conn", 0, ipvs->net->proc_net,
+			 &ip_vs_conn_fops))
+		goto err_conn;
+
+	if (!proc_create("ip_vs_conn_sync", 0, ipvs->net->proc_net,
+			 &ip_vs_conn_sync_fops))
+		goto err_conn_sync;
+#endif
+
 	return 0;
+
+#ifdef CONFIG_PROC_FS
+err_conn_sync:
+	remove_proc_entry("ip_vs_conn", ipvs->net->proc_net);
+err_conn:
+	return -ENOMEM;
+#endif
 }
 
 void __net_exit ip_vs_conn_net_cleanup(struct netns_ipvs *ipvs)
 {
 	/* flush all the connection entries first */
 	ip_vs_conn_flush(ipvs);
+#ifdef CONFIG_PROC_FS
 	remove_proc_entry("ip_vs_conn", ipvs->net->proc_net);
 	remove_proc_entry("ip_vs_conn_sync", ipvs->net->proc_net);
+#endif
 }
 
 int __init ip_vs_conn_init(void)
