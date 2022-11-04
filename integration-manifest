@@ -1,0 +1,28 @@
+drm drm-fixes 6295f1d8b4503ad8a18519b781dd2d1fe5e88c52
+	Merge tag 'drm-intel-fixes-2022-11-03' of git://anongit.freedesktop.org/drm/drm-intel into drm-fixes
+drm-misc drm-misc-fixes 3bc6a37f59f21a8bfaf74d0975b2eb0b2d52a065
+	drm/vc4: hdmi: Fix HSM clock too low on Pi4
+drm-intel drm-intel-fixes 12caf46cf4fc92b1c3884cb363ace2e12732fd2f
+	drm/i915/sdvo: Grab mode_config.mutex during LVDS init to avoid WARNs
+drm drm-next 60ba8c5bd94e17ab4b024f5cecf8b48e2cf36412
+	Merge tag 'drm-intel-gt-next-2022-11-03' of git://anongit.freedesktop.org/drm/drm-intel into drm-next
+drm-misc drm-misc-next-fixes 39dd0cc2e5bd0d5188dd69f27e18783cea7ff06a
+	drm/amdgpu: Fix VRAM eviction issue
+drm-intel drm-intel-next-fixes ea19684afb545605bbcb690c49a91ce2c8e596dd
+	drm/i915/display: consider DG2_RC_CCS_CC when migrating buffers
+drm-misc drm-misc-next a8300c46385e357079248302722d2f6b48adcba1
+	drm/ofdrm: Cast error pointers to void __iomem *
+drm-intel drm-intel-next 882ecff709b50b36128e07a6b0035f476c769f50
+	drm/i915: Use intel_crtc_needs_modeset() more
+drm-intel drm-intel-gt-next 178b8a3668bd63b40303d9dcb17ad58cf4b44007
+	drm/i915/guc: Don't deadlock busyness stats vs reset
+sound-upstream for-linus 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+sound-upstream for-next 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+drm-intel topic/core-for-CI f3387d5883ad92e9a54306fa3dff97d4f0581d78
+	freezer,sched: Rewrite core freezer logic fix
+drm-misc topic/i915-ttm 1e3944578b749449bd7fa6bf0bae4c3d3f5f1733
+	Merge tag 'amd-drm-next-5.16-2021-09-27' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm topic/nouveau-misc dfc4005f8c172eea359f9db08c3b2b0ff0153699
+	drm/nouveau/disp: move DAC load detection method
