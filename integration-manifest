@@ -1,0 +1,28 @@
+drm drm-fixes 6295f1d8b4503ad8a18519b781dd2d1fe5e88c52
+	Merge tag 'drm-intel-fixes-2022-11-03' of git://anongit.freedesktop.org/drm/drm-intel into drm-fixes
+drm-misc drm-misc-fixes f352262f727215553879705bacbcb208979f3eff
+	drm/panfrost: Split io-pgtable requests properly
+drm-intel drm-intel-fixes 178e31ce82d0308a9e5f2f15bfb4493160136729
+	drm/i915/userptr: restore probe_range behaviour
+drm drm-next a143bc517bf31c4575191efbaac216a11ec016e0
+	Merge branch '00.06-gr-ampere' of https://gitlab.freedesktop.org/skeggsb/nouveau into drm-next
+drm-misc drm-misc-next-fixes 39dd0cc2e5bd0d5188dd69f27e18783cea7ff06a
+	drm/amdgpu: Fix VRAM eviction issue
+drm-intel drm-intel-next-fixes ea19684afb545605bbcb690c49a91ce2c8e596dd
+	drm/i915/display: consider DG2_RC_CCS_CC when migrating buffers
+drm-misc drm-misc-next 6b818c533dd8615a803a72733eace58fd06e5a3c
+	drm: panel: Add Jadard JD9365DA-H3 DSI panel
+drm-intel drm-intel-next 6398acf34819da99e5110e7eae47e81ef5e4bb77
+	drm/i915/display: move struct intel_link_m_n to intel_display_types.h
+drm-intel drm-intel-gt-next 8c94951560ef29c455043bf2dfa2275b011edc66
+	drm/i915: use i915_sg_dma_sizes() for all backends
+sound-upstream for-linus 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+sound-upstream for-next 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+drm-intel topic/core-for-CI eba8a3edfcbbd58c2151780971fc89af5995607a
+	freezer, sched: Rewrite core freezer logic v2
+drm-misc topic/i915-ttm 1e3944578b749449bd7fa6bf0bae4c3d3f5f1733
+	Merge tag 'amd-drm-next-5.16-2021-09-27' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm topic/nouveau-misc dfc4005f8c172eea359f9db08c3b2b0ff0153699
+	drm/nouveau/disp: move DAC load detection method
