@@ -1,0 +1,28 @@
+drm drm-fixes 094226ad94f471a9f19e8f8e7140a09c2625abaa
+	Linux 6.1-rc5
+drm-misc drm-misc-fixes e17a025a47c66ca8499ae88d8046c4f0d7c9c057
+	drm/lima: Fix opp clkname setting in case of missing regulator
+drm-intel drm-intel-fixes 4f68332b2f89ab84285e5b6cb3d30e8b9894bef1
+	drm/i915/ttm: fix uaf with lmem_userfault_list handling
+drm drm-next c02f20d38fb90eba606277874581db124ace42c4
+	drm/nouveau/disp: fix incorrect/broken hdmi methods
+drm-misc drm-misc-next-fixes 39dd0cc2e5bd0d5188dd69f27e18783cea7ff06a
+	drm/amdgpu: Fix VRAM eviction issue
+drm-intel drm-intel-next-fixes ea19684afb545605bbcb690c49a91ce2c8e596dd
+	drm/i915/display: consider DG2_RC_CCS_CC when migrating buffers
+drm-misc drm-misc-next 0e308efe232afdec35d508f5dfae52f03d50efca
+	drm/connector: Add pixel clock to cmdline mode
+drm-intel drm-intel-next 002c6ca75289a4ac4f6738213dd2d258704886e4
+	Merge drm/drm-next into drm-intel-next
+drm-intel drm-intel-gt-next 39a10b6ac5d18dd714e8a64c96cb72ef121ce963
+	Documentation/gpu: Fix section in the wrong scope
+sound-upstream for-linus 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+sound-upstream for-next 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+drm-intel topic/core-for-CI eba8a3edfcbbd58c2151780971fc89af5995607a
+	freezer, sched: Rewrite core freezer logic v2
+drm-misc topic/i915-ttm 1e3944578b749449bd7fa6bf0bae4c3d3f5f1733
+	Merge tag 'amd-drm-next-5.16-2021-09-27' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm topic/nouveau-misc dfc4005f8c172eea359f9db08c3b2b0ff0153699
+	drm/nouveau/disp: move DAC load detection method
