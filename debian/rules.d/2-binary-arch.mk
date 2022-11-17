@@ -512,6 +512,8 @@ endif
 		$(pkgdir_bldinfo)/usr/lib/linux/$(abi_release)-$*/retpoline
 	install -m644 $(abidir)/$*.compiler \
 		$(pkgdir_bldinfo)/usr/lib/linux/$(abi_release)-$*/compiler
+	install -m644 $(DROOT)/canonical-certs.pem $(pkgdir_bldinfo)/usr/lib/linux/$(abi_release)-$*/canonical-certs.pem
+	install -m644 $(DROOT)/canonical-revoked-certs.pem $(pkgdir_bldinfo)/usr/lib/linux/$(abi_release)-$*/canonical-revoked-certs.pem
 
 ifneq ($(full_build),false)
 	# Clean out this flavours build directory.
