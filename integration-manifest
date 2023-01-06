@@ -1,0 +1,28 @@
+drm drm-fixes 5193326c4c5a656c733b6d2c6537e3f36319bcac
+	Merge tag 'drm-intel-fixes-2023-01-05' of git://anongit.freedesktop.org/drm/drm-intel into drm-fixes
+drm-misc drm-misc-fixes 0688773f0710528e1ab302c3d6317e269f2e2e6e
+	drm: Add orientation quirk for Lenovo ideapad D330-10IGL
+drm-intel drm-intel-fixes 60b13fed41b8106b8e869fa144ad6d126ea7105e
+	drm/i915: Reserve enough fence slot for i915_vma_unbind_async
+drm drm-next 03a0a1040895711e12c15ab28d4d1812928e171d
+	Merge tag 'drm-misc-next-2023-01-03' of git://anongit.freedesktop.org/drm/drm-misc into drm-next
+drm-misc drm-misc-next-fixes 03dec92c4f788c54a7c01b40a018f601eb8a6c52
+	drm/scheduler: Fix lockup in drm_sched_entity_kill()
+drm-intel drm-intel-next-fixes fe8f5b2f7bec504021b395d24f7efca415d21e2b
+	Merge tag 'amd-drm-fixes-6.2-2022-12-21' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm-misc drm-misc-next 2e3ab8a6994f265bbd4dbd00448b84548f18464c
+	drm/arm/hdlcd: use new debugfs device-centered functions
+drm-intel drm-intel-next 7e095a4ca32a7169d7c9cce16318b532c85bb39b
+	drm/i915: Update docs in intel_wakeref.h
+drm-intel drm-intel-gt-next 41bb543f5598fb44e0e8dbd723f5821be83b466b
+	drm/i915/mtl: Add initial gt workarounds
+sound-upstream for-linus 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+sound-upstream for-next 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+drm-intel topic/core-for-CI c0305620cad41de6ecad914f7984e3ed8ca0ded6
+	freezer: Dump more info on whoever is trying to get frozen with locks held
+drm-misc topic/i915-ttm 1e3944578b749449bd7fa6bf0bae4c3d3f5f1733
+	Merge tag 'amd-drm-next-5.16-2021-09-27' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm topic/nouveau-misc dfc4005f8c172eea359f9db08c3b2b0ff0153699
+	drm/nouveau/disp: move DAC load detection method
