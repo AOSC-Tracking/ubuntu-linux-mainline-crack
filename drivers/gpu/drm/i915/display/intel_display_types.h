@@ -50,6 +50,7 @@
 #include "i915_vma_types.h"
 #include "intel_bios.h"
 #include "intel_display.h"
+#include "intel_display_limits.h"
 #include "intel_display_power.h"
 #include "intel_dpll_mgr.h"
 #include "intel_pm_types.h"
@@ -262,8 +263,6 @@ struct intel_encoder {
 
 	enum hpd_pin hpd_pin;
 	enum intel_display_power_domain power_domain;
-	/* for communication with audio component; protected by av_mutex */
-	const struct drm_connector *audio_connector;
 
 	/* VBT information for this encoder (may be NULL for older platforms) */
 	const struct intel_bios_encoder_data *devdata;
@@ -1260,6 +1259,8 @@ struct intel_crtc_state {
 		union hdmi_infoframe drm;
 		struct drm_dp_vsc_sdp vsc;
 	} infoframes;
+
+	u8 eld[MAX_ELD_BYTES];
 
 	/* HDMI scrambling status */
 	bool hdmi_scrambling;
