@@ -928,6 +928,8 @@ int inet_csk_listen_start(struct sock *sk, int backlog)
 	 * after validation is complete.
 	 */
 	sk_state_store(sk, TCP_LISTEN);
+	/* get_port does not return an error code, yet */
+	err = -EADDRINUSE;
 	if (!sk->sk_prot->get_port(sk, inet->inet_num)) {
 		inet->inet_sport = htons(inet->inet_num);
 
