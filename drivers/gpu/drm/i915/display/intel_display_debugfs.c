@@ -1286,20 +1286,10 @@ static void wm_latency_show(struct seq_file *m, const u16 wm[8])
 {
 	struct drm_i915_private *dev_priv = m->private;
 	int level;
-	int num_levels;
-
-	if (IS_CHERRYVIEW(dev_priv))
-		num_levels = 3;
-	else if (IS_VALLEYVIEW(dev_priv))
-		num_levels = 1;
-	else if (IS_G4X(dev_priv))
-		num_levels = 3;
-	else
-		num_levels = ilk_wm_max_level(dev_priv) + 1;
 
 	drm_modeset_lock_all(&dev_priv->drm);
 
-	for (level = 0; level < num_levels; level++) {
+	for (level = 0; level < dev_priv->display.wm.num_levels; level++) {
 		unsigned int latency = wm[level];
 
 		/*
@@ -1402,19 +1392,9 @@ static ssize_t wm_latency_write(struct file *file, const char __user *ubuf,
 	struct seq_file *m = file->private_data;
 	struct drm_i915_private *dev_priv = m->private;
 	u16 new[8] = { 0 };
-	int num_levels;
 	int level;
 	int ret;
 	char tmp[32];
-
-	if (IS_CHERRYVIEW(dev_priv))
-		num_levels = 3;
-	else if (IS_VALLEYVIEW(dev_priv))
-		num_levels = 1;
-	else if (IS_G4X(dev_priv))
-		num_levels = 3;
-	else
-		num_levels = ilk_wm_max_level(dev_priv) + 1;
 
 	if (len >= sizeof(tmp))
 		return -EINVAL;
@@ -1427,12 +1407,12 @@ static ssize_t wm_latency_write(struct file *file, const char __user *ubuf,
 	ret = sscanf(tmp, "%hu %hu %hu %hu %hu %hu %hu %hu",
 		     &new[0], &new[1], &new[2], &new[3],
 		     &new[4], &new[5], &new[6], &new[7]);
-	if (ret != num_levels)
+	if (ret != dev_priv->display.wm.num_levels)
 		return -EINVAL;
 
 	drm_modeset_lock_all(&dev_priv->drm);
 
-	for (level = 0; level < num_levels; level++)
+	for (level = 0; level < dev_priv->display.wm.num_levels; level++)
 		wm[level] = new[level];
 
 	drm_modeset_unlock_all(&dev_priv->drm);
@@ -1622,7 +1602,7 @@ void intel_display_debugfs_register(struct drm_i915_private *i915)
 	intel_dmc_debugfs_register(i915);
 	intel_fbc_debugfs_register(i915);
 	intel_hpd_debugfs_register(i915);
-	skl_watermark_ipc_debugfs_register(i915);
+	skl_watermark_debugfs_register(i915);
 }
 
 static int i915_panel_show(struct seq_file *m, void *data)

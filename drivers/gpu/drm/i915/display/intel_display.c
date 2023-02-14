@@ -94,6 +94,7 @@
 #include "intel_hotplug.h"
 #include "intel_hti.h"
 #include "intel_lvds.h"
+#include "intel_lvds_regs.h"
 #include "intel_modeset_setup.h"
 #include "intel_modeset_verify.h"
 #include "intel_overlay.h"
@@ -1252,7 +1253,8 @@ static void intel_crtc_async_flip_disable_wa(struct intel_atomic_state *state,
 		intel_atomic_get_old_crtc_state(state, crtc);
 	const struct intel_crtc_state *new_crtc_state =
 		intel_atomic_get_new_crtc_state(state, crtc);
-	u8 update_planes = new_crtc_state->update_planes;
+	u8 disable_async_flip_planes = old_crtc_state->async_flip_planes &
+				       ~new_crtc_state->async_flip_planes;
 	const struct intel_plane_state *old_plane_state;
 	struct intel_plane *plane;
 	bool need_vbl_wait = false;
@@ -1261,7 +1263,7 @@ static void intel_crtc_async_flip_disable_wa(struct intel_atomic_state *state,
 	for_each_old_intel_plane_in_state(state, plane, old_plane_state, i) {
 		if (plane->need_async_flip_disable_wa &&
 		    plane->pipe == crtc->pipe &&
-		    update_planes & BIT(plane->id)) {
+		    disable_async_flip_planes & BIT(plane->id)) {
 			/*
 			 * Apart from the async flip bit we want to
 			 * preserve the old state for the plane.
@@ -1378,7 +1380,7 @@ static void intel_pre_plane_update(struct intel_atomic_state *state,
 	 * WA for platforms where async address update enable bit
 	 * is double buffered and only latched at start of vblank.
 	 */
-	if (old_crtc_state->uapi.async_flip && !new_crtc_state->uapi.async_flip)
+	if (old_crtc_state->async_flip_planes & ~new_crtc_state->async_flip_planes)
 		intel_crtc_async_flip_disable_wa(state, crtc);
 }
 
@@ -5943,6 +5945,8 @@ int intel_modeset_all_pipes(struct intel_atomic_state *state,
 			return ret;
 
 		crtc_state->update_planes |= crtc_state->active_planes;
+		crtc_state->async_flip_planes = 0;
+		crtc_state->do_async_flip = false;
 	}
 
 	return 0;
@@ -8639,7 +8643,7 @@ int intel_modeset_init_noirq(struct drm_i915_private *i915)
 	if (!HAS_DISPLAY(i915))
 		return 0;
 
-	intel_dmc_ucode_init(i915);
+	intel_dmc_init(i915);
 
 	i915->display.wq.modeset = alloc_ordered_workqueue("i915_modeset", 0);
 	i915->display.wq.flip = alloc_workqueue("i915_flip", WQ_HIGHPRI |
@@ -8674,7 +8678,7 @@ int intel_modeset_init_noirq(struct drm_i915_private *i915)
 	return 0;
 
 cleanup_vga_client_pw_domain_dmc:
-	intel_dmc_ucode_fini(i915);
+	intel_dmc_fini(i915);
 	intel_power_domains_driver_remove(i915);
 	intel_vga_unregister(i915);
 cleanup_bios:
@@ -9000,7 +9004,7 @@ void intel_modeset_driver_remove_noirq(struct drm_i915_private *i915)
 /* part #3: call after gem init */
 void intel_modeset_driver_remove_nogem(struct drm_i915_private *i915)
 {
-	intel_dmc_ucode_fini(i915);
+	intel_dmc_fini(i915);
 
 	intel_power_domains_driver_remove(i915);
 
@@ -9051,7 +9055,7 @@ void intel_display_driver_register(struct drm_i915_private *i915)
 	 * enabled. We do it last so that the async config cannot run
 	 * before the connectors are registered.
 	 */
-	intel_fbdev_initial_config_async(&i915->drm);
+	intel_fbdev_initial_config_async(i915);
 
 	/*
 	 * We need to coordinate the hotplugs with the asynchronous
