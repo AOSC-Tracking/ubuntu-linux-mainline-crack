@@ -1,0 +1,28 @@
+drm drm-fixes ceaa837f96adb69c0df0397937cd74991d5d821a
+	Linux 6.2-rc8
+drm-misc drm-misc-fixes a950b989ea29ab3b38ea7f6e3d2540700a3c54e8
+	drm/vmwgfx: Do not drop the reference to the handle too soon
+drm-intel drm-intel-fixes d5a1224aa68c8b124a4c5c390186e571815ed390
+	drm/i915/gen11: Wa_1408615072/Wa_1407596294 should be on GT list
+drm drm-next 48075a66fca613477ac1969b576a93ef5db0164f
+	Merge branch 'etnaviv/next' of https://git.pengutronix.de/git/lst/linux into drm-next
+drm-misc drm-misc-next-fixes 38b2d8efd03d2e56431b611e3523f0158306451d
+	drm: panel-orientation-quirks: Add quirk for Lenovo IdeaPad Duet 3 10IGL5
+drm-intel drm-intel-next-fixes 8038510b1fe443ffbc0e356db5f47cbb8678a594
+	drm/i915: Fix system suspend without fbdev being initialized
+drm-misc drm-misc-next f56e0071a6fea6b416943d8736f3128c8b2abed2
+	drm/nouveau/led: explicitly include linux/leds.h
+drm-intel drm-intel-next 0e7a16f9ddde61d7d65bae9c7ddda2e4a22cbc12
+	drm/i915/wm: add .get_hw_state to watermark funcs
+drm-intel drm-intel-gt-next d6683bbe70d4cdbf3da6acecf7d569cc6f0b4382
+	drm/i915/xelpmp: Consider GSI offset when doing MCR lookups
+sound-upstream for-linus 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+sound-upstream for-next 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+drm-intel topic/core-for-CI 2c670055c9fb5747d1f3719fcf184785fcac4bf3
+	freezer: Dump more info on whoever is trying to get frozen with locks held
+drm-misc topic/i915-ttm 1e3944578b749449bd7fa6bf0bae4c3d3f5f1733
+	Merge tag 'amd-drm-next-5.16-2021-09-27' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm topic/nouveau-misc dfc4005f8c172eea359f9db08c3b2b0ff0153699
+	drm/nouveau/disp: move DAC load detection method
