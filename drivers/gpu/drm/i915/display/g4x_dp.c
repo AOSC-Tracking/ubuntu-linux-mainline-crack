@@ -1279,10 +1279,18 @@ static const struct drm_encoder_funcs intel_dp_enc_funcs = {
 bool g4x_dp_init(struct drm_i915_private *dev_priv,
 		 i915_reg_t output_reg, enum port port)
 {
+	const struct intel_bios_encoder_data *devdata;
 	struct intel_digital_port *dig_port;
 	struct intel_encoder *intel_encoder;
 	struct drm_encoder *encoder;
 	struct intel_connector *intel_connector;
+
+	devdata = intel_bios_encoder_data_lookup(dev_priv, port);
+
+	/* FIXME bail? */
+	if (!devdata)
+		drm_dbg_kms(&dev_priv->drm, "No VBT child device for DP-%c\n",
+			    port_name(port));
 
 	dig_port = kzalloc(sizeof(*dig_port), GFP_KERNEL);
 	if (!dig_port)
@@ -1294,6 +1302,8 @@ bool g4x_dp_init(struct drm_i915_private *dev_priv,
 
 	intel_encoder = &dig_port->base;
 	encoder = &intel_encoder->base;
+
+	intel_encoder->devdata = devdata;
 
 	mutex_init(&dig_port->hdcp_mutex);
 
@@ -1391,7 +1401,7 @@ bool g4x_dp_init(struct drm_i915_private *dev_priv,
 	if (port != PORT_A)
 		intel_infoframe_init(dig_port);
 
-	dig_port->aux_ch = intel_bios_port_aux_ch(dev_priv, port);
+	dig_port->aux_ch = intel_bios_port_aux_ch(dev_priv, devdata, port);
 	if (!intel_dp_init_connector(dig_port, intel_connector))
 		goto err_init_connector;
 
