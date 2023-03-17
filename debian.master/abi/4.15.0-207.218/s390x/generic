@@ -1825,7 +1825,6 @@ EXPORT_SYMBOL vmlinux 0x10b3217b	ptep_modify_prot_commit
 EXPORT_SYMBOL vmlinux 0x10c88b00	tcf_em_tree_validate
 EXPORT_SYMBOL vmlinux 0x10d2dc31	ida_destroy
 EXPORT_SYMBOL vmlinux 0x10ecc048	blk_put_request
-EXPORT_SYMBOL vmlinux 0x110257db	__do_once_done
 EXPORT_SYMBOL vmlinux 0x11089ac7	_ctype
 EXPORT_SYMBOL vmlinux 0x1108ab0a	d_prune_aliases
 EXPORT_SYMBOL vmlinux 0x1163f0a7	blk_max_low_pfn
@@ -4337,6 +4336,7 @@ EXPORT_SYMBOL vmlinux 0xaad8c7d6	default_wake_function
 EXPORT_SYMBOL vmlinux 0xaaf96cd6	scsi_print_sense
 EXPORT_SYMBOL vmlinux 0xaafdc258	strcasecmp
 EXPORT_SYMBOL vmlinux 0xab05c098	config_item_init_type_name
+EXPORT_SYMBOL vmlinux 0xab251dc5	__do_once_done
 EXPORT_SYMBOL vmlinux 0xab3091c0	security_unix_may_send
 EXPORT_SYMBOL vmlinux 0xab3697e4	irq_poll_init
 EXPORT_SYMBOL vmlinux 0xab3bb343	dq_data_lock
@@ -5160,6 +5160,7 @@ EXPORT_SYMBOL vmlinux 0xe075d6eb	iter_div_u64_rem
 EXPORT_SYMBOL vmlinux 0xe0812a9e	register_adapter_interrupt
 EXPORT_SYMBOL vmlinux 0xe0875eb1	kstrtobool
 EXPORT_SYMBOL vmlinux 0xe088e91a	ether_setup
+EXPORT_SYMBOL vmlinux 0xe0a323f6	__do_once_slow_start
 EXPORT_SYMBOL vmlinux 0xe0af3e0a	dev_get_phys_port_name
 EXPORT_SYMBOL vmlinux 0xe0b13336	argv_free
 EXPORT_SYMBOL vmlinux 0xe0b8624a	dmam_alloc_attrs
@@ -5611,6 +5612,7 @@ EXPORT_SYMBOL vmlinux 0xfe719995	minmax_running_max
 EXPORT_SYMBOL vmlinux 0xfe9869cb	ethtool_convert_link_mode_to_legacy_u32
 EXPORT_SYMBOL vmlinux 0xfea48fad	vfs_dedupe_file_range_compare
 EXPORT_SYMBOL vmlinux 0xfeab533c	deactivate_super
+EXPORT_SYMBOL vmlinux 0xfebc7d0f	__do_once_slow_done
 EXPORT_SYMBOL vmlinux 0xfed018c7	downgrade_write
 EXPORT_SYMBOL vmlinux 0xfed1e389	proto_register
 EXPORT_SYMBOL vmlinux 0xfedcdb60	seq_hlist_next_percpu
@@ -6990,12 +6992,12 @@ EXPORT_SYMBOL_GPL net/802/garp 0x8100ca91	garp_request_leave
 EXPORT_SYMBOL_GPL net/802/garp 0x9b2666fa	garp_unregister_application
 EXPORT_SYMBOL_GPL net/802/garp 0xd5af146e	garp_uninit_applicant
 EXPORT_SYMBOL_GPL net/802/garp 0xfa60ea02	garp_register_application
-EXPORT_SYMBOL_GPL net/802/mrp 0x1c975914	mrp_register_application
-EXPORT_SYMBOL_GPL net/802/mrp 0x3a924665	mrp_request_leave
-EXPORT_SYMBOL_GPL net/802/mrp 0x542031c5	mrp_unregister_application
-EXPORT_SYMBOL_GPL net/802/mrp 0x765bb6df	mrp_request_join
-EXPORT_SYMBOL_GPL net/802/mrp 0xe6745071	mrp_uninit_applicant
-EXPORT_SYMBOL_GPL net/802/mrp 0xfbe92e44	mrp_init_applicant
+EXPORT_SYMBOL_GPL net/802/mrp 0x1a7189bb	mrp_request_join
+EXPORT_SYMBOL_GPL net/802/mrp 0x211aaa61	mrp_uninit_applicant
+EXPORT_SYMBOL_GPL net/802/mrp 0x8a7993e5	mrp_unregister_application
+EXPORT_SYMBOL_GPL net/802/mrp 0x8b03171e	mrp_register_application
+EXPORT_SYMBOL_GPL net/802/mrp 0xd96ffab2	mrp_init_applicant
+EXPORT_SYMBOL_GPL net/802/mrp 0xeb22c84c	mrp_request_leave
 EXPORT_SYMBOL_GPL net/802/stp 0x8e008757	stp_proto_unregister
 EXPORT_SYMBOL_GPL net/802/stp 0xd3868a8f	stp_proto_register
 EXPORT_SYMBOL_GPL net/9p/9pnet 0x0e2da4d5	p9_client_xattrwalk
@@ -8725,6 +8727,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x457594fa	crypto_alg_list
 EXPORT_SYMBOL_GPL vmlinux 0x458019c6	pkcs7_free_message
 EXPORT_SYMBOL_GPL vmlinux 0x458dc04f	timecounter_read
 EXPORT_SYMBOL_GPL vmlinux 0x45a9559e	pci_bus_resource_n
+EXPORT_SYMBOL_GPL vmlinux 0x45b77da0	debugfs_attr_write_signed
 EXPORT_SYMBOL_GPL vmlinux 0x45bf1ff3	crypto_inc
 EXPORT_SYMBOL_GPL vmlinux 0x45dab761	dm_device_name
 EXPORT_SYMBOL_GPL vmlinux 0x45f0273d	crypto_unregister_kpp
@@ -9452,6 +9455,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x847a1c7b	kvm_vcpu_read_guest
 EXPORT_SYMBOL_GPL vmlinux 0x8487a2b6	flush_work
 EXPORT_SYMBOL_GPL vmlinux 0x84a7d1e8	device_release_driver
 EXPORT_SYMBOL_GPL vmlinux 0x84b42af1	cond_synchronize_sched
+EXPORT_SYMBOL_GPL vmlinux 0x84b6c28c	simple_attr_write_signed
 EXPORT_SYMBOL_GPL vmlinux 0x84e00983	kvm_release_page_dirty
 EXPORT_SYMBOL_GPL vmlinux 0x84e73876	lwtunnel_encap_del_ops
 EXPORT_SYMBOL_GPL vmlinux 0x84e7b319	pkcs7_parse_message
