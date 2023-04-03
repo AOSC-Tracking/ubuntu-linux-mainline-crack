@@ -218,6 +218,11 @@ static int lima_drm_driver_open(struct drm_device *dev, struct drm_file *file)
 	if (!priv)
 		return -ENOMEM;
 
+	err = xa_alloc_cyclic(&ldev->active_contexts, &priv->id, priv,
+			      xa_limit_32b, &ldev->next_context_id, GFP_KERNEL);
+	if (err < 0)
+		goto err_out0;
+
 	priv->vm = lima_vm_create(ldev);
 	if (!priv->vm) {
 		err = -ENOMEM;
@@ -237,6 +242,9 @@ err_out0:
 static void lima_drm_driver_postclose(struct drm_device *dev, struct drm_file *file)
 {
 	struct lima_drm_priv *priv = file->driver_priv;
+	struct lima_device *ldev = to_lima_dev(dev);
+
+	xa_erase(&ldev->active_contexts, priv->id);
 
 	lima_ctx_mgr_fini(&priv->ctx_mgr);
 	lima_vm_put(priv->vm);
@@ -253,7 +261,36 @@ static const struct drm_ioctl_desc lima_drm_driver_ioctls[] = {
 	DRM_IOCTL_DEF_DRV(LIMA_CTX_FREE, lima_ioctl_ctx_free, DRM_RENDER_ALLOW),
 };
 
-DEFINE_DRM_GEM_FOPS(lima_drm_driver_fops);
+static void lima_drm_driver_show_fdinfo(struct seq_file *m, struct file *filp)
+{
+	struct drm_file *file = filp->private_data;
+	struct drm_device *dev = file->minor->dev;
+	struct lima_device *ldev = to_lima_dev(dev);
+	struct lima_drm_priv *priv = file->driver_priv;
+	struct lima_ctx_mgr *ctx_mgr = &priv->ctx_mgr;
+	u64 usage[lima_pipe_num];
+
+	lima_ctx_mgr_usage(ctx_mgr, usage);
+
+	/*
+	 * For a description of the text output format used here, see
+	 * Documentation/gpu/drm-usage-stats.rst.
+	 */
+	seq_printf(m, "drm-driver:\t%s\n", dev->driver->name);
+	seq_printf(m, "drm-client-id:\t%u\n", priv->id);
+	for (int i = 0; i < lima_pipe_num; i++) {
+		struct lima_sched_pipe *pipe = &ldev->pipe[i];
+		struct drm_gpu_scheduler *sched = &pipe->base;
+
+		seq_printf(m, "drm-engine-%s:\t%llu ns\n", sched->name, usage[i]);
+	}
+}
+
+static const struct file_operations lima_drm_driver_fops = {
+	.owner = THIS_MODULE,
+	DRM_GEM_FOPS,
+	.show_fdinfo = lima_drm_driver_show_fdinfo,
+};
 
 /*
  * Changelog:
@@ -388,12 +425,16 @@ static int lima_pdev_probe(struct platform_device *pdev)
 	ldev->dev = &pdev->dev;
 	ldev->id = (enum lima_gpu_id)of_device_get_match_data(&pdev->dev);
 
+	xa_init_flags(&ldev->active_contexts, XA_FLAGS_ALLOC);
+
 	platform_set_drvdata(pdev, ldev);
 
 	/* Allocate and initialize the DRM device. */
 	ddev = drm_dev_alloc(&lima_drm_driver, &pdev->dev);
-	if (IS_ERR(ddev))
-		return PTR_ERR(ddev);
+	if (IS_ERR(ddev)) {
+		err = PTR_ERR(ddev);
+		goto err_out0;
+	}
 
 	ddev->dev_private = ldev;
 	ldev->ddev = ddev;
@@ -443,6 +484,8 @@ static int lima_pdev_remove(struct platform_device *pdev)
 {
 	struct lima_device *ldev = platform_get_drvdata(pdev);
 	struct drm_device *ddev = ldev->ddev;
+
+	xa_destroy(&ldev->active_contexts);
 
 	sysfs_remove_bin_file(&ldev->dev->kobj, &lima_error_state_attr);
 
