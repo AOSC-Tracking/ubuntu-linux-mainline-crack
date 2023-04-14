@@ -1069,19 +1069,39 @@ static bool needs_async_flip_vtd_wa(const struct intel_crtc_state *crtc_state)
 		(DISPLAY_VER(i915) == 9 || IS_BROADWELL(i915) || IS_HASWELL(i915));
 }
 
+#define is_enabling(feature, old_crtc_state, new_crtc_state) \
+	((!(old_crtc_state)->feature || intel_crtc_needs_modeset(new_crtc_state)) && \
+	 (new_crtc_state)->feature)
+#define is_disabling(feature, old_crtc_state, new_crtc_state) \
+	((old_crtc_state)->feature && \
+	 (!(new_crtc_state)->feature || intel_crtc_needs_modeset(new_crtc_state)))
+
 static bool planes_enabling(const struct intel_crtc_state *old_crtc_state,
 			    const struct intel_crtc_state *new_crtc_state)
 {
-	return (!old_crtc_state->active_planes || intel_crtc_needs_modeset(new_crtc_state)) &&
-		new_crtc_state->active_planes;
+	return is_enabling(active_planes, old_crtc_state, new_crtc_state);
 }
 
 static bool planes_disabling(const struct intel_crtc_state *old_crtc_state,
 			     const struct intel_crtc_state *new_crtc_state)
 {
-	return old_crtc_state->active_planes &&
-		(!new_crtc_state->active_planes || intel_crtc_needs_modeset(new_crtc_state));
+	return is_disabling(active_planes, old_crtc_state, new_crtc_state);
 }
+
+static bool vrr_enabling(const struct intel_crtc_state *old_crtc_state,
+			 const struct intel_crtc_state *new_crtc_state)
+{
+	return is_enabling(vrr.enable, old_crtc_state, new_crtc_state);
+}
+
+static bool vrr_disabling(const struct intel_crtc_state *old_crtc_state,
+			  const struct intel_crtc_state *new_crtc_state)
+{
+	return is_disabling(vrr.enable, old_crtc_state, new_crtc_state);
+}
+
+#undef is_disabling
+#undef is_enabling
 
 static void intel_post_plane_update(struct intel_atomic_state *state,
 				    struct intel_crtc *crtc)
@@ -1195,6 +1215,11 @@ static void intel_pre_plane_update(struct intel_atomic_state *state,
 	const struct intel_crtc_state *new_crtc_state =
 		intel_atomic_get_new_crtc_state(state, crtc);
 	enum pipe pipe = crtc->pipe;
+
+	if (vrr_disabling(old_crtc_state, new_crtc_state)) {
+		intel_vrr_disable(old_crtc_state);
+		intel_crtc_update_active_timings(old_crtc_state, false);
+	}
 
 	intel_drrs_deactivate(old_crtc_state);
 
@@ -1676,6 +1701,8 @@ static void hsw_configure_cpu_transcoder(const struct intel_crtc_state *crtc_sta
 	}
 
 	intel_set_transcoder_timings(crtc_state);
+	if (HAS_VRR(dev_priv))
+		intel_vrr_set_transcoder_timings(crtc_state);
 
 	if (cpu_transcoder != TRANSCODER_EDP)
 		intel_de_write(dev_priv, TRANS_MULT(cpu_transcoder),
@@ -3901,7 +3928,7 @@ static bool hsw_get_pipe_config(struct intel_crtc *crtc,
 		intel_get_transcoder_timings(crtc, pipe_config);
 
 	if (HAS_VRR(dev_priv) && !transcoder_is_dsi(pipe_config->cpu_transcoder))
-		intel_vrr_get_config(crtc, pipe_config);
+		intel_vrr_get_config(pipe_config);
 
 	intel_get_pipe_src_size(crtc, pipe_config);
 
@@ -4110,7 +4137,10 @@ found:
 	}
 
 	state->acquire_ctx = ctx;
+	to_intel_atomic_state(state)->internal = true;
+
 	restore_state->acquire_ctx = ctx;
+	to_intel_atomic_state(restore_state)->internal = true;
 
 	connector_state = drm_atomic_get_connector_state(state, connector);
 	if (IS_ERR(connector_state)) {
@@ -5573,6 +5603,24 @@ intel_pipe_config_compare(const struct intel_crtc_state *current_config,
 	} \
 } while (0)
 
+#define PIPE_CONF_CHECK_CSC(name) do { \
+	PIPE_CONF_CHECK_X(name.preoff[0]); \
+	PIPE_CONF_CHECK_X(name.preoff[1]); \
+	PIPE_CONF_CHECK_X(name.preoff[2]); \
+	PIPE_CONF_CHECK_X(name.coeff[0]); \
+	PIPE_CONF_CHECK_X(name.coeff[1]); \
+	PIPE_CONF_CHECK_X(name.coeff[2]); \
+	PIPE_CONF_CHECK_X(name.coeff[3]); \
+	PIPE_CONF_CHECK_X(name.coeff[4]); \
+	PIPE_CONF_CHECK_X(name.coeff[5]); \
+	PIPE_CONF_CHECK_X(name.coeff[6]); \
+	PIPE_CONF_CHECK_X(name.coeff[7]); \
+	PIPE_CONF_CHECK_X(name.coeff[8]); \
+	PIPE_CONF_CHECK_X(name.postoff[0]); \
+	PIPE_CONF_CHECK_X(name.postoff[1]); \
+	PIPE_CONF_CHECK_X(name.postoff[2]); \
+} while (0)
+
 #define PIPE_CONF_QUIRK(quirk) \
 	((current_config->quirks | pipe_config->quirks) & (quirk))
 
@@ -5670,6 +5718,9 @@ intel_pipe_config_compare(const struct intel_crtc_state *current_config,
 		PIPE_CONF_CHECK_COLOR_LUT(pre_csc_lut, true);
 		PIPE_CONF_CHECK_COLOR_LUT(post_csc_lut, false);
 
+		PIPE_CONF_CHECK_CSC(csc);
+		PIPE_CONF_CHECK_CSC(output_csc);
+
 		if (current_config->active_planes) {
 			PIPE_CONF_CHECK_BOOL(has_psr);
 			PIPE_CONF_CHECK_BOOL(has_psr2);
@@ -5756,7 +5807,8 @@ intel_pipe_config_compare(const struct intel_crtc_state *current_config,
 	PIPE_CONF_CHECK_I(splitter.link_count);
 	PIPE_CONF_CHECK_I(splitter.pixel_overlap);
 
-	PIPE_CONF_CHECK_BOOL(vrr.enable);
+	if (!fastset)
+		PIPE_CONF_CHECK_BOOL(vrr.enable);
 	PIPE_CONF_CHECK_I(vrr.vmin);
 	PIPE_CONF_CHECK_I(vrr.vmax);
 	PIPE_CONF_CHECK_I(vrr.flipline);
@@ -6536,6 +6588,13 @@ int intel_atomic_check(struct drm_device *dev,
 
 	for_each_oldnew_intel_crtc_in_state(state, crtc, old_crtc_state,
 					    new_crtc_state, i) {
+		/*
+		 * crtc's state no longer considered to be inherited
+		 * after the first userspace/client initiated commit.
+		 */
+		if (!state->internal)
+			new_crtc_state->inherited = false;
+
 		if (new_crtc_state->inherited != old_crtc_state->inherited)
 			new_crtc_state->uapi.mode_changed = true;
 
@@ -6881,7 +6940,8 @@ static void intel_enable_crtc(struct intel_atomic_state *state,
 	if (!intel_crtc_needs_modeset(new_crtc_state))
 		return;
 
-	intel_crtc_update_active_timings(new_crtc_state);
+	/* VRR will be enable later, if required */
+	intel_crtc_update_active_timings(new_crtc_state, false);
 
 	dev_priv->display.funcs.display->crtc_enable(state, crtc);
 
@@ -6906,6 +6966,12 @@ static void intel_update_crtc(struct intel_atomic_state *state,
 	    intel_crtc_needs_modeset(new_crtc_state)) {
 		if (HAS_DPT(i915))
 			intel_dpt_configure(crtc);
+	}
+
+	if (vrr_enabling(old_crtc_state, new_crtc_state)) {
+		intel_vrr_enable(new_crtc_state);
+		intel_crtc_update_active_timings(new_crtc_state,
+						 new_crtc_state->vrr.enable);
 	}
 
 	if (!modeset) {
@@ -7313,6 +7379,12 @@ static void intel_atomic_commit_tail(struct intel_atomic_state *state)
 	 * 7. New _arm() registers are finally written
 	 * 8. Hardware finally latches a complete set of new
 	 *    register values, and subsequent frames will be OK again
+	 *
+	 * Also note that due to the pipe CSC hardware issues on
+	 * SKL/GLK DC states must remain off until the pipe CSC
+	 * state readout has happened. Otherwise we risk corrupting
+	 * the CSC latched register values with the readout (see
+	 * skl_read_csc() and skl_color_commit_noarm()).
 	 */
 	wakeref = intel_display_power_get(dev_priv, POWER_DOMAIN_DC_OFF);
 
@@ -7729,7 +7801,11 @@ static void intel_setup_outputs(struct drm_i915_private *dev_priv)
 	if (!HAS_DISPLAY(dev_priv))
 		return;
 
-	if (IS_DG2(dev_priv)) {
+	if (IS_METEORLAKE(dev_priv)) {
+		/* TODO: initialize TC ports as well */
+		intel_ddi_init(dev_priv, PORT_A);
+		intel_ddi_init(dev_priv, PORT_B);
+	} else if (IS_DG2(dev_priv)) {
 		intel_ddi_init(dev_priv, PORT_A);
 		intel_ddi_init(dev_priv, PORT_B);
 		intel_ddi_init(dev_priv, PORT_C);
@@ -8223,9 +8299,10 @@ static int intel_initial_commit(struct drm_device *dev)
 
 	drm_modeset_acquire_init(&ctx, 0);
 
-retry:
 	state->acquire_ctx = &ctx;
+	to_intel_atomic_state(state)->internal = true;
 
+retry:
 	for_each_intel_crtc(dev, crtc) {
 		struct intel_crtc_state *crtc_state =
 			intel_atomic_get_crtc_state(state, crtc);
@@ -8237,15 +8314,6 @@ retry:
 
 		if (crtc_state->hw.active) {
 			struct intel_encoder *encoder;
-
-			/*
-			 * We've not yet detected sink capabilities
-			 * (audio,infoframes,etc.) and thus we don't want to
-			 * force a full state recomputation yet. We want that to
-			 * happen only for the first real commit from userspace.
-			 * So preserve the inherited flag for the time being.
-			 */
-			crtc_state->inherited = true;
 
 			ret = drm_atomic_add_affected_planes(state, &crtc->base);
 			if (ret)
