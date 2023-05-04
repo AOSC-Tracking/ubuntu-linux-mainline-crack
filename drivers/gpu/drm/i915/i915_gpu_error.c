@@ -808,10 +808,15 @@ static void err_print_gt_engines(struct drm_i915_error_state_buf *m,
 	for (ee = gt->engine; ee; ee = ee->next) {
 		const struct i915_vma_coredump *vma;
 
-		if (ee->guc_capture_node)
-			intel_guc_capture_print_engine_node(m, ee);
-		else
+		if (gt->uc && gt->uc->guc.is_guc_capture) {
+			if (ee->guc_capture_node)
+				intel_guc_capture_print_engine_node(m, ee);
+			else
+				err_printf(m, "  Missing GuC capture node for %s\n",
+					   ee->engine->name);
+		} else {
 			error_print_engine(m, ee);
+		}
 
 		err_printf(m, "  hung: %u\n", ee->hung);
 		err_printf(m, "  engine reset count: %u\n", ee->reset_count);
@@ -2162,7 +2167,7 @@ void i915_error_state_store(struct i915_gpu_coredump *error)
  * i915_capture_error_state - capture an error record for later analysis
  * @gt: intel_gt which originated the hang
  * @engine_mask: hung engines
- *
+ * @dump_flags: dump flags
  *
  * Should be called when an error is detected (either a hang or an error
  * interrupt) to capture error state from the time of the error.  Fills
