@@ -1,0 +1,28 @@
+drm drm-fixes 9bd9be5cbaf8a8faa175ef4fba04a5623281debe
+	Merge tag 'drm-misc-fixes-2023-06-21' of git://anongit.freedesktop.org/drm/drm-misc into drm-fixes
+drm-misc drm-misc-fixes a590f03d8de7c4cb7ce4916dc7f2fd10711faabe
+	drm/ttm: Don't leak a resource on swapout move error
+drm-intel drm-intel-fixes 6995e2de6891c724bfeb2db33d7b87775f913ad1
+	Linux 6.4
+drm drm-next 5ff2977b19769fd24b0cfbe7cbe4d5114b6106af
+	Merge tag 'drm-intel-next-fixes-2023-06-21' of git://anongit.freedesktop.org/drm/drm-intel into drm-next
+drm-misc drm-misc-next-fixes cf683e8870bd4be0fd6b98639286700a35088660
+	fbdev: Use /* */ comment in initializer macro
+drm-intel drm-intel-next-fixes 5b7826355e5b9f48eea29275215fc55165cd17c3
+	drm/i915: Add missing forward declarations/includes to display power headers
+drm-misc drm-misc-next 81c5e39b386cf2059854a213b597b337cba25e15
+	drm/tests: Fix swapped drm_framebuffer tests parameter names
+drm-intel drm-intel-next 175b036472f678948b03baabce4a008b7ba91ce7
+	drm/i915: fix Sphinx indentation warning
+drm-intel drm-intel-gt-next 36dd2a6e5003a215a1d45e41589164dabae0ec5a
+	drm/i915: Replace kmap() with kmap_local_page()
+sound-upstream for-linus 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+sound-upstream for-next 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+drm-intel topic/core-for-CI 400ca0fcb875a0d6e649a44df25405a1fb310769
+	PCI/ASPM: pci_enable_link_state: Add argument to acquire bus lock
+drm-misc topic/i915-ttm 1e3944578b749449bd7fa6bf0bae4c3d3f5f1733
+	Merge tag 'amd-drm-next-5.16-2021-09-27' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm topic/nouveau-misc dfc4005f8c172eea359f9db08c3b2b0ff0153699
+	drm/nouveau/disp: move DAC load detection method
