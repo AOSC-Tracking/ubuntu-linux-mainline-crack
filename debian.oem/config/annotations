@@ -4881,6 +4881,7 @@ CONFIG_LMK04832                                 policy<{'amd64': 'm'}>
 CONFIG_LMP91000                                 policy<{'amd64': 'm'}>
 CONFIG_LOAD_UEFI_KEYS                           policy<{'amd64': 'y'}>
 CONFIG_LOCALVERSION                             policy<{'amd64': '""'}>
+CONFIG_LOCK_MM_AND_FIND_VMA                    policy<{'amd64': 'y'}>
 CONFIG_LOCKD                                    policy<{'amd64': 'm'}>
 CONFIG_LOCKDEP_SUPPORT                          policy<{'amd64': 'y'}>
 CONFIG_LOCKD_V4                                 policy<{'amd64': 'y'}>
