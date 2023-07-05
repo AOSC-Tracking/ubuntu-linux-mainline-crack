@@ -1,0 +1,28 @@
+drm drm-fixes 9bd9be5cbaf8a8faa175ef4fba04a5623281debe
+	Merge tag 'drm-misc-fixes-2023-06-21' of git://anongit.freedesktop.org/drm/drm-misc into drm-fixes
+drm-misc drm-misc-fixes 7f34e01f77f811ecb2ef83e60301b38cf89af466
+	accel/ivpu: Clear specific interrupt status bits on C0
+drm-intel drm-intel-fixes 6995e2de6891c724bfeb2db33d7b87775f913ad1
+	Linux 6.4
+drm drm-next 5ff2977b19769fd24b0cfbe7cbe4d5114b6106af
+	Merge tag 'drm-intel-next-fixes-2023-06-21' of git://anongit.freedesktop.org/drm/drm-intel into drm-next
+drm-misc drm-misc-next-fixes 59bba51ec2a50e3dc5c3ee80f0a23207346303ff
+	drm/panel: Fine tune Starry-ili9882t panel HFP and HBP
+drm-intel drm-intel-next-fixes f6cf3883df471abbcf1553127681dc244c8ff8dd
+	drm/i915: use mock device info for creating mock device
+drm-misc drm-misc-next b32d5a51f3c21843011d68a58e6ac0b897bce9f2
+	MAINTAINERS: add maintainers for DRM LOONGSON driver
+drm-intel drm-intel-next 021a62a52fd22c23a2d01cfe816739b5fca10d28
+	drm/i915: Try to initialize DDI/ICL+ DSI ports for every VBT child device
+drm-intel drm-intel-gt-next e3affc7cd9b48b03d1235168d50c313e2389a2d7
+	drm/i915/gt: Also check set bits in clr_set()
+sound-upstream for-linus 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+sound-upstream for-next 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+drm-intel topic/core-for-CI 11c79e740c1fd1dfdde3ac249d53726d362a4ece
+	drm/i915/gsc: define gsc fw
+drm-misc topic/i915-ttm 1e3944578b749449bd7fa6bf0bae4c3d3f5f1733
+	Merge tag 'amd-drm-next-5.16-2021-09-27' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm topic/nouveau-misc dfc4005f8c172eea359f9db08c3b2b0ff0153699
+	drm/nouveau/disp: move DAC load detection method
