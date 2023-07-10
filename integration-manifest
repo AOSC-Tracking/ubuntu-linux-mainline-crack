@@ -1,0 +1,28 @@
+drm drm-fixes 9bd9be5cbaf8a8faa175ef4fba04a5623281debe
+	Merge tag 'drm-misc-fixes-2023-06-21' of git://anongit.freedesktop.org/drm/drm-misc into drm-fixes
+drm-misc drm-misc-fixes a2848d08742c8e8494675892c02c0d22acbe3cf8
+	drm/ttm: never consider pinned BOs for eviction&swap
+drm-intel drm-intel-fixes 06c2afb862f9da8dc5efa4b6076a0e48c3fbaaa5
+	Linux 6.5-rc1
+drm drm-next 6725f33228077902ddac2a05e0ab361dee36e4ba
+	Merge tag 'drm-misc-next-fixes-2023-07-06' of git://anongit.freedesktop.org/drm/drm-misc into drm-next
+drm-misc drm-misc-next-fixes 59bba51ec2a50e3dc5c3ee80f0a23207346303ff
+	drm/panel: Fine tune Starry-ili9882t panel HFP and HBP
+drm-intel drm-intel-next-fixes f6cf3883df471abbcf1553127681dc244c8ff8dd
+	drm/i915: use mock device info for creating mock device
+drm-misc drm-misc-next 087787034b5a7968959f568f3c4c6c290f519c22
+	drm/arm: Make ARM devices menu depend on DRM
+drm-intel drm-intel-next 8290bcee57dee29dde0ce005968691fa811d87ed
+	drm/i915: Don't rely that 2 VDSC engines are always enough for pixel rate
+drm-intel drm-intel-gt-next 49c60b2f0867ac36fd54d513882a48431aeccae7
+	drm/i915: Fix one wrong caching mode enum usage
+sound-upstream for-linus 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+sound-upstream for-next 7cf3dead1ad70c72edb03e2d98e1f3dcd332cdb2
+	Linux 5.13
+drm-intel topic/core-for-CI c0ea2fa0491287dea97b384bec1b5a614408b8e3
+	drm/i915/gsc: define gsc fw
+drm-misc topic/i915-ttm 1e3944578b749449bd7fa6bf0bae4c3d3f5f1733
+	Merge tag 'amd-drm-next-5.16-2021-09-27' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm topic/nouveau-misc dfc4005f8c172eea359f9db08c3b2b0ff0153699
+	drm/nouveau/disp: move DAC load detection method
