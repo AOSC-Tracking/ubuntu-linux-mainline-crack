@@ -1,0 +1,24 @@
+drm drm-fixes 9bd9be5cbaf8a8faa175ef4fba04a5623281debe
+	Merge tag 'drm-misc-fixes-2023-06-21' of git://anongit.freedesktop.org/drm/drm-misc into drm-fixes
+drm-misc drm-misc-fixes 27655b9bb9f0d9c32b8de8bec649b676898c52d5
+	drm/client: Send hotplug event after registering a client
+drm-intel drm-intel-fixes 113899c2669dff148b2a5bea4780123811aecc13
+	drm/i915: Fix one wrong caching mode enum usage
+drm drm-next 6725f33228077902ddac2a05e0ab361dee36e4ba
+	Merge tag 'drm-misc-next-fixes-2023-07-06' of git://anongit.freedesktop.org/drm/drm-misc into drm-next
+drm-misc drm-misc-next-fixes 59bba51ec2a50e3dc5c3ee80f0a23207346303ff
+	drm/panel: Fine tune Starry-ili9882t panel HFP and HBP
+drm-intel drm-intel-next-fixes f6cf3883df471abbcf1553127681dc244c8ff8dd
+	drm/i915: use mock device info for creating mock device
+drm-misc drm-misc-next f1b215fdcd01ff3cc74f1e4194c866573af8034b
+	fbdev/hyperv_fb: Include <linux/screen_info.h>
+drm-intel drm-intel-next a811c2e42a519582e7683f1a0ada6fce7e7cf832
+	i915/display/hotplug: use drm_kms_helper_connector_hotplug_event()
+drm-intel drm-intel-gt-next 49c60b2f0867ac36fd54d513882a48431aeccae7
+	drm/i915: Fix one wrong caching mode enum usage
+drm-intel topic/core-for-CI c0ea2fa0491287dea97b384bec1b5a614408b8e3
+	drm/i915/gsc: define gsc fw
+drm-misc topic/i915-ttm 1e3944578b749449bd7fa6bf0bae4c3d3f5f1733
+	Merge tag 'amd-drm-next-5.16-2021-09-27' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm topic/nouveau-misc dfc4005f8c172eea359f9db08c3b2b0ff0153699
+	drm/nouveau/disp: move DAC load detection method
