@@ -303,8 +303,8 @@ static int iommufd_device_auto_get_domain(struct iommufd_device *idev,
 		goto out_abort;
 	list_add_tail(&hwpt->hwpt_item, &ioas->hwpt_list);
 
-	mutex_unlock(&ioas->mutex);
 	iommufd_object_finalize(idev->ictx, &hwpt->obj);
+	mutex_unlock(&ioas->mutex);
 	return 0;
 
 out_abort:
