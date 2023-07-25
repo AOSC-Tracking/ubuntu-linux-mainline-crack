@@ -1,0 +1,24 @@
+drm drm-fixes 28801cc85906ea62043e62c71def7f9daaf1c168
+	Merge tag 'amd-drm-fixes-6.5-2023-07-20' of https://gitlab.freedesktop.org/agd5f/linux into drm-fixes
+drm-misc drm-misc-fixes 39b1320e5dc2b707dfb5c25b0298ce9d4fc05aea
+	drm/fb-helper: Remove unused inline function drm_fb_helper_defio_init()
+drm-intel drm-intel-fixes e354f67733115b4453268f61e6e072e9b1ea7a2f
+	drm/i915: Fix an error handling path in igt_write_huge()
+drm drm-next 6c7f27441d6af776a89147027c6f4a11c0162c64
+	Merge tag 'drm-misc-next-2023-07-13' of git://anongit.freedesktop.org/drm/drm-misc into drm-next
+drm-misc drm-misc-next-fixes 59bba51ec2a50e3dc5c3ee80f0a23207346303ff
+	drm/panel: Fine tune Starry-ili9882t panel HFP and HBP
+drm-intel drm-intel-next-fixes f6cf3883df471abbcf1553127681dc244c8ff8dd
+	drm/i915: use mock device info for creating mock device
+drm-misc drm-misc-next 9af8cd1a1c046ec09cc7118ee5a3bfc6e74d99de
+	drm/ast: Do not enable PCI resources multiple times
+drm-intel drm-intel-next b364f3cd879888191290cabd8981b0e6bb3a6fdb
+	drm/i915: Simplify expression &to_i915(dev)->drm
+drm-intel drm-intel-gt-next 306f7a5b0e5794701c330291940a15191edc2f27
+	drm/i915: Replace i915->gt0 with to_gt(i915)
+drm-intel topic/core-for-CI c0ea2fa0491287dea97b384bec1b5a614408b8e3
+	drm/i915/gsc: define gsc fw
+drm-misc topic/i915-ttm 1e3944578b749449bd7fa6bf0bae4c3d3f5f1733
+	Merge tag 'amd-drm-next-5.16-2021-09-27' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm topic/nouveau-misc dfc4005f8c172eea359f9db08c3b2b0ff0153699
+	drm/nouveau/disp: move DAC load detection method
