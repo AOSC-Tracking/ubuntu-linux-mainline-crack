@@ -13,6 +13,7 @@
 #include <linux/kconfig.h>
 #include <linux/list.h>
 #include <linux/types.h>
+#include <linux/workqueue.h>
 
 #include <asm/unaligned.h>
 
@@ -68,6 +69,8 @@ struct crypto_instance {
 		/* List of attached spawns before registration. */
 		struct crypto_spawn *spawns;
 	};
+
+	struct work_struct free_work;
 
 	void *__ctx[] CRYPTO_MINALIGN_ATTR;
 };
