@@ -1091,6 +1091,9 @@ static ssize_t wq_ats_disable_store(struct device *dev, struct device_attribute 
 	if (wq->state != IDXD_WQ_DISABLED)
 		return -EPERM;
 
+	if (!test_bit(IDXD_FLAG_CONFIGURABLE, &idxd->flags))
+		return -EPERM;
+
 	if (!idxd->hw.wq_cap.wq_ats_support)
 		return -EOPNOTSUPP;
 
