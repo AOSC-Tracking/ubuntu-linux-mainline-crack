@@ -1366,7 +1366,7 @@ retry:
 	if (ret < 0)
 		return ret;
 	if (io_aux_cqe(ctx, issue_flags & IO_URING_F_COMPLETE_DEFER,
-		       req->cqe.user_data, ret, IORING_CQE_F_MORE, true))
+		       req->cqe.user_data, ret, IORING_CQE_F_MORE, false))
 		goto retry;
 
 	return -ECANCELED;
