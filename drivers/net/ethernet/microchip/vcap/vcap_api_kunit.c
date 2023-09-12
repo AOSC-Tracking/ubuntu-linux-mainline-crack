@@ -1001,6 +1001,16 @@ static void vcap_api_encode_rule_actionset_test(struct kunit *test)
 	KUNIT_EXPECT_EQ(test, (u32)0x00000000, actwords[11]);
 }
 
+static void vcap_free_ckf(struct vcap_rule *rule)
+{
+	struct vcap_client_keyfield *ckf, *next_ckf;
+
+	list_for_each_entry_safe(ckf, next_ckf, &rule->keyfields, ctrl.list) {
+		list_del(&ckf->ctrl.list);
+		kfree(ckf);
+	}
+}
+
 static void vcap_api_rule_add_keyvalue_test(struct kunit *test)
 {
 	struct vcap_admin admin = {
@@ -1033,6 +1043,7 @@ static void vcap_api_rule_add_keyvalue_test(struct kunit *test)
 	KUNIT_EXPECT_EQ(test, VCAP_FIELD_BIT, kf->ctrl.type);
 	KUNIT_EXPECT_EQ(test, 0x0, kf->data.u1.value);
 	KUNIT_EXPECT_EQ(test, 0x1, kf->data.u1.mask);
+	vcap_free_ckf(rule);
 
 	INIT_LIST_HEAD(&rule->keyfields);
 	ret = vcap_rule_add_key_bit(rule, VCAP_KF_LOOKUP_FIRST_IS, VCAP_BIT_1);
@@ -1045,6 +1056,7 @@ static void vcap_api_rule_add_keyvalue_test(struct kunit *test)
 	KUNIT_EXPECT_EQ(test, VCAP_FIELD_BIT, kf->ctrl.type);
 	KUNIT_EXPECT_EQ(test, 0x1, kf->data.u1.value);
 	KUNIT_EXPECT_EQ(test, 0x1, kf->data.u1.mask);
+	vcap_free_ckf(rule);
 
 	INIT_LIST_HEAD(&rule->keyfields);
 	ret = vcap_rule_add_key_bit(rule, VCAP_KF_LOOKUP_FIRST_IS,
@@ -1058,6 +1070,7 @@ static void vcap_api_rule_add_keyvalue_test(struct kunit *test)
 	KUNIT_EXPECT_EQ(test, VCAP_FIELD_BIT, kf->ctrl.type);
 	KUNIT_EXPECT_EQ(test, 0x0, kf->data.u1.value);
 	KUNIT_EXPECT_EQ(test, 0x0, kf->data.u1.mask);
+	vcap_free_ckf(rule);
 
 	INIT_LIST_HEAD(&rule->keyfields);
 	ret = vcap_rule_add_key_u32(rule, VCAP_KF_TYPE, 0x98765432, 0xff00ffab);
@@ -1070,6 +1083,7 @@ static void vcap_api_rule_add_keyvalue_test(struct kunit *test)
 	KUNIT_EXPECT_EQ(test, VCAP_FIELD_U32, kf->ctrl.type);
 	KUNIT_EXPECT_EQ(test, 0x98765432, kf->data.u32.value);
 	KUNIT_EXPECT_EQ(test, 0xff00ffab, kf->data.u32.mask);
+	vcap_free_ckf(rule);
 
 	INIT_LIST_HEAD(&rule->keyfields);
 	ret = vcap_rule_add_key_u128(rule, VCAP_KF_L3_IP6_SIP, &dip);
@@ -1084,6 +1098,7 @@ static void vcap_api_rule_add_keyvalue_test(struct kunit *test)
 		KUNIT_EXPECT_EQ(test, dip.value[idx], kf->data.u128.value[idx]);
 	for (idx = 0; idx < ARRAY_SIZE(dip.mask); ++idx)
 		KUNIT_EXPECT_EQ(test, dip.mask[idx], kf->data.u128.mask[idx]);
+	vcap_free_ckf(rule);
 }
 
 static void vcap_api_rule_add_actionvalue_test(struct kunit *test)
