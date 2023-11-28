@@ -3800,7 +3800,6 @@ nvmet
 nvmet-fc
 nvmet-rdma
 nvmet-tcp
-nvsw-sn2201
 nwl-dsi
 nxp-c45-tja11xx
 nxp-nci
