@@ -1,0 +1,32 @@
+drm drm-fixes 841c35169323cd833294798e58b9bf63fa4fa1de
+	Linux 6.8-rc4
+drm-misc drm-misc-fixes b6ddaa63f728d26c12048aed76be99c24f435c41
+	drm/rockchip: vop2: add a missing unlock in vop2_crtc_atomic_enable()
+drm-intel drm-intel-fixes ad26d56d080780bbfcc1696ca0c0cce3e2124ef6
+	drm/i915/dp: Limit SST link rate to <=8.1Gbps
+drm-xe drm-xe-fixes bf4c27b8267d7848bb81fd41e6aa07aa662f07fb
+	drm/xe: Remove TEST_VM_ASYNC_OPS_ERROR
+drm drm-next b344e64fbda303b767a3844ee739a596a9c3679e
+	Merge tag 'amd-drm-next-6.9-2024-02-09' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm-misc drm-misc-next-fixes 1f1626ac0428820f998245478610f452650bcab5
+	drm/ttm: fix ttm pool initialization for no-dma-device drivers
+drm-intel drm-intel-next-fixes 84b5ece64477df4394d362d494a2496bf0878985
+	drm/i915: Drop -Wstringop-overflow
+drm-xe drm-xe-next-fixes bf3ff145df184698a8a80b33265064638572366f
+	drm/xe: display support should not depend on EXPERT
+drm-misc drm-misc-next 6b1f93ea345947c94bf3a7a6e668a2acfd310918
+	dt-bindings: display: rockchip,dw-hdmi: add power-domains property
+drm-intel drm-intel-next 3a86cb16ab329b235ecd26adce584e5cb0c808d4
+	drm/i915: Prevent HW access during init from connector get_modes hooks
+drm-intel drm-intel-gt-next 599b0d8ce6edacc5991c552d68c6404b2e150cab
+	drm/i915/selftests: Increasing the sleep time for live_rc6_manual
+drm-xe drm-xe-next 9bc36e58d162466236a38489e4b41f38a8848c94
+	drm/xe: Add uAPI to query GuC firmware submission version
+drm-intel topic/core-for-CI ddccaf79b3af791db0822484c945f44fba5d2365
+	kunit: device: Unregister the kunit_bus on shutdown
+drm topic/nouveau-misc dfc4005f8c172eea359f9db08c3b2b0ff0153699
+	drm/nouveau/disp: move DAC load detection method
+drm topic/drm-ci ad6bfe1b66a5c146ec236847eca7af4c8806d666
+	drm: ci: docs: fix build warning - add missing escape
+drm-xe topic/xe-for-CI ea08150056720bdd045eb42b075765bccb77b48d
+	drm/xe/guc: define PVC FW
