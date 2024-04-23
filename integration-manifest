@@ -1,0 +1,30 @@
+drm drm-fixes ed30a4a51bb196781c8058073ea720133a65596f
+	Linux 6.9-rc5
+drm-misc drm-misc-fixes a386c30410450ea87cd38070f9feaca49dadce29
+	drm/atomic-helper: fix parameter order in drm_format_conv_state_copy() call
+drm-intel drm-intel-fixes ed30a4a51bb196781c8058073ea720133a65596f
+	Linux 6.9-rc5
+drm-xe drm-xe-fixes ca7c52ac7ad384bcf299d89482c45fec7cd00da9
+	drm/xe/vm: prevent UAF with asid based lookup
+drm drm-next 0208ca55aa9c9b997da1f5bc45c4e98916323f08
+	Backmerge tag 'v6.9-rc5' into drm-next
+drm-misc drm-misc-next-fixes 5d4e8ae6e57b025802aadf55a4775c55cceb75f1
+	nouveau/gsp: don't check devinit disable on GSP.
+drm-intel drm-intel-next-fixes 84b5ece64477df4394d362d494a2496bf0878985
+	drm/i915: Drop -Wstringop-overflow
+drm-xe drm-xe-next-fixes 4cece764965020c22cff7665b18a012006359095
+	Linux 6.9-rc1
+drm-misc drm-misc-next 6abe93b621ab12e93cf0eb7e42a609b36be32da1
+	drm/v3d: Fix race-condition between sysfs/fdinfo and interrupt handler
+drm-intel drm-intel-next 6068bc209ac8d07a5d04e93f168465195e22a4cc
+	drm/i915/dsi: pass display to register macros instead of implicit variable
+drm-intel drm-intel-gt-next c3015eb6e25a735ab77591573236169eab8e2e3a
+	drm/i915/dg2: wait for HuC load completion before running selftests
+drm-xe drm-xe-next 869e54d4d54b1b0ee16c98c2149f5785eea08c02
+	drm/xe: make xe_pm_runtime_lockdep_map a static struct
+drm-intel topic/core-for-CI 44909e5ed2f8e95a9a8576f44d570c68c76c44d6
+	ASoC: SOF: Core: Add remove_late() to  sof_init_environment failure path
+drm-xe topic/xe-for-CI ddb9be6feae2523fd4069482e44729e211f34219
+	drm/xe/huc: Define LNL HuC
+drm-intel topic/thunderbolt-next b8a730836c6b1788ca2fbd6bcc2ac99e97ef7de9
+	thunderbolt: Constify the struct device_type usage
