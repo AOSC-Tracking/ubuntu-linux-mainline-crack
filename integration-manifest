@@ -1,0 +1,30 @@
+drm drm-fixes e67572cd2204894179d89bd7b984072f19313b03
+	Linux 6.9-rc6
+drm-misc drm-misc-fixes e4236b14fe32a8d92686ec656c870a6bb1d6f50a
+	drm/imagination: Ensure PVR_MIPS_PT_PAGE_COUNT is never zero
+drm-intel drm-intel-fixes e67572cd2204894179d89bd7b984072f19313b03
+	Linux 6.9-rc6
+drm-xe drm-xe-fixes e3e989522ac9a6b7960c75b762e1e9568717b31e
+	drm/xe/guc: Fix arguments passed to relay G2H handlers
+drm drm-next b84bc948528e6474ba48596144e9c17466a98448
+	Merge v6.9-rc6 into drm-next
+drm-misc drm-misc-next-fixes 5d4e8ae6e57b025802aadf55a4775c55cceb75f1
+	nouveau/gsp: don't check devinit disable on GSP.
+drm-intel drm-intel-next-fixes 84b5ece64477df4394d362d494a2496bf0878985
+	drm/i915: Drop -Wstringop-overflow
+drm-xe drm-xe-next-fixes 4cece764965020c22cff7665b18a012006359095
+	Linux 6.9-rc1
+drm-misc drm-misc-next 75b68f22e39aafb22f3d8e3071e1aba73560788c
+	drm: ci: fix the xfails for apq8016
+drm-intel drm-intel-next 41b088a2680317964809ef67c173cd25267675e9
+	drm/i915/display: split out intel_sprite_regs.h from i915_reg.h
+drm-intel drm-intel-gt-next 4d3421e04c5dc38baf15224c051256204f223c15
+	drm/i915: Fix gt reset with GuC submission is disabled
+drm-xe drm-xe-next 4caf410766add8cf376a3afc910b17dd0961dd75
+	drm/xe: Merge 16021540221 and 18034896535 WAs
+drm-intel topic/core-for-CI 44909e5ed2f8e95a9a8576f44d570c68c76c44d6
+	ASoC: SOF: Core: Add remove_late() to  sof_init_environment failure path
+drm-xe topic/xe-for-CI bfcec151e1e732849facec2e6ac23edc0c7f20ba
+	drm/xe/huc: Define LNL HuC
+drm-intel topic/thunderbolt-next b8a730836c6b1788ca2fbd6bcc2ac99e97ef7de9
+	thunderbolt: Constify the struct device_type usage
