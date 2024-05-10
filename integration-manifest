@@ -1,0 +1,31 @@
+drm drm-fixes a222a6470d7eea91193946e8162066fa88da64c2
+	Revert "drm/nouveau/firmware: Fix SG_DEBUG error with nvkm_firmware_ctor()"
+drm-misc drm-misc-fixes 6897204ea3df808d342c8e4613135728bc538bcd
+	drm/connector: Add 
+ to message about demoting connector force-probes
+drm-intel drm-intel-fixes 43b26bdd2ee5cfca80939be910d5b23a50cd7f9d
+	drm/i915/bios: Fix parsing backlight BDB data
+drm-xe drm-xe-fixes c002bfe644a29ba600c571f2abba13a155a12dcd
+	drm/xe: Use ordered WQ for G2H handler
+drm drm-next 275654c02f0ba09d409c36d71dc238e470741e30
+	Merge tag 'drm-xe-next-fixes-2024-05-09-1' of https://gitlab.freedesktop.org/drm/xe/kernel into drm-next
+drm-misc drm-misc-next-fixes 713a75079f37b92835db48b27699e540657e3c5a
+	drm: xlnx: zynqmp_dpsub: Fix compilation error
+drm-intel drm-intel-next-fixes 84b5ece64477df4394d362d494a2496bf0878985
+	drm/i915: Drop -Wstringop-overflow
+drm-xe drm-xe-next-fixes d69c3d4b53829097b8948d6791ea32c07de3faab
+	drm/xe/ads: Use flexible-array
+drm-misc drm-misc-next 11cdc8f2bde4bc548da6f995556c4b7183431088
+	drm: use "0" instead of "" for deprecated driver date
+drm-intel drm-intel-next 56ac367dbf8d72274b0a77b817e583b6d6171191
+	drm/i915: Polish types in fb calculations
+drm-intel drm-intel-gt-next 3797783b1c966885e8bae4a7e6b99ca2f0fae4f0
+	drm/i915: Remove counter productive REGION_* wrappers
+drm-xe drm-xe-next c3203ca3b8a6aab7c5a5dc3f5e165a53410461f6
+	drm/xe: Rename few xe_args.h macros
+drm-intel topic/core-for-CI 44909e5ed2f8e95a9a8576f44d570c68c76c44d6
+	ASoC: SOF: Core: Add remove_late() to  sof_init_environment failure path
+drm-xe topic/xe-for-CI 684685f297175fb825771a33adfbb6a293d7b614
+	Revert "drm/xe/gsc: define GSC FW for LNL"
+drm-intel topic/thunderbolt-next b8a730836c6b1788ca2fbd6bcc2ac99e97ef7de9
+	thunderbolt: Constify the struct device_type usage
