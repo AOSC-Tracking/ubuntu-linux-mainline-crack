@@ -514,7 +514,11 @@ static void ivpu_boot_no_snoop_enable(struct ivpu_device *vdev)
 
 	val = REG_SET_FLD(VPU_37XX_HOST_IF_TCU_PTW_OVERRIDES, NOSNOOP_OVERRIDE_EN, val);
 	val = REG_CLR_FLD(VPU_37XX_HOST_IF_TCU_PTW_OVERRIDES, AW_NOSNOOP_OVERRIDE, val);
-	val = REG_SET_FLD(VPU_37XX_HOST_IF_TCU_PTW_OVERRIDES, AR_NOSNOOP_OVERRIDE, val);
+
+	if (ivpu_is_force_snoop_enabled(vdev))
+		val = REG_CLR_FLD(VPU_37XX_HOST_IF_TCU_PTW_OVERRIDES, AR_NOSNOOP_OVERRIDE, val);
+	else
+		val = REG_SET_FLD(VPU_37XX_HOST_IF_TCU_PTW_OVERRIDES, AR_NOSNOOP_OVERRIDE, val);
 
 	REGV_WR32(VPU_37XX_HOST_IF_TCU_PTW_OVERRIDES, val);
 }
@@ -589,6 +593,7 @@ static int ivpu_hw_37xx_info_init(struct ivpu_device *vdev)
 	hw->tile_fuse = TILE_FUSE_ENABLE_BOTH;
 	hw->sku = TILE_SKU_BOTH;
 	hw->config = WP_CONFIG_2_TILE_4_3_RATIO;
+	hw->sched_mode = ivpu_sched_mode;
 
 	ivpu_pll_init_frequency_ratios(vdev);
 
