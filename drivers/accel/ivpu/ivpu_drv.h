@@ -39,7 +39,11 @@
 #define IVPU_MIN_DB 1
 #define IVPU_MAX_DB 255
 
-#define IVPU_NUM_ENGINES 2
+#define IVPU_NUM_ENGINES       2
+#define IVPU_NUM_PRIORITIES    4
+#define IVPU_NUM_CMDQS_PER_CTX (IVPU_NUM_ENGINES * IVPU_NUM_PRIORITIES)
+
+#define IVPU_CMDQ_INDEX(engine, priority) ((engine) * IVPU_NUM_PRIORITIES + (priority))
 
 #define IVPU_PLATFORM_SILICON 0
 #define IVPU_PLATFORM_SIMICS  2
@@ -131,6 +135,9 @@ struct ivpu_device {
 
 	atomic64_t unique_id_counter;
 
+	ktime_t busy_start_ts;
+	ktime_t busy_time;
+
 	struct {
 		int boot;
 		int jsm;
@@ -149,8 +156,11 @@ struct ivpu_file_priv {
 	struct kref ref;
 	struct ivpu_device *vdev;
 	struct mutex lock; /* Protects cmdq */
-	struct ivpu_cmdq *cmdq[IVPU_NUM_ENGINES];
+	struct ivpu_cmdq *cmdq[IVPU_NUM_CMDQS_PER_CTX];
 	struct ivpu_mmu_context ctx;
+	struct mutex ms_lock; /* Protects ms_instance_list, ms_info_bo */
+	struct list_head ms_instance_list;
+	struct ivpu_bo *ms_info_bo;
 	bool has_mmu_faults;
 	bool bound;
 };
@@ -158,13 +168,17 @@ struct ivpu_file_priv {
 extern int ivpu_dbg_mask;
 extern u8 ivpu_pll_min_ratio;
 extern u8 ivpu_pll_max_ratio;
+extern int ivpu_sched_mode;
 extern bool ivpu_disable_mmu_cont_pages;
+extern bool ivpu_force_snoop;
 
 #define IVPU_TEST_MODE_FW_TEST            BIT(0)
 #define IVPU_TEST_MODE_NULL_HW            BIT(1)
 #define IVPU_TEST_MODE_NULL_SUBMISSION    BIT(2)
 #define IVPU_TEST_MODE_D0I3_MSG_DISABLE   BIT(4)
 #define IVPU_TEST_MODE_D0I3_MSG_ENABLE    BIT(5)
+#define IVPU_TEST_MODE_PREEMPTION_DISABLE BIT(6)
+#define IVPU_TEST_MODE_HWS_EXTRA_EVENTS	  BIT(7)
 extern int ivpu_test_mode;
 
 struct ivpu_file_priv *ivpu_file_priv_get(struct ivpu_file_priv *file_priv);
@@ -229,6 +243,11 @@ static inline bool ivpu_is_simics(struct ivpu_device *vdev)
 static inline bool ivpu_is_fpga(struct ivpu_device *vdev)
 {
 	return ivpu_get_platform(vdev) == IVPU_PLATFORM_FPGA;
+}
+
+static inline bool ivpu_is_force_snoop_enabled(struct ivpu_device *vdev)
+{
+	return ivpu_force_snoop;
 }
 
 #endif /* __IVPU_DRV_H__ */

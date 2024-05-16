@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: GPL-2.0-only
-# Copyright (C) 2023 Intel Corporation
+# Copyright (C) 2023-2024 Intel Corporation
 
 intel_vpu-y := \
 	ivpu_drv.o \
@@ -13,7 +13,9 @@ intel_vpu-y := \
 	ivpu_jsm_msg.o \
 	ivpu_mmu.o \
 	ivpu_mmu_context.o \
-	ivpu_pm.o
+	ivpu_ms.o \
+	ivpu_pm.o \
+	ivpu_sysfs.o
 
 intel_vpu-$(CONFIG_DEBUG_FS) += ivpu_debugfs.o
 
