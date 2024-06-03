@@ -1,0 +1,28 @@
+drm drm-fixes c3f38fa61af77b49866b006939479069cd451173
+	Linux 6.10-rc2
+drm-misc drm-misc-fixes 629f2b4e05225e53125aaf7ff0b87d5d53897128
+	drm/panel: sitronix-st7789v: Add check for of_drm_get_panel_orientation
+drm-intel drm-intel-fixes c3f38fa61af77b49866b006939479069cd451173
+	Linux 6.10-rc2
+drm-xe drm-xe-fixes 6c5cd0807c79eb4c0cda70b48f6be668a241d584
+	drm/xe: Properly handle alloc_guc_id() failure
+drm drm-next c3f38fa61af77b49866b006939479069cd451173
+	Linux 6.10-rc2
+drm-misc drm-misc-next-fixes 539d33b5783804f22a62bd62ff463dfd1cef4265
+	drm/komeda: remove unused struct 'gamma_curve_segment'
+drm-intel drm-intel-next-fixes 1613e604df0cd359cf2a7fbd9be7a0bcfacfabd0
+	Linux 6.10-rc1
+drm-xe drm-xe-next-fixes d69c3d4b53829097b8948d6791ea32c07de3faab
+	drm/xe/ads: Use flexible-array
+drm-misc drm-misc-next 62ea2eeba7bf11f4b04e080475de93c2f8ee0f92
+	drm: panel: nv3052c: Add WL-355608-A8 panel
+drm-intel drm-intel-next b330568f0c51b0b80e463841b0062206011a4746
+	drm/i915/psr: Add Early Transport into psr debugfs interface
+drm-intel drm-intel-gt-next a09d2327a9ba8e3f5be238bc1b7ca2809255b464
+	drm/i915/gt: Fix CCS id's calculation for CCS mode setting
+drm-xe drm-xe-next 877517f2dcba58867b64e3e0c616f26c62d4a8db
+	drm/xe: Add kernel-doc to some xe_lrc interfaces
+drm-intel topic/core-for-CI 3e5fdd7886b71d1050015b2762a7984dfc97cafa
+	Revert "igc: fix a log entry using uninitialized netdev"
+drm-xe topic/xe-for-CI 428c3ef38ef5565140b2104f0d3dafdae9056ca9
+	Revert "drm/xe/gsc: define GSC FW for LNL"
