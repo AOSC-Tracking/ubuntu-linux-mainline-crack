@@ -1,0 +1,28 @@
+drm drm-fixes 6ba59ff4227927d3a8530fc2973b80e94b54d58f
+	Linux 6.10-rc4
+drm-misc drm-misc-fixes d92a7580392ad4681b1d4f9275d00b95375ebe01
+	drm/fbdev-dma: Only set smem_start is enable per module option
+drm-intel drm-intel-fixes 49cc17967be95d64606d5684416ee51eec35e84a
+	drm/i915/mso: using joiner is not possible with eDP MSO
+drm-xe drm-xe-fixes 2470b141bfae2b9695b5b6823e3b978b22d33dde
+	drm/xe: move disable_c6 call
+drm drm-next 1ddaaa244021aba8496536a6627b4ad2bc0f936a
+	Merge tag 'amd-drm-next-6.11-2024-06-07' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm-misc drm-misc-next-fixes 539d33b5783804f22a62bd62ff463dfd1cef4265
+	drm/komeda: remove unused struct 'gamma_curve_segment'
+drm-intel drm-intel-next-fixes 1613e604df0cd359cf2a7fbd9be7a0bcfacfabd0
+	Linux 6.10-rc1
+drm-xe drm-xe-next-fixes d69c3d4b53829097b8948d6791ea32c07de3faab
+	drm/xe/ads: Use flexible-array
+drm-misc drm-misc-next b9578c49456340ca4d3c7ddbaca054ffc2b51bc1
+	dma-buf/heaps: Correct the types of fd_flags and heap_flags
+drm-intel drm-intel-next 851de367dede776180e6c4c709089bc8becbb53a
+	drm/i915: Enable plane/pipeDMC ATS fault interrupts on mtl
+drm-intel drm-intel-gt-next 24bb052d3dd499c5956abad5f7d8e4fd07da7fb1
+	drm/i915/gt: Fix potential UAF by revoke of fence registers
+drm-xe drm-xe-next 8e7455dd0dedf88332f249f8b1e50bc554e4c1e3
+	drm/xe: Use ttm_uncached for BO with NEEDS_UC flag
+drm-intel topic/core-for-CI 3c68a14fa4d74f82171e47533b877eb277bd2ece
+	Revert "e1000e: move force SMBUS near the end of enable_ulp function"
+drm-xe topic/xe-for-CI 428c3ef38ef5565140b2104f0d3dafdae9056ca9
+	Revert "drm/xe/gsc: define GSC FW for LNL"
