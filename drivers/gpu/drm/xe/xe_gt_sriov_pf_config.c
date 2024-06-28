@@ -1785,7 +1785,6 @@ static int pf_get_threshold(struct xe_gt *gt, unsigned int vfid,
 			    enum xe_guc_klv_threshold_index index)
 {
 	struct xe_gt_sriov_config *config = pf_pick_vf_config(gt, vfid);
-	struct xe_device *xe = gt_to_xe(gt);
 
 	return config->thresholds[index];
 }
