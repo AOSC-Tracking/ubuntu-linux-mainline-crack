@@ -1,0 +1,28 @@
+drm drm-fixes 4f2a129b33a2054e62273edd5a051c34c08d96e9
+	drm/drm_file: Fix pid refcounting race
+drm-misc drm-misc-fixes 3285d8f0a2ede604c368155c9c0921e16d41f70a
+	firmware: sysfb: Fix reference count of sysfb parent device
+drm-intel drm-intel-fixes 996c3412a06578e9d779a16b9e79ace18125ab50
+	drm/i915/gt: Fix potential UAF by revoke of fence registers
+drm-xe drm-xe-fixes f2661062f16b2de5d7b6a5c42a9a5c96326b8454
+	Linux 6.10-rc5
+drm drm-next fb625bf6187d97c3cd28d680b14bf80f84207e5a
+	Merge tag 'drm-habanalabs-next-2024-06-23' of https://github.com/HabanaAI/drivers.accel.habanalabs.kernel into drm-next
+drm-misc drm-misc-next-fixes 539d33b5783804f22a62bd62ff463dfd1cef4265
+	drm/komeda: remove unused struct 'gamma_curve_segment'
+drm-intel drm-intel-next-fixes 1613e604df0cd359cf2a7fbd9be7a0bcfacfabd0
+	Linux 6.10-rc1
+drm-xe drm-xe-next-fixes d69c3d4b53829097b8948d6791ea32c07de3faab
+	drm/xe/ads: Use flexible-array
+drm-misc drm-misc-next 185f99b614427360ec3a91dc5b3fc6220bed4742
+	drm/stm: dsi: expose DSI PHY internal clock
+drm-intel drm-intel-next 32a120f52a4c0121bca8f2328d4680d283693d60
+	drm/i915/mtl: Skip PLL state verification in TBT mode
+drm-intel drm-intel-gt-next 3b85152cb167bd24fe84ceb91b719b5904ca354f
+	drm/i915/gem: Suppress oom warning in favour of ENOMEM to userspace
+drm-xe drm-xe-next e71cf19e3119de446cc37ddabb2e161ebbf7357c
+	drm/xe/client: Check return value of xe_force_wake_get
+drm-intel topic/core-for-CI 02c064d8d8d913a528cdae3e5173de4d1a52b566
+	Revert "e1000e: move force SMBUS near the end of enable_ulp function"
+drm-xe topic/xe-for-CI 428c3ef38ef5565140b2104f0d3dafdae9056ca9
+	Revert "drm/xe/gsc: define GSC FW for LNL"
