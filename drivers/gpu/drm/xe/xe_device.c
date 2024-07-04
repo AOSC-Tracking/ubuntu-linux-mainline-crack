@@ -42,9 +42,9 @@
 #include "xe_memirq.h"
 #include "xe_mmio.h"
 #include "xe_module.h"
+#include "xe_observation.h"
 #include "xe_pat.h"
 #include "xe_pcode.h"
-#include "xe_perf.h"
 #include "xe_pm.h"
 #include "xe_query.h"
 #include "xe_sriov.h"
@@ -142,7 +142,7 @@ static const struct drm_ioctl_desc xe_ioctls[] = {
 			  DRM_RENDER_ALLOW),
 	DRM_IOCTL_DEF_DRV(XE_WAIT_USER_FENCE, xe_wait_user_fence_ioctl,
 			  DRM_RENDER_ALLOW),
-	DRM_IOCTL_DEF_DRV(XE_PERF, xe_perf_ioctl, DRM_RENDER_ALLOW),
+	DRM_IOCTL_DEF_DRV(XE_OBSERVATION, xe_observation_ioctl, DRM_RENDER_ALLOW),
 };
 
 static long xe_drm_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
@@ -744,13 +744,22 @@ void xe_device_shutdown(struct xe_device *xe)
 {
 }
 
+/**
+ * xe_device_wmb() - Device specific write memory barrier
+ * @xe: the &xe_device
+ *
+ * While wmb() is sufficient for a barrier if we use system memory, on discrete
+ * platforms with device memory we additionally need to issue a register write.
+ * Since it doesn't matter which register we write to, use the read-only VF_CAP
+ * register that is also marked as accessible by the VFs.
+ */
 void xe_device_wmb(struct xe_device *xe)
 {
 	struct xe_gt *gt = xe_root_mmio_gt(xe);
 
 	wmb();
 	if (IS_DGFX(xe))
-		xe_mmio_write32(gt, SOFTWARE_FLAGS_SPR33, 0);
+		xe_mmio_write32(gt, VF_CAP_REG, 0);
 }
 
 /**
