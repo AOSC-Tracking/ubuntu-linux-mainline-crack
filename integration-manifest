@@ -1,0 +1,28 @@
+drm drm-fixes 256abd8e550ce977b728be79a74e1729438b4948
+	Linux 6.10-rc7
+drm-misc drm-misc-fixes 833cd3e9ad8360785b6c23c82dd3856df00732d9
+	drm/fb-helper: Don't schedule_work() to flush frame buffer during panic()
+drm-intel drm-intel-fixes f36139c756a90d9e9db4c7f28a3d5e7922e1b4d6
+	i915/perf: Remove code to update PWR_CLK_STATE for gen12
+drm-xe drm-xe-fixes 609458abd5a10180f513ca364d6c0ae30128c821
+	drm/xe/display/xe_hdcp_gsc: Free arbiter on driver removal
+drm drm-next dbf35b4deabb5706e739cec7ce35c12631bb8c87
+	Merge tag 'drm-intel-next-2024-06-28' of https://gitlab.freedesktop.org/drm/i915/kernel into drm-next
+drm-misc drm-misc-next-fixes c537fb4e3d36e7cd1a0837dd577cd30d3d64f1bc
+	drm/qxl: Pin buffer objects for internal mappings
+drm-intel drm-intel-next-fixes dbf35b4deabb5706e739cec7ce35c12631bb8c87
+	Merge tag 'drm-intel-next-2024-06-28' of https://gitlab.freedesktop.org/drm/i915/kernel into drm-next
+drm-xe drm-xe-next-fixes 26d289158e491d5ae34b10eab40b093a40fab7d7
+	drm/xe: Drop trace_xe_hw_fence_free
+drm-misc drm-misc-next 993d36ac99efeafeb7b5f12353def6d7d20d6389
+	drm/panel-edp: Add BOE NV140WUM-N41
+drm-intel drm-intel-next 7fbad577c82c5dd6db7217855c26f51554e53d85
+	drm/i915/display: WA for Re-initialize dispcnlunitt1 xosc clock
+drm-intel drm-intel-gt-next 7b5bdae7740eb6a3d09f9cd4e4b07362a15b86b3
+	i915/perf: Remove code to update PWR_CLK_STATE for gen12
+drm-xe drm-xe-next 71733b8d7f50b61403f940c6c9745fb3a9b98dcb
+	drm/xe/xe2: Make subsequent L2 flush sequential
+drm-intel topic/core-for-CI 02c064d8d8d913a528cdae3e5173de4d1a52b566
+	Revert "e1000e: move force SMBUS near the end of enable_ulp function"
+drm-xe topic/xe-for-CI 428c3ef38ef5565140b2104f0d3dafdae9056ca9
+	Revert "drm/xe/gsc: define GSC FW for LNL"
