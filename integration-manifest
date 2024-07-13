@@ -1,0 +1,28 @@
+drm drm-fixes 8b68788bebd3f697ae62aa9af3dac35ed112ebd7
+	Merge tag 'amd-drm-fixes-6.10-2024-07-11' of https://gitlab.freedesktop.org/agd5f/linux into drm-fixes
+drm-misc drm-misc-fixes 833cd3e9ad8360785b6c23c82dd3856df00732d9
+	drm/fb-helper: Don't schedule_work() to flush frame buffer during panic()
+drm-intel drm-intel-fixes f36139c756a90d9e9db4c7f28a3d5e7922e1b4d6
+	i915/perf: Remove code to update PWR_CLK_STATE for gen12
+drm-xe drm-xe-fixes 609458abd5a10180f513ca364d6c0ae30128c821
+	drm/xe/display/xe_hdcp_gsc: Free arbiter on driver removal
+drm drm-next c58c39163a7e2c4c8885c57e4e74931c7b482e53
+	drm/omap: Restrict compile testing to PAGE_SIZE less than 64KB
+drm-misc drm-misc-next-fixes c537fb4e3d36e7cd1a0837dd577cd30d3d64f1bc
+	drm/qxl: Pin buffer objects for internal mappings
+drm-intel drm-intel-next-fixes dbf35b4deabb5706e739cec7ce35c12631bb8c87
+	Merge tag 'drm-intel-next-2024-06-28' of https://gitlab.freedesktop.org/drm/i915/kernel into drm-next
+drm-xe drm-xe-next-fixes 26d289158e491d5ae34b10eab40b093a40fab7d7
+	drm/xe: Drop trace_xe_hw_fence_free
+drm-misc drm-misc-next 0b91c6dacae24a1393f99f8154037c56454c277c
+	drm/v3d: Expose memory stats through fdinfo
+drm-intel drm-intel-next d43caea1faf5c31dc02aa1adb8bb1aa1c33bf86f
+	drm/i915/fbc: Extract intel_fbc_cfb_cpp()
+drm-intel drm-intel-gt-next 7b5bdae7740eb6a3d09f9cd4e4b07362a15b86b3
+	i915/perf: Remove code to update PWR_CLK_STATE for gen12
+drm-xe drm-xe-next 86c5b70a9c0c3f05f7002ef8b789460c96b54e27
+	drm/xe/xe2: Add Wa_15015404425
+drm-intel topic/core-for-CI 02c064d8d8d913a528cdae3e5173de4d1a52b566
+	Revert "e1000e: move force SMBUS near the end of enable_ulp function"
+drm-xe topic/xe-for-CI e89b6efbf0c5726d8c1654e8e2fb02b10e31df70
+	drm/xe/huc: Define BMG HuC
