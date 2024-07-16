@@ -1,0 +1,28 @@
+drm drm-fixes 8b68788bebd3f697ae62aa9af3dac35ed112ebd7
+	Merge tag 'amd-drm-fixes-6.10-2024-07-11' of https://gitlab.freedesktop.org/agd5f/linux into drm-fixes
+drm-misc drm-misc-fixes eeb1f825b5dc68047a0556e5ae86d1467920db41
+	drm/gpuvm: fix missing dependency to DRM_EXEC
+drm-intel drm-intel-fixes f36139c756a90d9e9db4c7f28a3d5e7922e1b4d6
+	i915/perf: Remove code to update PWR_CLK_STATE for gen12
+drm-xe drm-xe-fixes 609458abd5a10180f513ca364d6c0ae30128c821
+	drm/xe/display/xe_hdcp_gsc: Free arbiter on driver removal
+drm drm-next c58c39163a7e2c4c8885c57e4e74931c7b482e53
+	drm/omap: Restrict compile testing to PAGE_SIZE less than 64KB
+drm-misc drm-misc-next-fixes 1fe1c66274fb80cc1ac42e0d38917d53adc7d7a3
+	drm/v3d: Fix Indirect Dispatch configuration for V3D 7.1.6 and later
+drm-intel drm-intel-next-fixes c58c39163a7e2c4c8885c57e4e74931c7b482e53
+	drm/omap: Restrict compile testing to PAGE_SIZE less than 64KB
+drm-xe drm-xe-next-fixes 26d289158e491d5ae34b10eab40b093a40fab7d7
+	drm/xe: Drop trace_xe_hw_fence_free
+drm-misc drm-misc-next 9480db72e17b5efd38f592a3c79d35af42ee0a25
+	drm: lcdif: Use adjusted_mode .clock instead of .crtc_clock
+drm-intel drm-intel-next d43caea1faf5c31dc02aa1adb8bb1aa1c33bf86f
+	drm/i915/fbc: Extract intel_fbc_cfb_cpp()
+drm-intel drm-intel-gt-next 7df0be6e6280c6fca01d039864bb123e5e36604b
+	drm/i915/gt: Do not consider preemption during execlists_dequeue for gen8
+drm-xe drm-xe-next 45d30c828c613441bfbe5c97ca766854152b7181
+	drm/xe/vf: Track writes to inaccessible registers from VF
+drm-intel topic/core-for-CI 02c064d8d8d913a528cdae3e5173de4d1a52b566
+	Revert "e1000e: move force SMBUS near the end of enable_ulp function"
+drm-xe topic/xe-for-CI e89b6efbf0c5726d8c1654e8e2fb02b10e31df70
+	drm/xe/huc: Define BMG HuC
