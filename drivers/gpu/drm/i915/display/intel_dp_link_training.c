@@ -114,7 +114,13 @@ intel_dp_set_lttpr_transparent_mode(struct intel_dp *intel_dp, bool enable)
 	u8 val = enable ? DP_PHY_REPEATER_MODE_TRANSPARENT :
 			  DP_PHY_REPEATER_MODE_NON_TRANSPARENT;
 
-	return drm_dp_dpcd_write(&intel_dp->aux, DP_PHY_REPEATER_MODE, &val, 1) == 1;
+	if (drm_dp_dpcd_write(&intel_dp->aux, DP_PHY_REPEATER_MODE, &val, 1) != 1)
+		return false;
+
+	intel_dp->lttpr_common_caps[DP_PHY_REPEATER_MODE -
+				    DP_LT_TUNABLE_PHY_REPEATER_FIELD_DATA_STRUCTURE_REV] = val;
+
+	return true;
 }
 
 static bool intel_dp_lttpr_transparent_mode_enabled(struct intel_dp *intel_dp)
@@ -174,7 +180,7 @@ static int intel_dp_init_lttpr_phys(struct intel_dp *intel_dp, const u8 dpcd[DP_
 	 * still taking into account any LTTPR common lane- rate/count limits.
 	 */
 	if (lttpr_count < 0)
-		return 0;
+		goto out_reset_lttpr_count;
 
 	if (!intel_dp_set_lttpr_transparent_mode(intel_dp, false)) {
 		lt_dbg(intel_dp, DP_PHY_DPRX,
