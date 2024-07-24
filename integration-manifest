@@ -1,0 +1,28 @@
+drm drm-fixes 8b68788bebd3f697ae62aa9af3dac35ed112ebd7
+	Merge tag 'amd-drm-fixes-6.10-2024-07-11' of https://gitlab.freedesktop.org/agd5f/linux into drm-fixes
+drm-misc drm-misc-fixes 445d336cd15860f1efb441e6d694f829fbf679eb
+	drm/virtio: Fix type of dma-fence context variable
+drm-intel drm-intel-fixes f36139c756a90d9e9db4c7f28a3d5e7922e1b4d6
+	i915/perf: Remove code to update PWR_CLK_STATE for gen12
+drm-xe drm-xe-fixes 609458abd5a10180f513ca364d6c0ae30128c821
+	drm/xe/display/xe_hdcp_gsc: Free arbiter on driver removal
+drm drm-next 627a24f5f25d689682f395f3df1411273be4436b
+	Merge tag 'amd-drm-fixes-6.11-2024-07-18' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm-misc drm-misc-next-fixes b6f7d984ebf826069d3dc6fa187b4d1cfb90f965
+	dt-bindings: display: panel: samsung,atna33xc20: Document ATNA45AF01
+drm-intel drm-intel-next-fixes 26720dd2b5a1d088bff8f7e6355fca021c83718f
+	drm/i915: Allow NULL memory region
+drm-xe drm-xe-next-fixes 0cf3f7297d01c6863fb5a20c3e247999824e3dde
+	drm/xe/vf: Fix register value lookup
+drm-misc drm-misc-next 7214da0ed2220a2b9ad22aa77a5974cdd2a62799
+	drm/virtio: Add DRM capset definition
+drm-intel drm-intel-next 76a791fa0926e504f262310cbd0c8f1a60e67ae8
+	drm/i915/dp: Make read-only array bw_gbps static const
+drm-intel drm-intel-gt-next e4a0251d36fc6c190c545aa95702eec0efe05a4f
+	drm/i915/guc: Extend w/a 14019159160
+drm-xe drm-xe-next 1a394b4f504f33eac8c38b6f42ba025105c7e869
+	drm/xe: Fix possible UAF in guc_exec_queue_process_msg
+drm-intel topic/core-for-CI 02c064d8d8d913a528cdae3e5173de4d1a52b566
+	Revert "e1000e: move force SMBUS near the end of enable_ulp function"
+drm-xe topic/xe-for-CI 35380fda665130c94063731c249473c414bca251
+	drm/xe/huc: Define BMG HuC
