@@ -204,14 +204,6 @@ int xe_sync_entry_parse(struct xe_device *xe, struct xe_file *xef,
 	return 0;
 }
 
-int xe_sync_entry_wait(struct xe_sync_entry *sync)
-{
-	if (sync->fence)
-		dma_fence_wait(sync->fence, true);
-
-	return 0;
-}
-
 int xe_sync_entry_add_deps(struct xe_sync_entry *sync, struct xe_sched_job *job)
 {
 	int err;
@@ -267,7 +259,7 @@ void xe_sync_entry_cleanup(struct xe_sync_entry *sync)
 	if (sync->fence)
 		dma_fence_put(sync->fence);
 	if (sync->chain_fence)
-		dma_fence_put(&sync->chain_fence->base);
+		dma_fence_chain_free(sync->chain_fence);
 	if (sync->ufence)
 		user_fence_put(sync->ufence);
 }
