@@ -1,0 +1,28 @@
+drm drm-fixes 76f461867800fa9421d26a70a1640eed55dff0cd
+	Merge tag 'drm-xe-fixes-2024-08-22' of https://gitlab.freedesktop.org/drm/xe/kernel into drm-fixes
+drm-misc drm-misc-fixes c358a809cb58af944d496944391a240e02f5837a
+	Revert "drm/ttm: increase ttm pre-fault value to PMD size"
+drm-intel drm-intel-fixes 5d41eeb6725e3e24853629e5d7635e4bc45d736e
+	drm/i915/hdcp: Use correct cp_irq_count
+drm-xe drm-xe-fixes 9e7f30563677fbeff62d368d5d2a5ac7aaa9746a
+	drm/xe: Free job before xe_exec_queue_put
+drm drm-next 11df68c265460d4dff5d19a1313f0fff69470f98
+	Merge tag 'drm-misc-next-2024-08-16' of https://gitlab.freedesktop.org/drm/misc/kernel into drm-next
+drm-misc drm-misc-next-fixes 291e4baf70019f17a81b7b47aeb186b27d222159
+	kselftests: dmabuf-heaps: Ensure the driver name is null-terminated
+drm-intel drm-intel-next-fixes 8400291e289ee6b2bf9779ff1c83a291501f017b
+	Linux 6.11-rc1
+drm-xe drm-xe-next-fixes a4172af3040cdc207f1b60efffcdd219156093c9
+	Merge tag 'drm-xe-next-2024-07-30' of https://gitlab.freedesktop.org/drm/xe/kernel into drm-next
+drm-misc drm-misc-next 58a261bfc96763a851cb48b203ed57da37e157b8
+	drm/amd/display: use a more lax vblank enable policy for older ASICs
+drm-intel drm-intel-next 1c8f80c2aadf76daff01ab133fb11136e7248746
+	drm/i915/display: convert params to struct intel_display
+drm-intel drm-intel-gt-next 6628851159c77cf5666160e0272d46acc0772a6c
+	drm/i915/gt: Continue creating engine sysfs files even after a failure
+drm-xe drm-xe-next 66a0f6b9f5fc205272035b6ffa4830be51e3f787
+	drm/xe/display: handle HPD polling in display runtime suspend/resume
+drm-intel topic/core-for-CI 5d4f308a0cd71418b7a8f9a09a24f230b4b217e6
+	thunderbolt: Add Kconfig option to disable PCIe tunneling
+drm-xe topic/xe-for-CI 1ec484590947f43be963899f7885d9b92bd26f07
+	drm/xe/guc: Pre-release GuC firmware v70.29.2 for PVC
