@@ -1,0 +1,28 @@
+drm drm-fixes 5be63fc19fcaa4c236b307420483578a56986a37
+	Linux 6.11-rc5
+drm-misc drm-misc-fixes b49420d6a1aeb399e5b107fc6eb8584d0860fbd7
+	video/aperture: optionally match the device in sysfb_disable()
+drm-intel drm-intel-fixes 2955ae8186c8a6f029e429f7890e0c7e5f6e215e
+	drm/i915: ARL requires a newer GSC firmware
+drm-xe drm-xe-fixes 1eb52589a299f8b29df0f214206da6616e33a8b6
+	drm/xe: Invalidate media_gt TLBs
+drm drm-next e55ef65510a401862b902dc979441ea10ae25c61
+	Merge tag 'amd-drm-next-6.12-2024-08-26' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm-misc drm-misc-next-fixes 291e4baf70019f17a81b7b47aeb186b27d222159
+	kselftests: dmabuf-heaps: Ensure the driver name is null-terminated
+drm-intel drm-intel-next-fixes 8400291e289ee6b2bf9779ff1c83a291501f017b
+	Linux 6.11-rc1
+drm-xe drm-xe-next-fixes a4172af3040cdc207f1b60efffcdd219156093c9
+	Merge tag 'drm-xe-next-2024-07-30' of https://gitlab.freedesktop.org/drm/xe/kernel into drm-next
+drm-misc drm-misc-next 01cc7b2e8a59fcae0c4493720561e5b33a195fe7
+	Revert "drm/panel-edp: Add SDC ATNA45AF01"
+drm-intel drm-intel-next c66f4711f79c937832b6c0e0b1805061667d99ea
+	drm/xe: Align all VRAM scanout buffers to 64k physical pages when needed.
+drm-intel drm-intel-gt-next 03ded4d432a1fb7bb6c44c5856d14115f6f6c3b9
+	drm/i915: Do not attempt to load the GSC multiple times
+drm-xe drm-xe-next 014125c64d09e58e90dde49fbb57d802a13e2559
+	drm/xe: Support 'nomodeset' kernel command-line option
+drm-intel topic/core-for-CI 5d4f308a0cd71418b7a8f9a09a24f230b4b217e6
+	thunderbolt: Add Kconfig option to disable PCIe tunneling
+drm-xe topic/xe-for-CI 1ec484590947f43be963899f7885d9b92bd26f07
+	drm/xe/guc: Pre-release GuC firmware v70.29.2 for PVC
