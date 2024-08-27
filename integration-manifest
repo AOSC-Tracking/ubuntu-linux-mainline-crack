@@ -1,0 +1,28 @@
+drm drm-fixes 5be63fc19fcaa4c236b307420483578a56986a37
+	Linux 6.11-rc5
+drm-misc drm-misc-fixes b49420d6a1aeb399e5b107fc6eb8584d0860fbd7
+	video/aperture: optionally match the device in sysfb_disable()
+drm-intel drm-intel-fixes 5d41eeb6725e3e24853629e5d7635e4bc45d736e
+	drm/i915/hdcp: Use correct cp_irq_count
+drm-xe drm-xe-fixes 9e7f30563677fbeff62d368d5d2a5ac7aaa9746a
+	drm/xe: Free job before xe_exec_queue_put
+drm drm-next 11df68c265460d4dff5d19a1313f0fff69470f98
+	Merge tag 'drm-misc-next-2024-08-16' of https://gitlab.freedesktop.org/drm/misc/kernel into drm-next
+drm-misc drm-misc-next-fixes 291e4baf70019f17a81b7b47aeb186b27d222159
+	kselftests: dmabuf-heaps: Ensure the driver name is null-terminated
+drm-intel drm-intel-next-fixes 8400291e289ee6b2bf9779ff1c83a291501f017b
+	Linux 6.11-rc1
+drm-xe drm-xe-next-fixes a4172af3040cdc207f1b60efffcdd219156093c9
+	Merge tag 'drm-xe-next-2024-07-30' of https://gitlab.freedesktop.org/drm/xe/kernel into drm-next
+drm-misc drm-misc-next 071d583e01c88272f6ff216d4f867f8f35e94d7d
+	drm: Expand max DRM device number to full MINORBITS
+drm-intel drm-intel-next 67733d7a71503fd3e32eeada371f8aa2516c5c95
+	drm/i915: ARL requires a newer GSC firmware
+drm-intel drm-intel-gt-next 54f90b03335916e21c417a31d0926841f7d97c56
+	drm/i915/guc: Fix missing enable of Wa_14019159160 on ARL
+drm-xe drm-xe-next 65112db0c21022cb1caed5a03c6392eaaf984c14
+	drm/xe: Remove NULL check of lrc->bo in xe_lrc_snapshot_capture()
+drm-intel topic/core-for-CI 5d4f308a0cd71418b7a8f9a09a24f230b4b217e6
+	thunderbolt: Add Kconfig option to disable PCIe tunneling
+drm-xe topic/xe-for-CI 1ec484590947f43be963899f7885d9b92bd26f07
+	drm/xe/guc: Pre-release GuC firmware v70.29.2 for PVC
