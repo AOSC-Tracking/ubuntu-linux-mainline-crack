@@ -1,0 +1,28 @@
+drm drm-fixes 27f5b729cb56e46d8beca47c227c0edf1e958fbb
+	Merge tag 'drm-misc-fixes-2024-08-29' of https://gitlab.freedesktop.org/drm/misc/kernel into drm-fixes
+drm-misc drm-misc-fixes f33b9ab0495b7e3bb01bf6d76045f078e20ada65
+	nouveau: fix the fwsec sb verification register.
+drm-intel drm-intel-fixes a2ccc33b88e2953a6bf0b309e7e8849cc5320018
+	drm/i915/dp_mst: Fix MST state after a sink reset
+drm-xe drm-xe-fixes 59d237c8a241168c7ae34c48244059b7bafaff38
+	drm/xe/hwmon: Fix WRITE_I1 param from u32 to u16
+drm drm-next 6d0ebb3904853d18eeec7af5e8b4ca351b6f9025
+	Merge tag 'drm-intel-next-2024-08-29' of https://gitlab.freedesktop.org/drm/i915/kernel into drm-next
+drm-misc drm-misc-next-fixes 291e4baf70019f17a81b7b47aeb186b27d222159
+	kselftests: dmabuf-heaps: Ensure the driver name is null-terminated
+drm-intel drm-intel-next-fixes 8400291e289ee6b2bf9779ff1c83a291501f017b
+	Linux 6.11-rc1
+drm-xe drm-xe-next-fixes a4172af3040cdc207f1b60efffcdd219156093c9
+	Merge tag 'drm-xe-next-2024-07-30' of https://gitlab.freedesktop.org/drm/xe/kernel into drm-next
+drm-misc drm-misc-next c7d84a45f4266e9ff4c61eddde4acbfddb8f6b57
+	drm/nouveau: Use for_each_child_of_node_scoped()
+drm-intel drm-intel-next 2bb3fc536d692d43cd55396ecff73c7691eeae85
+	Merge drm/drm-next into drm-intel-next
+drm-intel drm-intel-gt-next 727eb1e3f014e66dcdec53afc6f5bfe0d8c0871d
+	drm/i915/hwmon: expose fan speed
+drm-xe drm-xe-next bf758226c7e6927f1c2c34fd6eb2cb580b77f543
+	drm/xe: Invalidate media_gt TLBs in PT code
+drm-intel topic/core-for-CI 5d4f308a0cd71418b7a8f9a09a24f230b4b217e6
+	thunderbolt: Add Kconfig option to disable PCIe tunneling
+drm-xe topic/xe-for-CI 1ec484590947f43be963899f7885d9b92bd26f07
+	drm/xe/guc: Pre-release GuC firmware v70.29.2 for PVC
