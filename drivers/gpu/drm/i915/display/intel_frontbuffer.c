@@ -56,6 +56,7 @@
  */
 
 #include "gem/i915_gem_object_frontbuffer.h"
+#include "gem/i915_gem_object_types.h"
 #include "i915_active.h"
 #include "i915_drv.h"
 #include "intel_display_trace.h"
@@ -83,6 +84,8 @@ static void frontbuffer_flush(struct drm_i915_private *i915,
 			      unsigned int frontbuffer_bits,
 			      enum fb_op_origin origin)
 {
+	struct intel_display *display = &i915->display;
+
 	/* Delay flushing when rings are still busy.*/
 	spin_lock(&i915->display.fb_tracking.lock);
 	frontbuffer_bits &= ~i915->display.fb_tracking.busy_bits;
@@ -96,7 +99,7 @@ static void frontbuffer_flush(struct drm_i915_private *i915,
 	might_sleep();
 	intel_td_flush(i915);
 	intel_drrs_flush(i915, frontbuffer_bits);
-	intel_psr_flush(i915, frontbuffer_bits, origin);
+	intel_psr_flush(display, frontbuffer_bits, origin);
 	intel_fbc_flush(i915, frontbuffer_bits, origin);
 }
 
@@ -172,6 +175,7 @@ void __intel_fb_invalidate(struct intel_frontbuffer *front,
 			   unsigned int frontbuffer_bits)
 {
 	struct drm_i915_private *i915 = intel_bo_to_i915(front->obj);
+	struct intel_display *display = &i915->display;
 
 	if (origin == ORIGIN_CS) {
 		spin_lock(&i915->display.fb_tracking.lock);
@@ -183,7 +187,7 @@ void __intel_fb_invalidate(struct intel_frontbuffer *front,
 	trace_intel_frontbuffer_invalidate(i915, frontbuffer_bits, origin);
 
 	might_sleep();
-	intel_psr_invalidate(i915, frontbuffer_bits, origin);
+	intel_psr_invalidate(display, frontbuffer_bits, origin);
 	intel_drrs_invalidate(i915, frontbuffer_bits);
 	intel_fbc_invalidate(i915, frontbuffer_bits, origin);
 }

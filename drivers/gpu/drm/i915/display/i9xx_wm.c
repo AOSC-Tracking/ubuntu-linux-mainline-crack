@@ -9,10 +9,19 @@
 #include "intel_atomic.h"
 #include "intel_display.h"
 #include "intel_display_trace.h"
+#include "intel_fb.h"
 #include "intel_mchbar_regs.h"
 #include "intel_wm.h"
 #include "skl_watermark.h"
 #include "vlv_sideband.h"
+
+struct intel_watermark_params {
+	u16 fifo_size;
+	u16 max_wm;
+	u8 default_wm;
+	u8 guard_size;
+	u8 cacheline_size;
+};
 
 /* used in computing the new watermarks state */
 struct intel_wm_config {
