@@ -701,12 +701,6 @@ static int at24_probe(struct i2c_client *client)
 	pm_runtime_set_active(dev);
 	pm_runtime_enable(dev);
 
-	at24->nvmem = devm_nvmem_register(dev, &nvmem_config);
-	if (IS_ERR(at24->nvmem)) {
-		pm_runtime_disable(dev);
-		return PTR_ERR(at24->nvmem);
-	}
-
 	/*
 	 * Perform a one-byte test read to verify that the
 	 * chip is functional.
@@ -715,6 +709,12 @@ static int at24_probe(struct i2c_client *client)
 	if (err) {
 		pm_runtime_disable(dev);
 		return -ENODEV;
+	}
+
+	at24->nvmem = devm_nvmem_register(dev, &nvmem_config);
+	if (IS_ERR(at24->nvmem)) {
+		pm_runtime_disable(dev);
+		return PTR_ERR(at24->nvmem);
 	}
 
 	pm_runtime_idle(dev);
