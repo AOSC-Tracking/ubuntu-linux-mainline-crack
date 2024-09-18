@@ -3,6 +3,7 @@
  * Copyright © 2020 Intel Corporation
  */
 
+#include <linux/debugfs.h>
 #include <linux/string_helpers.h>
 
 #include <drm/drm_debugfs.h>
@@ -15,8 +16,8 @@
 #include "i915_reg.h"
 #include "intel_alpm.h"
 #include "intel_crtc.h"
-#include "intel_de.h"
 #include "intel_crtc_state_dump.h"
+#include "intel_de.h"
 #include "intel_display_debugfs.h"
 #include "intel_display_debugfs_params.h"
 #include "intel_display_power.h"
@@ -27,6 +28,7 @@
 #include "intel_dp_link_training.h"
 #include "intel_dp_mst.h"
 #include "intel_drrs.h"
+#include "intel_fb.h"
 #include "intel_fbc.h"
 #include "intel_fbdev.h"
 #include "intel_hdcp.h"
@@ -424,7 +426,7 @@ static void intel_scaler_info(struct seq_file *m, struct intel_crtc *crtc)
 	int num_scalers = crtc->num_scalers;
 	int i;
 
-	/* Not all platformas have a scaler */
+	/* Not all platforms have a scaler */
 	if (num_scalers) {
 		seq_printf(m, "\tnum_scalers=%d, scaler_users=%x scaler_id=%d scaling_filter=%d",
 			   num_scalers,
@@ -1066,8 +1068,8 @@ void intel_display_debugfs_register(struct drm_i915_private *i915)
 				 minor->debugfs_root, minor);
 
 	intel_bios_debugfs_register(display);
-	intel_cdclk_debugfs_register(i915);
-	intel_dmc_debugfs_register(i915);
+	intel_cdclk_debugfs_register(display);
+	intel_dmc_debugfs_register(display);
 	intel_fbc_debugfs_register(display);
 	intel_hpd_debugfs_register(i915);
 	intel_opregion_debugfs_register(display);
@@ -1548,7 +1550,7 @@ void intel_connector_debugfs_add(struct intel_connector *connector)
 				    connector, &i915_dsc_fractional_bpp_fops);
 	}
 
-	if (DISPLAY_VER(i915) >= 11 &&
+	if (HAS_BIGJOINER(i915) &&
 	    (connector_type == DRM_MODE_CONNECTOR_DisplayPort ||
 	     connector_type == DRM_MODE_CONNECTOR_eDP)) {
 		debugfs_create_bool("i915_bigjoiner_force_enable", 0644, root,
