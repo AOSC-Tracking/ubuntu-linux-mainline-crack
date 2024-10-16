@@ -1143,6 +1143,8 @@ static struct sof_sdw_codec_info codec_info_list[] = {
 				.rtd_init = cs42l43_dmic_rtd_init,
 				.widgets = generic_dmic_widgets,
 				.num_widgets = ARRAY_SIZE(generic_dmic_widgets),
+				.quirk = SOF_CODEC_MIC,
+				.quirk_exclude = true,
 			},
 			{
 				.direction = {false, true},

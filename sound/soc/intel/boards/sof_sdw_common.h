@@ -65,6 +65,7 @@ enum {
  *   - SOF_CODEC_SPKR | SOF_SIDECAR_AMPS - Not currently supported
  */
 #define SOF_SIDECAR_AMPS		BIT(16)
+#define SOF_CODEC_MIC			BIT(17)
 
 /* BT audio offload: reserve 3 bits for future */
 #define SOF_BT_OFFLOAD_SSP_SHIFT	15
