@@ -98,6 +98,7 @@ struct sof_sdw_dai_info {
 	int (*rtd_init)(struct snd_soc_pcm_runtime *rtd, struct snd_soc_dai *dai);
 	bool rtd_init_done; /* Indicate that the rtd_init callback is done */
 	unsigned long quirk;
+	bool quirk_exclude;
 };
 
 struct sof_sdw_codec_info {

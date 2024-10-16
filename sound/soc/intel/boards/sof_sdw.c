@@ -1571,7 +1571,8 @@ static int parse_sdw_endpoints(struct snd_soc_card *card,
 				dai_info = &codec_info->dais[adr_end->num];
 				sof_dai = find_dailink(sof_dais, adr_end);
 
-				if (dai_info->quirk && !(dai_info->quirk & sof_sdw_quirk))
+				if (dai_info->quirk &&
+				    !(dai_info->quirk_exclude ^ !!(dai_info->quirk & sof_sdw_quirk)))
 					continue;
 
 				dev_dbg(dev,
