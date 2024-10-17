@@ -1,0 +1,28 @@
+drm drm-fixes 49ff3e79a7f49e269b0278e75d35d6421f5538a2
+	Merge tag 'drm-misc-fixes-2024-10-17' of https://gitlab.freedesktop.org/drm/misc/kernel into drm-fixes
+drm-misc drm-misc-fixes c09c4f2a972ca7cd9c8926594aa2099bcbcd3b79
+	drm/ast: vga: Clear EDID if no display is connected
+drm-intel drm-intel-fixes 2f54e71359eb2abc0bdf6619cd356e5e350ff27b
+	drm/i915/dp_mst: Don't require DSC hblank quirk for a non-DSC compatible mode
+drm-xe drm-xe-fixes 1badf482816417dca71f8120b4c540cdc82aa03c
+	drm/xe: Make wedged_mode debugfs writable
+drm drm-next 26bb2dc102783fef49336b26a94563318f9790d3
+	Merge tag 'drm-xe-next-2024-10-10' of https://gitlab.freedesktop.org/drm/xe/kernel into drm-next
+drm-misc drm-misc-next-fixes ba2b9de0c1ac2abfbe663414a292c5881e64c361
+	drm/tegra: fix potential uninitialized variable use
+drm-intel drm-intel-next-fixes e860513f56d8428fcb2bd0282ac8ab691a53fc6c
+	drm/i915/dp: Fix colorimetry detection
+drm-xe drm-xe-next-fixes d7126c0cfc137a580eba92bd82b6d288bd43961d
+	Merge tag 'drm-xe-next-fixes-2024-09-19' of https://gitlab.freedesktop.org/drm/xe/kernel into drm-next
+drm-misc drm-misc-next 128a9bf8ace290d86d2805c06f3b0e4cfab75de0
+	drm/rockchip: Add basic RK3588 HDMI output support
+drm-intel drm-intel-next 59579829743239e387fff568809512ca34677f19
+	drm/i915: Fix irq related documentation
+drm-intel drm-intel-gt-next e217f22041fe2478e8ab6e4cfa1774089db9a918
+	drm/i915/pmu: Add support for gen2
+drm-xe drm-xe-next 61ef737db9f284153546f98d711c4ebf23740d7a
+	drm/xe/ptl: Apply Wa_14022866841
+drm-intel topic/core-for-CI 20ef35f70a8e49809b248df3f8e05fdd53753534
+	x86/apic: Stop the TSC Deadline timer during lapic timer shutdown
+drm-xe topic/xe-for-CI ec78e665e25834158bb45dd6c62452677cd5ceaf
+	drm/xe/guc: Pre-release GuC firmware v70.29.2 for PVC
