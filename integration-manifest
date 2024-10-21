@@ -1,0 +1,28 @@
+drm drm-fixes 42f7652d3eb527d03665b09edac47f85fb600924
+	Linux 6.12-rc4
+drm-misc drm-misc-fixes 5c23878252515b8d2b86839bd4cb7dea7088aacd
+	drm/bridge: tc358767: fix missing of_node_put() in for_each_endpoint_of_node()
+drm-intel drm-intel-fixes 338b655a1178900ac05aca7ac66dc28b05100430
+	i915: fix DRM_I915_GVT_KVMGT dependencies
+drm-xe drm-xe-fixes ffafd12696d1a4c8eeb7386d798d75e1fafb4e01
+	drm/i915/display: Don't allow tile4 framebuffer to do hflip on display20 or greater
+drm drm-next 0a4d0b2d9d84c7afb6a49a30ed947ed4bb0b64f1
+	Merge tag 'drm-xe-next-2024-10-17' of https://gitlab.freedesktop.org/drm/xe/kernel into drm-next
+drm-misc drm-misc-next-fixes ba2b9de0c1ac2abfbe663414a292c5881e64c361
+	drm/tegra: fix potential uninitialized variable use
+drm-intel drm-intel-next-fixes e860513f56d8428fcb2bd0282ac8ab691a53fc6c
+	drm/i915/dp: Fix colorimetry detection
+drm-xe drm-xe-next-fixes d7126c0cfc137a580eba92bd82b6d288bd43961d
+	Merge tag 'drm-xe-next-fixes-2024-09-19' of https://gitlab.freedesktop.org/drm/xe/kernel into drm-next
+drm-misc drm-misc-next d284ccd8588c9b87222ec666a1da57f197023e5f
+	drm/bridge: sii902x: Set input bus format based on bus-width
+drm-intel drm-intel-next 682c9d3d7abbe07a6dda6ea2cae2bf72a10982cd
+	drm/i915/pxp: Add missing tag for Wa_14019159160
+drm-intel drm-intel-gt-next e217f22041fe2478e8ab6e4cfa1774089db9a918
+	drm/i915/pmu: Add support for gen2
+drm-xe drm-xe-next 6ef3bb60557d5e7f5af442c8c9ef0a9190bf3d23
+	drm/xe: enable lite restore
+drm-intel topic/core-for-CI 20ef35f70a8e49809b248df3f8e05fdd53753534
+	x86/apic: Stop the TSC Deadline timer during lapic timer shutdown
+drm-xe topic/xe-for-CI fefe873265210efca14d239382df9243cb6387b9
+	drm/xe/ptl: Define HuC FW version for PTL
