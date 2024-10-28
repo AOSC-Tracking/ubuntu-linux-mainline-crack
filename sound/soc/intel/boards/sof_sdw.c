@@ -1077,6 +1077,8 @@ static struct sof_sdw_codec_info codec_info_list[] = {
 				.num_controls = ARRAY_SIZE(generic_spk_controls),
 				.widgets = generic_spk_widgets,
 				.num_widgets = ARRAY_SIZE(generic_spk_widgets),
+				.quirk = SOF_CODEC_SPKR,
+				.quirk_exclude = true,
 			},
 			{
 				.direction = {false, true},
