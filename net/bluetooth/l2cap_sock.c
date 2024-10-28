@@ -776,6 +776,7 @@ static int l2cap_sock_setsockopt(struct socket *sock, int level, int optname,
 	struct l2cap_conn *conn;
 	int len, err = 0;
 	u32 opt;
+	u16 mtu;
 
 	BT_DBG("sk %p", sk);
 
@@ -957,12 +958,12 @@ static int l2cap_sock_setsockopt(struct socket *sock, int level, int optname,
 			break;
 		}
 
-		if (get_user(opt, (u16 __user *) optval)) {
+		if (get_user(mtu, (u16 __user *) optval)) {
 			err = -EFAULT;
 			break;
 		}
 
-		chan->imtu = opt;
+		chan->imtu = mtu;
 		break;
 
 	default:
