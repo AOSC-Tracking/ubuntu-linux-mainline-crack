@@ -1,0 +1,28 @@
+drm drm-fixes 8594a2d8d72d86b70b8bace607100d88111aedf6
+	Merge tag 'amd-drm-fixes-6.12-2024-10-31' of https://gitlab.freedesktop.org/agd5f/linux into drm-fixes
+drm-misc drm-misc-fixes add4163aca0d4a86e9fe4aa513865e4237db8aef
+	drm/tests: hdmi: Fix memory leaks in drm_display_mode_from_cea_vic()
+drm-intel drm-intel-fixes 81983758430957d9a5cb3333fe324fd70cf63e7e
+	Linux 6.12-rc5
+drm-xe drm-xe-fixes fe05cee4d9533892210e1ee90147175d87e7c053
+	drm/xe: Don't short circuit TDR on jobs not started
+drm drm-next e7103f8785504dd5c6aad118fbc64fc49eda33af
+	Merge tag 'amd-drm-next-6.13-2024-10-25' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm-misc drm-misc-next-fixes ba2b9de0c1ac2abfbe663414a292c5881e64c361
+	drm/tegra: fix potential uninitialized variable use
+drm-intel drm-intel-next-fixes e860513f56d8428fcb2bd0282ac8ab691a53fc6c
+	drm/i915/dp: Fix colorimetry detection
+drm-xe drm-xe-next-fixes d7126c0cfc137a580eba92bd82b6d288bd43961d
+	Merge tag 'drm-xe-next-fixes-2024-09-19' of https://gitlab.freedesktop.org/drm/xe/kernel into drm-next
+drm-misc drm-misc-next 623b1e4d2eace0958996995f9f88cb659a6f69dd
+	MAINTAINERS: Remove myself as a VKMS maintainer
+drm-intel drm-intel-next 98d2f2530fcc62efcfc816ac5ca352269db95765
+	drm/i915: Implement Dbuf overlap detection feature starting from LNL
+drm-intel drm-intel-gt-next 6ef0e3ef2662db71d363af77ce31fa940bb7d525
+	drm/i915/gt: Retry RING_HEAD reset until it get sticks
+drm-xe drm-xe-next 2aff81e039de5b0b7ef6bdcb2c320f121f69e2b4
+	drm/xe/guc: Fix dereference before NULL check
+drm-intel topic/core-for-CI 8db9a55ae3149e377b72f80da5078e347f0fde3c
+	x86/apic: Stop the TSC Deadline timer during lapic timer shutdown
+drm-xe topic/xe-for-CI fefe873265210efca14d239382df9243cb6387b9
+	drm/xe/ptl: Define HuC FW version for PTL
