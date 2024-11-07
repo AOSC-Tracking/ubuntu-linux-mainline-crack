@@ -1,0 +1,28 @@
+drm drm-fixes 59b723cd2adbac2a34fc8e12c74ae26ae45bf230
+	Linux 6.12-rc6
+drm-misc drm-misc-fixes f432a1621f049bb207e78363d9d0e3c6fa2da5db
+	drm/panthor: Be stricter about IO mapping flags
+drm-intel drm-intel-fixes 59b723cd2adbac2a34fc8e12c74ae26ae45bf230
+	Linux 6.12-rc6
+drm-xe drm-xe-fixes 514447a1219021298329ce586536598c3b4b2dc0
+	drm/xe: Stop accumulating LRC timestamp on job_free
+drm drm-next e175800137f588688ac6aae30ce491e098f30c45
+	Merge tag 'exynos-drm-next-for-v6.13-v2' of git://git.kernel.org/pub/scm/linux/kernel/git/daeinki/drm-exynos into drm-next
+drm-misc drm-misc-next-fixes ba2b9de0c1ac2abfbe663414a292c5881e64c361
+	drm/tegra: fix potential uninitialized variable use
+drm-intel drm-intel-next-fixes e860513f56d8428fcb2bd0282ac8ab691a53fc6c
+	drm/i915/dp: Fix colorimetry detection
+drm-xe drm-xe-next-fixes d7126c0cfc137a580eba92bd82b6d288bd43961d
+	Merge tag 'drm-xe-next-fixes-2024-09-19' of https://gitlab.freedesktop.org/drm/xe/kernel into drm-next
+drm-misc drm-misc-next baf4afc5831438b35de4b0e951b9cd58435a6d99
+	drm/sched: Improve teardown documentation
+drm-intel drm-intel-next 5d0396114e7119a20034e252a58d30b0b41ab965
+	drm/i915/hdcp: Handle HDCP Line Rekeying for HDCP 1.4
+drm-intel drm-intel-gt-next b939a08bc378a7c716ad7a9486b48794b95d22f5
+	drm/i915/guc: Flush ct receive tasklet during reset preparation
+drm-xe drm-xe-next 9e7aacd8402b88394e6a83cb242901fde77a1773
+	drm/xe: Ensure all locks released in exec IOCTL
+drm-intel topic/core-for-CI 8db9a55ae3149e377b72f80da5078e347f0fde3c
+	x86/apic: Stop the TSC Deadline timer during lapic timer shutdown
+drm-xe topic/xe-for-CI fefe873265210efca14d239382df9243cb6387b9
+	drm/xe/ptl: Define HuC FW version for PTL
