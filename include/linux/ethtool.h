@@ -730,6 +730,9 @@ struct kernel_ethtool_ts_info {
  *	contexts.
  * @cap_rss_sym_xor_supported: indicates if the driver supports symmetric-xor
  *	RSS.
+ * @cap_rss_rxnfc_adds: device supports nonzero ring_cookie in filters with
+ *	%FLOW_RSS flag; the queue ID from the filter is added to the value from
+ *	the indirection table to determine the delivery queue.
  * @rxfh_indir_space: max size of RSS indirection tables, if indirection table
  *	size as returned by @get_rxfh_indir_size may change during lifetime
  *	of the device. Leave as 0 if the table size is constant.
@@ -951,6 +954,7 @@ struct ethtool_ops {
 	u32     cap_link_lanes_supported:1;
 	u32     cap_rss_ctx_supported:1;
 	u32	cap_rss_sym_xor_supported:1;
+	u32	cap_rss_rxnfc_adds:1;
 	u32	rxfh_indir_space;
 	u16	rxfh_key_space;
 	u16	rxfh_priv_size;
