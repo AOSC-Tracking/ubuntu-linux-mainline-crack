@@ -982,7 +982,7 @@ static int trc_inspect_reader(struct task_struct *t, void *arg)
 	// holdout list.
 	t->trc_reader_checked = nesting >= 0;
 	if (nesting <= 0)
-		return !nesting;  // If in QS, done, otherwise try again later.
+		return nesting ? -EINVAL : 0;  // If in QS, done, otherwise try again later.
 
 	// The task is in a read-side critical section, so set up its
 	// state so that it will awaken the grace-period kthread upon exit
