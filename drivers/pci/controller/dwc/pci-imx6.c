@@ -733,6 +733,7 @@ static int imx6_pcie_deassert_core_reset(struct imx6_pcie *imx6_pcie)
 	struct device *dev = pci->dev;
 
 	reset_control_deassert(imx6_pcie->pciephy_reset);
+	reset_control_deassert(imx6_pcie->apps_reset);
 
 	switch (imx6_pcie->drvdata->variant) {
 	case IMX7D:
