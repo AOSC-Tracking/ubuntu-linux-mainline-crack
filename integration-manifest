@@ -1,0 +1,28 @@
+drm drm-fixes 40384c840ea1944d7c5a392e8975ed088ecf0b37
+	Linux 6.13-rc1
+drm-misc drm-misc-fixes 86e8f94789dd6f3e705bfa821e1e416f97a2f863
+	drm/sti: Add __iomem for mixer_dbg_mxn's parameter
+drm-intel drm-intel-fixes 2b1980a063e655a56b7e445241393f05e37f0e29
+	drm/i915/color: Stop using non-posted DSB writes for legacy LUT
+drm-xe drm-xe-fixes 5dce85fecb87751ec94526e1ac516dd7871e2e0c
+	drm/xe: Move the coredump registration to the worker thread
+drm drm-next 40384c840ea1944d7c5a392e8975ed088ecf0b37
+	Linux 6.13-rc1
+drm-misc drm-misc-next-fixes 818956c76517e127fad8cf02cd29866e0a852072
+	drm/rockchip: avoid 64-bit division
+drm-intel drm-intel-next-fixes 40384c840ea1944d7c5a392e8975ed088ecf0b37
+	Linux 6.13-rc1
+drm-xe drm-xe-next-fixes aef0b4a07277f715bfc2a0d76a16da2bc4e89205
+	drm/xe: Take PM ref in delayed snapshot capture worker
+drm-misc drm-misc-next f3c03be182efccce3f6c2d8ceb35ba43e77ac128
+	drm/dp: extract drm_dp_dpcd_clear_payload()
+drm-intel drm-intel-next 5f7fb33b7ba1287c33e35b7778d5a371472e3503
+	drm/i915/display: remove unused for_each_crtc()
+drm-intel drm-intel-gt-next b939a08bc378a7c716ad7a9486b48794b95d22f5
+	drm/i915/guc: Flush ct receive tasklet during reset preparation
+drm-xe drm-xe-next 20124c3e22db52c6507529dbf2315260a5769a75
+	drm/xe/xe_guc_ads: Add nonpriv registers to write list
+drm-intel topic/core-for-CI c63b2aff736fc2bdfb22ddd7520a1022f0936b55
+	cpufreq: intel_pstate: Rearrange locking in hybrid_init_cpu_capacity_scaling()
+drm-xe topic/xe-for-CI d77237d345ac4fdce6558605acb84aa7a76dc9a1
+	drm/xe/ptl: Define HuC FW version for PTL
