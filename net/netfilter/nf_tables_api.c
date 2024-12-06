@@ -426,7 +426,7 @@ static int nft_mapelem_deactivate(const struct nft_ctx *ctx,
 				  const struct nft_set_iter *iter,
 				  struct nft_set_elem *elem)
 {
-	struct nft_set_ext *ext = nft_set_elem_ext(set, elem);
+	struct nft_set_ext *ext = nft_set_elem_ext(set, elem->priv);
 
 	if (!nft_set_elem_active(ext, iter->genmask))
 		return 0;
@@ -4148,7 +4148,7 @@ static int nft_mapelem_activate(const struct nft_ctx *ctx,
 				const struct nft_set_iter *iter,
 				struct nft_set_elem *elem)
 {
-	struct nft_set_ext *ext = nft_set_elem_ext(set, elem);
+	struct nft_set_ext *ext = nft_set_elem_ext(set, elem->priv);
 
 	/* called from abort path, reverse check to undo changes. */
 	if (nft_set_elem_active(ext, iter->genmask))
