@@ -1,0 +1,28 @@
+drm drm-fixes 4bbf9020becbfd8fc2c3da790855b7042fad455b
+	Linux 6.13-rc4
+drm-misc drm-misc-fixes 79d67c499c3f886202a40c5cb27e747e4fa4d738
+	drm: adv7511: Drop dsi single lane support
+drm-intel drm-intel-fixes 20e7c5313ffbf11c34a46395345677adbe890bee
+	drm/i915/dg1: Fix power gate sequence.
+drm-xe drm-xe-fixes fe39b222a4139354d32ff9d46b88757f63f71d63
+	drm/xe: Fix fault on fd close after unbind
+drm drm-next d678c63534ed0d0fe52ff95cea83808f6f0ae382
+	Merge tag 'drm-misc-next-2024-12-19' of https://gitlab.freedesktop.org/drm/misc/kernel into drm-next
+drm-misc drm-misc-next-fixes 818956c76517e127fad8cf02cd29866e0a852072
+	drm/rockchip: avoid 64-bit division
+drm-intel drm-intel-next-fixes 40384c840ea1944d7c5a392e8975ed088ecf0b37
+	Linux 6.13-rc1
+drm-xe drm-xe-next-fixes aef0b4a07277f715bfc2a0d76a16da2bc4e89205
+	drm/xe: Take PM ref in delayed snapshot capture worker
+drm-misc drm-misc-next f8a2397baf041a5cee408b082334bb09c7e161df
+	drm/bridge: dw-hdmi-qp: drop atomic_check() callback
+drm-intel drm-intel-next 5aad05463d221bb8afb11607d63eb56fc56eff82
+	drm/i915/dp_mst: Use link.{min/max}_bpp_x16
+drm-intel drm-intel-gt-next 835443da6f50d9516b58bba5a4fdf9e563d961c7
+	drm/i915/gt: Log reason for setting TAINT_WARN at reset
+drm-xe drm-xe-next fba0f039affdd0c8767f24e41d5dbef49addea78
+	xe/oa: Drop the unused logic to parse context image
+drm-intel topic/core-for-CI 81827bbe1d8bb152470a04724c4c969a807d8ef6
+	Revert "lockdep: Enable PROVE_RAW_LOCK_NESTING with PROVE_LOCKING."
+drm-xe topic/xe-for-CI d77237d345ac4fdce6558605acb84aa7a76dc9a1
+	drm/xe/ptl: Define HuC FW version for PTL
