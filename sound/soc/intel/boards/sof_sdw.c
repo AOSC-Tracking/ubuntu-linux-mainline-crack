@@ -551,9 +551,9 @@ static const struct dmi_system_id sof_sdw_quirk_table[] = {
 		.callback = sof_sdw_quirk_cb,
 		.matches = {
 			DMI_MATCH(DMI_SYS_VENDOR, "LENOVO"),
-			DMI_EXACT_MATCH(DMI_PRODUCT_SKU, "3832")
+			DMI_MATCH(DMI_PRODUCT_NAME, "83LC")
 		},
-		.driver_data = (void *)(SOF_SIDECAR_AMPS),
+		.driver_data = (void *)(SOF_SIDECAR_AMPS | SOF_CODEC_MIC),
 	},
 	{
 		.callback = sof_sdw_quirk_cb,
