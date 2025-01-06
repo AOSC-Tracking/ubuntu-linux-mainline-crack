@@ -567,14 +567,14 @@ static void io_kill_timeouts(struct io_ring_ctx *ctx)
 	spin_unlock_irq(&ctx->completion_lock);
 }
 
-static void io_commit_cqring(struct io_ring_ctx *ctx)
+static void __io_commit_cqring_flush(struct io_ring_ctx *ctx)
 {
 	struct io_kiocb *req;
 
+	lockdep_assert_held(&ctx->completion_lock);
+
 	while ((req = io_get_timeout_req(ctx)) != NULL)
 		io_kill_timeout(req);
-
-	__io_commit_cqring(ctx);
 
 	while ((req = io_get_deferred_req(ctx)) != NULL) {
 		if (req->flags & REQ_F_SHADOW_DRAIN) {
@@ -585,6 +585,12 @@ static void io_commit_cqring(struct io_ring_ctx *ctx)
 		req->flags |= REQ_F_IO_DRAINED;
 		io_queue_async_work(ctx, req);
 	}
+}
+
+static void io_commit_cqring(struct io_ring_ctx *ctx)
+{
+	__io_commit_cqring_flush(ctx);
+	__io_commit_cqring(ctx);
 }
 
 static struct io_uring_cqe *io_get_cqring(struct io_ring_ctx *ctx)
@@ -846,7 +852,10 @@ static void io_iopoll_complete(struct io_ring_ctx *ctx, unsigned int *nr_events,
 		}
 	}
 
-	io_commit_cqring(ctx);
+	spin_lock_irq(&ctx->completion_lock);
+	__io_commit_cqring_flush(ctx);
+	spin_unlock_irq(&ctx->completion_lock);
+	__io_commit_cqring(ctx);
 	io_cqring_ev_posted_iopoll(ctx);
 	io_free_req_many(ctx, reqs, &to_free);
 }
