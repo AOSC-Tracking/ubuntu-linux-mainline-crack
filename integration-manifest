@@ -1,0 +1,28 @@
+drm drm-fixes 5bc55a333a2f7316b58edc7573e8e893f7acb532
+	Linux 6.13-rc7
+drm-misc drm-misc-fixes ef84aee151bd6c2c9223c8b430cae21d57b5e1c1
+	drm/bridge: ite-it6263: Prevent error pointer dereference in probe()
+drm-intel drm-intel-fixes 1a5401ec3018c101c456cdbda2eaef9482db6786
+	drm/i915/fb: Relax clear color alignment to 64 bytes
+drm-xe drm-xe-fixes 79a21fc921d7aafaf69d00b4938435b81bf66022
+	drm/xe/oa: Add missing VISACTL mux registers
+drm drm-next 24c61d553302ee49e9c21dd251275ba8c36dcfe4
+	Merge tag 'drm-msm-next-2025-01-07' of gitlab.freedesktop.org:drm/msm into drm-next
+drm-misc drm-misc-next-fixes f1359f46f1f1305340970b5073240126fe87254f
+	drm/bridge: fix documentation for the hdmi_audio_prepare() callback
+drm-intel drm-intel-next-fixes 40384c840ea1944d7c5a392e8975ed088ecf0b37
+	Linux 6.13-rc1
+drm-xe drm-xe-next-fixes aef0b4a07277f715bfc2a0d76a16da2bc4e89205
+	drm/xe: Take PM ref in delayed snapshot capture worker
+drm-misc drm-misc-next 00728273bdf1001f8d2f7b65bc398000d7defe0b
+	drm/tests/buddy: fix build with unused prng
+drm-intel drm-intel-next fd95e73debdffd77febc0f0b4b304378856a5e6b
+	drm/i915/vrr: Plumb the DSB into intel_vrr_send_push()
+drm-intel drm-intel-gt-next 1113fc0e826581bb56858b100cab46f1ceef69c7
+	drm/i915: Add debug print about hw config table size
+drm-xe drm-xe-next 174e9ce0daf6af791386e96e76e743eb59e8a401
+	drm/xe/guc: Drop error messages about missing GuC logs
+drm-intel topic/core-for-CI a38a4d1da756adef5c4eb19ef6b95183cd25d172
+	Revert "lockdep: Enable PROVE_RAW_LOCK_NESTING with PROVE_LOCKING."
+drm-xe topic/xe-for-CI cb9432e080034e6d10612df6905b64ee8124e981
+	drm/xe/ptl: Define HuC FW version for PTL
