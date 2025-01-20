@@ -2610,14 +2610,51 @@ static int intel_crtc_compute_pipe_mode(struct intel_crtc_state *crtc_state)
 	return 0;
 }
 
-static bool intel_crtc_needs_wa_14015401596(struct intel_crtc_state *crtc_state)
+static bool intel_crtc_needs_wa_14015401596(const struct intel_crtc_state *crtc_state)
 {
 	struct intel_display *display = to_intel_display(crtc_state);
-	const struct drm_display_mode *adjusted_mode = &crtc_state->hw.adjusted_mode;
 
 	return intel_vrr_possible(crtc_state) && crtc_state->has_psr &&
-		adjusted_mode->crtc_vblank_start == adjusted_mode->crtc_vdisplay &&
 		IS_DISPLAY_VER(display, 13, 14);
+}
+
+static int intel_crtc_vblank_delay(const struct intel_crtc_state *crtc_state)
+{
+	struct intel_display *display = to_intel_display(crtc_state);
+	int vblank_delay = 0;
+
+	if (!HAS_DSB(display))
+		return 0;
+
+	/* Wa_14015401596 */
+	if (intel_crtc_needs_wa_14015401596(crtc_state))
+		vblank_delay = max(vblank_delay, 1);
+
+	return vblank_delay;
+}
+
+static int intel_crtc_compute_vblank_delay(struct intel_atomic_state *state,
+					   struct intel_crtc *crtc)
+{
+	struct intel_display *display = to_intel_display(state);
+	struct intel_crtc_state *crtc_state =
+		intel_atomic_get_new_crtc_state(state, crtc);
+	struct drm_display_mode *adjusted_mode =
+		&crtc_state->hw.adjusted_mode;
+	int vblank_delay, max_vblank_delay;
+
+	vblank_delay = intel_crtc_vblank_delay(crtc_state);
+	max_vblank_delay = adjusted_mode->crtc_vblank_end - adjusted_mode->crtc_vblank_start - 1;
+
+	if (vblank_delay > max_vblank_delay) {
+		drm_dbg_kms(display->drm, "[CRTC:%d:%s] vblank delay (%d) exceeds max (%d)\n",
+			    crtc->base.base.id, crtc->base.name, vblank_delay, max_vblank_delay);
+		return -EINVAL;
+	}
+
+	adjusted_mode->crtc_vblank_start += vblank_delay;
+
+	return 0;
 }
 
 static int intel_crtc_compute_config(struct intel_atomic_state *state,
@@ -2625,13 +2662,11 @@ static int intel_crtc_compute_config(struct intel_atomic_state *state,
 {
 	struct intel_crtc_state *crtc_state =
 		intel_atomic_get_new_crtc_state(state, crtc);
-	struct drm_display_mode *adjusted_mode =
-		&crtc_state->hw.adjusted_mode;
 	int ret;
 
-	/* Wa_14015401596 */
-	if (intel_crtc_needs_wa_14015401596(crtc_state))
-		adjusted_mode->crtc_vblank_start += 1;
+	ret = intel_crtc_compute_vblank_delay(state, crtc);
+	if (ret)
+		return ret;
 
 	ret = intel_dpll_crtc_compute_clock(state, crtc);
 	if (ret)
@@ -6493,36 +6528,7 @@ static int intel_async_flip_check_hw(struct intel_atomic_state *state, struct in
 		if (!plane->async_flip)
 			continue;
 
-		/*
-		 * FIXME: This check is kept generic for all platforms.
-		 * Need to verify this for all gen9 platforms to enable
-		 * this selectively if required.
-		 */
-		switch (new_plane_state->hw.fb->modifier) {
-		case DRM_FORMAT_MOD_LINEAR:
-			/*
-			 * FIXME: Async on Linear buffer is supported on ICL as
-			 * but with additional alignment and fbc restrictions
-			 * need to be taken care of. These aren't applicable for
-			 * gen12+.
-			 */
-			if (DISPLAY_VER(i915) < 12) {
-				drm_dbg_kms(&i915->drm,
-					    "[PLANE:%d:%s] Modifier 0x%llx does not support async flip on display ver %d\n",
-					    plane->base.base.id, plane->base.name,
-					    new_plane_state->hw.fb->modifier, DISPLAY_VER(i915));
-				return -EINVAL;
-			}
-			break;
-
-		case I915_FORMAT_MOD_X_TILED:
-		case I915_FORMAT_MOD_Y_TILED:
-		case I915_FORMAT_MOD_Yf_TILED:
-		case I915_FORMAT_MOD_4_TILED:
-		case I915_FORMAT_MOD_4_TILED_BMG_CCS:
-		case I915_FORMAT_MOD_4_TILED_LNL_CCS:
-			break;
-		default:
+		if (!intel_plane_can_async_flip(plane, new_plane_state->hw.fb->modifier)) {
 			drm_dbg_kms(&i915->drm,
 				    "[PLANE:%d:%s] Modifier 0x%llx does not support async flip\n",
 				    plane->base.base.id, plane->base.name,
@@ -6530,7 +6536,8 @@ static int intel_async_flip_check_hw(struct intel_atomic_state *state, struct in
 			return -EINVAL;
 		}
 
-		if (new_plane_state->hw.fb->format->num_planes > 1) {
+		if (intel_format_info_is_yuv_semiplanar(new_plane_state->hw.fb->format,
+							new_plane_state->hw.fb->modifier)) {
 			drm_dbg_kms(&i915->drm,
 				    "[PLANE:%d:%s] Planar formats do not support async flips\n",
 				    plane->base.base.id, plane->base.name);
@@ -6572,6 +6579,14 @@ static int intel_async_flip_check_hw(struct intel_atomic_state *state, struct in
 		    new_plane_state->hw.rotation) {
 			drm_dbg_kms(&i915->drm,
 				    "[PLANE:%d:%s] Rotation cannot be changed in async flip\n",
+				    plane->base.base.id, plane->base.name);
+			return -EINVAL;
+		}
+
+		if (skl_plane_aux_dist(old_plane_state, 0) !=
+		    skl_plane_aux_dist(new_plane_state, 0)) {
+			drm_dbg_kms(&i915->drm,
+				    "[PLANE:%d:%s] AUX_DIST cannot be changed in async flip\n",
 				    plane->base.base.id, plane->base.name);
 			return -EINVAL;
 		}
@@ -8728,5 +8743,5 @@ void intel_hpd_poll_fini(struct drm_i915_private *i915)
 
 bool intel_scanout_needs_vtd_wa(struct drm_i915_private *i915)
 {
-	return DISPLAY_VER(i915) >= 6 && i915_vtd_active(i915);
+	return IS_DISPLAY_VER(i915, 6, 11) && i915_vtd_active(i915);
 }
