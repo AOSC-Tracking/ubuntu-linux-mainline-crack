@@ -1,0 +1,28 @@
+drm drm-fixes 9b1c673a1648cc3501a3b7719db2bec931cf00f7
+	Merge tag 'drm-xe-fixes-2025-01-16' of https://gitlab.freedesktop.org/drm/xe/kernel into drm-fixes
+drm-misc drm-misc-fixes ef84aee151bd6c2c9223c8b430cae21d57b5e1c1
+	drm/bridge: ite-it6263: Prevent error pointer dereference in probe()
+drm-intel drm-intel-fixes ffd294d346d185b70e28b1a28abe367bbfe53c04
+	Linux 6.13
+drm-xe drm-xe-fixes b1231ff7ea0689d04040a44864c265bc11612fa8
+	drm/xe: Mark ComputeCS read mode as UC on iGPU
+drm drm-next 951a6bf30667307e7901aac5e74e50dadd5ccfc7
+	Merge tag 'drm-misc-next-fixes-2025-01-16' of https://gitlab.freedesktop.org/drm/misc/kernel into drm-next
+drm-misc drm-misc-next-fixes db8b2c0e2abc90d1025fd7f6d4461b21b1d3248e
+	drm/virtio: Fix UAF in virtgpu_dma_buf_free_obj()
+drm-intel drm-intel-next-fixes 24c61d553302ee49e9c21dd251275ba8c36dcfe4
+	Merge tag 'drm-msm-next-2025-01-07' of gitlab.freedesktop.org:drm/msm into drm-next
+drm-xe drm-xe-next-fixes 24c61d553302ee49e9c21dd251275ba8c36dcfe4
+	Merge tag 'drm-msm-next-2025-01-07' of gitlab.freedesktop.org:drm/msm into drm-next
+drm-misc drm-misc-next cdb73451bc675392c9c76779e2fec720edafd7ab
+	drm/imagination: Use the drm_sched_job_has_dependency helper
+drm-intel drm-intel-next 6f7c813c88aed90ca342a76ef4cdc078d6210e07
+	drm/i915: Carve up skl_get_plane_caps()
+drm-intel drm-intel-gt-next 709631924ee544ba0b661c41b442427897569f30
+	drm/i915/uc: Include requested frequency in slow firmware load messages
+drm-xe drm-xe-next 173baa1b2dc44e3551d9414f4919a48fe5da4880
+	drm/xe: Suppress printing of mode when running in non-sriov mode
+drm-intel topic/core-for-CI 177ab7c0296b3df8bf2d2d9c51d47db10f7df7e0
+	Revert "lockdep: Enable PROVE_RAW_LOCK_NESTING with PROVE_LOCKING."
+drm-xe topic/xe-for-CI cb9432e080034e6d10612df6905b64ee8124e981
+	drm/xe/ptl: Define HuC FW version for PTL
