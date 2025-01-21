@@ -2285,14 +2285,14 @@ struct page *get_dump_page(unsigned long addr)
 /*
  * Returns the number of collected folios. Return value is always >= 0.
  */
-static unsigned long collect_longterm_unpinnable_folios(
+static void collect_longterm_unpinnable_folios(
 					struct list_head *movable_folio_list,
 					unsigned long nr_folios,
 					struct folio **folios)
 {
-	unsigned long i, collected = 0;
 	struct folio *prev_folio = NULL;
 	bool drain_allow = true;
+	unsigned long i;
 
 	for (i = 0; i < nr_folios; i++) {
 		struct folio *folio = folios[i];
@@ -2303,8 +2303,6 @@ static unsigned long collect_longterm_unpinnable_folios(
 
 		if (folio_is_longterm_pinnable(folio))
 			continue;
-
-		collected++;
 
 		if (folio_is_device_coherent(folio))
 			continue;
@@ -2327,8 +2325,6 @@ static unsigned long collect_longterm_unpinnable_folios(
 				    NR_ISOLATED_ANON + folio_is_file_lru(folio),
 				    folio_nr_pages(folio));
 	}
-
-	return collected;
 }
 
 /*
@@ -2421,12 +2417,11 @@ err:
 static long check_and_migrate_movable_folios(unsigned long nr_folios,
 					     struct folio **folios)
 {
-	unsigned long collected;
 	LIST_HEAD(movable_folio_list);
 
-	collected = collect_longterm_unpinnable_folios(&movable_folio_list,
-						       nr_folios, folios);
-	if (!collected)
+	collect_longterm_unpinnable_folios(&movable_folio_list,
+					   nr_folios, folios);
+	if (list_empty(&movable_folio_list))
 		return 0;
 
 	return migrate_longterm_unpinnable_folios(&movable_folio_list,
