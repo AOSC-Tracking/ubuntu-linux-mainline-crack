@@ -1,0 +1,28 @@
+drm drm-fixes 9b1c673a1648cc3501a3b7719db2bec931cf00f7
+	Merge tag 'drm-xe-fixes-2025-01-16' of https://gitlab.freedesktop.org/drm/xe/kernel into drm-fixes
+drm-misc drm-misc-fixes 5247a8b313cc88f18614ea5d163c4f8dc198ccab
+	drm/bochs: Do not put DRM device in PCI remove callback
+drm-intel drm-intel-fixes ffd294d346d185b70e28b1a28abe367bbfe53c04
+	Linux 6.13
+drm-xe drm-xe-fixes b1231ff7ea0689d04040a44864c265bc11612fa8
+	drm/xe: Mark ComputeCS read mode as UC on iGPU
+drm drm-next 07c5b277208cf9a9e9cf31bf0143977d7f030aa1
+	Merge v6.13 into drm-next
+drm-misc drm-misc-next-fixes 6e64d6b3a3c39655de56682ec83e894978d23412
+	drm/v3d: Assign job pointer to NULL before signaling the fence
+drm-intel drm-intel-next-fixes 951a6bf30667307e7901aac5e74e50dadd5ccfc7
+	Merge tag 'drm-misc-next-fixes-2025-01-16' of https://gitlab.freedesktop.org/drm/misc/kernel into drm-next
+drm-xe drm-xe-next-fixes 951a6bf30667307e7901aac5e74e50dadd5ccfc7
+	Merge tag 'drm-misc-next-fixes-2025-01-16' of https://gitlab.freedesktop.org/drm/misc/kernel into drm-next
+drm-misc drm-misc-next 6ce24b3450b8e8132b74d4f0b43a48f4e370e825
+	drm/panel-edp: Add STA 116QHD024002
+drm-intel drm-intel-next 381ab12d483ea30af4ca52db51d23c947f2904c1
+	drm/i915: fix typos in drm/i915 files
+drm-intel drm-intel-gt-next 367d7bc6d55a138cdcbd856e1e8f1f6967934954
+	drm/i915/pmu: Remove i915_pmu_event_event_idx()
+drm-xe drm-xe-next dddc53806dd2a10e210d5ea08caec6d3f92440b2
+	drm/xe/ptl: Apply Wa_13011645652
+drm-intel topic/core-for-CI 177ab7c0296b3df8bf2d2d9c51d47db10f7df7e0
+	Revert "lockdep: Enable PROVE_RAW_LOCK_NESTING with PROVE_LOCKING."
+drm-xe topic/xe-for-CI 6ea369b34748ef5377f23e24b577912585ce5445
+	drm/xe/ptl: Define HuC FW version for PTL
