@@ -2921,7 +2921,6 @@ CONFIG_CLK_X1E80100_DISPCC                      policy<{'arm64': 'm'}>
 CONFIG_CLK_X1E80100_GCC                         policy<{'arm64': 'm'}>
 CONFIG_CLK_X1E80100_GPUCC                       policy<{'arm64': 'm'}>
 CONFIG_CLK_X1E80100_TCSRCC                      policy<{'arm64': 'm'}>
-CONFIG_CLOCKSOURCE_VALIDATE_LAST_CYCLE          policy<{'amd64': 'y'}>
 CONFIG_CLOCKSOURCE_WATCHDOG                     policy<{'amd64': 'y'}>
 CONFIG_CLOCKSOURCE_WATCHDOG_MAX_SKEW_US         policy<{'amd64': '100'}>
 CONFIG_CLONE_BACKWARDS                          policy<{'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 'riscv64': 'y'}>
