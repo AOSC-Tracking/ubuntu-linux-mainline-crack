@@ -3927,7 +3927,6 @@ CONFIG_DEBUG_SPINLOCK                           policy<{'amd64': 'n', 'arm64': '
 CONFIG_DEBUG_STACKOVERFLOW                      policy<{'ppc64el': 'n'}>
 CONFIG_DEBUG_STACK_USAGE                        policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 'riscv64': 'n', 's390x': 'n'}>
 CONFIG_DEBUG_TEST_DRIVER_REMOVE                 policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 'riscv64': 'n', 's390x': 'n'}>
-CONFIG_DEBUG_TIMEKEEPING                        policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n', 'riscv64': 'n', 's390x': 'n'}>
 CONFIG_DEBUG_TLBFLUSH                           policy<{'amd64': 'n'}>
 CONFIG_DEBUG_USER                               policy<{'armhf': 'n'}>
 CONFIG_DEBUG_VF_UART_PORT                       policy<{'armhf': '1'}>
