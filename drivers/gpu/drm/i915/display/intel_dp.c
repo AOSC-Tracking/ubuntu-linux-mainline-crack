@@ -1075,7 +1075,7 @@ static bool source_can_output(struct intel_dp *intel_dp,
 		/*
 		 * No YCbCr output support on gmch platforms.
 		 * Also, ILK doesn't seem capable of DP YCbCr output.
-		 * The displayed image is severly corrupted. SNB+ is fine.
+		 * The displayed image is severely corrupted. SNB+ is fine.
 		 */
 		return !HAS_GMCH(display) && !display->platform.ironlake;
 
@@ -1791,7 +1791,7 @@ int intel_dp_dsc_max_src_input_bpc(struct intel_display *display)
 	if (DISPLAY_VER(display) == 11)
 		return 10;
 
-	return 0;
+	return intel_dp_dsc_min_src_input_bpc();
 }
 
 int intel_dp_dsc_compute_max_bpp(const struct intel_connector *connector,
@@ -1941,7 +1941,7 @@ static bool is_bw_sufficient_for_dsc_config(u16 compressed_bppx16, u32 link_cloc
 
 static int dsc_compute_link_config(struct intel_dp *intel_dp,
 				   struct intel_crtc_state *pipe_config,
-				   struct link_config_limits *limits,
+				   const struct link_config_limits *limits,
 				   u16 compressed_bppx16,
 				   int timeslots)
 {
@@ -2061,16 +2061,17 @@ static int dsc_src_max_compressed_bpp(struct intel_dp *intel_dp)
 static int
 icl_dsc_compute_link_config(struct intel_dp *intel_dp,
 			    struct intel_crtc_state *pipe_config,
-			    struct link_config_limits *limits,
+			    const struct link_config_limits *limits,
 			    int dsc_max_bpp,
 			    int dsc_min_bpp,
 			    int pipe_bpp,
 			    int timeslots)
 {
 	int i, ret;
+	int output_bpp = intel_dp_output_bpp(pipe_config->output_format, pipe_bpp);
 
 	/* Compressed BPP should be less than the Input DSC bpp */
-	dsc_max_bpp = min(dsc_max_bpp, pipe_bpp - 1);
+	dsc_max_bpp = min(dsc_max_bpp, output_bpp - 1);
 
 	for (i = 0; i < ARRAY_SIZE(valid_dsc_bpp); i++) {
 		if (valid_dsc_bpp[i] < dsc_min_bpp)
@@ -2103,7 +2104,7 @@ static int
 xelpd_dsc_compute_link_config(struct intel_dp *intel_dp,
 			      const struct intel_connector *connector,
 			      struct intel_crtc_state *pipe_config,
-			      struct link_config_limits *limits,
+			      const struct link_config_limits *limits,
 			      int dsc_max_bpp,
 			      int dsc_min_bpp,
 			      int pipe_bpp,
@@ -2111,6 +2112,7 @@ xelpd_dsc_compute_link_config(struct intel_dp *intel_dp,
 {
 	struct intel_display *display = to_intel_display(intel_dp);
 	u8 bppx16_incr = drm_dp_dsc_sink_bpp_incr(connector->dp.dsc_dpcd);
+	int output_bpp = intel_dp_output_bpp(pipe_config->output_format, pipe_bpp);
 	u16 compressed_bppx16;
 	u8 bppx16_step;
 	int ret;
@@ -2121,7 +2123,7 @@ xelpd_dsc_compute_link_config(struct intel_dp *intel_dp,
 		bppx16_step = 16 / bppx16_incr;
 
 	/* Compressed BPP should be less than the Input DSC bpp */
-	dsc_max_bpp = min(dsc_max_bpp << 4, (pipe_bpp << 4) - bppx16_step);
+	dsc_max_bpp = min(dsc_max_bpp << 4, (output_bpp << 4) - bppx16_step);
 	dsc_min_bpp = dsc_min_bpp << 4;
 
 	for (compressed_bppx16 = dsc_max_bpp;
@@ -2151,7 +2153,7 @@ xelpd_dsc_compute_link_config(struct intel_dp *intel_dp,
 static int dsc_compute_compressed_bpp(struct intel_dp *intel_dp,
 				      const struct intel_connector *connector,
 				      struct intel_crtc_state *pipe_config,
-				      struct link_config_limits *limits,
+				      const struct link_config_limits *limits,
 				      int pipe_bpp,
 				      int timeslots)
 {
@@ -2183,7 +2185,7 @@ int intel_dp_dsc_min_src_input_bpc(void)
 }
 
 static
-bool is_dsc_pipe_bpp_sufficient(struct link_config_limits *limits,
+bool is_dsc_pipe_bpp_sufficient(const struct link_config_limits *limits,
 				int pipe_bpp)
 {
 	return pipe_bpp >= limits->pipe.min_bpp &&
@@ -2192,7 +2194,7 @@ bool is_dsc_pipe_bpp_sufficient(struct link_config_limits *limits,
 
 static
 int intel_dp_force_dsc_pipe_bpp(struct intel_dp *intel_dp,
-				struct link_config_limits *limits)
+				const struct link_config_limits *limits)
 {
 	struct intel_display *display = to_intel_display(intel_dp);
 	int forced_bpp;
@@ -2218,7 +2220,7 @@ int intel_dp_force_dsc_pipe_bpp(struct intel_dp *intel_dp,
 static int intel_dp_dsc_compute_pipe_bpp(struct intel_dp *intel_dp,
 					 struct intel_crtc_state *pipe_config,
 					 struct drm_connector_state *conn_state,
-					 struct link_config_limits *limits,
+					 const struct link_config_limits *limits,
 					 int timeslots)
 {
 	const struct intel_connector *connector =
@@ -2268,7 +2270,7 @@ static int intel_dp_dsc_compute_pipe_bpp(struct intel_dp *intel_dp,
 static int intel_edp_dsc_compute_pipe_bpp(struct intel_dp *intel_dp,
 					  struct intel_crtc_state *pipe_config,
 					  struct drm_connector_state *conn_state,
-					  struct link_config_limits *limits)
+					  const struct link_config_limits *limits)
 {
 	struct intel_display *display = to_intel_display(intel_dp);
 	struct intel_connector *connector =
@@ -2333,7 +2335,7 @@ static void intel_dp_fec_compute_config(struct intel_dp *intel_dp,
 int intel_dp_dsc_compute_config(struct intel_dp *intel_dp,
 				struct intel_crtc_state *pipe_config,
 				struct drm_connector_state *conn_state,
-				struct link_config_limits *limits,
+				const struct link_config_limits *limits,
 				int timeslots,
 				bool compute_pipe_bpp)
 {
@@ -2641,9 +2643,9 @@ intel_dp_compute_link_config(struct intel_encoder *encoder,
 		if (!ret && intel_dp_is_uhbr(pipe_config))
 			ret = intel_dp_mtp_tu_compute_config(intel_dp,
 							     pipe_config,
-							     pipe_config->pipe_bpp,
-							     pipe_config->pipe_bpp,
 							     conn_state,
+							     pipe_config->pipe_bpp,
+							     pipe_config->pipe_bpp,
 							     0, false);
 		if (ret)
 			dsc_needed = true;
@@ -2824,24 +2826,22 @@ static void intel_dp_compute_as_sdp(struct intel_dp *intel_dp,
 	const struct drm_display_mode *adjusted_mode =
 		&crtc_state->hw.adjusted_mode;
 
-	if (!crtc_state->vrr.enable || !intel_dp->as_sdp_supported)
+	if (!intel_vrr_possible(crtc_state) || !intel_dp->as_sdp_supported)
 		return;
 
 	crtc_state->infoframes.enable |= intel_hdmi_infoframe_enable(DP_SDP_ADAPTIVE_SYNC);
 
-	/* Currently only DP_AS_SDP_AVT_FIXED_VTOTAL mode supported */
 	as_sdp->sdp_type = DP_SDP_ADAPTIVE_SYNC;
 	as_sdp->length = 0x9;
 	as_sdp->duration_incr_ms = 0;
+	as_sdp->vtotal = intel_vrr_vmin_vtotal(crtc_state);
 
 	if (crtc_state->cmrr.enable) {
 		as_sdp->mode = DP_AS_SDP_FAVT_TRR_REACHED;
-		as_sdp->vtotal = adjusted_mode->vtotal;
 		as_sdp->target_rr = drm_mode_vrefresh(adjusted_mode);
 		as_sdp->target_rr_divider = true;
 	} else {
-		as_sdp->mode = DP_AS_SDP_AVT_FIXED_VTOTAL;
-		as_sdp->vtotal = adjusted_mode->vtotal;
+		as_sdp->mode = DP_AS_SDP_AVT_DYNAMIC_VTOTAL;
 		as_sdp->target_rr = 0;
 	}
 }
