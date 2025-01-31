@@ -1,0 +1,28 @@
+drm drm-fixes 9b1c673a1648cc3501a3b7719db2bec931cf00f7
+	Merge tag 'drm-xe-fixes-2025-01-16' of https://gitlab.freedesktop.org/drm/xe/kernel into drm-fixes
+drm-misc drm-misc-fixes 79fc672a092d93a7eac24fe20a571d4efd8fa5a4
+	drm/komeda: Add check for komeda_get_layer_fourcc_list()
+drm-intel drm-intel-fixes ffd294d346d185b70e28b1a28abe367bbfe53c04
+	Linux 6.13
+drm-xe drm-xe-fixes b1231ff7ea0689d04040a44864c265bc11612fa8
+	drm/xe: Mark ComputeCS read mode as UC on iGPU
+drm drm-next 8dcb26b493d3bab90851f93ae1c127af5cb2dbb5
+	Merge tag 'amd-drm-fixes-6.14-2025-01-29' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm-misc drm-misc-next-fixes 6daaae5ff7f3b23a2dacc9c387ff3d4f95b67cad
+	gpu: drm_dp_cec: fix broken CEC adapter properties check
+drm-intel drm-intel-next-fixes 8dcb26b493d3bab90851f93ae1c127af5cb2dbb5
+	Merge tag 'amd-drm-fixes-6.14-2025-01-29' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm-xe drm-xe-next-fixes 8dcb26b493d3bab90851f93ae1c127af5cb2dbb5
+	Merge tag 'amd-drm-fixes-6.14-2025-01-29' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm-misc drm-misc-next 7271a88629857dc285d4291055b8e7811f9d3603
+	accel/qaic: Add AIC200 support
+drm-intel drm-intel-next a67221b5eb8d59fb7e1f0df3ef9945b6a0f32cca
+	drm/i915/dp: Return min bpc supported by source instead of 0
+drm-intel drm-intel-gt-next 9069b783cd42963ecb47f7a614b663b4d257a5a7
+	Revert "drm/i915/gt: Log reason for setting TAINT_WARN at reset"
+drm-xe drm-xe-next d9bc304437da6b74ac2b6644fe47702b8286eb8d
+	drm/xe: Skip survivability mode for VF
+drm-intel topic/core-for-CI 177ab7c0296b3df8bf2d2d9c51d47db10f7df7e0
+	Revert "lockdep: Enable PROVE_RAW_LOCK_NESTING with PROVE_LOCKING."
+drm-xe topic/xe-for-CI 6ea369b34748ef5377f23e24b577912585ce5445
+	drm/xe/ptl: Define HuC FW version for PTL
