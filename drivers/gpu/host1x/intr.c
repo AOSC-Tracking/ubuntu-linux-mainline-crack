@@ -102,8 +102,6 @@ int host1x_intr_init(struct host1x *host)
 {
 	unsigned int id;
 
-	mutex_init(&host->intr_mutex);
-
 	for (id = 0; id < host1x_syncpt_nb_pts(host); ++id) {
 		struct host1x_syncpt *syncpt = &host->syncpt[id];
 
