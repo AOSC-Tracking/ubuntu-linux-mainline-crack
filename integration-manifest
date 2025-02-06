@@ -1,0 +1,28 @@
+drm drm-fixes 2014c95afecee3e76ca4a56956a936e23283f05b
+	Linux 6.14-rc1
+drm-misc drm-misc-fixes 5d14c08a47460e8eedf0185a28b116420ea7f29d
+	drm/tests: hdmi: Fix recursive locking
+drm-intel drm-intel-fixes 069504f1fcfa1532e4e221290df428b15bd9d284
+	drm/i915/dp: Fix potential infinite loop in 128b/132b SST
+drm-xe drm-xe-fixes a9ab6591b45258b79af1cb66112fd9f83c8855da
+	drm/xe: Fix and re-enable xe_print_blob_ascii85()
+drm drm-next 2014c95afecee3e76ca4a56956a936e23283f05b
+	Linux 6.14-rc1
+drm-misc drm-misc-next-fixes ecee4d0695067ae04959b121028b42a588e75370
+	accel/amdxdna: Add MODULE_FIRMWARE() declarations
+drm-intel drm-intel-next-fixes 2014c95afecee3e76ca4a56956a936e23283f05b
+	Linux 6.14-rc1
+drm-xe drm-xe-next-fixes 8dcb26b493d3bab90851f93ae1c127af5cb2dbb5
+	Merge tag 'amd-drm-fixes-6.14-2025-01-29' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm-misc drm-misc-next a5072fc77fb9e38fa9fd883642c83c3720049159
+	drm/bridge: it6505: fix HDCP V match check is not performed correctly
+drm-intel drm-intel-next a5efc8dcfe710fd63a0557d3512e8ff753c2e283
+	drm/i915/backlight: Enable nits based luminance
+drm-intel drm-intel-gt-next 8d8334632ea62424233ac6529712868241d0f8df
+	drm/i915/selftests: avoid using uninitialized context
+drm-xe drm-xe-next 01aebfaeff324d21f559a696016e13640f59b297
+	drm/xe: Don't treat SR-IOV platforms as reclaim unsafe
+drm-intel topic/core-for-CI fa78591784db6ffdca888d186584ae0b61f1ea41
+	Revert "lockdep: Enable PROVE_RAW_LOCK_NESTING with PROVE_LOCKING."
+drm-xe topic/xe-for-CI 6ea369b34748ef5377f23e24b577912585ce5445
+	drm/xe/ptl: Define HuC FW version for PTL
