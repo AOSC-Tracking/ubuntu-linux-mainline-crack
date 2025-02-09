@@ -1,0 +1,28 @@
+drm drm-fixes 4f6993b3feab7bfb1869a8fa12eb8b375964c19f
+	Merge tag 'drm-intel-fixes-2025-02-06' of https://gitlab.freedesktop.org/drm/i915/kernel into drm-fixes
+drm-misc drm-misc-fixes 9ab127a18018fb06bd42a54ed38bb7b8c449d686
+	drm/hisilicon/hibmc: select CONFIG_DRM_DISPLAY_DP_HELPER
+drm-intel drm-intel-fixes 069504f1fcfa1532e4e221290df428b15bd9d284
+	drm/i915/dp: Fix potential infinite loop in 128b/132b SST
+drm-xe drm-xe-fixes a9ab6591b45258b79af1cb66112fd9f83c8855da
+	drm/xe: Fix and re-enable xe_print_blob_ascii85()
+drm drm-next 2014c95afecee3e76ca4a56956a936e23283f05b
+	Linux 6.14-rc1
+drm-misc drm-misc-next-fixes ecee4d0695067ae04959b121028b42a588e75370
+	accel/amdxdna: Add MODULE_FIRMWARE() declarations
+drm-intel drm-intel-next-fixes 2014c95afecee3e76ca4a56956a936e23283f05b
+	Linux 6.14-rc1
+drm-xe drm-xe-next-fixes 8dcb26b493d3bab90851f93ae1c127af5cb2dbb5
+	Merge tag 'amd-drm-fixes-6.14-2025-01-29' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm-misc drm-misc-next 6f3d9d0dd335290fa364048de5b3a440f1cf259f
+	drm/virtio: Add drm_panic support
+drm-intel drm-intel-next 9e35a4edb837627849063d61d46968bfc691c484
+	drm/i915/dp_mst: Fix disabling the minimum HBlank time
+drm-intel drm-intel-gt-next 8d8334632ea62424233ac6529712868241d0f8df
+	drm/i915/selftests: avoid using uninitialized context
+drm-xe drm-xe-next 6bb05b3631bd81227298b291b651dc7ec6ee0145
+	drm/xe: Enable SR-IOV for PTL
+drm-intel topic/core-for-CI 6624d9287696c087d26f2904563cd56594d2326d
+	scsi: use GFP_NOIO to avoid circular locking dependency
+drm-xe topic/xe-for-CI 6ea369b34748ef5377f23e24b577912585ce5445
+	drm/xe/ptl: Define HuC FW version for PTL
