@@ -1,0 +1,28 @@
+drm drm-fixes a64dcfb451e254085a7daee5fe51bf22959d52d3
+	Linux 6.14-rc2
+drm-misc drm-misc-fixes 9ab127a18018fb06bd42a54ed38bb7b8c449d686
+	drm/hisilicon/hibmc: select CONFIG_DRM_DISPLAY_DP_HELPER
+drm-intel drm-intel-fixes 53139b3f9998ea07289e7b70b909fea2264a0de9
+	drm/i915/selftests: avoid using uninitialized context
+drm-xe drm-xe-fixes a64dcfb451e254085a7daee5fe51bf22959d52d3
+	Linux 6.14-rc2
+drm drm-next a64dcfb451e254085a7daee5fe51bf22959d52d3
+	Linux 6.14-rc2
+drm-misc drm-misc-next-fixes ecee4d0695067ae04959b121028b42a588e75370
+	accel/amdxdna: Add MODULE_FIRMWARE() declarations
+drm-intel drm-intel-next-fixes 2014c95afecee3e76ca4a56956a936e23283f05b
+	Linux 6.14-rc1
+drm-xe drm-xe-next-fixes 8dcb26b493d3bab90851f93ae1c127af5cb2dbb5
+	Merge tag 'amd-drm-fixes-6.14-2025-01-29' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm-misc drm-misc-next 50625eab3972e5d37dcf3a250d9e3cdecbd6c13b
+	drm/edp-panel: Add panel used by T14s Gen6 Snapdragon
+drm-intel drm-intel-next f2d236766f01ac56799070cc076518f5a7bdbbaf
+	drm/i915: Continue intel_display_power struct intel_display conversion
+drm-intel drm-intel-gt-next fc2ef5b6e1ab9717b1a0b588a39b410864091fa9
+	selftests: i915: Use struct_size() helper in kmalloc()
+drm-xe drm-xe-next 768fec5ff7c1d1183edb14ff7d68b07edc98a6e1
+	drm/xe/pxp: Don't use 0 to indicate NULL
+drm-intel topic/core-for-CI 6624d9287696c087d26f2904563cd56594d2326d
+	scsi: use GFP_NOIO to avoid circular locking dependency
+drm-xe topic/xe-for-CI 6ea369b34748ef5377f23e24b577912585ce5445
+	drm/xe/ptl: Define HuC FW version for PTL
