@@ -1,0 +1,28 @@
+drm drm-fixes d082ecbc71e9e0bf49883ee4afd435a77a5101b6
+	Linux 6.14-rc4
+drm-misc drm-misc-fixes 01f1d77a2630e774ce33233c4e6723bca3ae9daa
+	drm/nouveau: Do not override forced connector status
+drm-intel drm-intel-fixes 16fef33fdb1e2269c20697d9b61ae8022bc92665
+	drm/i915/dp_mst: Fix encoder HW state readout for UHBR MST
+drm-xe drm-xe-fixes 12c2f962fe71f390951d9242725bc7e608f55927
+	drm/xe: cancel pending job timer before freeing scheduler
+drm drm-next 16893dd23f6d1e3a4dd6da272ef9960825da3ebd
+	Merge tag 'drm-intel-next-2025-02-24' of https://gitlab.freedesktop.org/drm/i915/kernel into drm-next
+drm-misc drm-misc-next-fixes ecee4d0695067ae04959b121028b42a588e75370
+	accel/amdxdna: Add MODULE_FIRMWARE() declarations
+drm-intel drm-intel-next-fixes 2014c95afecee3e76ca4a56956a936e23283f05b
+	Linux 6.14-rc1
+drm-xe drm-xe-next-fixes 8dcb26b493d3bab90851f93ae1c127af5cb2dbb5
+	Merge tag 'amd-drm-fixes-6.14-2025-01-29' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm-misc drm-misc-next 099b79f94366f3110783301e20d8136d762247f8
+	drm/doc: Document KUnit expectations
+drm-intel drm-intel-next db0d2d7572153490449e360d5ebf298badf5f395
+	drm/i915: Fix pipeDMC and ATS fault handling
+drm-intel drm-intel-gt-next 7ded94bd11d47a8ddef051aef1d1a42d8191e09f
+	drm/i915/gt: add wait on depth stall done bit handling
+drm-xe drm-xe-next 18778b5fdd018baa6eb492166d04605b39030e1d
+	drm/xe: Eliminate usage of TIMESTAMP_OVERRIDE
+drm-intel topic/core-for-CI 69a373f3b198bfdbaaf68a38ea400136b7ed329c
+	Revert "lockdep: Enable PROVE_RAW_LOCK_NESTING with PROVE_LOCKING."
+drm-xe topic/xe-for-CI 6ea369b34748ef5377f23e24b577912585ce5445
+	drm/xe/ptl: Define HuC FW version for PTL
