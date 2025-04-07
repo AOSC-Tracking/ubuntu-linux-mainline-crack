@@ -1,0 +1,28 @@
+drm drm-fixes 0af2f6be1b4281385b618cb86ad946eded089ac8
+	Linux 6.15-rc1
+drm-misc drm-misc-fixes 7fb6afa9125fc111478615e24231943c4f76cc2e
+	drm/sti: remove duplicate object names
+drm-intel drm-intel-fixes bc1feb8174b7e46c1806a6f684d89a47508f3a53
+	drm/i915/xe2hpd: Identify the memory type for SKUs with GDDR + ECC
+drm-xe drm-xe-fixes 88ecb66b9956a14577d513a6c8c28bb2e7989703
+	drm/xe: Restore EIO errno return when GuC PC start fails
+drm drm-next 0af2f6be1b4281385b618cb86ad946eded089ac8
+	Linux 6.15-rc1
+drm-misc drm-misc-next-fixes 85a063b8b281e144ed96463936fb4e6b3d4fe9e4
+	drm/i2c: tda998x: select CONFIG_DRM_KMS_HELPER
+drm-intel drm-intel-next-fixes 0af2f6be1b4281385b618cb86ad946eded089ac8
+	Linux 6.15-rc1
+drm-xe drm-xe-next-fixes 5e66cf6edddb5f6237e3afb07475ace57ecb56bc
+	drm/xe: Fix unmet direct dependencies warning
+drm-misc drm-misc-next 9521f9ba82b5a6e77ece46ea06cef61b97f5b45f
+	drm/ast: Validate display modes against framebuffer and format limits
+drm-intel drm-intel-next 8b6b67938ed5a0a4385c38efad91cb3e6f7e5765
+	drm/i915/dp_mst: Rename intel_dp::mst.active_links to mst.active_streams
+drm-intel drm-intel-gt-next 4e22d5b8ba499905721329f89675795f4ca488b2
+	drm/i915/gem: Convert SPDX headers to single-line format
+drm-xe drm-xe-next 1e1981b16bb1bbe2fafa57ed439b45cb5b34e32d
+	drm/xe: Fix taking invalid lock on wedge
+drm-intel topic/core-for-CI 2a7715d7249d1af78d0c3b803cb1116706e22ad3
+	Revert "lockdep: Enable PROVE_RAW_LOCK_NESTING with PROVE_LOCKING."
+drm-xe topic/xe-for-CI 7cccfd9303aa2d0311a86fcb38fde73760bd8e8a
+	drm/xe/pm: Re-enable D3Cold by default on BMG
