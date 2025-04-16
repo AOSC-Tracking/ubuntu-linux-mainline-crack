@@ -1,0 +1,28 @@
+drm drm-fixes c925e9936def79c6a1af7c61b02438670d0ab65c
+	Merge tag 'amd-drm-fixes-6.15-2025-04-16' of https://gitlab.freedesktop.org/agd5f/linux into drm-fixes
+drm-misc drm-misc-fixes d27326a9999286fa45ad063f760e63329254f130
+	dma-buf/sw_sync: Decrement refcount on error in sw_sync_ioctl_get_deadline()
+drm-intel drm-intel-fixes 3a47280b768748992ee34bd52c394c60b2845af3
+	drm/i915/dp: Check for HAS_DSC_3ENGINES while configuring DSC slices
+drm-xe drm-xe-fixes 88ecb66b9956a14577d513a6c8c28bb2e7989703
+	drm/xe: Restore EIO errno return when GuC PC start fails
+drm drm-next b60301774a8fe6c30b14a95104ec099290a2e904
+	Merge tag 'drm-intel-next-2025-04-11' of https://gitlab.freedesktop.org/drm/i915/kernel into drm-next
+drm-misc drm-misc-next-fixes 85a063b8b281e144ed96463936fb4e6b3d4fe9e4
+	drm/i2c: tda998x: select CONFIG_DRM_KMS_HELPER
+drm-intel drm-intel-next-fixes 0af2f6be1b4281385b618cb86ad946eded089ac8
+	Linux 6.15-rc1
+drm-xe drm-xe-next-fixes 5e66cf6edddb5f6237e3afb07475ace57ecb56bc
+	drm/xe: Fix unmet direct dependencies warning
+drm-misc drm-misc-next 4890d68db651562ea80250f2c93205a5c0327a6a
+	drm/bridge: dw-hdmi: Avoid including uapi headers
+drm-intel drm-intel-next b484c1e225a6a582fc78c4d7af7b286408bb7d41
+	drm/i915/pxp: fix undefined reference to `intel_pxp_gsccs_is_ready_for_sessions'
+drm-intel drm-intel-gt-next 795dbde92fe5c6996a02a5b579481de73035e7bf
+	drm/i915/huc: Fix fence not released on early probe errors
+drm-xe drm-xe-next d755887f8e5a2a18e15e6632a5193e5feea18499
+	drm/xe/dma_buf: stop relying on placement in unmap
+drm-intel topic/core-for-CI abfe4d1d04b5806ffcf552b2482b8b279846f152
+	Revert "lockdep: Enable PROVE_RAW_LOCK_NESTING with PROVE_LOCKING."
+drm-xe topic/xe-for-CI 313717fcb713a154c4535877283f5ce83f72038b
+	drm/xe/pm: Re-enable D3Cold by default on BMG
