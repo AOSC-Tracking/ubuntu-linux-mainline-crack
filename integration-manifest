@@ -1,0 +1,28 @@
+drm drm-fixes 0467145fab3b3a7a1efd221722310fe32329b3da
+	Merge tag 'drm-msm-fixes-2025-04-18' of https://gitlab.freedesktop.org/drm/msm into drm-fixes
+drm-misc drm-misc-fixes bbe5679f30d7690a9b6838a583b9690ea73fe0e9
+	drm/nouveau: Fix WARN_ON in nouveau_fence_context_kill()
+drm-intel drm-intel-fixes 7e21ea8149a0e41c3666ee52cc063a6f797a7a2a
+	drm/i915/pxp: fix undefined reference to `intel_pxp_gsccs_is_ready_for_sessions'
+drm-xe drm-xe-fixes 9c32cda43eb78f78c73aee4aa344b777714e259b
+	Linux 6.15-rc3
+drm drm-next b60301774a8fe6c30b14a95104ec099290a2e904
+	Merge tag 'drm-intel-next-2025-04-11' of https://gitlab.freedesktop.org/drm/i915/kernel into drm-next
+drm-misc drm-misc-next-fixes 85a063b8b281e144ed96463936fb4e6b3d4fe9e4
+	drm/i2c: tda998x: select CONFIG_DRM_KMS_HELPER
+drm-intel drm-intel-next-fixes 0af2f6be1b4281385b618cb86ad946eded089ac8
+	Linux 6.15-rc1
+drm-xe drm-xe-next-fixes 5e66cf6edddb5f6237e3afb07475ace57ecb56bc
+	drm/xe: Fix unmet direct dependencies warning
+drm-misc drm-misc-next ef6517ac5cf971cfeaccea4238d9da7e2425b8b1
+	MAINTAINERS: add entry for Sitronix ST7571 LCD Controller
+drm-intel drm-intel-next 4332473e7ca8ee6db3c41474eb5a16d5deedffa8
+	drm/i915/display: Rename vblank DC workaround functions and variables
+drm-intel drm-intel-gt-next 795dbde92fe5c6996a02a5b579481de73035e7bf
+	drm/i915/huc: Fix fence not released on early probe errors
+drm-xe drm-xe-next 4ea512714c42c69828b4a2647d206bf404043ad5
+	drm/xe: Fix CFI violation when accessing sysfs files
+drm-intel topic/core-for-CI abfe4d1d04b5806ffcf552b2482b8b279846f152
+	Revert "lockdep: Enable PROVE_RAW_LOCK_NESTING with PROVE_LOCKING."
+drm-xe topic/xe-for-CI 993a9b1f119ff8e6d89e5e32f5a86a02c7d2cf57
+	drm/xe/pm: Re-enable D3Cold by default on BMG
