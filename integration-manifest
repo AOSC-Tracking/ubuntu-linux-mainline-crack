@@ -1,0 +1,28 @@
+drm drm-fixes b4432656b36e5cc1d50a1f2dc15357543add530e
+	Linux 6.15-rc4
+drm-misc drm-misc-fixes 32dce6b1949a696dc7abddc04de8cbe35c260217
+	drm: Select DRM_KMS_HELPER from DRM_DEBUG_DP_MST_TOPOLOGY_REFS
+drm-intel drm-intel-fixes 7e21ea8149a0e41c3666ee52cc063a6f797a7a2a
+	drm/i915/pxp: fix undefined reference to `intel_pxp_gsccs_is_ready_for_sessions'
+drm-xe drm-xe-fixes 9c32cda43eb78f78c73aee4aa344b777714e259b
+	Linux 6.15-rc3
+drm drm-next d2b9e2f8a15d53121ae8f2c67b69cf06b6fa586c
+	Merge tag 'drm-xe-next-2025-04-17' of https://gitlab.freedesktop.org/drm/xe/kernel into drm-next
+drm-misc drm-misc-next-fixes 85a063b8b281e144ed96463936fb4e6b3d4fe9e4
+	drm/i2c: tda998x: select CONFIG_DRM_KMS_HELPER
+drm-intel drm-intel-next-fixes 0af2f6be1b4281385b618cb86ad946eded089ac8
+	Linux 6.15-rc1
+drm-xe drm-xe-next-fixes 5e66cf6edddb5f6237e3afb07475ace57ecb56bc
+	drm/xe: Fix unmet direct dependencies warning
+drm-misc drm-misc-next 69b8115fc8d1d57c37b003e7c39a927c5b03390e
+	drm/panfrost: reorder pd/clk/rst sequence
+drm-intel drm-intel-next 2af5615a5ba1aac2a356aa4cd9fc02e78c037092
+	drm/i915/psr: Move PSR workaround to intel_psr.c
+drm-intel drm-intel-gt-next 795dbde92fe5c6996a02a5b579481de73035e7bf
+	drm/i915/huc: Fix fence not released on early probe errors
+drm-xe drm-xe-next 1bb53d05ba71b684f61bd11df8b99fe75ce52754
+	Merge drm/drm-next into drm-xe-next
+drm-intel topic/core-for-CI 5d93b4b116842b7f59de2868a5bda39300fd4de7
+	gcc-15: disable '-Wunterminated-string-initialization' entirely for now
+drm-xe topic/xe-for-CI 993a9b1f119ff8e6d89e5e32f5a86a02c7d2cf57
+	drm/xe/pm: Re-enable D3Cold by default on BMG
