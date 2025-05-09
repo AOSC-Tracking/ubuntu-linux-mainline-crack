@@ -1,0 +1,28 @@
+drm drm-fixes 80e12f3e2a5a911fb67597da4c17af48e7cb92de
+	Merge tag 'amd-drm-fixes-6.15-2025-05-08' of https://gitlab.freedesktop.org/agd5f/linux into drm-fixes
+drm-misc drm-misc-fixes 7c6fa1797a725732981f2d77711c867166737719
+	drm/panel: simple: Update timings for AUO G101EVN010
+drm-intel drm-intel-fixes 936b73feab5cd7eae8fe3d08a7ac9b1f8ac68042
+	drm/i915/slpc: Balance the inc/dec for num_waiters
+drm-xe drm-xe-fixes 92a09c47464d040866cf2b4cd052bc60555185fb
+	Linux 6.15-rc5
+drm drm-next 5e0c67998152bdb91b056160449ee542b86271a5
+	BackMerge tag 'v6.15-rc5' into drm-next
+drm-misc drm-misc-next-fixes 85a063b8b281e144ed96463936fb4e6b3d4fe9e4
+	drm/i2c: tda998x: select CONFIG_DRM_KMS_HELPER
+drm-intel drm-intel-next-fixes 0af2f6be1b4281385b618cb86ad946eded089ac8
+	Linux 6.15-rc1
+drm-xe drm-xe-next-fixes 5e66cf6edddb5f6237e3afb07475ace57ecb56bc
+	drm/xe: Fix unmet direct dependencies warning
+drm-misc drm-misc-next c065e46395e2a584c3d7eade1f7386175a990dba
+	accel/amdxdna: Support submit commands without arguments
+drm-intel drm-intel-next 0f45696ddb2b901fbf15cb8d2e89767be481d59f
+	drm/i915/dp: Fix determining SST/MST mode during MTP TU state computation
+drm-intel drm-intel-gt-next ff868667a4f9c6e349f4a4f0dcc3ff60d6ea8a73
+	drm/i915/guc: Enable DUAL_QUEUE_WA for newer platforms
+drm-xe drm-xe-next 252c4711973de4e4f3ecddcc18912aecfd4e537c
+	drm/xe/doc: Wire up PCIe Gen5 limitations
+drm-intel topic/core-for-CI 5d93b4b116842b7f59de2868a5bda39300fd4de7
+	gcc-15: disable '-Wunterminated-string-initialization' entirely for now
+drm-xe topic/xe-for-CI 993a9b1f119ff8e6d89e5e32f5a86a02c7d2cf57
+	drm/xe/pm: Re-enable D3Cold by default on BMG
