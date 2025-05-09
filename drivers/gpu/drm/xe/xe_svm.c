@@ -726,7 +726,6 @@ static int xe_svm_alloc_vram(struct xe_vm *vm, struct xe_tile *tile,
 }
 #endif
 
-
 /**
  * xe_svm_handle_pagefault() - SVM handle page fault
  * @vm: The VM.
