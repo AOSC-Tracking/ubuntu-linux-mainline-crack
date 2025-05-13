@@ -140,46 +140,47 @@ static void bdw_set_pipe_misc(struct intel_dsb *dsb,
 			      const struct intel_crtc_state *crtc_state);
 
 /* returns HPLL frequency in kHz */
-int vlv_get_hpll_vco(struct drm_i915_private *dev_priv)
+int vlv_get_hpll_vco(struct drm_device *drm)
 {
 	int hpll_freq, vco_freq[] = { 800, 1600, 2000, 2400 };
 
 	/* Obtain SKU information */
-	hpll_freq = vlv_cck_read(dev_priv, CCK_FUSE_REG) &
+	hpll_freq = vlv_cck_read(drm, CCK_FUSE_REG) &
 		CCK_FUSE_HPLL_FREQ_MASK;
 
 	return vco_freq[hpll_freq] * 1000;
 }
 
-int vlv_get_cck_clock(struct drm_i915_private *dev_priv,
+int vlv_get_cck_clock(struct drm_device *drm,
 		      const char *name, u32 reg, int ref_freq)
 {
 	u32 val;
 	int divider;
 
-	val = vlv_cck_read(dev_priv, reg);
+	val = vlv_cck_read(drm, reg);
 	divider = val & CCK_FREQUENCY_VALUES;
 
-	drm_WARN(&dev_priv->drm, (val & CCK_FREQUENCY_STATUS) !=
+	drm_WARN(drm, (val & CCK_FREQUENCY_STATUS) !=
 		 (divider << CCK_FREQUENCY_STATUS_SHIFT),
 		 "%s change in progress\n", name);
 
 	return DIV_ROUND_CLOSEST(ref_freq << 1, divider + 1);
 }
 
-int vlv_get_cck_clock_hpll(struct drm_i915_private *dev_priv,
+int vlv_get_cck_clock_hpll(struct drm_device *drm,
 			   const char *name, u32 reg)
 {
+	struct drm_i915_private *dev_priv = to_i915(drm);
 	int hpll;
 
-	vlv_cck_get(dev_priv);
+	vlv_cck_get(drm);
 
 	if (dev_priv->hpll_freq == 0)
-		dev_priv->hpll_freq = vlv_get_hpll_vco(dev_priv);
+		dev_priv->hpll_freq = vlv_get_hpll_vco(drm);
 
-	hpll = vlv_get_cck_clock(dev_priv, name, reg, dev_priv->hpll_freq);
+	hpll = vlv_get_cck_clock(drm, name, reg, dev_priv->hpll_freq);
 
-	vlv_cck_put(dev_priv);
+	vlv_cck_put(drm);
 
 	return hpll;
 }
@@ -191,7 +192,7 @@ void intel_update_czclk(struct intel_display *display)
 	if (!display->platform.valleyview && !display->platform.cherryview)
 		return;
 
-	dev_priv->czclk_freq = vlv_get_cck_clock_hpll(dev_priv, "czclk",
+	dev_priv->czclk_freq = vlv_get_cck_clock_hpll(display->drm, "czclk",
 						      CCK_CZ_CLOCK_CONTROL);
 
 	drm_dbg_kms(display->drm, "CZ clock rate: %d kHz\n", dev_priv->czclk_freq);
@@ -4318,6 +4319,22 @@ compute_sink_pipe_bpp(const struct drm_connector_state *conn_state,
 	return 0;
 }
 
+int intel_display_min_pipe_bpp(void)
+{
+	return 6 * 3;
+}
+
+int intel_display_max_pipe_bpp(struct intel_display *display)
+{
+	if (display->platform.g4x || display->platform.valleyview ||
+	    display->platform.cherryview)
+		return 10*3;
+	else if (DISPLAY_VER(display) >= 5)
+		return 12*3;
+	else
+		return 8*3;
+}
+
 static int
 compute_baseline_pipe_bpp(struct intel_atomic_state *state,
 			  struct intel_crtc *crtc)
@@ -4327,17 +4344,9 @@ compute_baseline_pipe_bpp(struct intel_atomic_state *state,
 		intel_atomic_get_new_crtc_state(state, crtc);
 	struct drm_connector *connector;
 	struct drm_connector_state *connector_state;
-	int bpp, i;
+	int i;
 
-	if (display->platform.g4x || display->platform.valleyview ||
-	    display->platform.cherryview)
-		bpp = 10*3;
-	else if (DISPLAY_VER(display) >= 5)
-		bpp = 12*3;
-	else
-		bpp = 8*3;
-
-	crtc_state->pipe_bpp = bpp;
+	crtc_state->pipe_bpp = intel_display_max_pipe_bpp(display);
 
 	/* Clamp display bpp to connector max bpp */
 	for_each_new_connector_in_state(&state->base, connector, connector_state, i) {
