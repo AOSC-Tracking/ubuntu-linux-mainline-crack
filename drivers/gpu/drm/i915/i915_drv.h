@@ -177,7 +177,8 @@ struct i915_selftest_stash {
 struct drm_i915_private {
 	struct drm_device drm;
 
-	struct intel_display display;
+	struct intel_display *display;
+	struct intel_display __display; /* Transitional. Do not use directly. */
 
 	/* FIXME: Device release actions should all be moved to drmm_ */
 	bool do_release;
@@ -230,6 +231,7 @@ struct drm_i915_private {
 	/* VLV/CHV IOSF sideband */
 	struct {
 		struct mutex lock; /* protect sideband access */
+		unsigned long locked_unit_mask;
 		struct pm_qos_request qos;
 	} vlv_iosf_sb;
 
