@@ -1,0 +1,30 @@
+drm drm-fixes a5806cd506af5a7c19bcd596e4708b5c464bfd21
+	Linux 6.15-rc7
+drm-misc drm-misc-fixes 6692dbc15e5ed40a3aa037aced65d7b8826c58cd
+	drm/edid: fixed the bug that hdr metadata was not reset
+drm-intel drm-intel-fixes a5806cd506af5a7c19bcd596e4708b5c464bfd21
+	Linux 6.15-rc7
+drm-xe drm-xe-fixes 617d824c5323b8474b3665ae6c410c98b839e0b0
+	drm/xe: Add WA BB to capture active context utilization
+drm drm-next c4f8ac095fc91084108ec21117eb9c1fff64725d
+	Merge tag 'nova-next-v6.16-2025-05-20' of https://gitlab.freedesktop.org/drm/nova into drm-next
+drm-misc drm-misc-next-fixes 7c1a9408ce5f34ded5a85db81cf80e0975901685
+	Merge tag 'drm-msm-next-2025-05-16' of https://gitlab.freedesktop.org/drm/msm into drm-next
+drm-intel drm-intel-next-fixes 765165a5f0356d7f1f2f216b788239c8861c6bd1
+	drm/i915/gem: Allow EXEC_CAPTURE on recoverable contexts on DG1
+drm-xe drm-xe-next-fixes 1faeeb315fdbd005bbc1bc74214e39087971dda9
+	Merge tag 'amd-drm-next-6.16-2025-05-09' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm-misc drm-misc-next ae01d3183d2763ed27ab71f4ef5402b683d9ad8a
+	drm/bridge: adv7511: switch to the HDMI connector helpers
+drm-intel drm-intel-next 5a9f299f956ef9764f56044cfca7aafa23cea1d1
+	drm/xe/display: use xe->display to decide whether to do anything
+drm-intel drm-intel-gt-next 9b961744a83a3027b8d4b97fe1fc587334883ce8
+	drm/i915/pci: Remove force_probe requirement for DG1
+drm-xe drm-xe-next a7f87deac2295d11865048bcb9c2de369b52ed93
+	drm/xe: Default auto_link_downgrade status to false
+drm-intel topic/core-for-CI 1c26b51f9295abb1d1bc24eb2cf49e9a1fea29ab
+	Revert "lockdep: Enable PROVE_RAW_LOCK_NESTING with PROVE_LOCKING."
+drm-xe topic/xe-for-CI 993a9b1f119ff8e6d89e5e32f5a86a02c7d2cf57
+	drm/xe/pm: Re-enable D3Cold by default on BMG
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
