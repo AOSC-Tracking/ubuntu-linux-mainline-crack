@@ -38,13 +38,17 @@
 
 static bool has_display(struct xe_device *xe)
 {
-	return HAS_DISPLAY(&xe->display);
+	struct intel_display *display = xe->display;
+
+	return HAS_DISPLAY(display);
 }
 
 /**
  * xe_display_driver_probe_defer - Detect if we need to wait for other drivers
  *				   early on
  * @pdev: PCI device
+ *
+ * Note: This is called before xe or display device creation.
  *
  * Returns: true if probe needs to be deferred, false otherwise
  */
@@ -63,6 +67,8 @@ bool xe_display_driver_probe_defer(struct pci_dev *pdev)
  * Set features and function hooks in @driver that are needed for driving the
  * display IP. This sets the driver's capability of driving display, regardless
  * if the device has it enabled
+ *
+ * Note: This is called before xe or display device creation.
  */
 void xe_display_driver_set_hooks(struct drm_driver *driver)
 {
@@ -81,39 +87,12 @@ static void unset_display_features(struct xe_device *xe)
 	xe->drm.driver_features &= ~(DRIVER_MODESET | DRIVER_ATOMIC);
 }
 
-static void display_destroy(struct drm_device *dev, void *dummy)
-{
-	struct xe_device *xe = to_xe_device(dev);
-
-	destroy_workqueue(xe->display.hotplug.dp_wq);
-}
-
-/**
- * xe_display_create - create display struct
- * @xe: XE device instance
- *
- * Initialize all fields used by the display part.
- *
- * TODO: once everything can be inside a single struct, make the struct opaque
- * to the rest of xe and return it to be xe->display.
- *
- * Returns: 0 on success
- */
-int xe_display_create(struct xe_device *xe)
-{
-	spin_lock_init(&xe->display.fb_tracking.lock);
-
-	xe->display.hotplug.dp_wq = alloc_ordered_workqueue("xe-dp", 0);
-
-	return drmm_add_action_or_reset(&xe->drm, display_destroy, NULL);
-}
-
 static void xe_display_fini_early(void *arg)
 {
 	struct xe_device *xe = arg;
-	struct intel_display *display = &xe->display;
+	struct intel_display *display = xe->display;
 
-	if (!xe->info.probe_display)
+	if (!display)
 		return;
 
 	intel_display_driver_remove_nogem(display);
@@ -124,10 +103,10 @@ static void xe_display_fini_early(void *arg)
 
 int xe_display_init_early(struct xe_device *xe)
 {
-	struct intel_display *display = &xe->display;
+	struct intel_display *display = xe->display;
 	int err;
 
-	if (!xe->info.probe_display)
+	if (!display)
 		return 0;
 
 	/* Fake uncore lock */
@@ -168,7 +147,7 @@ err_opregion:
 static void xe_display_fini(void *arg)
 {
 	struct xe_device *xe = arg;
-	struct intel_display *display = &xe->display;
+	struct intel_display *display = xe->display;
 
 	intel_hpd_poll_fini(display);
 	intel_hdcp_component_fini(display);
@@ -178,10 +157,10 @@ static void xe_display_fini(void *arg)
 
 int xe_display_init(struct xe_device *xe)
 {
-	struct intel_display *display = &xe->display;
+	struct intel_display *display = xe->display;
 	int err;
 
-	if (!xe->info.probe_display)
+	if (!display)
 		return 0;
 
 	err = intel_display_driver_probe(display);
@@ -193,9 +172,9 @@ int xe_display_init(struct xe_device *xe)
 
 void xe_display_register(struct xe_device *xe)
 {
-	struct intel_display *display = &xe->display;
+	struct intel_display *display = xe->display;
 
-	if (!xe->info.probe_display)
+	if (!display)
 		return;
 
 	intel_display_driver_register(display);
@@ -204,9 +183,9 @@ void xe_display_register(struct xe_device *xe)
 
 void xe_display_unregister(struct xe_device *xe)
 {
-	struct intel_display *display = &xe->display;
+	struct intel_display *display = xe->display;
 
-	if (!xe->info.probe_display)
+	if (!display)
 		return;
 
 	intel_power_domains_disable(display);
@@ -217,9 +196,9 @@ void xe_display_unregister(struct xe_device *xe)
 
 void xe_display_irq_handler(struct xe_device *xe, u32 master_ctl)
 {
-	struct intel_display *display = &xe->display;
+	struct intel_display *display = xe->display;
 
-	if (!xe->info.probe_display)
+	if (!display)
 		return;
 
 	if (master_ctl & DISPLAY_IRQ)
@@ -228,9 +207,9 @@ void xe_display_irq_handler(struct xe_device *xe, u32 master_ctl)
 
 void xe_display_irq_enable(struct xe_device *xe, u32 gu_misc_iir)
 {
-	struct intel_display *display = &xe->display;
+	struct intel_display *display = xe->display;
 
-	if (!xe->info.probe_display)
+	if (!display)
 		return;
 
 	if (gu_misc_iir & GU_MISC_GSE)
@@ -239,9 +218,9 @@ void xe_display_irq_enable(struct xe_device *xe, u32 gu_misc_iir)
 
 void xe_display_irq_reset(struct xe_device *xe)
 {
-	struct intel_display *display = &xe->display;
+	struct intel_display *display = xe->display;
 
-	if (!xe->info.probe_display)
+	if (!display)
 		return;
 
 	gen11_display_irq_reset(display);
@@ -249,9 +228,9 @@ void xe_display_irq_reset(struct xe_device *xe)
 
 void xe_display_irq_postinstall(struct xe_device *xe, struct xe_gt *gt)
 {
-	struct intel_display *display = &xe->display;
+	struct intel_display *display = xe->display;
 
-	if (!xe->info.probe_display)
+	if (!display)
 		return;
 
 	if (gt->info.id == XE_GT0)
@@ -290,9 +269,9 @@ static void xe_display_flush_cleanup_work(struct xe_device *xe)
 
 static void xe_display_enable_d3cold(struct xe_device *xe)
 {
-	struct intel_display *display = &xe->display;
+	struct intel_display *display = xe->display;
 
-	if (!xe->info.probe_display)
+	if (!display)
 		return;
 
 	/*
@@ -313,9 +292,9 @@ static void xe_display_enable_d3cold(struct xe_device *xe)
 
 static void xe_display_disable_d3cold(struct xe_device *xe)
 {
-	struct intel_display *display = &xe->display;
+	struct intel_display *display = xe->display;
 
-	if (!xe->info.probe_display)
+	if (!display)
 		return;
 
 	intel_dmc_resume(display);
@@ -337,10 +316,10 @@ static void xe_display_disable_d3cold(struct xe_device *xe)
 
 void xe_display_pm_suspend(struct xe_device *xe)
 {
-	struct intel_display *display = &xe->display;
+	struct intel_display *display = xe->display;
 	bool s2idle = suspend_to_idle();
 
-	if (!xe->info.probe_display)
+	if (!display)
 		return;
 
 	/*
@@ -362,7 +341,7 @@ void xe_display_pm_suspend(struct xe_device *xe)
 
 	if (has_display(xe)) {
 		intel_display_driver_suspend_access(display);
-		intel_encoder_suspend_all(&xe->display);
+		intel_encoder_suspend_all(display);
 	}
 
 	intel_opregion_suspend(display, s2idle ? PCI_D1 : PCI_D3cold);
@@ -372,9 +351,9 @@ void xe_display_pm_suspend(struct xe_device *xe)
 
 void xe_display_pm_shutdown(struct xe_device *xe)
 {
-	struct intel_display *display = &xe->display;
+	struct intel_display *display = xe->display;
 
-	if (!xe->info.probe_display)
+	if (!display)
 		return;
 
 	intel_power_domains_disable(display);
@@ -403,9 +382,9 @@ void xe_display_pm_shutdown(struct xe_device *xe)
 
 void xe_display_pm_runtime_suspend(struct xe_device *xe)
 {
-	struct intel_display *display = &xe->display;
+	struct intel_display *display = xe->display;
 
-	if (!xe->info.probe_display)
+	if (!display)
 		return;
 
 	if (xe->d3cold.allowed) {
@@ -418,10 +397,10 @@ void xe_display_pm_runtime_suspend(struct xe_device *xe)
 
 void xe_display_pm_suspend_late(struct xe_device *xe)
 {
-	struct intel_display *display = &xe->display;
+	struct intel_display *display = xe->display;
 	bool s2idle = suspend_to_idle();
 
-	if (!xe->info.probe_display)
+	if (!display)
 		return;
 
 	intel_display_power_suspend_late(display, s2idle);
@@ -429,9 +408,9 @@ void xe_display_pm_suspend_late(struct xe_device *xe)
 
 void xe_display_pm_runtime_suspend_late(struct xe_device *xe)
 {
-	struct intel_display *display = &xe->display;
+	struct intel_display *display = xe->display;
 
-	if (!xe->info.probe_display)
+	if (!display)
 		return;
 
 	if (xe->d3cold.allowed)
@@ -447,9 +426,9 @@ void xe_display_pm_runtime_suspend_late(struct xe_device *xe)
 
 void xe_display_pm_shutdown_late(struct xe_device *xe)
 {
-	struct intel_display *display = &xe->display;
+	struct intel_display *display = xe->display;
 
-	if (!xe->info.probe_display)
+	if (!display)
 		return;
 
 	/*
@@ -462,9 +441,9 @@ void xe_display_pm_shutdown_late(struct xe_device *xe)
 
 void xe_display_pm_resume_early(struct xe_device *xe)
 {
-	struct intel_display *display = &xe->display;
+	struct intel_display *display = xe->display;
 
-	if (!xe->info.probe_display)
+	if (!display)
 		return;
 
 	intel_display_power_resume_early(display);
@@ -472,9 +451,9 @@ void xe_display_pm_resume_early(struct xe_device *xe)
 
 void xe_display_pm_resume(struct xe_device *xe)
 {
-	struct intel_display *display = &xe->display;
+	struct intel_display *display = xe->display;
 
-	if (!xe->info.probe_display)
+	if (!display)
 		return;
 
 	intel_dmc_resume(display);
@@ -507,9 +486,9 @@ void xe_display_pm_resume(struct xe_device *xe)
 
 void xe_display_pm_runtime_resume(struct xe_device *xe)
 {
-	struct intel_display *display = &xe->display;
+	struct intel_display *display = xe->display;
 
-	if (!xe->info.probe_display)
+	if (!display)
 		return;
 
 	if (xe->d3cold.allowed) {
@@ -530,6 +509,17 @@ static void display_device_remove(struct drm_device *dev, void *arg)
 	intel_display_device_remove(display);
 }
 
+/**
+ * xe_display_probe - probe display and create display struct
+ * @xe: XE device instance
+ *
+ * Initialize all fields used by the display part.
+ *
+ * TODO: once everything can be inside a single struct, make the struct opaque
+ * to the rest of xe and return it to be xe->display.
+ *
+ * Returns: 0 on success
+ */
 int xe_display_probe(struct xe_device *xe)
 {
 	struct pci_dev *pdev = to_pci_dev(xe->drm.dev);
@@ -538,6 +528,9 @@ int xe_display_probe(struct xe_device *xe)
 
 	if (!xe->info.probe_display)
 		goto no_display;
+
+	/* TODO: Allocate display dynamically. */
+	xe->display = &xe->__display;
 
 	display = intel_display_device_probe(pdev);
 
