@@ -1,0 +1,30 @@
+drm drm-fixes fe1e5a1f2d1c2d4385a414dacca0e5275c0af281
+	Merge tag 'drm-xe-fixes-2025-05-23' of https://gitlab.freedesktop.org/drm/xe/kernel into drm-fixes
+drm-misc drm-misc-fixes 471db2c2d4f80ee94225a1ef246e4f5011733e50
+	drm/scheduler: signal scheduled fence when kill job
+drm-intel drm-intel-fixes a5806cd506af5a7c19bcd596e4708b5c464bfd21
+	Linux 6.15-rc7
+drm-xe drm-xe-fixes 027a362fb36b479030beecbaaec30711ddabf8fa
+	drm/xe/ptl: Update the PTL pci id table
+drm drm-next f8bb3ed3197966fb60bedcbdc126d2bd5bc0a77f
+	drm/nouveau/tegra: Fix error pointer vs NULL return in nvkm_device_tegra_resource_addr()
+drm-misc drm-misc-next-fixes 4673dec88da803fa23f1af9e04761683a30dd6aa
+	drm/panel: nt37801: Fix IS_ERR() vs NULL check in probe()
+drm-intel drm-intel-next-fixes f4c7baa0699b69edb6887a992283b389761e0e81
+	drm/i915/display: Add check for alloc_ordered_workqueue() and alloc_workqueue()
+drm-xe drm-xe-next-fixes 879ede53958f7bab79a88888f77e0ca91f0f77da
+	drm/xe: Default auto_link_downgrade status to false
+drm-misc drm-misc-next 1f957fbb88b61eaf5ac9bf2db6bc2e54121a4359
+	drm: renesas: rz-du: Add support for RZ/V2H(P) SoC
+drm-intel drm-intel-next 42e5fc672fee07da071a37e06a2454aba85d8efe
+	drm/i915/display: Use str_true_false() helper
+drm-intel drm-intel-gt-next 9b961744a83a3027b8d4b97fe1fc587334883ce8
+	drm/i915/pci: Remove force_probe requirement for DG1
+drm-xe drm-xe-next 20a07782dacf7348a259efcc4a2ab56ecbe7aeb1
+	drm/xe/vf: Fail migration recovery if fixups needed but platform not supported
+drm-intel topic/core-for-CI 1c26b51f9295abb1d1bc24eb2cf49e9a1fea29ab
+	Revert "lockdep: Enable PROVE_RAW_LOCK_NESTING with PROVE_LOCKING."
+drm-xe topic/xe-for-CI 993a9b1f119ff8e6d89e5e32f5a86a02c7d2cf57
+	drm/xe/pm: Re-enable D3Cold by default on BMG
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
