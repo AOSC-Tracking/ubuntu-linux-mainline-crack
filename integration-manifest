@@ -1,0 +1,30 @@
+drm drm-fixes 0ff41df1cb268fc69e703a08a57ee14ae967d0ca
+	Linux 6.15
+drm-misc drm-misc-fixes 03bcbbb3995ba5df43af9aba45334e35f2dfe27b
+	dummycon: Trigger redraw when switching consoles with deferred takeover
+drm-intel drm-intel-fixes 0ff41df1cb268fc69e703a08a57ee14ae967d0ca
+	Linux 6.15
+drm-xe drm-xe-fixes 0ff41df1cb268fc69e703a08a57ee14ae967d0ca
+	Linux 6.15
+drm drm-next f8bb3ed3197966fb60bedcbdc126d2bd5bc0a77f
+	drm/nouveau/tegra: Fix error pointer vs NULL return in nvkm_device_tegra_resource_addr()
+drm-misc drm-misc-next-fixes 6579a03e68ffa5feb2d2823dea16ca7466f6de16
+	drm/bridge: analogix_dp: Remove the unnecessary calls to clk_disable_unprepare() during probing
+drm-intel drm-intel-next-fixes ed5915cfce2abb9a553c3737badebd4a11d6c9c7
+	Revert "drm/i915/gem: Allow EXEC_CAPTURE on recoverable contexts on DG1"
+drm-xe drm-xe-next-fixes 879ede53958f7bab79a88888f77e0ca91f0f77da
+	drm/xe: Default auto_link_downgrade status to false
+drm-misc drm-misc-next 126bf397bf58485cdd631824190cdcfeb86f5d9b
+	drm/panel-edp: add N160JCE-ELL CMN panel for Lenovo Thinkbook 16
+drm-intel drm-intel-next e6ba431676d522ddc5f4301c0b5fb9f4741433c2
+	drm/xe: stop including intel_display_{core, device}.h from xe_device_types.h
+drm-intel drm-intel-gt-next d2dc30e0aa252830f908c8e793d3139d51321370
+	Revert "drm/i915/gem: Allow EXEC_CAPTURE on recoverable contexts on DG1"
+drm-xe drm-xe-next 39578fa40420fb11dbe4f42225a347e945d8fd0e
+	drm/xe: Add missing documentation of rpa_freq
+drm-intel topic/core-for-CI 1c26b51f9295abb1d1bc24eb2cf49e9a1fea29ab
+	Revert "lockdep: Enable PROVE_RAW_LOCK_NESTING with PROVE_LOCKING."
+drm-xe topic/xe-for-CI 993a9b1f119ff8e6d89e5e32f5a86a02c7d2cf57
+	drm/xe/pm: Re-enable D3Cold by default on BMG
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
