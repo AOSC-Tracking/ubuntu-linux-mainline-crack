@@ -550,6 +550,10 @@ struct intel_connector {
 		struct intel_dp *dp;
 	} mst;
 
+	struct {
+		int force_bpp_x16;
+	} link;
+
 	/* Work struct to schedule a uevent on link train failure */
 	struct work_struct modeset_retry_work;
 
@@ -591,7 +595,7 @@ struct intel_atomic_state {
 
 	bool dpll_set, modeset;
 
-	struct intel_shared_dpll_state shared_dpll[I915_NUM_PLLS];
+	struct intel_dpll_state dpll_state[I915_NUM_PLLS];
 
 	struct intel_dp_tunnel_inherited_state *inherited_dp_tunnels;
 
@@ -1075,8 +1079,8 @@ struct intel_crtc_state {
 	 * haswell. */
 	struct dpll dpll;
 
-	/* Selected dpll when shared or NULL. */
-	struct intel_shared_dpll *shared_dpll;
+	/* Selected dpll or NULL. */
+	struct intel_dpll *intel_dpll;
 
 	/* Actual register state of the dpll, for shared dpll cross-checking. */
 	struct intel_dpll_hw_state dpll_hw_state;
@@ -1086,7 +1090,7 @@ struct intel_crtc_state {
 	 * setting shared_dpll and dpll_hw_state to one of these reserved ones.
 	 */
 	struct icl_port_dpll {
-		struct intel_shared_dpll *pll;
+		struct intel_dpll *pll;
 		struct intel_dpll_hw_state hw_state;
 	} icl_port_dplls[ICL_PORT_DPLL_COUNT];
 
@@ -1293,7 +1297,7 @@ struct intel_crtc_state {
 	enum transcoder mst_master_transcoder;
 
 	/* For DSB based pipe updates */
-	struct intel_dsb *dsb_color_vblank, *dsb_commit;
+	struct intel_dsb *dsb_color, *dsb_commit;
 	bool use_dsb;
 
 	u32 psr2_man_track_ctl;
