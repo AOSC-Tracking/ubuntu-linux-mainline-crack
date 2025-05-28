@@ -1,0 +1,30 @@
+drm drm-fixes 0ff41df1cb268fc69e703a08a57ee14ae967d0ca
+	Linux 6.15
+drm-misc drm-misc-fixes 4557cc834712eca4eae7adbd9f0a06bdd8f79c99
+	accel/ivpu: Reorder Doorbell Unregister and Command Queue Destruction
+drm-intel drm-intel-fixes 0ff41df1cb268fc69e703a08a57ee14ae967d0ca
+	Linux 6.15
+drm-xe drm-xe-fixes 0ff41df1cb268fc69e703a08a57ee14ae967d0ca
+	Linux 6.15
+drm drm-next 84e2f918550e1063bd8e29faffe8ad491b7d8c52
+	Merge tag 'drm-xe-next-fixes-2025-05-28' of https://gitlab.freedesktop.org/drm/xe/kernel into drm-next
+drm-misc drm-misc-next-fixes fd03f82a026cc03cb8051a8c6487c99f96c9029f
+	drm/bridge: analogix_dp: Fix clk-disable removal
+drm-intel drm-intel-next-fixes ed5915cfce2abb9a553c3737badebd4a11d6c9c7
+	Revert "drm/i915/gem: Allow EXEC_CAPTURE on recoverable contexts on DG1"
+drm-xe drm-xe-next-fixes 40493d97b329f8185c0f04dc0ef2b9ffc58e7f3b
+	drm/xe: Add missing documentation of rpa_freq
+drm-misc drm-misc-next ef818481d9fbaf3483dde0d1faa565a016810de3
+	drm/vkms: Add support for DRM_FORMAT_R*
+drm-intel drm-intel-next 7ce53db1ff02062ba2b5808f41fa61ef2706f83b
+	drm/i915: Indicate which pipe lied about its interrupts
+drm-intel drm-intel-gt-next a6a26786f22a4ab0227bcf610510c4c9c2df0808
+	drm/i915/guc: Check if expecting reply before decrementing outstanding_submission_g2h
+drm-xe drm-xe-next 2cb38bb0add9b81f89ccdb2db88af89e99925880
+	drm/xe: Allow to trigger GT resets using debugfs writes
+drm-intel topic/core-for-CI 1c26b51f9295abb1d1bc24eb2cf49e9a1fea29ab
+	Revert "lockdep: Enable PROVE_RAW_LOCK_NESTING with PROVE_LOCKING."
+drm-xe topic/xe-for-CI 993a9b1f119ff8e6d89e5e32f5a86a02c7d2cf57
+	drm/xe/pm: Re-enable D3Cold by default on BMG
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
