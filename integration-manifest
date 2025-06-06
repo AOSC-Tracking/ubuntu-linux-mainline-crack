@@ -1,0 +1,30 @@
+drm drm-fixes 6f7e234f74caf5f8863bbca51b1b135d0736b0b3
+	Merge tag 'drm-misc-fixes-2025-06-06' of https://gitlab.freedesktop.org/drm/misc/kernel into drm-fixes
+drm-misc drm-misc-fixes f670b50ef5e4a69bf4d2ec5ac6a9228d93b13a7a
+	sysfb: Fix screen_info type check for VGA
+drm-intel drm-intel-fixes 0ff41df1cb268fc69e703a08a57ee14ae967d0ca
+	Linux 6.15
+drm-xe drm-xe-fixes 0ff41df1cb268fc69e703a08a57ee14ae967d0ca
+	Linux 6.15
+drm drm-next 04c8970771b4f1f39bb8453a2eeb188c4d5edbd6
+	drm/nouveau/vfn/r535: Convert comma to semicolon
+drm-misc drm-misc-next-fixes fd03f82a026cc03cb8051a8c6487c99f96c9029f
+	drm/bridge: analogix_dp: Fix clk-disable removal
+drm-intel drm-intel-next-fixes 791d76005de0ab556b590473eb4cbfede727fce0
+	drm/i915/display: Fix u32 overflow in SNPS PHY HDMI PLL setup
+drm-xe drm-xe-next-fixes 7c7c5cb5b5bf9d8ccc6a51b28687c9e7ff7f1890
+	drm/xe: remove unmatched xe_vm_unlock() from __xe_exec_queue_init()
+drm-misc drm-misc-next 93614c2ab39a9d6641b3e0fba73feea1f6120817
+	accel/qaic: delete qaic_bo.handle
+drm-intel drm-intel-next 7247efca0dcbc8ac6147db9200ed1549c0662465
+	drm/i915: use drm_modeset_lock_assert_held() in intel_connector_get_pipe()
+drm-intel drm-intel-gt-next f36a75aba1c3176d177964bca76f86a075d2943a
+	drm/i915/guc: Handle race condition where wakeref count drops below 0
+drm-xe drm-xe-next bfb114751af9f44bc0fdd595bc09b085c81cc61f
+	drm/xe/topology: Stop trying to fix programming mistakes
+drm-intel topic/core-for-CI 1c26b51f9295abb1d1bc24eb2cf49e9a1fea29ab
+	Revert "lockdep: Enable PROVE_RAW_LOCK_NESTING with PROVE_LOCKING."
+drm-xe topic/xe-for-CI 993a9b1f119ff8e6d89e5e32f5a86a02c7d2cf57
+	drm/xe/pm: Re-enable D3Cold by default on BMG
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
