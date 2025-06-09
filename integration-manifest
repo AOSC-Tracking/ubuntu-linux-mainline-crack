@@ -1,0 +1,30 @@
+drm drm-fixes 19272b37aa4f83ca52bdf9c16d5d81bdd1354494
+	Linux 6.16-rc1
+drm-misc drm-misc-fixes 779a0c9e06a91d0007f2a4f4071e3b9a8102b15e
+	accel/amdxdna: Fix incorrect PSP firmware size
+drm-intel drm-intel-fixes 19272b37aa4f83ca52bdf9c16d5d81bdd1354494
+	Linux 6.16-rc1
+drm-xe drm-xe-fixes d6fb4f01736a1d18cc981eb04fa2907a7121fc27
+	drm/xe/svm: Fix regression disallowing 64K SVM migration
+drm drm-next 19272b37aa4f83ca52bdf9c16d5d81bdd1354494
+	Linux 6.16-rc1
+drm-misc drm-misc-next-fixes fd03f82a026cc03cb8051a8c6487c99f96c9029f
+	drm/bridge: analogix_dp: Fix clk-disable removal
+drm-intel drm-intel-next-fixes 19272b37aa4f83ca52bdf9c16d5d81bdd1354494
+	Linux 6.16-rc1
+drm-xe drm-xe-next-fixes 04c8970771b4f1f39bb8453a2eeb188c4d5edbd6
+	drm/nouveau/vfn/r535: Convert comma to semicolon
+drm-misc drm-misc-next 6f392f37165008cfb3f89d723aa019e372ee79b9
+	drm: renesas: rz-du: Implement MIPI DSI host transfers
+drm-intel drm-intel-next 188bdfb77615ab14da49bf1438ab3a1413da9898
+	drm/i915: split out display register macros to a separate file
+drm-intel drm-intel-gt-next f36a75aba1c3176d177964bca76f86a075d2943a
+	drm/i915/guc: Handle race condition where wakeref count drops below 0
+drm-xe drm-xe-next 86e2d052c2320bf12571a5d96b16c2745e1cfc5e
+	Merge drm/drm-next into drm-xe-next
+drm-intel topic/core-for-CI d1b73bf90165ba57f261092c21cb56f998841f52
+	Revert "lockdep: Enable PROVE_RAW_LOCK_NESTING with PROVE_LOCKING."
+drm-xe topic/xe-for-CI 993a9b1f119ff8e6d89e5e32f5a86a02c7d2cf57
+	drm/xe/pm: Re-enable D3Cold by default on BMG
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
