@@ -1,0 +1,30 @@
+drm drm-fixes 19272b37aa4f83ca52bdf9c16d5d81bdd1354494
+	Linux 6.16-rc1
+drm-misc drm-misc-fixes afe382843717d44b24ef5014d57dcbaab75a4052
+	udmabuf: use sgtable-based scatterlist wrappers
+drm-intel drm-intel-fixes 19272b37aa4f83ca52bdf9c16d5d81bdd1354494
+	Linux 6.16-rc1
+drm-xe drm-xe-fixes d6fb4f01736a1d18cc981eb04fa2907a7121fc27
+	drm/xe/svm: Fix regression disallowing 64K SVM migration
+drm drm-next 19272b37aa4f83ca52bdf9c16d5d81bdd1354494
+	Linux 6.16-rc1
+drm-misc drm-misc-next-fixes fd03f82a026cc03cb8051a8c6487c99f96c9029f
+	drm/bridge: analogix_dp: Fix clk-disable removal
+drm-intel drm-intel-next-fixes 19272b37aa4f83ca52bdf9c16d5d81bdd1354494
+	Linux 6.16-rc1
+drm-xe drm-xe-next-fixes 04c8970771b4f1f39bb8453a2eeb188c4d5edbd6
+	drm/nouveau/vfn/r535: Convert comma to semicolon
+drm-misc drm-misc-next c5ae936db72d0f45f1a85caa30780b716ac1b608
+	accel/qaic: Use dev_printk() in RAS
+drm-intel drm-intel-next 9d4e26042c6094d4f1abc7a4e7f55e426641312b
+	drm/i915/display: drop i915_reg.h include where possible
+drm-intel drm-intel-gt-next f36a75aba1c3176d177964bca76f86a075d2943a
+	drm/i915/guc: Handle race condition where wakeref count drops below 0
+drm-xe drm-xe-next 0ed4b3c21c5013842b7e661dd1c4aa5b75c9c5db
+	drm/xe/lrc: Prepare WA BB setup for more users
+drm-intel topic/core-for-CI 83af71422d949383e553e2da38494a32aee4586e
+	platform/x86: asus-wmi: Only register lps0 dev for Ally devices
+drm-xe topic/xe-for-CI 9b740fabbb7eb6722c78b886d1ae59d2504d855b
+	drm/xe/pm: Re-enable D3Cold by default on BMG
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
