@@ -1,0 +1,30 @@
+drm drm-fixes 1364af9cb2c5716f1905113cc84ff77ddf16a22e
+	Merge tag 'drm-misc-fixes-2025-06-12' of https://gitlab.freedesktop.org/drm/misc/kernel into drm-fixes
+drm-misc drm-misc-fixes 553ab30a181043f01b99a493ba13f9c011eb75ae
+	Documentation: nouveau: Update GSP message queue kernel-doc reference
+drm-intel drm-intel-fixes 19272b37aa4f83ca52bdf9c16d5d81bdd1354494
+	Linux 6.16-rc1
+drm-xe drm-xe-fixes 9c7632faad434c98f1f2cc06f3647a5a5d05ddbf
+	drm/xe/lrc: Use a temporary buffer for WA BB
+drm drm-next 19272b37aa4f83ca52bdf9c16d5d81bdd1354494
+	Linux 6.16-rc1
+drm-misc drm-misc-next-fixes fd03f82a026cc03cb8051a8c6487c99f96c9029f
+	drm/bridge: analogix_dp: Fix clk-disable removal
+drm-intel drm-intel-next-fixes 19272b37aa4f83ca52bdf9c16d5d81bdd1354494
+	Linux 6.16-rc1
+drm-xe drm-xe-next-fixes 04c8970771b4f1f39bb8453a2eeb188c4d5edbd6
+	drm/nouveau/vfn/r535: Convert comma to semicolon
+drm-misc drm-misc-next 60ba94338047bb5410a3626ced3380afe9285ed8
+	drm/vkms: Compile all tests with CONFIG_DRM_VKMS_KUNIT_TEST
+drm-intel drm-intel-next 762ccc195bfe399199f9da89aade8177826451a4
+	drm/i915/dsi: Assert that vfp+vsync+vbp == vtotal on BXT/GLK
+drm-intel drm-intel-gt-next 686d773186bf72b739bab7e12eb8665d914676ee
+	drm/i915/pmu: Fix build error with GCOV and AutoFDO enabled
+drm-xe drm-xe-next 3ee9f2058ab202fd29d6a4adbf520d8878530520
+	drm/xe/vm: Add a helper xe_vm_range_tilemask_tlb_invalidation()
+drm-intel topic/core-for-CI 83af71422d949383e553e2da38494a32aee4586e
+	platform/x86: asus-wmi: Only register lps0 dev for Ally devices
+drm-xe topic/xe-for-CI 9b740fabbb7eb6722c78b886d1ae59d2504d855b
+	drm/xe/pm: Re-enable D3Cold by default on BMG
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
