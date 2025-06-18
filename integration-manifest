@@ -1,0 +1,30 @@
+drm drm-fixes e04c78d86a9699d136910cfc0bdcf01087e3267e
+	Linux 6.16-rc2
+drm-misc drm-misc-fixes 61ee19dedb8d753249e20308782bf4e9e2fb7344
+	drm/etnaviv: Protect the scheduler's pending list with its lock
+drm-intel drm-intel-fixes c464ce6af332e7c802c36cd337cacf81db05400c
+	drm/i915/dsi: Fix off by one in BXT_MIPI_TRANS_VTOTAL
+drm-xe drm-xe-fixes 9c7632faad434c98f1f2cc06f3647a5a5d05ddbf
+	drm/xe/lrc: Use a temporary buffer for WA BB
+drm drm-next 45215c589e7f22641e2fc6f518bcbead71d90f9c
+	Merge tag 'drm-misc-next-2025-06-12' of https://gitlab.freedesktop.org/drm/misc/kernel into drm-next
+drm-misc drm-misc-next-fixes fd03f82a026cc03cb8051a8c6487c99f96c9029f
+	drm/bridge: analogix_dp: Fix clk-disable removal
+drm-intel drm-intel-next-fixes 19272b37aa4f83ca52bdf9c16d5d81bdd1354494
+	Linux 6.16-rc1
+drm-xe drm-xe-next-fixes 04c8970771b4f1f39bb8453a2eeb188c4d5edbd6
+	drm/nouveau/vfn/r535: Convert comma to semicolon
+drm-misc drm-misc-next 1a45ef022f0364186d4fb2f4e5255dcae1ff638a
+	drm/format-helper: Move drm_fb_build_fourcc_list() to sysfb helpers
+drm-intel drm-intel-next f8e1c3e07db1805b585df65bd747fd98edbf4ca3
+	drm/i915/xe3lpd: Add support for display version 30.02
+drm-intel drm-intel-gt-next 686d773186bf72b739bab7e12eb8665d914676ee
+	drm/i915/pmu: Fix build error with GCOV and AutoFDO enabled
+drm-xe drm-xe-next 3c0f211bc8fc0d0a0b4c29c471b57ffff48eec60
+	drm/xe: Add Wildcat Lake device IDs to PTL list
+drm-intel topic/core-for-CI bcf4f105064e719d571c47c5ca1396853973d046
+	PCI/PM: Set up runtime PM even for devices without PCI PM
+drm-xe topic/xe-for-CI 9b740fabbb7eb6722c78b886d1ae59d2504d855b
+	drm/xe/pm: Re-enable D3Cold by default on BMG
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
