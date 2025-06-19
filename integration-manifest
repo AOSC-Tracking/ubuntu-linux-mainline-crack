@@ -1,0 +1,30 @@
+drm drm-fixes b8de9b21e8499a09ef424e101a8703e8e1866bfd
+	Merge tag 'drm-xe-fixes-2025-06-19' of https://gitlab.freedesktop.org/drm/xe/kernel into drm-fixes
+drm-misc drm-misc-fixes 61ee19dedb8d753249e20308782bf4e9e2fb7344
+	drm/etnaviv: Protect the scheduler's pending list with its lock
+drm-intel drm-intel-fixes c464ce6af332e7c802c36cd337cacf81db05400c
+	drm/i915/dsi: Fix off by one in BXT_MIPI_TRANS_VTOTAL
+drm-xe drm-xe-fixes a39d082c3553d35b4fe5585e1e2fb221c130cae8
+	drm/xe: Fix early wedge on GuC load failure
+drm drm-next 45215c589e7f22641e2fc6f518bcbead71d90f9c
+	Merge tag 'drm-misc-next-2025-06-12' of https://gitlab.freedesktop.org/drm/misc/kernel into drm-next
+drm-misc drm-misc-next-fixes fd03f82a026cc03cb8051a8c6487c99f96c9029f
+	drm/bridge: analogix_dp: Fix clk-disable removal
+drm-intel drm-intel-next-fixes 19272b37aa4f83ca52bdf9c16d5d81bdd1354494
+	Linux 6.16-rc1
+drm-xe drm-xe-next-fixes 04c8970771b4f1f39bb8453a2eeb188c4d5edbd6
+	drm/nouveau/vfn/r535: Convert comma to semicolon
+drm-misc drm-misc-next a59a271769149f0b8258507276f3d2a24370cbdb
+	drm/bridge: tc358767: convert to devm_drm_bridge_alloc() API
+drm-intel drm-intel-next 4f9c81d64f030c1f3d96c5fd356cfb6e68ef9fc2
+	drm/i915/snps_hdmi_pll: Use clamp() instead of max(min())
+drm-intel drm-intel-gt-next 686d773186bf72b739bab7e12eb8665d914676ee
+	drm/i915/pmu: Fix build error with GCOV and AutoFDO enabled
+drm-xe drm-xe-next 3c0f211bc8fc0d0a0b4c29c471b57ffff48eec60
+	drm/xe: Add Wildcat Lake device IDs to PTL list
+drm-intel topic/core-for-CI bcf4f105064e719d571c47c5ca1396853973d046
+	PCI/PM: Set up runtime PM even for devices without PCI PM
+drm-xe topic/xe-for-CI 9b740fabbb7eb6722c78b886d1ae59d2504d855b
+	drm/xe/pm: Re-enable D3Cold by default on BMG
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
