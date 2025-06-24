@@ -1,0 +1,30 @@
+drm drm-fixes 86731a2a651e58953fc949573895f2fa6d456841
+	Linux 6.16-rc3
+drm-misc drm-misc-fixes 10357824151262636fda879845f8b64553541106
+	drm/bridge-connector: Fix bridge in drm_connector_hdmi_audio_init()
+drm-intel drm-intel-fixes a3ef3c2da675a8a564c8bea1a511cdd0a2a9aa49
+	drm/dp: Change AUX DPCD probe address from DPCD_REV to LANE0_1_STATUS
+drm-xe drm-xe-fixes 9127a69c7193ad47047ff968a2de9161d5c93d37
+	drm/xe/hwmon: Fix xe_hwmon_power_max_write
+drm drm-next 36c52fb703e90388285963fc8f03cf60f76cbe4c
+	Merge tag 'drm-intel-next-2025-06-18' of https://gitlab.freedesktop.org/drm/i915/kernel into drm-next
+drm-misc drm-misc-next-fixes fd03f82a026cc03cb8051a8c6487c99f96c9029f
+	drm/bridge: analogix_dp: Fix clk-disable removal
+drm-intel drm-intel-next-fixes 19272b37aa4f83ca52bdf9c16d5d81bdd1354494
+	Linux 6.16-rc1
+drm-xe drm-xe-next-fixes 04c8970771b4f1f39bb8453a2eeb188c4d5edbd6
+	drm/nouveau/vfn/r535: Convert comma to semicolon
+drm-misc drm-misc-next 1174bf15bd601f17556f721798cd9183e169549a
+	drm/connector: move HDR sink metadata to display info
+drm-intel drm-intel-next c9c325072b35671f26c92c9c7ba6fe5bb1ab111a
+	drm/i915/wm: reduce stack usage in skl_print_wm_changes()
+drm-intel drm-intel-gt-next c371161086153623796dff9de713e98c47f4c586
+	drm/i915: reduce stack usage in igt_vma_pin1()
+drm-xe drm-xe-next 2ddbb73ec20b98e70a5200cb85deade22ccea2ec
+	drm/xe/guc: Explicitly exit CT safe mode on unwind
+drm-intel topic/core-for-CI df2ed2be971d13ac658cf8049303462f1bfa4b82
+	iommu/vt-d: Enable ATS before cache tag assignment
+drm-xe topic/xe-for-CI 9b740fabbb7eb6722c78b886d1ae59d2504d855b
+	drm/xe/pm: Re-enable D3Cold by default on BMG
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
