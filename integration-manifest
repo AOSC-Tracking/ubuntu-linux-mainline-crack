@@ -1,0 +1,30 @@
+drm drm-fixes 9fbceb37c95939182e1409211447a1d3f3db9274
+	Merge tag 'drm-misc-fixes-2025-06-26' of https://gitlab.freedesktop.org/drm/misc/kernel into drm-fixes
+drm-misc drm-misc-fixes 615cc4223fcbe1e0e6f68b8494b26bb6c08d917a
+	drm/vesadrm: Avoid NULL-ptr deref in vesadrm_pmi_cmap_write()
+drm-intel drm-intel-fixes d02b2103a08b6d6908f1d3d8e8783d3f342555ac
+	drm/i915: fix build error some more
+drm-xe drm-xe-fixes af2b588abe006bd55ddd358c4c3b87523349c475
+	drm/xe: Process deferred GGTT node removals on device unwind
+drm drm-next f41830c57bb8e70e283b9db251c95f1270a8279d
+	Merge tag 'drm-misc-next-2025-06-26' of https://gitlab.freedesktop.org/drm/misc/kernel into drm-next
+drm-misc drm-misc-next-fixes fd03f82a026cc03cb8051a8c6487c99f96c9029f
+	drm/bridge: analogix_dp: Fix clk-disable removal
+drm-intel drm-intel-next-fixes 19272b37aa4f83ca52bdf9c16d5d81bdd1354494
+	Linux 6.16-rc1
+drm-xe drm-xe-next-fixes 04c8970771b4f1f39bb8453a2eeb188c4d5edbd6
+	drm/nouveau/vfn/r535: Convert comma to semicolon
+drm-misc drm-misc-next 8733bf4c46f2546bc9225951ae2fee306bbb8e25
+	MAINTAINERS: Add missing sysfb files to firmware framebuffers entry
+drm-intel drm-intel-next 05f3af5905d5dbb758db9dae0a103b22b441ad67
+	drm/xe: Fix conflicting intel_pcode_* symbols
+drm-intel drm-intel-gt-next 4afcdbbd38e27ec04a349f8ba23f64b92b47fa9c
+	drm/i915: move GEM_QUIRK_PIN_SWIZZLED_PAGES to i915_gem.h
+drm-xe drm-xe-next a559434880b320b83733d739733250815aecf1b0
+	drm/xe: Allow dropping kunit dependency as built-in
+drm-intel topic/core-for-CI df2ed2be971d13ac658cf8049303462f1bfa4b82
+	iommu/vt-d: Enable ATS before cache tag assignment
+drm-xe topic/xe-for-CI 9b740fabbb7eb6722c78b886d1ae59d2504d855b
+	drm/xe/pm: Re-enable D3Cold by default on BMG
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
