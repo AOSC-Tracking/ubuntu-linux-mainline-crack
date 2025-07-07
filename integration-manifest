@@ -1,0 +1,30 @@
+drm drm-fixes d7b8f8e20813f0179d8ef519541a3527e7661d3a
+	Linux 6.16-rc5
+drm-misc drm-misc-fixes d133036a0b23d3ef781d067ccdea6bbfb381e0cf
+	drm/nouveau/gsp: fix potential leak of memory used during acpi init
+drm-intel drm-intel-fixes 01870d09f295ff1a95d9f77e8ebfed5ca551861e
+	drm/i915/bios: Apply vlv_fixup_mipi_sequences() to v2 mipi-sequences too
+drm-xe drm-xe-fixes b20b87414405b396cd64a1965c5d1cb74fc1f770
+	FOR-DRM-XE-FIXES-TEST-UNBLOCK: platform/x86: asus-wmi: Only register lps0 dev for Ally devices
+drm drm-next 17d081ef84a6f3c2a1867cc753d7c8459a34d829
+	Merge tag 'drm-misc-next-2025-07-03' of https://gitlab.freedesktop.org/drm/misc/kernel into drm-next
+drm-misc drm-misc-next-fixes fd03f82a026cc03cb8051a8c6487c99f96c9029f
+	drm/bridge: analogix_dp: Fix clk-disable removal
+drm-intel drm-intel-next-fixes 19272b37aa4f83ca52bdf9c16d5d81bdd1354494
+	Linux 6.16-rc1
+drm-xe drm-xe-next-fixes 04c8970771b4f1f39bb8453a2eeb188c4d5edbd6
+	drm/nouveau/vfn/r535: Convert comma to semicolon
+drm-misc drm-misc-next 482c7e296edc0f594e8869a789a40be53c49bd6a
+	drm/tegra: Use dma_buf from GEM object instance
+drm-intel drm-intel-next d6a59ee852758bc69c4cc821954db277a2bd5b93
+	drm/ttm: Remove unneeded blank line in comment
+drm-intel drm-intel-gt-next 4e65d104129e8be001d561410f6402135f6f8a45
+	drm/i915/guc: Enable CT_DEAD output in regular debug builds
+drm-xe drm-xe-next 4c93e2c34154d36c9eab54d81d8ec22fa2e2afd6
+	drm/xe/ptl: Add HuC FW definition for PTL
+drm-intel topic/core-for-CI 5d02a8a47924660f5456c0501b4d455546a83d2a
+	usb: early: xhci-dbc: Fix early_ioremap leak
+drm-xe topic/xe-for-CI bbdbb8211f9e069738887bbd67ec6356a6222f8c
+	drm/xe/pm: Re-enable D3Cold by default on BMG
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
