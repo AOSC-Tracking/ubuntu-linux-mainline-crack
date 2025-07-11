@@ -1,0 +1,30 @@
+drm drm-fixes b7dc79a6332fe6f58f2e6b2a631bad101dc79107
+	Merge tag 'drm-misc-fixes-2025-07-10' of https://gitlab.freedesktop.org/drm/misc/kernel into drm-fixes
+drm-misc drm-misc-fixes e5478166dffb51fa64e76cdbb5c24421f22f2d43
+	drm/nouveau: check ioctl command codes better
+drm-intel drm-intel-fixes e778689390c71462a099b5d6e56d71c316486184
+	drm/i915/bios: Apply vlv_fixup_mipi_sequences() to v2 mipi-sequences too
+drm-xe drm-xe-fixes 87a38d938ae9cd49006919884b2e515069d64c5f
+	FOR-DRM-XE-FIXES-TEST-UNBLOCK: platform/x86: asus-wmi: Only register lps0 dev for Ally devices
+drm drm-next 3a252ff9d8b6dc22b20463bfcb31a4e8992b0e8f
+	Merge tag 'drm-intel-next-2025-07-10' of https://gitlab.freedesktop.org/drm/i915/kernel into drm-next
+drm-misc drm-misc-next-fixes fd03f82a026cc03cb8051a8c6487c99f96c9029f
+	drm/bridge: analogix_dp: Fix clk-disable removal
+drm-intel drm-intel-next-fixes 19272b37aa4f83ca52bdf9c16d5d81bdd1354494
+	Linux 6.16-rc1
+drm-xe drm-xe-next-fixes 04c8970771b4f1f39bb8453a2eeb188c4d5edbd6
+	drm/nouveau/vfn/r535: Convert comma to semicolon
+drm-misc drm-misc-next 917b10d90990fd2138b5dbc2d22cfa428c070ade
+	drm: rust: rename as_ref() to from_raw() for drm constructors
+drm-intel drm-intel-next 3347b55f2c6c4bebc7a07343448416e5678b8b5c
+	drm/i915/xe3lpd: Prune modes for YUV420
+drm-intel drm-intel-gt-next 4e65d104129e8be001d561410f6402135f6f8a45
+	drm/i915/guc: Enable CT_DEAD output in regular debug builds
+drm-xe drm-xe-next 7b6db1731a642be2ac89168d6aa9be6383796844
+	drm/xe: Normalize default param values
+drm-intel topic/core-for-CI 5d02a8a47924660f5456c0501b4d455546a83d2a
+	usb: early: xhci-dbc: Fix early_ioremap leak
+drm-xe topic/xe-for-CI ffb5a1ba5583f4438588def773d510eb10bb9e1e
+	drm/xe/pm: Re-enable D3Cold by default on BMG
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
