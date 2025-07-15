@@ -1,0 +1,30 @@
+drm drm-fixes 347e9f5043c89695b01e66b3ed111755afcf1911
+	Linux 6.16-rc6
+drm-misc drm-misc-fixes cb345f954eacd162601e7d07ca2f0f0a17b54ee3
+	drm/panfrost: Fix scheduler workqueue bug
+drm-intel drm-intel-fixes d34d6feaf4a76833effcec0b148b65946b04cde8
+	drm/dp: Change AUX DPCD probe address from LANE0_1_STATUS to TRAINING_PATTERN_SET
+drm-xe drm-xe-fixes 87a38d938ae9cd49006919884b2e515069d64c5f
+	FOR-DRM-XE-FIXES-TEST-UNBLOCK: platform/x86: asus-wmi: Only register lps0 dev for Ally devices
+drm drm-next 7e11e01d1f1d00cb308f9351511e9597a4f70678
+	Merge tag 'amd-drm-next-6.17-2025-07-11' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm-misc drm-misc-next-fixes fd03f82a026cc03cb8051a8c6487c99f96c9029f
+	drm/bridge: analogix_dp: Fix clk-disable removal
+drm-intel drm-intel-next-fixes 19272b37aa4f83ca52bdf9c16d5d81bdd1354494
+	Linux 6.16-rc1
+drm-xe drm-xe-next-fixes 04c8970771b4f1f39bb8453a2eeb188c4d5edbd6
+	drm/nouveau/vfn/r535: Convert comma to semicolon
+drm-misc drm-misc-next 0bcc0f5e98bebd05e44261df3c33d274084eab60
+	dt-bindings: display: panel: samsung,atna30dw01: document ATNA30DW01
+drm-intel drm-intel-next 8a643df55f3a9c034cf8d1942c25a6eb08d57d9d
+	drm/i915: Don't check for atomic context on PREEMPT_RT
+drm-intel drm-intel-gt-next 4e65d104129e8be001d561410f6402135f6f8a45
+	drm/i915/guc: Enable CT_DEAD output in regular debug builds
+drm-xe drm-xe-next ed5461daa150b037e36b8202381da1ef85d6b16b
+	drm/xe: Don't fail probe on unsupported mailbox command
+drm-intel topic/core-for-CI 5d02a8a47924660f5456c0501b4d455546a83d2a
+	usb: early: xhci-dbc: Fix early_ioremap leak
+drm-xe topic/xe-for-CI ffb5a1ba5583f4438588def773d510eb10bb9e1e
+	drm/xe/pm: Re-enable D3Cold by default on BMG
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
