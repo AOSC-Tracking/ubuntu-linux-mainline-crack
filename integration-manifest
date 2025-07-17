@@ -1,0 +1,30 @@
+drm drm-fixes 347e9f5043c89695b01e66b3ed111755afcf1911
+	Linux 6.16-rc6
+drm-misc drm-misc-fixes 1918e79be908b8a2c8757640289bc196c14d928a
+	Revert "drm/gem-dma: Use dma_buf from GEM object instance"
+drm-intel drm-intel-fixes d34d6feaf4a76833effcec0b148b65946b04cde8
+	drm/dp: Change AUX DPCD probe address from LANE0_1_STATUS to TRAINING_PATTERN_SET
+drm-xe drm-xe-fixes 0456696778025afcc92498e12dae0a7b9c945834
+	FOR-DRM-XE-FIXES-TEST-UNBLOCK: platform/x86: asus-wmi: Only register lps0 dev for Ally devices
+drm drm-next 7e11e01d1f1d00cb308f9351511e9597a4f70678
+	Merge tag 'amd-drm-next-6.17-2025-07-11' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm-misc drm-misc-next-fixes fd03f82a026cc03cb8051a8c6487c99f96c9029f
+	drm/bridge: analogix_dp: Fix clk-disable removal
+drm-intel drm-intel-next-fixes 19272b37aa4f83ca52bdf9c16d5d81bdd1354494
+	Linux 6.16-rc1
+drm-xe drm-xe-next-fixes 04c8970771b4f1f39bb8453a2eeb188c4d5edbd6
+	drm/nouveau/vfn/r535: Convert comma to semicolon
+drm-misc drm-misc-next b9a572f471993d3e8bf874fcb57f331d66650440
+	drm: document DRM_MODE_PAGE_FLIP_EVENT interactions with atomic
+drm-intel drm-intel-next 976d608d6f8404475ac8e133a713395defa14f41
+	drm/i915/dp: Make .set_idle_link_train() mandatory
+drm-intel drm-intel-gt-next 4e65d104129e8be001d561410f6402135f6f8a45
+	drm/i915/guc: Enable CT_DEAD output in regular debug builds
+drm-xe drm-xe-next 487579fd8524c58dc237904c1b1d9e7c89e53378
+	drm/xe/xe_debugfs: Exposure of G-State and pcie link state residency counters through debugfs
+drm-intel topic/core-for-CI 5d02a8a47924660f5456c0501b4d455546a83d2a
+	usb: early: xhci-dbc: Fix early_ioremap leak
+drm-xe topic/xe-for-CI 4722c06be23f092a73db92133824b04c0253a1d6
+	drm/xe/pf: Set VF LMEM BAR size
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
