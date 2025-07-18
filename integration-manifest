@@ -1,0 +1,30 @@
+drm drm-fixes 4d33ed640ffc06734271cebda5ac2e3b5a79f453
+	Merge tag 'drm-xe-fixes-2025-07-17' of https://gitlab.freedesktop.org/drm/xe/kernel into drm-fixes
+drm-misc drm-misc-fixes 1918e79be908b8a2c8757640289bc196c14d928a
+	Revert "drm/gem-dma: Use dma_buf from GEM object instance"
+drm-intel drm-intel-fixes d34d6feaf4a76833effcec0b148b65946b04cde8
+	drm/dp: Change AUX DPCD probe address from LANE0_1_STATUS to TRAINING_PATTERN_SET
+drm-xe drm-xe-fixes 0456696778025afcc92498e12dae0a7b9c945834
+	FOR-DRM-XE-FIXES-TEST-UNBLOCK: platform/x86: asus-wmi: Only register lps0 dev for Ally devices
+drm drm-next 7e11e01d1f1d00cb308f9351511e9597a4f70678
+	Merge tag 'amd-drm-next-6.17-2025-07-11' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm-misc drm-misc-next-fixes b213eb34f857c45bdd769c9e9191a386accc9e8f
+	drm/tidss: oldi: convert to devm_drm_bridge_alloc() API
+drm-intel drm-intel-next-fixes 19272b37aa4f83ca52bdf9c16d5d81bdd1354494
+	Linux 6.16-rc1
+drm-xe drm-xe-next-fixes 04c8970771b4f1f39bb8453a2eeb188c4d5edbd6
+	drm/nouveau/vfn/r535: Convert comma to semicolon
+drm-misc drm-misc-next ca2a6abdaee43808034cdb218428d2ed85fd3db8
+	drm/panthor: Fix memory leak in panthor_ioctl_group_create()
+drm-intel drm-intel-next 976d608d6f8404475ac8e133a713395defa14f41
+	drm/i915/dp: Make .set_idle_link_train() mandatory
+drm-intel drm-intel-gt-next 4e65d104129e8be001d561410f6402135f6f8a45
+	drm/i915/guc: Enable CT_DEAD output in regular debug builds
+drm-xe drm-xe-next 4b5514f786dd790ec0d3e2fe66cea7fd2f36bdf3
+	drm/xe: Remove unnecessary EU stall debug message
+drm-intel topic/core-for-CI 5d02a8a47924660f5456c0501b4d455546a83d2a
+	usb: early: xhci-dbc: Fix early_ioremap leak
+drm-xe topic/xe-for-CI 4722c06be23f092a73db92133824b04c0253a1d6
+	drm/xe/pf: Set VF LMEM BAR size
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
