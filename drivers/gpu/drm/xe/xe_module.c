@@ -20,8 +20,12 @@
 
 #if IS_ENABLED(CONFIG_DRM_XE_DEBUG)
 #define DEFAULT_GUC_LOG_LEVEL		3
+#define DEFAULT_MAX_VFS			~0
+#define DEFAULT_MAX_VFS_STR		"unlimited"
 #else
 #define DEFAULT_GUC_LOG_LEVEL		1
+#define DEFAULT_MAX_VFS			0
+#define DEFAULT_MAX_VFS_STR		__stringify(DEFAULT_MAX_VFS)
 #endif
 
 #define DEFAULT_PROBE_DISPLAY		true
@@ -34,6 +38,9 @@ struct xe_modparam xe_modparam = {
 	.probe_display =	DEFAULT_PROBE_DISPLAY,
 	.guc_log_level =	DEFAULT_GUC_LOG_LEVEL,
 	.force_probe =		DEFAULT_FORCE_PROBE,
+#ifdef CONFIG_PCI_IOV
+	.max_vfs =		DEFAULT_MAX_VFS,
+#endif
 	.wedged_mode =		DEFAULT_WEDGED_MODE,
 	.svm_notifier_size =	DEFAULT_SVM_NOTIFIER_SIZE,
 	/* the rest are 0 by default */
@@ -79,7 +86,8 @@ MODULE_PARM_DESC(force_probe,
 module_param_named(max_vfs, xe_modparam.max_vfs, uint, 0400);
 MODULE_PARM_DESC(max_vfs,
 		 "Limit number of Virtual Functions (VFs) that could be managed. "
-		 "(0 = no VFs [default]; N = allow up to N VFs)");
+		 "(0=no VFs; N=allow up to N VFs "
+		 "[default=" DEFAULT_MAX_VFS_STR "])");
 #endif
 
 module_param_named_unsafe(wedged_mode, xe_modparam.wedged_mode, int, 0600);
