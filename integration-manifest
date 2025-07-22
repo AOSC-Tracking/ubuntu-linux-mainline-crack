@@ -1,0 +1,30 @@
+drm drm-fixes 89be9a83ccf1f88522317ce02f854f30d6115c41
+	Linux 6.16-rc7
+drm-misc drm-misc-fixes 15a7ca747d9538c2ad8b0c81dd4c1261e0736c82
+	drm/bridge: ti-sn65dsi86: Remove extra semicolon in ti_sn_bridge_probe()
+drm-intel drm-intel-fixes 9e0c433d0c05fde284025264b89eaa4ad59f0a3e
+	drm/i915/dp: Fix 2.7 Gbps DP_LINK_BW value on g4x
+drm-xe drm-xe-fixes 0456696778025afcc92498e12dae0a7b9c945834
+	FOR-DRM-XE-FIXES-TEST-UNBLOCK: platform/x86: asus-wmi: Only register lps0 dev for Ally devices
+drm drm-next ba0f4c4c0f9d0f90300578fc8d081f43be281a71
+	Merge tag 'nova-next-v6.17-2025-07-18' of https://gitlab.freedesktop.org/drm/nova into drm-next
+drm-misc drm-misc-next-fixes b213eb34f857c45bdd769c9e9191a386accc9e8f
+	drm/tidss: oldi: convert to devm_drm_bridge_alloc() API
+drm-intel drm-intel-next-fixes 19272b37aa4f83ca52bdf9c16d5d81bdd1354494
+	Linux 6.16-rc1
+drm-xe drm-xe-next-fixes 04c8970771b4f1f39bb8453a2eeb188c4d5edbd6
+	drm/nouveau/vfn/r535: Convert comma to semicolon
+drm-misc drm-misc-next 5982a539cdcedcf1a87709c01125e1596eee2c9a
+	accel/amdxdna: Delete pci_free_irq_vectors()
+drm-intel drm-intel-next 17133255a32275f0f042f7f432f332ff1cf5e57d
+	drm/i915: replace DRM_DEBUG_SELFTEST with DRM_KUNIT_TEST
+drm-intel drm-intel-gt-next 4e65d104129e8be001d561410f6402135f6f8a45
+	drm/i915/guc: Enable CT_DEAD output in regular debug builds
+drm-xe drm-xe-next 176f44a5ec0b074aaf44852db77d0c183c36696d
+	drm/xe/uc: Fix missing unwind goto
+drm-intel topic/core-for-CI 5d02a8a47924660f5456c0501b4d455546a83d2a
+	usb: early: xhci-dbc: Fix early_ioremap leak
+drm-xe topic/xe-for-CI 4722c06be23f092a73db92133824b04c0253a1d6
+	drm/xe/pf: Set VF LMEM BAR size
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
