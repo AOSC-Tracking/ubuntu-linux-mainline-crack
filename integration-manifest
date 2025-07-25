@@ -1,0 +1,30 @@
+drm drm-fixes 14e8f8e74dc137ff9f1dfb2781784ceb19497ee5
+	Merge tag 'drm-xe-fixes-2025-07-24' of https://gitlab.freedesktop.org/drm/xe/kernel into drm-fixes
+drm-misc drm-misc-fixes 15a7ca747d9538c2ad8b0c81dd4c1261e0736c82
+	drm/bridge: ti-sn65dsi86: Remove extra semicolon in ti_sn_bridge_probe()
+drm-intel drm-intel-fixes fd77b2c1b6eb7c7d2087e2c2b37c671d47fd2d4f
+	drm/i915/display: Fix dma_fence_wait_timeout() return value handling
+drm-xe drm-xe-fixes 519575a16fc0976de4838e60cd7aeea985c4c824
+	FOR-DRM-XE-FIXES-TEST-UNBLOCK: platform/x86: asus-wmi: Only register lps0 dev for Ally devices
+drm drm-next ba0f4c4c0f9d0f90300578fc8d081f43be281a71
+	Merge tag 'nova-next-v6.17-2025-07-18' of https://gitlab.freedesktop.org/drm/nova into drm-next
+drm-misc drm-misc-next-fixes b213eb34f857c45bdd769c9e9191a386accc9e8f
+	drm/tidss: oldi: convert to devm_drm_bridge_alloc() API
+drm-intel drm-intel-next-fixes 19272b37aa4f83ca52bdf9c16d5d81bdd1354494
+	Linux 6.16-rc1
+drm-xe drm-xe-next-fixes 04c8970771b4f1f39bb8453a2eeb188c4d5edbd6
+	drm/nouveau/vfn/r535: Convert comma to semicolon
+drm-misc drm-misc-next a7352c849492a30b5d8491fcb9314ab376a3942f
+	dt-bindings: npu: rockchip,rknn: Add bindings
+drm-intel drm-intel-next 4af5de27d3a9ba19b7f61ac2fa0d6d35ee876c95
+	drm/i915/display: Remove unused declarations of intel_io_*
+drm-intel drm-intel-gt-next c8bdf3165fccadac12d670e94ea4a9a893a5a813
+	drm/i915: Replace empty conditional with continue in eb_relocate_vma()
+drm-xe drm-xe-next ca33cd271ef9b27acddf96742eef136d0f4caaa5
+	drm/xe/xelp: Add Wa_18022495364
+drm-intel topic/core-for-CI 5d02a8a47924660f5456c0501b4d455546a83d2a
+	usb: early: xhci-dbc: Fix early_ioremap leak
+drm-xe topic/xe-for-CI 7f2f32f161ac0048ade49a2d5db0aab9bae0633a
+	drm/xe/pf: Set VF LMEM BAR size
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
