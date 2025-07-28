@@ -1,0 +1,30 @@
+drm drm-fixes 038d61fd642278bab63ee8ef722c50d10ab01e8f
+	Linux 6.16
+drm-misc drm-misc-fixes 038d61fd642278bab63ee8ef722c50d10ab01e8f
+	Linux 6.16
+drm-intel drm-intel-fixes 038d61fd642278bab63ee8ef722c50d10ab01e8f
+	Linux 6.16
+drm-xe drm-xe-fixes 519575a16fc0976de4838e60cd7aeea985c4c824
+	FOR-DRM-XE-FIXES-TEST-UNBLOCK: platform/x86: asus-wmi: Only register lps0 dev for Ally devices
+drm drm-next ba0f4c4c0f9d0f90300578fc8d081f43be281a71
+	Merge tag 'nova-next-v6.17-2025-07-18' of https://gitlab.freedesktop.org/drm/nova into drm-next
+drm-misc drm-misc-next-fixes b213eb34f857c45bdd769c9e9191a386accc9e8f
+	drm/tidss: oldi: convert to devm_drm_bridge_alloc() API
+drm-intel drm-intel-next-fixes ba0f4c4c0f9d0f90300578fc8d081f43be281a71
+	Merge tag 'nova-next-v6.17-2025-07-18' of https://gitlab.freedesktop.org/drm/nova into drm-next
+drm-xe drm-xe-next-fixes 942ac8da6388c25fe62b2792c78715e0ea6e649b
+	drm/xe/configfs: Fix pci_dev reference leak
+drm-misc drm-misc-next 33f8f321e7aa7715ce19560801ee5223ba8b9a7d
+	drm/vmwgfx: fix missing assignment to ts
+drm-intel drm-intel-next 6c57634d734ac8b8f6fdadb58964ea2b010e5307
+	drm/i915/vblank: Change log from err to debug
+drm-intel drm-intel-gt-next c8bdf3165fccadac12d670e94ea4a9a893a5a813
+	drm/i915: Replace empty conditional with continue in eb_relocate_vma()
+drm-xe drm-xe-next 45fbb51050e72723c2bdcedc1ce32305256c70ed
+	drm/xe/guc: Add more GuC load error status codes
+drm-intel topic/core-for-CI 5d02a8a47924660f5456c0501b4d455546a83d2a
+	usb: early: xhci-dbc: Fix early_ioremap leak
+drm-xe topic/xe-for-CI 7f2f32f161ac0048ade49a2d5db0aab9bae0633a
+	drm/xe/pf: Set VF LMEM BAR size
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
