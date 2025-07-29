@@ -1,0 +1,30 @@
+drm drm-fixes 038d61fd642278bab63ee8ef722c50d10ab01e8f
+	Linux 6.16
+drm-misc drm-misc-fixes 038d61fd642278bab63ee8ef722c50d10ab01e8f
+	Linux 6.16
+drm-intel drm-intel-fixes 038d61fd642278bab63ee8ef722c50d10ab01e8f
+	Linux 6.16
+drm-xe drm-xe-fixes 519575a16fc0976de4838e60cd7aeea985c4c824
+	FOR-DRM-XE-FIXES-TEST-UNBLOCK: platform/x86: asus-wmi: Only register lps0 dev for Ally devices
+drm drm-next 711fa2667d8b230ff31f1855d0f25e3263268d8a
+	Merge tag 'drm-misc-next-fixes-2025-07-24' of https://gitlab.freedesktop.org/drm/misc/kernel into drm-next
+drm-misc drm-misc-next-fixes b213eb34f857c45bdd769c9e9191a386accc9e8f
+	drm/tidss: oldi: convert to devm_drm_bridge_alloc() API
+drm-intel drm-intel-next-fixes 5a569ef4d4ab184a481dd8ecb58f464a89b44d2f
+	drm/i915/display: Set C10_VDR_CTRL_MSGBUS_ACCESS before phy reg read
+drm-xe drm-xe-next-fixes 942ac8da6388c25fe62b2792c78715e0ea6e649b
+	drm/xe/configfs: Fix pci_dev reference leak
+drm-misc drm-misc-next 85c23f28905cf20a86ceec3cfd7a0a5572c9eb13
+	drm: docs: Update task from drm TODO list
+drm-intel drm-intel-next b116bd3ad3a7b9ee3144ab70497b25b915b904c3
+	drm/i915/display: remove superfluous <linux/types.h> includes
+drm-intel drm-intel-gt-next c8bdf3165fccadac12d670e94ea4a9a893a5a813
+	drm/i915: Replace empty conditional with continue in eb_relocate_vma()
+drm-xe drm-xe-next d6a0311c37b0955d3b2e15137f40c65c9aeb8f20
+	drm/xe/hw_engine_group: Don't use drm_warn to catch missed case
+drm-intel topic/core-for-CI 5d02a8a47924660f5456c0501b4d455546a83d2a
+	usb: early: xhci-dbc: Fix early_ioremap leak
+drm-xe topic/xe-for-CI 7f2f32f161ac0048ade49a2d5db0aab9bae0633a
+	drm/xe/pf: Set VF LMEM BAR size
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
