@@ -1,0 +1,30 @@
+drm drm-fixes 038d61fd642278bab63ee8ef722c50d10ab01e8f
+	Linux 6.16
+drm-misc drm-misc-fixes 038d61fd642278bab63ee8ef722c50d10ab01e8f
+	Linux 6.16
+drm-intel drm-intel-fixes 038d61fd642278bab63ee8ef722c50d10ab01e8f
+	Linux 6.16
+drm-xe drm-xe-fixes 519575a16fc0976de4838e60cd7aeea985c4c824
+	FOR-DRM-XE-FIXES-TEST-UNBLOCK: platform/x86: asus-wmi: Only register lps0 dev for Ally devices
+drm drm-next 6531a2cf07ef156956840853692755cc7e1621b7
+	Merge tag 'drm-xe-next-fixes-2025-07-31' of https://gitlab.freedesktop.org/drm/xe/kernel into drm-next
+drm-misc drm-misc-next-fixes be71ce9796c36517c677ab1d3c6691423dd0bdec
+	drm/bridge: fix OF node leak
+drm-intel drm-intel-next-fixes 5a569ef4d4ab184a481dd8ecb58f464a89b44d2f
+	drm/i915/display: Set C10_VDR_CTRL_MSGBUS_ACCESS before phy reg read
+drm-xe drm-xe-next-fixes a9ea192943e48d27716ac9016ff4e00d60b316a7
+	drm/xe/pf: Enable SR-IOV PF mode by default
+drm-misc drm-misc-next 82928cc1c2b2be16ea6ee9e23799ca182e1cd37c
+	drm/panel-edp: Add BOE NV140WUM-N64
+drm-intel drm-intel-next f8b99c61a8ac1dc94520fea7d5660ae09a047c9f
+	drm/i915/bw: Remove space before newline
+drm-intel drm-intel-gt-next c8bdf3165fccadac12d670e94ea4a9a893a5a813
+	drm/i915: Replace empty conditional with continue in eb_relocate_vma()
+drm-xe drm-xe-next 9fd9f221440024b7451678898facfb34af054310
+	drm/xe/pf: Don't resume device from restart worker
+drm-intel topic/core-for-CI 5d02a8a47924660f5456c0501b4d455546a83d2a
+	usb: early: xhci-dbc: Fix early_ioremap leak
+drm-xe topic/xe-for-CI 7f2f32f161ac0048ade49a2d5db0aab9bae0633a
+	drm/xe/pf: Set VF LMEM BAR size
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
