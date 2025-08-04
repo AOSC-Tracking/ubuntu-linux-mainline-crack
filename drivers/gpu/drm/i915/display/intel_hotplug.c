@@ -28,6 +28,7 @@
 
 #include "i915_drv.h"
 #include "i915_irq.h"
+#include "i915_utils.h"
 #include "intel_connector.h"
 #include "intel_display_power.h"
 #include "intel_display_core.h"
@@ -970,8 +971,6 @@ void intel_hpd_cancel_work(struct intel_display *display)
 		return;
 
 	spin_lock_irq(&display->irq.lock);
-
-	drm_WARN_ON(display->drm, get_blocked_hpd_pin_mask(display));
 
 	display->hotplug.long_hpd_pin_mask = 0;
 	display->hotplug.short_hpd_pin_mask = 0;
