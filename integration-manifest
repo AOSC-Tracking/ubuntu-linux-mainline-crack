@@ -1,0 +1,30 @@
+drm drm-fixes 68ad07df92faf4d7842199820ffb2b96702d0cfa
+	Merge tag 'amd-drm-fixes-6.17-2025-08-13' of https://gitlab.freedesktop.org/agd5f/linux into drm-fixes
+drm-misc drm-misc-fixes 3eb61d7cb74cea2ea697363669fa256937164758
+	Revert "drm/amdgpu: Use dma_buf from GEM object instance"
+drm-intel drm-intel-fixes 184889dfe0568528fd6d14bba864dd57ed45bbf2
+	drm/i915/psr: Do not trigger Frame Change events from frontbuffer flush
+drm-xe drm-xe-fixes 01d101b96122fa8008b2bddca226e6a54002688a
+	FOR-DRM-XE-FIXES-TEST-UNBLOCK: platform/x86: asus-wmi: Only register lps0 dev for Ally devices
+drm drm-next 8f5ae30d69d7543eee0d70083daf4de8fe15d585
+	Linux 6.17-rc1
+drm-misc drm-misc-next-fixes 54d4f445517fe8350d735624d7f4225e7511d9eb
+	drm/panfrost: Print RSS for tiler heap BO's in debugfs GEMS file
+drm-intel drm-intel-next-fixes 5a569ef4d4ab184a481dd8ecb58f464a89b44d2f
+	drm/i915/display: Set C10_VDR_CTRL_MSGBUS_ACCESS before phy reg read
+drm-xe drm-xe-next-fixes 8f5ae30d69d7543eee0d70083daf4de8fe15d585
+	Linux 6.17-rc1
+drm-misc drm-misc-next ed07a76be7baa0bb164b152116486e4d9fed50dc
+	drm/simpledrm: Use of_reserved_mem_region_to_resource() for "memory-region"
+drm-intel drm-intel-next 632633d095b6fc09ee38fd786778c02a003a8e67
+	drm/i915/wcl: Add display device info
+drm-intel drm-intel-gt-next 317be9c64215f264740c6dffb0a44216960875b2
+	drm/i915/gt: Protect against overflow in active_engine()
+drm-xe drm-xe-next 32a4d1b98e6663101fd0abfaf151c48feea7abb1
+	drm/xe/pf: Set VF LMEM BAR size
+drm-intel topic/core-for-CI 5eb9459abcc3520a0798d28f6eb53447cab15826
+	PCI: vmd: Remove MSI-X check on child devices
+drm-xe topic/xe-for-CI 6916e5fb25c414cb3d4adcfc8f12f55f602c53b2
+	drm/xe/pm: Re-enable D3Cold by default on BMG
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
