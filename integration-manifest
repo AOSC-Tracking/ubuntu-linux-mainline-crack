@@ -1,0 +1,30 @@
+drm drm-fixes 00062ea01d35eaca34d561e5c76cd988dc8c3b83
+	Merge tag 'drm-xe-fixes-2025-08-14' of https://gitlab.freedesktop.org/drm/xe/kernel into drm-fixes
+drm-misc drm-misc-fixes db2e7bcee11cd57f95fef3c6cbb562d0577eb84a
+	drm: nova-drm: fix 32-bit arm build
+drm-intel drm-intel-fixes e7c6c431c8b71f7d7860bf757bb6df787e2eb396
+	drm/i915/icl+/tc: Convert AUX powered WARN to a debug message
+drm-xe drm-xe-fixes 94eae6ee4c2df2031bca586405e9ec36e0b9ccf8
+	drm/xe/pf: Set VF LMEM BAR size
+drm drm-next 8f5ae30d69d7543eee0d70083daf4de8fe15d585
+	Linux 6.17-rc1
+drm-misc drm-misc-next-fixes 54d4f445517fe8350d735624d7f4225e7511d9eb
+	drm/panfrost: Print RSS for tiler heap BO's in debugfs GEMS file
+drm-intel drm-intel-next-fixes 5a569ef4d4ab184a481dd8ecb58f464a89b44d2f
+	drm/i915/display: Set C10_VDR_CTRL_MSGBUS_ACCESS before phy reg read
+drm-xe drm-xe-next-fixes 8f5ae30d69d7543eee0d70083daf4de8fe15d585
+	Linux 6.17-rc1
+drm-misc drm-misc-next cb640b2ca54617f4a9d4d6efd5ff2afd6be11f19
+	drm/bridge: display-connector: don't set OP_DETECT for DisplayPorts
+drm-intel drm-intel-next 63e0b17ae79a4365e874d7e2ff3816db2e6d55b5
+	drm/i915/bo: remove unnecessary include
+drm-intel drm-intel-gt-next 60b006b7cf0dd5e8ee99bd77fb4573e1a3956035
+	drm/i915/active: Use try_cmpxchg64() in __active_lookup()
+drm-xe drm-xe-next 32a4d1b98e6663101fd0abfaf151c48feea7abb1
+	drm/xe/pf: Set VF LMEM BAR size
+drm-intel topic/core-for-CI d1d8ba9d1ed3f147737cf380b7ccd6fb0c41f0c4
+	locking: Fix __clear_task_blocked_on() warning from __ww_mutex_wound() path
+drm-xe topic/xe-for-CI 6916e5fb25c414cb3d4adcfc8f12f55f602c53b2
+	drm/xe/pm: Re-enable D3Cold by default on BMG
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
