@@ -1,0 +1,30 @@
+drm drm-fixes c17b750b3ad9f45f2b6f7e6f7f4679844244f0b9
+	Linux 6.17-rc2
+drm-misc drm-misc-fixes 3271faf42d135bcf569c3ff6af55c21858eec212
+	drm/hisilicon/hibmc: fix dp and vga cannot show together
+drm-intel drm-intel-fixes d7fa5754e83cd36c4327eb2d806064e598a72ff6
+	drm/i915/icl+/tc: Convert AUX powered WARN to a debug message
+drm-xe drm-xe-fixes c17b750b3ad9f45f2b6f7e6f7f4679844244f0b9
+	Linux 6.17-rc2
+drm drm-next c17b750b3ad9f45f2b6f7e6f7f4679844244f0b9
+	Linux 6.17-rc2
+drm-misc drm-misc-next-fixes 54d4f445517fe8350d735624d7f4225e7511d9eb
+	drm/panfrost: Print RSS for tiler heap BO's in debugfs GEMS file
+drm-intel drm-intel-next-fixes 5a569ef4d4ab184a481dd8ecb58f464a89b44d2f
+	drm/i915/display: Set C10_VDR_CTRL_MSGBUS_ACCESS before phy reg read
+drm-xe drm-xe-next-fixes 8f5ae30d69d7543eee0d70083daf4de8fe15d585
+	Linux 6.17-rc1
+drm-misc drm-misc-next c8cea4371e5eca30cda8660aabb337747dabc51d
+	accel/amdxdna: Add a function to walk hardware contexts
+drm-intel drm-intel-next 63e0b17ae79a4365e874d7e2ff3816db2e6d55b5
+	drm/i915/bo: remove unnecessary include
+drm-intel drm-intel-gt-next 60b006b7cf0dd5e8ee99bd77fb4573e1a3956035
+	drm/i915/active: Use try_cmpxchg64() in __active_lookup()
+drm-xe drm-xe-next b85bb2d677153d990924d31be9416166d22382eb
+	drm/xe: Make page size consistent in loop
+drm-intel topic/core-for-CI 9b396ff7c0e059f397a3379cd74392fdcd647a3e
+	Revert "block: restore default wbt enablement"
+drm-xe topic/xe-for-CI 6916e5fb25c414cb3d4adcfc8f12f55f602c53b2
+	drm/xe/pm: Re-enable D3Cold by default on BMG
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
