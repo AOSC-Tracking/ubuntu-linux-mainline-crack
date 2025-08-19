@@ -1,0 +1,30 @@
+drm drm-fixes c17b750b3ad9f45f2b6f7e6f7f4679844244f0b9
+	Linux 6.17-rc2
+drm-misc drm-misc-fixes 3271faf42d135bcf569c3ff6af55c21858eec212
+	drm/hisilicon/hibmc: fix dp and vga cannot show together
+drm-intel drm-intel-fixes 8236820fd767f400d1baefb71bc7e36e37730a1e
+	drm/i915/gt: Relocate compression repacking WA for JSL/EHL
+drm-xe drm-xe-fixes 40b7de4f29fa404925e434c2ac7a018823ceb6b3
+	drm/xe: Fix vm_bind_ioctl double free bug
+drm drm-next dd489c01c3971778c417630f328460021fc8fc61
+	Merge tag 'drm-misc-next-2025-08-14' of https://gitlab.freedesktop.org/drm/misc/kernel into drm-next
+drm-misc drm-misc-next-fixes 54d4f445517fe8350d735624d7f4225e7511d9eb
+	drm/panfrost: Print RSS for tiler heap BO's in debugfs GEMS file
+drm-intel drm-intel-next-fixes 5a569ef4d4ab184a481dd8ecb58f464a89b44d2f
+	drm/i915/display: Set C10_VDR_CTRL_MSGBUS_ACCESS before phy reg read
+drm-xe drm-xe-next-fixes 8f5ae30d69d7543eee0d70083daf4de8fe15d585
+	Linux 6.17-rc1
+drm-misc drm-misc-next f1f2a22b8683d7ac38821d4508d4549a2f0c0a0a
+	rust: drm: update ARef and AlwaysRefCounted imports from sync::aref
+drm-intel drm-intel-next 0492e13eb819008e0ce7570a7e152559e9a89a4e
+	drm/i915/dram: move fsb_freq and mem_freq to dram info
+drm-intel drm-intel-gt-next b7a855f488c6825e3dc06e78c49326491bef6f98
+	drm/i915/gt: Relocate Gen6 context-specific workaround
+drm-xe drm-xe-next b85bb2d677153d990924d31be9416166d22382eb
+	drm/xe: Make page size consistent in loop
+drm-intel topic/core-for-CI 9b396ff7c0e059f397a3379cd74392fdcd647a3e
+	Revert "block: restore default wbt enablement"
+drm-xe topic/xe-for-CI 6916e5fb25c414cb3d4adcfc8f12f55f602c53b2
+	drm/xe/pm: Re-enable D3Cold by default on BMG
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
