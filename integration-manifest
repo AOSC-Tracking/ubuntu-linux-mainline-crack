@@ -1,0 +1,30 @@
+drm drm-fixes c17b750b3ad9f45f2b6f7e6f7f4679844244f0b9
+	Linux 6.17-rc2
+drm-misc drm-misc-fixes 1a2cf179e2973f6801c67397ecc987391b084bcf
+	Merge drm/drm-fixes into drm-misc-fixes
+drm-intel drm-intel-fixes 8236820fd767f400d1baefb71bc7e36e37730a1e
+	drm/i915/gt: Relocate compression repacking WA for JSL/EHL
+drm-xe drm-xe-fixes 54c505685d59bb316bbb8249e60b6494d9cfdc9a
+	FOR-DRM-XE-FIXES-TEST-UNBLOCK: platform/x86: asus-wmi: Only register lps0 dev for Ally devices
+drm drm-next dd489c01c3971778c417630f328460021fc8fc61
+	Merge tag 'drm-misc-next-2025-08-14' of https://gitlab.freedesktop.org/drm/misc/kernel into drm-next
+drm-misc drm-misc-next-fixes 54d4f445517fe8350d735624d7f4225e7511d9eb
+	drm/panfrost: Print RSS for tiler heap BO's in debugfs GEMS file
+drm-intel drm-intel-next-fixes 5a569ef4d4ab184a481dd8ecb58f464a89b44d2f
+	drm/i915/display: Set C10_VDR_CTRL_MSGBUS_ACCESS before phy reg read
+drm-xe drm-xe-next-fixes 8f5ae30d69d7543eee0d70083daf4de8fe15d585
+	Linux 6.17-rc1
+drm-misc drm-misc-next 043d9c6928b010be7902a01b5cdfa7d754535b1a
+	drm/bridge: anx7625: register content protect property
+drm-intel drm-intel-next 9b1795e9b0ae6d8b2c50987048170f77d0dc0300
+	drm/i915/psr: Underrun on idle PSR wa only when pkgc latency > delayed vblank
+drm-intel drm-intel-gt-next b7a855f488c6825e3dc06e78c49326491bef6f98
+	drm/i915/gt: Relocate Gen6 context-specific workaround
+drm-xe drm-xe-next 1046be1db620d00eb390a94ac7b67109e0beeff5
+	drm/xe: Use for_each_gt to define gt_count
+drm-intel topic/core-for-CI 9b396ff7c0e059f397a3379cd74392fdcd647a3e
+	Revert "block: restore default wbt enablement"
+drm-xe topic/xe-for-CI 6916e5fb25c414cb3d4adcfc8f12f55f602c53b2
+	drm/xe/pm: Re-enable D3Cold by default on BMG
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
