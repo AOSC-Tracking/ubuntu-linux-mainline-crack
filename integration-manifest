@@ -1,0 +1,30 @@
+drm drm-fixes a60f5ee68efd91b4507eacbb40d4024ecf363304
+	Merge tag 'drm-xe-fixes-2025-08-21-1' of https://gitlab.freedesktop.org/drm/xe/kernel into drm-fixes
+drm-misc drm-misc-fixes e2fe0c54fb7401e6ecd3c10348519ab9e23bd639
+	drm/nouveau/disp: Always accept linear modifier
+drm-intel drm-intel-fixes 8236820fd767f400d1baefb71bc7e36e37730a1e
+	drm/i915/gt: Relocate compression repacking WA for JSL/EHL
+drm-xe drm-xe-fixes 111fb43a557726079a67ce3ab51f602ddbf7097e
+	drm/xe: Fix vm_bind_ioctl double free bug
+drm drm-next dd489c01c3971778c417630f328460021fc8fc61
+	Merge tag 'drm-misc-next-2025-08-14' of https://gitlab.freedesktop.org/drm/misc/kernel into drm-next
+drm-misc drm-misc-next-fixes 54d4f445517fe8350d735624d7f4225e7511d9eb
+	drm/panfrost: Print RSS for tiler heap BO's in debugfs GEMS file
+drm-intel drm-intel-next-fixes 5a569ef4d4ab184a481dd8ecb58f464a89b44d2f
+	drm/i915/display: Set C10_VDR_CTRL_MSGBUS_ACCESS before phy reg read
+drm-xe drm-xe-next-fixes 8f5ae30d69d7543eee0d70083daf4de8fe15d585
+	Linux 6.17-rc1
+drm-misc drm-misc-next b6f11f114759a088acf44e86b5cd72f24de85d44
+	drm/rockchip: dsi2: add support rk3576
+drm-intel drm-intel-next 7c8c76272e1732c63aab760b0b656f00bdc67050
+	drm/i915/psr: Check pause counter before continuing to PSR activation
+drm-intel drm-intel-gt-next b7a855f488c6825e3dc06e78c49326491bef6f98
+	drm/i915/gt: Relocate Gen6 context-specific workaround
+drm-xe drm-xe-next 13dda74a164b570d93d412e812dc80549506410f
+	drm/xe/configfs: Dump custom settings when binding
+drm-intel topic/core-for-CI 9b396ff7c0e059f397a3379cd74392fdcd647a3e
+	Revert "block: restore default wbt enablement"
+drm-xe topic/xe-for-CI 6916e5fb25c414cb3d4adcfc8f12f55f602c53b2
+	drm/xe/pm: Re-enable D3Cold by default on BMG
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
