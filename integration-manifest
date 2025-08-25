@@ -1,0 +1,30 @@
+drm drm-fixes 1b237f190eb3d36f52dffe07a40b5eb210280e00
+	Linux 6.17-rc3
+drm-misc drm-misc-fixes e228e7d382fa85005ee2ebf303e1bf194aca49a8
+	drm/gpuvm: fix various typos in .c and .h gpuvm file
+drm-intel drm-intel-fixes 1b237f190eb3d36f52dffe07a40b5eb210280e00
+	Linux 6.17-rc3
+drm-xe drm-xe-fixes cb3019f73b3f38315a79fb27d155c2a2523b4d8e
+	FOR-DRM-XE-FIXES-TEST-UNBLOCK: Revert "block: restore default wbt enablement"
+drm drm-next 1cd0c7afef97c3192edc92774a62d36b2a0bf2e0
+	Merge tag 'drm-misc-next-2025-08-21' of https://gitlab.freedesktop.org/drm/misc/kernel into drm-next
+drm-misc drm-misc-next-fixes 54d4f445517fe8350d735624d7f4225e7511d9eb
+	drm/panfrost: Print RSS for tiler heap BO's in debugfs GEMS file
+drm-intel drm-intel-next-fixes 5a569ef4d4ab184a481dd8ecb58f464a89b44d2f
+	drm/i915/display: Set C10_VDR_CTRL_MSGBUS_ACCESS before phy reg read
+drm-xe drm-xe-next-fixes 8f5ae30d69d7543eee0d70083daf4de8fe15d585
+	Linux 6.17-rc1
+drm-misc drm-misc-next cbdd16b818eef876dd2de9d503fe7397a0666cbe
+	HID: i2c-hid: Make elan touch controllers power on after panel is enabled
+drm-intel drm-intel-next 9cc10041e9fe7f32c4817e3cdd806ff1986d266c
+	drm/i915/psr: Check drm_dp_dpcd_read return value on PSR dpcd init
+drm-intel drm-intel-gt-next b7a855f488c6825e3dc06e78c49326491bef6f98
+	drm/i915/gt: Relocate Gen6 context-specific workaround
+drm-xe drm-xe-next 358ee50ab565f3c8ea32480e9d03127a81ba32f8
+	drm/xe/vm: Clear the scratch_pt pointer on error
+drm-intel topic/core-for-CI 822bdcee36a8e5d8a24aa6ba8e14a86459a78e4f
+	platform/x86: asus-wmi: Only register lps0 dev for Ally devices
+drm-xe topic/xe-for-CI 6916e5fb25c414cb3d4adcfc8f12f55f602c53b2
+	drm/xe/pm: Re-enable D3Cold by default on BMG
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
