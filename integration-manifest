@@ -1,0 +1,30 @@
+drm drm-fixes 1b237f190eb3d36f52dffe07a40b5eb210280e00
+	Linux 6.17-rc3
+drm-misc drm-misc-fixes 16fdb3cc6af8460f23a706512c6f5e7dfdd4f338
+	Revert "drm/tegra: Use dma_buf from GEM object instance"
+drm-intel drm-intel-fixes 1b237f190eb3d36f52dffe07a40b5eb210280e00
+	Linux 6.17-rc3
+drm-xe drm-xe-fixes 75671d90fde8c78e940e15a1366a50ece56c6b69
+	drm/xe: switch to local xbasename() helper
+drm drm-next 1cd0c7afef97c3192edc92774a62d36b2a0bf2e0
+	Merge tag 'drm-misc-next-2025-08-21' of https://gitlab.freedesktop.org/drm/misc/kernel into drm-next
+drm-misc drm-misc-next-fixes 54d4f445517fe8350d735624d7f4225e7511d9eb
+	drm/panfrost: Print RSS for tiler heap BO's in debugfs GEMS file
+drm-intel drm-intel-next-fixes 5a569ef4d4ab184a481dd8ecb58f464a89b44d2f
+	drm/i915/display: Set C10_VDR_CTRL_MSGBUS_ACCESS before phy reg read
+drm-xe drm-xe-next-fixes 8f5ae30d69d7543eee0d70083daf4de8fe15d585
+	Linux 6.17-rc1
+drm-misc drm-misc-next 6380b1ceba7783ccd2c7fb2e003412c1b8bb4235
+	accel/amdxdna: Fix incorrect type used for a local variable
+drm-intel drm-intel-next c65ee1b1ffc68e274d6c1cebdf9df09407d180fd
+	drm/i915/psr: Do not unnecessarily remove underrun on idle PSR WA
+drm-intel drm-intel-gt-next b7a855f488c6825e3dc06e78c49326491bef6f98
+	drm/i915/gt: Relocate Gen6 context-specific workaround
+drm-xe drm-xe-next d738e1be2b2b4364403babc43ae7343d45e99d41
+	drm/xe/wcl: Extend L3bank mask workaround
+drm-intel topic/core-for-CI 822bdcee36a8e5d8a24aa6ba8e14a86459a78e4f
+	platform/x86: asus-wmi: Only register lps0 dev for Ally devices
+drm-xe topic/xe-for-CI 6916e5fb25c414cb3d4adcfc8f12f55f602c53b2
+	drm/xe/pm: Re-enable D3Cold by default on BMG
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
