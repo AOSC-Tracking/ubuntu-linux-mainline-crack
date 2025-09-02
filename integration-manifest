@@ -1,0 +1,34 @@
+drm drm-fixes b320789d6883cc00ac78ce83bccbfe7ed58afcf0
+	Linux 6.17-rc4
+drm-misc drm-misc-fixes 69a79ada8eb034ce016b5b78fb7d08d8687223de
+	accel/ivpu: Prevent recovery work from being queued during device removal
+drm-rust drm-rust-fixes 5c5a41a75452e9eb5810a7d0d9916b61fe9fd1c5
+	gpu: nova-core: depend on CONFIG_64BIT
+drm-intel drm-intel-fixes b320789d6883cc00ac78ce83bccbfe7ed58afcf0
+	Linux 6.17-rc4
+drm-xe drm-xe-fixes 75671d90fde8c78e940e15a1366a50ece56c6b69
+	drm/xe: switch to local xbasename() helper
+drm drm-next 14579a6f18506fbb3613d509b8291e3d13c13952
+	Merge tag 'amd-drm-next-6.18-2025-08-29' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm-misc drm-misc-next-fixes 54d4f445517fe8350d735624d7f4225e7511d9eb
+	drm/panfrost: Print RSS for tiler heap BO's in debugfs GEMS file
+drm-intel drm-intel-next-fixes 5a569ef4d4ab184a481dd8ecb58f464a89b44d2f
+	drm/i915/display: Set C10_VDR_CTRL_MSGBUS_ACCESS before phy reg read
+drm-xe drm-xe-next-fixes 8f5ae30d69d7543eee0d70083daf4de8fe15d585
+	Linux 6.17-rc1
+drm-misc drm-misc-next a69997be443dcc64e6f0d6588f40e06c9b3a39be
+	drm/ssd130x: Remove the use of dev_err_probe()
+drm-rust drm-rust-next 8f5ae30d69d7543eee0d70083daf4de8fe15d585
+	Linux 6.17-rc1
+drm-intel drm-intel-next 3b6f62b6b5777f56e3fedc45041c2f61645b5204
+	iopoll: Reorder the timeout handling in poll_timeout_us()
+drm-intel drm-intel-gt-next b7a855f488c6825e3dc06e78c49326491bef6f98
+	drm/i915/gt: Relocate Gen6 context-specific workaround
+drm-xe drm-xe-next 1047bd82794a1eab64d643f196d09171ce983f44
+	drm/xe: Fix incorrect migration of backed-up object to VRAM
+drm-intel topic/core-for-CI 822bdcee36a8e5d8a24aa6ba8e14a86459a78e4f
+	platform/x86: asus-wmi: Only register lps0 dev for Ally devices
+drm-xe topic/xe-for-CI 6916e5fb25c414cb3d4adcfc8f12f55f602c53b2
+	drm/xe/pm: Re-enable D3Cold by default on BMG
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
