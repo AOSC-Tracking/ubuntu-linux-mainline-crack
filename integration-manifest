@@ -1,0 +1,34 @@
+drm drm-fixes b320789d6883cc00ac78ce83bccbfe7ed58afcf0
+	Linux 6.17-rc4
+drm-misc drm-misc-fixes bdd5a14e660062114bdebaef9ad52adf04970a89
+	drm/bridge: ti-sn65dsi86: fix REFCLK setting
+drm-rust drm-rust-fixes 5c5a41a75452e9eb5810a7d0d9916b61fe9fd1c5
+	gpu: nova-core: depend on CONFIG_64BIT
+drm-intel drm-intel-fixes b320789d6883cc00ac78ce83bccbfe7ed58afcf0
+	Linux 6.17-rc4
+drm-xe drm-xe-fixes 379b3c983fc0257c183052278832ac68e3ccd33b
+	drm/xe: Fix incorrect migration of backed-up object to VRAM
+drm drm-next 4bf83dd6e3b3b2a131e357f035b17edaee6f6766
+	Merge tag 'drm-intel-gt-next-2025-09-01' of https://gitlab.freedesktop.org/drm/i915/kernel into drm-next
+drm-misc drm-misc-next-fixes 54d4f445517fe8350d735624d7f4225e7511d9eb
+	drm/panfrost: Print RSS for tiler heap BO's in debugfs GEMS file
+drm-intel drm-intel-next-fixes 5a569ef4d4ab184a481dd8ecb58f464a89b44d2f
+	drm/i915/display: Set C10_VDR_CTRL_MSGBUS_ACCESS before phy reg read
+drm-xe drm-xe-next-fixes 8f5ae30d69d7543eee0d70083daf4de8fe15d585
+	Linux 6.17-rc1
+drm-misc drm-misc-next 306734a1c76ce35fa613ea823a31ddbcdbf1eef5
+	drm/display: bridge_connector: use drm_bridge_is_last()
+drm-rust drm-rust-next 8f5ae30d69d7543eee0d70083daf4de8fe15d585
+	Linux 6.17-rc1
+drm-intel drm-intel-next 5f9bab808180c47426346a4f8f494a642e9f69de
+	drm/i915: compute pipe bpp from link bandwidth management
+drm-intel drm-intel-gt-next b7a855f488c6825e3dc06e78c49326491bef6f98
+	drm/i915/gt: Relocate Gen6 context-specific workaround
+drm-xe drm-xe-next ad83b1da5b786ee2d245e41ce55cb1c71fed7c22
+	drm/xe/guc: Increase GuC crash dump buffer size
+drm-intel topic/core-for-CI 822bdcee36a8e5d8a24aa6ba8e14a86459a78e4f
+	platform/x86: asus-wmi: Only register lps0 dev for Ally devices
+drm-xe topic/xe-for-CI 6916e5fb25c414cb3d4adcfc8f12f55f602c53b2
+	drm/xe/pm: Re-enable D3Cold by default on BMG
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
