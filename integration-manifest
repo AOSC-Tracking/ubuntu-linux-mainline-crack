@@ -1,0 +1,34 @@
+drm drm-fixes e5f0a698b34ed76002dc5cff3804a61c80233a7a
+	Linux 6.17
+drm-misc drm-misc-fixes 7d9c3442b02ab7dd3c44e20095a178fd57d2eccb
+	drm/panthor: Defer scheduler entitiy destruction to queue release
+drm-rust drm-rust-fixes 349510052f765b6eb9c2a21d0ffe08ba61fa683c
+	MAINTAINERS: Add drm-rust tree for Rust DRM drivers and infrastructure
+drm-intel drm-intel-fixes 7f97a0a871d9532f2e1a5ee7d16d0e364215bcac
+	drm/i915/ddi: Guard reg_val against a INVALID_TRANSCODER
+drm-xe drm-xe-fixes e5f0a698b34ed76002dc5cff3804a61c80233a7a
+	Linux 6.17
+drm drm-next b2ec5ca9d5c2c019e2316f7ba447596d1dcd8fde
+	Merge tag 'amd-drm-next-6.18-2025-09-26' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm-misc drm-misc-next-fixes 0c4932f6ddf815618fa34f7403df682aed7862b5
+	drm/tiny: pixpaper: Fix missing dependency on DRM_GEM_SHMEM_HELPER
+drm-intel drm-intel-next-fixes 5a569ef4d4ab184a481dd8ecb58f464a89b44d2f
+	drm/i915/display: Set C10_VDR_CTRL_MSGBUS_ACCESS before phy reg read
+drm-xe drm-xe-next-fixes 1cdda15e54274278dd873c2067527180d6112720
+	drm/xe/configfs: Improve doc for ctx_restore* attributes
+drm-misc drm-misc-next d861831836126cfbb6550923a2f480d537a2738e
+	drm/xlnx: Compute dumb-buffer sizes with drm_mode_size_dumb()
+drm-rust drm-rust-next 299eb32863e584cfff7c6b667c3e92ae7d4d2bf9
+	gpu: nova-core: Add base files for r570.144 firmware bindings
+drm-intel drm-intel-next 97825e1c6de7315cba9acb6c1371f1a87dedd904
+	drm/{i915,xe}: driver agnostic drm to display pointer chase
+drm-intel drm-intel-gt-next 6fa6c7a50e465c32a075d3e0341bcd4f0fe0bb47
+	drm/i915: Fix incorrect error handling in shmem_pwrite()
+drm-xe drm-xe-next 486d7f1bd14fc104c20be13fe8f9632f2e8d08be
+	drm/xe/pf: Make GGTT/LMEM debugfs files per-tile
+drm-intel topic/core-for-CI e9b01b51c8625afc2f18bf3a91db2b8f2c68a751
+	Revert "lockdep: Enable PROVE_RAW_LOCK_NESTING with PROVE_LOCKING."
+drm-xe topic/xe-for-CI 6916e5fb25c414cb3d4adcfc8f12f55f602c53b2
+	drm/xe/pm: Re-enable D3Cold by default on BMG
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
