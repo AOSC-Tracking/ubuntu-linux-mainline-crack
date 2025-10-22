@@ -1,0 +1,34 @@
+drm drm-fixes 211ddde0823f1442e4ad052a2f30f050145ccada
+	Linux 6.18-rc2
+drm-misc drm-misc-fixes 23437509a69476d4f896891032d62ac868731668
+	drm/panic: Fix 24bit pixel crossing page boundaries
+drm-rust drm-rust-fixes 211ddde0823f1442e4ad052a2f30f050145ccada
+	Linux 6.18-rc2
+drm-intel drm-intel-fixes 789e46fbfca1875671717a20a916ca1a920268e4
+	drm/i915/panic: fix panic structure allocation memory leak
+drm-xe drm-xe-fixes ce831bffcef3d8f9691b5537d74ffa1b1256c017
+	drm/xe/uapi: Hide the madvise autoreset behind a VM_BIND flag
+drm drm-next 6200442de089468ff283becb81382d6ac23c25e9
+	Merge tag 'drm-misc-next-2025-10-02' of https://gitlab.freedesktop.org/drm/misc/kernel into drm-next
+drm-misc drm-misc-next-fixes adefb2ccea1e96b452cbbc39150bc0ccf1688b99
+	drm/v3d: create a dedicated lock for dma fence
+drm-intel drm-intel-next-fixes 3a8660878839faadb4f1a6dd72c3179c1df56787
+	Linux 6.18-rc1
+drm-xe drm-xe-next-fixes 3a8660878839faadb4f1a6dd72c3179c1df56787
+	Linux 6.18-rc1
+drm-misc drm-misc-next f97180f094aed00bae9776f00ae61c7c020b4d79
+	drm/vkms: Allow to configure connector status via configfs
+drm-rust drm-rust-next 5ae65bdcb867555540169ef57876658262a67d87
+	Partially revert "rust: drm: gem: Implement AlwaysRefCounted for all gem objects automatically"
+drm-intel drm-intel-next 6b1209d158e2c8a56e67f61d65e0f22d3754fb3a
+	drm/i915/dmc: Set DMC_EVT_CTL_ENABLE for disabled event handlers as well
+drm-intel drm-intel-gt-next 2ada9cb1df3f5405a01d013b708b1b0914efccfe
+	drm/i915: Fix conversion between clock ticks and nanoseconds
+drm-xe drm-xe-next f6c1345a851bbe51d49fc7bc2653da92bb8896f5
+	drm/xe: Avoid PM wake reference during VF migration
+drm-intel topic/core-for-CI 1dbee42cdc871bb80612f3041d18b66c1377f1e3
+	KVM: x86/pmu: Don't try to get perf capabilities for hybrid CPUs
+drm-xe topic/xe-for-CI 7ae3386872235016be2f83f41efe787ad82b5687
+	drm/xe/nvls: Define GuC firmware for NVL-S
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
