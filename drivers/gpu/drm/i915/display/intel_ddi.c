@@ -35,7 +35,6 @@
 #include <drm/drm_privacy_screen_consumer.h>
 
 #include "i915_reg.h"
-#include "i915_utils.h"
 #include "icl_dsi.h"
 #include "intel_alpm.h"
 #include "intel_audio.h"
@@ -53,6 +52,7 @@
 #include "intel_display_power.h"
 #include "intel_display_regs.h"
 #include "intel_display_types.h"
+#include "intel_display_utils.h"
 #include "intel_dkl_phy.h"
 #include "intel_dkl_phy_regs.h"
 #include "intel_dp.h"
@@ -4559,6 +4559,13 @@ static int intel_ddi_compute_config_late(struct intel_encoder *encoder,
 	struct intel_display *display = to_intel_display(encoder);
 	struct drm_connector *connector = conn_state->connector;
 	u8 port_sync_transcoders = 0;
+	int ret = 0;
+
+	if (intel_crtc_has_dp_encoder(crtc_state))
+		ret = intel_dp_compute_config_late(encoder, crtc_state, conn_state);
+
+	if (ret)
+		return ret;
 
 	drm_dbg_kms(display->drm, "[ENCODER:%d:%s] [CRTC:%d:%s]\n",
 		    encoder->base.base.id, encoder->base.name,
