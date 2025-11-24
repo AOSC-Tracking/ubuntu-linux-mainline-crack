@@ -1,0 +1,34 @@
+drm drm-fixes ac3fd01e4c1efce8f2c054cdeb2ddd2fc0fb150d
+	Linux 6.18-rc7
+drm-misc drm-misc-fixes 620a8f131154250f6a64a07d049a4f235d6451a5
+	drm: sti: fix device leaks at component probe
+drm-rust drm-rust-fixes 211ddde0823f1442e4ad052a2f30f050145ccada
+	Linux 6.18-rc2
+drm-intel drm-intel-fixes ac3fd01e4c1efce8f2c054cdeb2ddd2fc0fb150d
+	Linux 6.18-rc7
+drm-xe drm-xe-fixes ac3fd01e4c1efce8f2c054cdeb2ddd2fc0fb150d
+	Linux 6.18-rc7
+drm drm-next 611d4d160616a8f96959a3045ed01bc9afe0900f
+	Merge tag 'mediatek-drm-next-20251120' of https://git.kernel.org/pub/scm/linux/kernel/git/chunkuang.hu/linux into drm-next
+drm-misc drm-misc-next-fixes 31d3354f42c0da34415164a1f621a195caa1f1bc
+	drm/nouveau: verify that hardware supports the flush page address
+drm-intel drm-intel-next-fixes 611d4d160616a8f96959a3045ed01bc9afe0900f
+	Merge tag 'mediatek-drm-next-20251120' of https://git.kernel.org/pub/scm/linux/kernel/git/chunkuang.hu/linux into drm-next
+drm-xe drm-xe-next-fixes dcb171931954c51a1a7250d558f02b8f36570783
+	drm/xe/oa: Fix potential UAF in xe_oa_add_config_ioctl()
+drm-misc drm-misc-next 94124ea5a741b82d3789a0df9231f0315819efa2
+	drm/edp-panel: Add touchscreen panel used by Lenovo X13s
+drm-rust drm-rust-next 57dc2ea0b7bdb828c5d966d9135c28fe854933a4
+	rust: slice: fix broken intra-doc links
+drm-intel drm-intel-next f32df9e94d9565b4ce3067cf107afd687fca0851
+	drm/i915/cx0: Read out power-down state of both PHY lanes for reversed lanes
+drm-intel drm-intel-gt-next 3bcf7894a93e18bff802088a368c13d86a5987a0
+	drm/i915/gt: Use standard API for seqcount read in TLB invalidation
+drm-xe drm-xe-next 69ef30d6c903c4b9cd75c50367acb1cd1f95d440
+	drm/xe/uc: Change assertion to error on huc authentication failure
+drm-intel topic/core-for-CI 7699f1e58837bde8d1038b84841c2b7929ef708b
+	Revert "lockdep: Enable PROVE_RAW_LOCK_NESTING with PROVE_LOCKING."
+drm-xe topic/xe-for-CI da39e07e72ce7927980f9eada791aa74cd2c9717
+	topic/for-xe-CI: drm/xe/cri: Define GuC firmware for CRI
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
