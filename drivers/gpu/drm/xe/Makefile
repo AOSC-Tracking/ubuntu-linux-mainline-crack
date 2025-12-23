@@ -95,6 +95,7 @@ xe-y += xe_bb.o \
 	xe_oa.o \
 	xe_observation.o \
 	xe_pagefault.o \
+	xe_page_reclaim.o \
 	xe_pat.o \
 	xe_pci.o \
 	xe_pcode.o \
@@ -115,6 +116,7 @@ xe-y += xe_bb.o \
 	xe_sa.o \
 	xe_sched_job.o \
 	xe_shrinker.o \
+	xe_soc_remapper.o \
 	xe_step.o \
 	xe_survivability_mode.o \
 	xe_sync.o \
@@ -173,6 +175,7 @@ xe-$(CONFIG_PCI_IOV) += \
 	xe_lmtt.o \
 	xe_lmtt_2l.o \
 	xe_lmtt_ml.o \
+	xe_mert.o \
 	xe_pci_sriov.o \
 	xe_sriov_packet.o \
 	xe_sriov_pf.o \
