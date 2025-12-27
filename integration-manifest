@@ -1,0 +1,36 @@
+drm drm-fixes 479e25d88d1681e04cac708501180db606aecd1e
+	Merge tag 'drm-msm-fixes-2025-12-26' of https://gitlab.freedesktop.org/drm/msm into drm-fixes
+drm-misc drm-misc-fixes 3fbd97618f49e07e05aad96510e5f2ed22d68809
+	drm/gem-shmem: Fix the MODULE_LICENSE() string
+drm-rust drm-rust-fixes 97872fa28b33a1ca6acc0a7b260750c9a123b193
+	MAINTAINERS: exclude the tyr driver from DRM MISC
+drm-intel drm-intel-fixes 8f0b4cce4481fb22653697cced8d0d04027cb1e8
+	Linux 6.19-rc1
+drm-xe drm-xe-fixes 754c23238438600e9236719f7e67aff2c4d02093
+	drm/pagemap, drm/xe: Ensure that the devmem allocation is idle before use
+drm drm-next 9ec3c8ee16a07dff8be82aba595dd77c134c03c2
+	Merge tag 'drm-xe-next-2025-12-19' of https://gitlab.freedesktop.org/drm/xe/kernel into drm-next
+drm-misc drm-misc-next-fixes 308eeb8ca3fdee54bcd3ec7272c05688e178299a
+	drm/rcar-du: dsi: Handle both DRM_MODE_FLAG_N.SYNC and !DRM_MODE_FLAG_P.SYNC
+drm-intel drm-intel-next-fixes 8f0b4cce4481fb22653697cced8d0d04027cb1e8
+	Linux 6.19-rc1
+drm-xe drm-xe-next-fixes 3f1c07fc21c68bd3bd2df9d2c9441f6485e934d9
+	Merge drm/drm-next into drm-xe-next-fixes
+drm-misc drm-misc-next 130343ee6bca9895c47d314467db7dd3dcc8bc35
+	MAINTAINERS: Add entry for Innosilicon hdmi bridge library
+drm-rust drm-rust-next 51293e589bafb4281a597986b3416471f67a79c2
+	drm: tyr: replace `kernel::c_str!` with C-Strings
+drm-intel drm-intel-next fb3fba6933d169a4a12a7aa33cb68abfeed62ef4
+	drm/i915/cx0: Use the consolidated HDMI tables
+drm-intel drm-intel-gt-next 18476087f1a18dc279d200d934ad94fba1fb51d5
+	drm/i915: Fix format string truncation warning
+drm-xe drm-xe-next 0b075f82935e82fc9fff90d06d2a161caaebd9c3
+	drm/xe: Improve rebar log messages
+drm-intel topic/core-for-CI 6e17f00d83c854235925eb01592665859953bdf7
+	powercap: intel_rapl: Fix possible recursive lock warning
+drm-xe topic/xe-for-CI 7f3219f02c00680d63c06e779926b1715c42b51d
+	topic/for-xe-CI: drm/xe/cri: Define GuC firmware for CRI
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
+drm-intel topic/drm-intel-plane-color-pipeline 860daa4b0d09a398a0ac9ae6fe67efd73a275968
+	drm/i915/color: Enable Plane Color Pipelines
