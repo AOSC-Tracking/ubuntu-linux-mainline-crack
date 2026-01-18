@@ -1,0 +1,36 @@
+drm drm-fixes 9dd1f5f3eb8cb175e2f7fd2a685bdb6b1bd2a726
+	Merge tag 'drm-misc-fixes-2026-01-16' of https://gitlab.freedesktop.org/drm/misc/kernel into drm-fixes
+drm-misc drm-misc-fixes b91a565ed14fcf900b4d95e86882b4b763860986
+	drm/sysfb: Remove duplicate declarations
+drm-rust drm-rust-fixes 0f61b1860cc3f52aef9036d7235ed1f017632193
+	Linux 6.19-rc5
+drm-intel drm-intel-fixes 81d0223832f99c0833e46be114a8310888015f8b
+	drm/i915/guc: make 'guc_hw_reg_state' static as it isn't exported
+drm-xe drm-xe-fixes b886aa65eafe3098bbd691f0ca4a9abce03f9d03
+	drm/xe: Disable timestamp WA on VFs
+drm drm-next 971c2b68bddb87f4929e66cd4563fca78b722210
+	Merge tag 'drm-xe-next-2026-01-15' of https://gitlab.freedesktop.org/drm/xe/kernel into drm-next
+drm-misc drm-misc-next-fixes 308eeb8ca3fdee54bcd3ec7272c05688e178299a
+	drm/rcar-du: dsi: Handle both DRM_MODE_FLAG_N.SYNC and !DRM_MODE_FLAG_P.SYNC
+drm-intel drm-intel-next-fixes 8f0b4cce4481fb22653697cced8d0d04027cb1e8
+	Linux 6.19-rc1
+drm-xe drm-xe-next-fixes 3f1c07fc21c68bd3bd2df9d2c9441f6485e934d9
+	Merge drm/drm-next into drm-xe-next-fixes
+drm-misc drm-misc-next 26b4309a3ab82a0697751cde52eb336c29c19035
+	drm: Account property blob allocations to memcg
+drm-rust drm-rust-next 086714bbb96f63785da251e1f8d1ce3e716a6e42
+	Merge tag 'v6.19-rc5' into drm-rust-next
+drm-intel drm-intel-next c5a52cd04e24f0ae53fda26f74ab027b8c548e0e
+	drm/i915/psr: Don't enable Panel Replay on sink if globally disabled
+drm-intel drm-intel-gt-next 9512d9fc2a7a4fee14854fbb3af89a8bf599f361
+	drm/i915/guc: Recommend GuC v70.53.0 for DG2, MTL
+drm-xe drm-xe-next 6cdaa5346d6f3f6116e607e49c92c2401390c267
+	drm/xe: Add context-based invalidation to GuC TLB invalidation backend
+drm-intel topic/core-for-CI 3d15d7e81d498d56ca6ba3af63f2fa1106da87ad
+	ACPI: PM: s2idle: Add module parameter for LPS0 constraints checking
+drm-xe topic/xe-for-CI 912b9b537ae6e75c352d42f7ac40b50f9aa3d2ce
+	topic/for-xe-CI: drm/xe/cri: Define GuC firmware for CRI
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
+drm-intel topic/drm-intel-plane-color-pipeline 860daa4b0d09a398a0ac9ae6fe67efd73a275968
+	drm/i915/color: Enable Plane Color Pipelines
