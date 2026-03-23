@@ -1,0 +1,34 @@
+drm drm-fixes c369299895a591d96745d6492d4888259b004a9e
+	Linux 7.0-rc5
+drm-misc drm-misc-fixes fc3bbf34e643faa8678aabdc3810c60109f3435a
+	drm/shmem-helper: Fix huge page mapping in fault handler
+drm-rust drm-rust-fixes f338e77383789c0cae23ca3d48adcc5e9e137e3c
+	Linux 7.0-rc4
+drm-intel drm-intel-fixes bfa71b7a9dc6b5b8af157686e03308291141d00c
+	drm/i915: Unlink NV12 planes earlier
+drm-xe drm-xe-fixes 87997b6c6516e049cbaf2fc6810b213d587a06b1
+	drm/xe/pf: Fix use-after-free in migration restore
+drm drm-next 74919e2797727596816a06e55c35352e0707a710
+	Merge tag 'drm-misc-next-2026-03-20' of https://gitlab.freedesktop.org/drm/misc/kernel into drm-next
+drm-misc drm-misc-next-fixes 69674c1c704c0199ca7a3947f3cdcd575973175d
+	accel/amdxdna: Move RPM resume into job run function
+drm-intel drm-intel-next-fixes 777a02812f739af9e349cd0f695400a1d84053f4
+	drm/i915/dp: Add missing slice count check during mode validation
+drm-xe drm-xe-next-fixes 6de23f81a5e08be8fbf5e8d7e9febc72a5b5f27f
+	Linux 7.0-rc1
+drm-misc drm-misc-next 140cfee588af8656822b835ccd28515f0b8c77cf
+	accel/amdxdna: Return ERR_PTR on dma_alloc_noncoherent failure
+drm-rust drm-rust-next 55fd681cdd8599edc82013674cbf87c2f22d58f8
+	rust: dma: remove dma::CoherentAllocation<T>
+drm-intel drm-intel-next fb69d0076e687421188bc8103ab0e8e5825b1df1
+	drm/i915/dp_tunnel: Fix error handling when clearing stream BW in atomic state
+drm-intel drm-intel-gt-next 06249b4e691a75694c014a61708c007fb5755f60
+	drm/i915: Fix potential overflow of shmem scatterlist length
+drm-xe drm-xe-next a31566762d4075646a8a2214586158b681e94305
+	drm/xe: Implement recent spec updates to Wa_16025250150
+drm-intel topic/core-for-CI 3d15d7e81d498d56ca6ba3af63f2fa1106da87ad
+	ACPI: PM: s2idle: Add module parameter for LPS0 constraints checking
+drm-xe topic/xe-for-CI bd9ef8d19f9e9ff47518ce48fb2002d58bfeeaaa
+	drm/xe/nvlp: Define GuC firmware for NVL-P
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
