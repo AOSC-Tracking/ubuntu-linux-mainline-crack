@@ -1,0 +1,34 @@
+drm drm-fixes c369299895a591d96745d6492d4888259b004a9e
+	Linux 7.0-rc5
+drm-misc drm-misc-fixes 45ebe43ea00d6b9f5b3e0db9c35b8ca2a96b7e70
+	Revert "drm: Fix use-after-free on framebuffers and property blobs when calling drm_dev_unplug"
+drm-rust drm-rust-fixes f338e77383789c0cae23ca3d48adcc5e9e137e3c
+	Linux 7.0-rc4
+drm-intel drm-intel-fixes 77fcf58df15edcf3f5b5421f24814fb72796def9
+	drm/i915/dp_tunnel: Fix error handling when clearing stream BW in atomic state
+drm-xe drm-xe-fixes bfe9e314d7574d1c5c851972e7aee342733819d2
+	drm/xe: always keep track of remap prev/next
+drm drm-next 3f4207256ef421db03fd583e1954ab5fa6cf9919
+	Merge tag 'amd-drm-next-7.1-2026-03-25' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm-misc drm-misc-next-fixes 69674c1c704c0199ca7a3947f3cdcd575973175d
+	accel/amdxdna: Move RPM resume into job run function
+drm-intel drm-intel-next-fixes 777a02812f739af9e349cd0f695400a1d84053f4
+	drm/i915/dp: Add missing slice count check during mode validation
+drm-xe drm-xe-next-fixes 6de23f81a5e08be8fbf5e8d7e9febc72a5b5f27f
+	Linux 7.0-rc1
+drm-misc drm-misc-next 46c31e1604d121221167cb09380de8c7d53290b9
+	drm/rockchip: cdn-dp: add missing check in cdn_dp_config_video()
+drm-rust drm-rust-next bdf6b22fd52954f5ac88689eeaf960ac9687b78c
+	rust: drm: use new sync::aref path for imports
+drm-intel drm-intel-next 059b7b5b79009af10eeeb24fb942de6fb6bea677
+	mailmap: update email address for Christoph Manszewski
+drm-intel drm-intel-gt-next 06249b4e691a75694c014a61708c007fb5755f60
+	drm/i915: Fix potential overflow of shmem scatterlist length
+drm-xe drm-xe-next b6df77f40c83d02fad6e58f84391417cb7d8f7a5
+	drm/xe: Fix mismatched include guards in header files
+drm-intel topic/core-for-CI 3d15d7e81d498d56ca6ba3af63f2fa1106da87ad
+	ACPI: PM: s2idle: Add module parameter for LPS0 constraints checking
+drm-xe topic/xe-for-CI bd9ef8d19f9e9ff47518ce48fb2002d58bfeeaaa
+	drm/xe/nvlp: Define GuC firmware for NVL-P
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
