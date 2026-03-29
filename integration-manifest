@@ -1,0 +1,34 @@
+drm drm-fixes 5ba61d8a25ddf89915f71bf8b63c06d6ffdf06cc
+	Merge tag 'mediatek-drm-fixes-20260323' of https://git.kernel.org/pub/scm/linux/kernel/git/chunkuang.hu/linux into drm-fixes
+drm-misc drm-misc-fixes 2feec5ae5df785658924ab6bd91280dc3926507c
+	accel/qaic: Handle DBC deactivation if the owner went away
+drm-rust drm-rust-fixes f338e77383789c0cae23ca3d48adcc5e9e137e3c
+	Linux 7.0-rc4
+drm-intel drm-intel-fixes 77fcf58df15edcf3f5b5421f24814fb72796def9
+	drm/i915/dp_tunnel: Fix error handling when clearing stream BW in atomic state
+drm-xe drm-xe-fixes bfe9e314d7574d1c5c851972e7aee342733819d2
+	drm/xe: always keep track of remap prev/next
+drm drm-next a51973c5dff8a0f01cc7d1b2007306ea0004fa16
+	Merge tag 'drm-xe-next-2026-03-26-1' of https://gitlab.freedesktop.org/drm/xe/kernel into drm-next
+drm-misc drm-misc-next-fixes 69674c1c704c0199ca7a3947f3cdcd575973175d
+	accel/amdxdna: Move RPM resume into job run function
+drm-intel drm-intel-next-fixes 777a02812f739af9e349cd0f695400a1d84053f4
+	drm/i915/dp: Add missing slice count check during mode validation
+drm-xe drm-xe-next-fixes 6de23f81a5e08be8fbf5e8d7e9febc72a5b5f27f
+	Linux 7.0-rc1
+drm-misc drm-misc-next dac97a6bd6c4a24e60a147cb2cf750eddb7594a8
+	accel/qaic: Retain bootlogs that overflow
+drm-rust drm-rust-next e10dcb9d654177270b48119fa79f3924aef9ff48
+	gpu: nova-core: firmware: gsp: use dma::Coherent for level0 table
+drm-intel drm-intel-next e012fa31f90de0928d85ab22d9cc5fc8fe84c5b0
+	drm/i915/uncore: Do GT FIFO checks in early sanitize and forcewake get
+drm-intel drm-intel-gt-next 06249b4e691a75694c014a61708c007fb5755f60
+	drm/i915: Fix potential overflow of shmem scatterlist length
+drm-xe drm-xe-next 4a706bd93c4fb156a13477e26ffdf2e633edeb10
+	drm/xe: Drop registration of guc_submit_wedged_fini from xe_guc_submit_wedge()
+drm-intel topic/core-for-CI 3d15d7e81d498d56ca6ba3af63f2fa1106da87ad
+	ACPI: PM: s2idle: Add module parameter for LPS0 constraints checking
+drm-xe topic/xe-for-CI bd9ef8d19f9e9ff47518ce48fb2002d58bfeeaaa
+	drm/xe/nvlp: Define GuC firmware for NVL-P
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
