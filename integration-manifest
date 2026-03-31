@@ -1,0 +1,34 @@
+drm drm-fixes 7aaa8047eafd0bd628065b15757d9b48c5f9c07d
+	Linux 7.0-rc6
+drm-misc drm-misc-fixes 2f42c1a6161646cbd29b443459fd635d29eda634
+	drm/ast: dp501: Fix initialization of SCU2C
+drm-rust drm-rust-fixes f338e77383789c0cae23ca3d48adcc5e9e137e3c
+	Linux 7.0-rc4
+drm-intel drm-intel-fixes 4dfce79e098915d8e5fc2b9e1d980bc3251dd32c
+	drm/i915/dsi: Don't do DSC horizontal timing adjustments in command mode
+drm-xe drm-xe-fixes 56b7432b7e8e6ae1b289cb405d16db4150ef193b
+	drm/xe: Avoid memory allocations in xe_device_declare_wedged()
+drm drm-next f6225b546dfccfc322b18c0d757b7b9c767a1e27
+	BackMerge tag 'v7.0-rc6' into drm-next
+drm-misc drm-misc-next-fixes 6fdfd24017756bbe27ccc786051e97f3bf0c3d62
+	Merge drm/drm-fixes into drm-misc-next-fixes
+drm-intel drm-intel-next-fixes 777a02812f739af9e349cd0f695400a1d84053f4
+	drm/i915/dp: Add missing slice count check during mode validation
+drm-xe drm-xe-next-fixes 6de23f81a5e08be8fbf5e8d7e9febc72a5b5f27f
+	Linux 7.0-rc1
+drm-misc drm-misc-next fb7b1a0ab25a6077d26cb3829e31743972d4f31d
+	udmabuf: fix DMA direction mismatch in release_udmabuf()
+drm-rust drm-rust-next 7c50d748b4a635bc39802ea3f6b120e66b1b9067
+	gpu: nova-core: firmware: factor out an elf_str() function
+drm-intel drm-intel-next 299d59abcc3907524239e10277c8dd8b714977e9
+	drm/i915: Move the sharpness filter dump next to pfit
+drm-intel drm-intel-gt-next 06249b4e691a75694c014a61708c007fb5755f60
+	drm/i915: Fix potential overflow of shmem scatterlist length
+drm-xe drm-xe-next 72d918472886b6e1b998b756303816737929ef0a
+	drm/xe/ggtt: Remove duplicate XE_GGTT_FLAGS_64K macro definition
+drm-intel topic/core-for-CI 3d15d7e81d498d56ca6ba3af63f2fa1106da87ad
+	ACPI: PM: s2idle: Add module parameter for LPS0 constraints checking
+drm-xe topic/xe-for-CI bd9ef8d19f9e9ff47518ce48fb2002d58bfeeaaa
+	drm/xe/nvlp: Define GuC firmware for NVL-P
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
