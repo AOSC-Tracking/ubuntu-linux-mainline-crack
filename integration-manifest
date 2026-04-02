@@ -1,0 +1,34 @@
+drm drm-fixes 2aa5a6d933f4e458db1825c7b25a7ec268a167ee
+	Merge tag 'amd-drm-fixes-7.0-2026-04-01' of https://gitlab.freedesktop.org/agd5f/linux into drm-fixes
+drm-misc drm-misc-fixes 857fa8f2a5b184c206c703a3d9ce05cea683cfed
+	accel: ethosu: Add hardware dependency hint
+drm-rust drm-rust-fixes f338e77383789c0cae23ca3d48adcc5e9e137e3c
+	Linux 7.0-rc4
+drm-intel drm-intel-fixes 9c9a57e4e337f94e23ddf69263fd0685c91155fb
+	drm/i915/dp: Use crtc_state->enhanced_framing properly on ivb/hsw CPU eDP
+drm-xe drm-xe-fixes 56b7432b7e8e6ae1b289cb405d16db4150ef193b
+	drm/xe: Avoid memory allocations in xe_device_declare_wedged()
+drm drm-next 9bdbf7eb25b3121ef19533df4fb70f2c39fc0d6a
+	Merge tag 'drm-rust-next-2026-03-30' of https://gitlab.freedesktop.org/drm/rust/kernel into drm-next
+drm-misc drm-misc-next-fixes c636ae346d196b71e972188f91b3260ae522ade6
+	accel/ivpu: Trigger recovery on TDR with OS scheduling
+drm-intel drm-intel-next-fixes 777a02812f739af9e349cd0f695400a1d84053f4
+	drm/i915/dp: Add missing slice count check during mode validation
+drm-xe drm-xe-next-fixes 6de23f81a5e08be8fbf5e8d7e9febc72a5b5f27f
+	Linux 7.0-rc1
+drm-misc drm-misc-next 4b9c36c83b34f710da9573291404f6a2246251c1
+	drm/vc4: Clean-up UAPI header inclusion
+drm-rust drm-rust-next 7c50d748b4a635bc39802ea3f6b120e66b1b9067
+	gpu: nova-core: firmware: factor out an elf_str() function
+drm-intel drm-intel-next 8e005ef09ba5a973e9401fa21b653339a5effda1
+	drm/xe: pass struct xe_device to xe_display_bo_fbdev_prefer_stolen()
+drm-intel drm-intel-gt-next 06249b4e691a75694c014a61708c007fb5755f60
+	drm/i915: Fix potential overflow of shmem scatterlist length
+drm-xe drm-xe-next c79bc999442ff3c0908ab8bce92b2a3cb7d59861
+	drm/xe: Drop redundant rtp entries for Wa_14019988906 & Wa_14019877138
+drm-intel topic/core-for-CI 3d15d7e81d498d56ca6ba3af63f2fa1106da87ad
+	ACPI: PM: s2idle: Add module parameter for LPS0 constraints checking
+drm-xe topic/xe-for-CI bd9ef8d19f9e9ff47518ce48fb2002d58bfeeaaa
+	drm/xe/nvlp: Define GuC firmware for NVL-P
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
