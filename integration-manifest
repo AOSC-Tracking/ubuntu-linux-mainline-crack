@@ -1,0 +1,36 @@
+drm drm-fixes 591cd656a1bf5ea94a222af5ef2ee76df029c1d2
+	Linux 7.0-rc7
+drm-misc drm-misc-fixes 857fa8f2a5b184c206c703a3d9ce05cea683cfed
+	accel: ethosu: Add hardware dependency hint
+drm-rust drm-rust-fixes f338e77383789c0cae23ca3d48adcc5e9e137e3c
+	Linux 7.0-rc4
+drm-intel drm-intel-fixes 4c71fd099513bfa8acab529b626e1f0097b76061
+	drm/i915/gt: fix refcount underflow in intel_engine_park_heartbeat
+drm-xe drm-xe-fixes 7596459f3c93d8d45a1bf12d4d7526b50c15baa2
+	drm/xe: Fix bug in idledly unit conversion
+drm drm-next 650c54b6a501e169447f14a2af975980f598b662
+	Merge tag 'drm-rust-next-2026-04-06' of https://gitlab.freedesktop.org/drm/rust/kernel into drm-next
+drm-misc drm-misc-next-fixes 408df6213f56f467675dc0ecf156a8bd1984555e
+	dma-fence: correct kernel-doc function parameter @flags
+drm-intel drm-intel-next-fixes 777a02812f739af9e349cd0f695400a1d84053f4
+	drm/i915/dp: Add missing slice count check during mode validation
+drm-xe drm-xe-next-fixes 6de23f81a5e08be8fbf5e8d7e9febc72a5b5f27f
+	Linux 7.0-rc1
+drm-misc drm-misc-next b20a9b5f9c4baeae0b2e143046b195b910c59714
+	drm/panthor: Fix kernel-doc in panthor_sched.c so it's visible
+drm-rust drm-rust-next a7a080bb4236ebe577b6776d940d1717912ff6dd
+	gpu: nova-core: fix missing colon in SEC2 boot debug message
+drm-intel drm-intel-next 332021557104ccf46d40ef7bae3f12a53f56edf3
+	drm/i915/dp: Don't use DP link min bpp for the FRL link bandwidth check
+drm-intel drm-intel-gt-next 13238dc0ee4f9ab8dafa2cca7295736191ae2f42
+	drm/i915/gt: fix refcount underflow in intel_engine_park_heartbeat
+drm-xe drm-xe-next af35e741e2f2dbef75500921e8fce17cf4f08fbd
+	Merge drm/drm-next into drm-xe-next
+drm-intel topic/core-for-CI 3d15d7e81d498d56ca6ba3af63f2fa1106da87ad
+	ACPI: PM: s2idle: Add module parameter for LPS0 constraints checking
+drm-xe topic/xe-for-CI bd9ef8d19f9e9ff47518ce48fb2002d58bfeeaaa
+	drm/xe/nvlp: Define GuC firmware for NVL-P
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
+drm-intel topic/step 4516432284e1b2ad9e70de8067f779c9c1072189
+	ttm/pool: track allocated_pages per numa node.
