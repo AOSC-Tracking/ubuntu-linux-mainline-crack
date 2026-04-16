@@ -1,0 +1,36 @@
+drm drm-fixes 028ef9c96e96197026887c0f092424679298aae8
+	Linux 7.0
+drm-misc drm-misc-fixes 6597ff1d8de3f583be169587efeafd8af134e138
+	drm/nouveau: fix nvkm_device leak on aperture removal failure
+drm-rust drm-rust-fixes f338e77383789c0cae23ca3d48adcc5e9e137e3c
+	Linux 7.0-rc4
+drm-intel drm-intel-fixes 028ef9c96e96197026887c0f092424679298aae8
+	Linux 7.0
+drm-xe drm-xe-fixes 028ef9c96e96197026887c0f092424679298aae8
+	Linux 7.0
+drm drm-next ca8639fbb3354629084c15e137e61fcb8528c4ec
+	Merge tag 'amd-drm-next-7.1-2026-04-03' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm-misc drm-misc-next-fixes dc6d51959ec0c08366d5aaeb5b8fb02d814d1e4b
+	dma-buf: fix htmldocs error for dma_buf_attach_revocable
+drm-intel drm-intel-next-fixes a97c88a176b6b8d116f4d3f508f3bd02bc77b462
+	drm/i915/wm: Verify the correct plane DDB entry
+drm-xe drm-xe-next-fixes 6de23f81a5e08be8fbf5e8d7e9febc72a5b5f27f
+	Linux 7.0-rc1
+drm-misc drm-misc-next 2d1e82f1224f3109481bb0ed3683e54b09b978e3
+	accel/amdxdna: Fix fatal_error_info layout in firmware interface
+drm-rust drm-rust-next a7a080bb4236ebe577b6776d940d1717912ff6dd
+	gpu: nova-core: fix missing colon in SEC2 boot debug message
+drm-intel drm-intel-next 9fce8ff956cc3493b327f6928458e2278ef531a9
+	drm/i915: Remove the vma parent interface
+drm-intel drm-intel-gt-next f6d4afc9ec6a0bc326151b35a7a3369369180079
+	drm/i915/gem: Drop check for changed VM in EXECBUF
+drm-xe drm-xe-next ad422cae958fcfbc231aabc8ad8fbcdda0f2e019
+	drm/xe: Suppress reset log for killed queues
+drm-intel topic/core-for-CI 3d15d7e81d498d56ca6ba3af63f2fa1106da87ad
+	ACPI: PM: s2idle: Add module parameter for LPS0 constraints checking
+drm-xe topic/xe-for-CI bd9ef8d19f9e9ff47518ce48fb2002d58bfeeaaa
+	drm/xe/nvlp: Define GuC firmware for NVL-P
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
+drm-intel topic/pipe-reorder 2c683e9b419328da3433a49f7c467da71aaf0469
+	drm/i915/display: change pipe allocation order for discrete platforms
