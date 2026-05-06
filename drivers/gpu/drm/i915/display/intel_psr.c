@@ -28,6 +28,7 @@
 #include <drm/drm_debugfs.h>
 #include <drm/drm_print.h>
 #include <drm/drm_vblank.h>
+#include <drm/intel/step.h>
 
 #include "intel_alpm.h"
 #include "intel_atomic.h"
@@ -51,7 +52,6 @@
 #include "intel_psr_regs.h"
 #include "intel_quirks.h"
 #include "intel_snps_phy.h"
-#include "intel_step.h"
 #include "intel_vblank.h"
 #include "intel_vdsc.h"
 #include "intel_vrr.h"
@@ -3358,11 +3358,11 @@ static int intel_psr_fastset_force(struct intel_display *display)
 {
 	struct drm_connector_list_iter conn_iter;
 	struct drm_modeset_acquire_ctx ctx;
-	struct drm_atomic_state *state;
+	struct drm_atomic_commit *state;
 	struct drm_connector *conn;
 	int err = 0;
 
-	state = drm_atomic_state_alloc(display->drm);
+	state = drm_atomic_commit_alloc(display->drm);
 	if (!state)
 		return -ENOMEM;
 
@@ -3404,7 +3404,7 @@ retry:
 		err = drm_atomic_commit(state);
 
 	if (err == -EDEADLK) {
-		drm_atomic_state_clear(state);
+		drm_atomic_commit_clear(state);
 		err = drm_modeset_backoff(&ctx);
 		if (!err)
 			goto retry;
@@ -3412,7 +3412,7 @@ retry:
 
 	drm_modeset_drop_locks(&ctx);
 	drm_modeset_acquire_fini(&ctx);
-	drm_atomic_state_put(state);
+	drm_atomic_commit_put(state);
 
 	return err;
 }
