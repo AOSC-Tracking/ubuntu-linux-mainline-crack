@@ -219,13 +219,13 @@ static int aie2_mgmt_fw_query(struct amdxdna_dev_hdl *ndev)
 		return ret;
 	}
 
-	ret = aie2_query_aie_metadata(ndev, &ndev->metadata);
+	ret = aie2_query_aie_metadata(ndev, &ndev->aie.metadata);
 	if (ret) {
 		XDNA_ERR(ndev->aie.xdna, "Query AIE metadata failed");
 		return ret;
 	}
 
-	ndev->total_col = min(aie2_max_col, ndev->metadata.cols);
+	ndev->total_col = min(aie2_max_col, ndev->aie.metadata.cols);
 
 	return 0;
 }
@@ -246,6 +246,7 @@ static int aie2_xrs_load(void *cb_arg, struct xrs_action_load *action)
 	xdna = hwctx->client->xdna;
 
 	hwctx->start_col = action->part.start_col;
+	hwctx->num_unused_col = action->part.ncols - hwctx->num_col;
 	hwctx->num_col = action->part.ncols;
 	ret = aie2_create_context(xdna->dev_handle, hwctx);
 	if (ret)
@@ -594,7 +595,7 @@ static int aie2_init(struct amdxdna_dev *xdna)
 	xrs_cfg.clk_list.num_levels = ndev->max_dpm_level + 1;
 	for (i = 0; i < xrs_cfg.clk_list.num_levels; i++)
 		xrs_cfg.clk_list.cu_clk_list[i] = ndev->priv->dpm_clk_tbl[i].hclk;
-	xrs_cfg.sys_eff_factor = 1;
+	xrs_cfg.sys_eff_factor = 2;
 	xrs_cfg.ddev = &xdna->ddev;
 	xrs_cfg.actions = &aie2_xrs_actions;
 	xrs_cfg.total_col = ndev->total_col;
@@ -655,53 +656,6 @@ static int aie2_get_aie_status(struct amdxdna_client *client,
 	}
 
 	return 0;
-}
-
-static int aie2_get_aie_metadata(struct amdxdna_client *client,
-				 struct amdxdna_drm_get_info *args)
-{
-	struct amdxdna_drm_query_aie_metadata *meta;
-	struct amdxdna_dev *xdna = client->xdna;
-	struct amdxdna_dev_hdl *ndev;
-	int ret = 0;
-	u32 buf_sz;
-
-	ndev = xdna->dev_handle;
-	meta = kzalloc_obj(*meta);
-	if (!meta)
-		return -ENOMEM;
-
-	meta->col_size = ndev->metadata.size;
-	meta->cols = ndev->metadata.cols;
-	meta->rows = ndev->metadata.rows;
-
-	meta->version.major = ndev->metadata.version.major;
-	meta->version.minor = ndev->metadata.version.minor;
-
-	meta->core.row_count = ndev->metadata.core.row_count;
-	meta->core.row_start = ndev->metadata.core.row_start;
-	meta->core.dma_channel_count = ndev->metadata.core.dma_channel_count;
-	meta->core.lock_count = ndev->metadata.core.lock_count;
-	meta->core.event_reg_count = ndev->metadata.core.event_reg_count;
-
-	meta->mem.row_count = ndev->metadata.mem.row_count;
-	meta->mem.row_start = ndev->metadata.mem.row_start;
-	meta->mem.dma_channel_count = ndev->metadata.mem.dma_channel_count;
-	meta->mem.lock_count = ndev->metadata.mem.lock_count;
-	meta->mem.event_reg_count = ndev->metadata.mem.event_reg_count;
-
-	meta->shim.row_count = ndev->metadata.shim.row_count;
-	meta->shim.row_start = ndev->metadata.shim.row_start;
-	meta->shim.dma_channel_count = ndev->metadata.shim.dma_channel_count;
-	meta->shim.lock_count = ndev->metadata.shim.lock_count;
-	meta->shim.event_reg_count = ndev->metadata.shim.event_reg_count;
-
-	buf_sz = min(args->buffer_size, sizeof(*meta));
-	if (copy_to_user(u64_to_user_ptr(args->buffer), meta, buf_sz))
-		ret = -EFAULT;
-
-	kfree(meta);
-	return ret;
 }
 
 static int aie2_get_aie_version(struct amdxdna_client *client,
@@ -1038,6 +992,7 @@ static int aie2_get_preempt_state(struct amdxdna_client *client,
 static int aie2_get_info(struct amdxdna_client *client, struct amdxdna_drm_get_info *args)
 {
 	struct amdxdna_dev *xdna = client->xdna;
+	struct amdxdna_dev_hdl *ndev = xdna->dev_handle;
 	int ret, idx;
 
 	if (!drm_dev_enter(&xdna->ddev, &idx))
@@ -1052,7 +1007,7 @@ static int aie2_get_info(struct amdxdna_client *client, struct amdxdna_drm_get_i
 		ret = aie2_get_aie_status(client, args);
 		break;
 	case DRM_AMDXDNA_QUERY_AIE_METADATA:
-		ret = aie2_get_aie_metadata(client, args);
+		ret = amdxdna_get_metadata(&ndev->aie, client, args);
 		break;
 	case DRM_AMDXDNA_QUERY_AIE_VERSION:
 		ret = aie2_get_aie_version(client, args);
