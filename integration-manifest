@@ -1,0 +1,38 @@
+drm drm-fixes e43ffb69e0438cddd72aaa30898b4dc446f664f8
+	Linux 7.1-rc6
+drm-misc drm-misc-fixes 30252e6f71ba974ecf9cd8ce395b73b9900bc378
+	drm/dumb-buffer: Drop buffer-size limits for now
+drm-rust drm-rust-fixes 0a69ac25bd596d50823d530d0a2004336668c0df
+	rust: drm: fix unsound initialization in drm::Device::new
+drm-intel drm-intel-fixes 26eb7c0a7ab09d83eec833db6a5a2bc60b9d4d9a
+	drm/i915: Fix color blob reference handling in intel_plane_state
+drm-xe drm-xe-fixes 42445de1765547f56f48d107c0b8f3482c98458e
+	Revert "drm/xe/nvls: Define GuC firmware for NVL-S"
+drm drm-next 9bb8af2770b7b24619e0f95422322dd55384f7ca
+	Merge tag 'amd-drm-next-7.2-2026-05-29' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm-misc drm-misc-next-fixes 62c1671f6454ceaa80e9ceff63f821aa36f35154
+	accel/amdxdna: Return errors for failed debug BO commands
+drm-rust drm-rust-next-fixes 99676aed1fec109d62822e21a06760eb098dc5f4
+	gpu: nova-core: move lifetime to `Bar0`
+drm-intel drm-intel-next-fixes 314f6179e370988ac00dadf373a4f6166eb3db15
+	drm/i915/psr: Init variable to avoid early exit from et alignment loop
+drm-xe drm-xe-next-fixes 6de23f81a5e08be8fbf5e8d7e9febc72a5b5f27f
+	Linux 7.0-rc1
+drm-misc drm-misc-next 6e7eb171ac96fefa32197afa658e7d9da238be89
+	Documentation: drm: Add entry for removing spsc_queue to TODO list
+drm-rust drm-rust-next 99676aed1fec109d62822e21a06760eb098dc5f4
+	gpu: nova-core: move lifetime to `Bar0`
+drm-intel drm-intel-next bd61c7756b34157e093028225a69383b4b1203cc
+	drm/i915/edp: Check supported link rates DPCD read
+drm-intel drm-intel-gt-next 6c064db893f548d57036fce17c6493808396e620
+	Revert "i915: don't use a vma that didn't match the context VM"
+drm-xe drm-xe-next 3dbb27b1db141671dd7ab2e0e0fffcea5d0fb5bc
+	drm/xe/pxp: PXP no longer requires HuC from media 35 onwards
+drm-intel topic/core-for-CI 42f6438f1d344694656e7eca76e2d02b109697b6
+	Revert "lockdep: Enable PROVE_RAW_LOCK_NESTING with PROVE_LOCKING."
+drm-xe topic/xe-for-CI e324041cd4b66cfe43ca2fc0da9619c37ccfcab8
+	topic/xe-for-CI: Define GuC firmware for NVL-P
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
+drm-intel topic/pipe-reorder 2c683e9b419328da3433a49f7c467da71aaf0469
+	drm/i915/display: change pipe allocation order for discrete platforms
