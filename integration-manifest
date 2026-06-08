@@ -1,0 +1,38 @@
+drm drm-fixes 2aaaf5931b16938a017b7db51b8d9fadad857adc
+	Merge tag 'amd-drm-fixes-7.1-2026-06-04' of https://gitlab.freedesktop.org/agd5f/linux into drm-fixes
+drm-misc drm-misc-fixes 3f26bb732cc136ab20176697c92f32c9c84cb125
+	drm/virtio: fix dma_fence refcount leak on error in virtio_gpu_dma_fence_wait()
+drm-rust drm-rust-fixes 0a69ac25bd596d50823d530d0a2004336668c0df
+	rust: drm: fix unsound initialization in drm::Device::new
+drm-intel drm-intel-fixes 4549871118cf616eecdd2d939f78e3b9e1dddc48
+	Linux 7.1-rc7
+drm-xe drm-xe-fixes 4549871118cf616eecdd2d939f78e3b9e1dddc48
+	Linux 7.1-rc7
+drm drm-next 8205c61deb6e5c1cabaf02415337070f3ca1ea19
+	Merge tag 'drm-rust-next-2026-06-04' of https://gitlab.freedesktop.org/drm/rust/kernel into drm-next
+drm-misc drm-misc-next-fixes b08472db93b1ccff84a7adec5779d47f0e9d3a30
+	agp/amd64: Fix broken error propagation in agp_amd64_probe()
+drm-rust drm-rust-next-fixes 99676aed1fec109d62822e21a06760eb098dc5f4
+	gpu: nova-core: move lifetime to `Bar0`
+drm-intel drm-intel-next-fixes 314f6179e370988ac00dadf373a4f6166eb3db15
+	drm/i915/psr: Init variable to avoid early exit from et alignment loop
+drm-xe drm-xe-next-fixes 527b3f2a4853f94a856815ee4e4f44d14df58182
+	Merge tag 'amd-drm-next-7.2-2026-06-03' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm-misc drm-misc-next d4ae726fc08024b359e9cacf2507f1c256b9d71c
+	drm/panel-edp: Add BOE NV116WH2-M30, BOE NT116WHM-N21, BOE NV116FH1-M31, BOE NV116FH1-M30
+drm-rust drm-rust-next fea3a2dd7d3fc1936211ced5f84420e610435730
+	rust: drm: gem: shmem: Fix Default implementation for ObjectConfig
+drm-intel drm-intel-next 361fd015ad8e38cd17b6351f84e4f4ec15f0d040
+	drm/i915/dp_link_training: Document DP link recovery logic
+drm-intel drm-intel-gt-next 6c064db893f548d57036fce17c6493808396e620
+	Revert "i915: don't use a vma that didn't match the context VM"
+drm-xe drm-xe-next a57011eff45e7265dc42a7adad68b84605d8f828
+	drm/xe/rtp: Fix build error with clang < 21 and non-const initializers
+drm-intel topic/core-for-CI 42f6438f1d344694656e7eca76e2d02b109697b6
+	Revert "lockdep: Enable PROVE_RAW_LOCK_NESTING with PROVE_LOCKING."
+drm-xe topic/xe-for-CI 1cf7dc778fc0682a29c228939df45bb7be27a433
+	topic/xe-for-CI: Define GuC firmware for NVL-P
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
+drm-intel topic/pipe-reorder 2c683e9b419328da3433a49f7c467da71aaf0469
+	drm/i915/display: change pipe allocation order for discrete platforms
