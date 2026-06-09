@@ -1,0 +1,38 @@
+drm drm-fixes 2aaaf5931b16938a017b7db51b8d9fadad857adc
+	Merge tag 'amd-drm-fixes-7.1-2026-06-04' of https://gitlab.freedesktop.org/agd5f/linux into drm-fixes
+drm-misc drm-misc-fixes 5d563a5da8717629ae72f9eadf1e0e340bd1658b
+	drm/vc4: fix krealloc() memory leak
+drm-rust drm-rust-fixes 0a69ac25bd596d50823d530d0a2004336668c0df
+	rust: drm: fix unsound initialization in drm::Device::new
+drm-intel drm-intel-fixes 2673cefa99ca918e7ac5b0388ff578a83656c896
+	drm/i915/edp: Check supported link rates DPCD read
+drm-xe drm-xe-fixes 4549871118cf616eecdd2d939f78e3b9e1dddc48
+	Linux 7.1-rc7
+drm drm-next f5ed9dba3100e607a9724f38a7e202107a13dfd3
+	Merge tag 'drm-misc-next-fixes-2026-06-05' of https://gitlab.freedesktop.org/drm/misc/kernel into drm-next
+drm-misc drm-misc-next-fixes b08472db93b1ccff84a7adec5779d47f0e9d3a30
+	agp/amd64: Fix broken error propagation in agp_amd64_probe()
+drm-rust drm-rust-next-fixes 99676aed1fec109d62822e21a06760eb098dc5f4
+	gpu: nova-core: move lifetime to `Bar0`
+drm-intel drm-intel-next-fixes 314f6179e370988ac00dadf373a4f6166eb3db15
+	drm/i915/psr: Init variable to avoid early exit from et alignment loop
+drm-xe drm-xe-next-fixes 527b3f2a4853f94a856815ee4e4f44d14df58182
+	Merge tag 'amd-drm-next-7.2-2026-06-03' of https://gitlab.freedesktop.org/agd5f/linux into drm-next
+drm-misc drm-misc-next 7a921d111810652672e02c392b35fdcefa4d5030
+	drm/connector: Update docs of "colorspace" for color format prop
+drm-rust drm-rust-next 9eaff547805f8556992a9474465001c3e128b7bd
+	gpu: nova-core: gsp: tu102: keep unloading if FWSEC-SB fails
+drm-intel drm-intel-next 88b30ff4bc52f959e46599b14ab16674e8ebfde8
+	drm/i915/bw: Simplify the best max_data_rate search
+drm-intel drm-intel-gt-next 6c064db893f548d57036fce17c6493808396e620
+	Revert "i915: don't use a vma that didn't match the context VM"
+drm-xe drm-xe-next ca24e8d9fa48c7c121614c1a80971aecda640674
+	drm/xe/nvls: Update PCI IDs
+drm-intel topic/core-for-CI 42f6438f1d344694656e7eca76e2d02b109697b6
+	Revert "lockdep: Enable PROVE_RAW_LOCK_NESTING with PROVE_LOCKING."
+drm-xe topic/xe-for-CI 1cf7dc778fc0682a29c228939df45bb7be27a433
+	topic/xe-for-CI: Define GuC firmware for NVL-P
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
+drm-intel topic/pipe-reorder 2c683e9b419328da3433a49f7c467da71aaf0469
+	drm/i915/display: change pipe allocation order for discrete platforms
