@@ -1,0 +1,36 @@
+drm drm-fixes dc59e4fea9d83f03bad6bddf3fa2e52491777482
+	Linux 7.2-rc1
+drm-misc drm-misc-fixes b4a0500fdf6e61a6c5f92ff2e61bc91578075803
+	accel/amdxdna: Fix iommu domain lifetime race during device removal
+drm-rust drm-rust-fixes dc59e4fea9d83f03bad6bddf3fa2e52491777482
+	Linux 7.2-rc1
+drm-intel drm-intel-fixes 8cd9520d35a6c38db6567e97dd93b1f11f185dc6
+	Linux 7.1
+drm-xe drm-xe-fixes dc59e4fea9d83f03bad6bddf3fa2e52491777482
+	Linux 7.2-rc1
+drm drm-next dc59e4fea9d83f03bad6bddf3fa2e52491777482
+	Linux 7.2-rc1
+drm-misc drm-misc-next-fixes 52d4ab1ca790a668cc8f2c27017138b1c467168c
+	Merge tag 'drm-misc-next-fixes-2026-06-11' of https://gitlab.freedesktop.org/drm/misc/kernel into drm-next
+drm-rust drm-rust-next-fixes 99676aed1fec109d62822e21a06760eb098dc5f4
+	gpu: nova-core: move lifetime to `Bar0`
+drm-intel drm-intel-next-fixes 2ee8dbd880b14fb0b5115bf2353c7900aa33b95b
+	drm/i915/cdclk: Fix up CDCLK_FREQ_DECIMAL without a full PLL re-enable
+drm-xe drm-xe-next-fixes 0b5ed2756d45b04669502a1f13b1657ec7664571
+	drm/xe: Add compact-PT and addr mask handling for page reclaim
+drm-misc drm-misc-next 8fca3d8dbebf8d960dad7b10db3cb4a61139454b
+	dt-bindings: gpu: img,powervr-*: Add maintainer entries
+drm-rust drm-rust-next 23d66dbab84e8518943563df2ced14aaab28b77a
+	gpu: nova-core: falcon: store bar and dev in falcon
+drm-intel drm-intel-next 58a224375c81179b52558c53d8857b93196d2687
+	drm/i915/hdcp: require monotonically increasing seq_num_v
+drm-intel drm-intel-gt-next 6029bc064f0b1bac184203a50fbaaf070fa18832
+	drm/i915: Return NULL on error in active_instance
+drm-xe drm-xe-next 3e493f88c84088ccd7b53cdd23ac5c875c9a60dd
+	drm/xe/display: skip FORCE_WC and vm_bound check for external dma-bufs
+drm-intel topic/core-for-CI d8451c92a4da76aa7cabb07864ef2a601c482ca7
+	Revert "lockdep: Enable PROVE_RAW_LOCK_NESTING with PROVE_LOCKING."
+drm-xe topic/xe-for-CI 1cf7dc778fc0682a29c228939df45bb7be27a433
+	topic/xe-for-CI: Define GuC firmware for NVL-P
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
