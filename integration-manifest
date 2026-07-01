@@ -1,0 +1,36 @@
+drm drm-fixes dc59e4fea9d83f03bad6bddf3fa2e52491777482
+	Linux 7.2-rc1
+drm-misc drm-misc-fixes ec3304ddfd99adf531244be3a35c77b52583d5d3
+	accel/amdxdna: Fix use-after-free in debug BO command handling
+drm-rust drm-rust-fixes dc59e4fea9d83f03bad6bddf3fa2e52491777482
+	Linux 7.2-rc1
+drm-intel drm-intel-fixes 2084503f2d087bf956198e7f6eb25b03a7049cb2
+	drm/i915/bios: range check LFP Data Block panel_type2
+drm-xe drm-xe-fixes dc59e4fea9d83f03bad6bddf3fa2e52491777482
+	Linux 7.2-rc1
+drm drm-next dc59e4fea9d83f03bad6bddf3fa2e52491777482
+	Linux 7.2-rc1
+drm-misc drm-misc-next-fixes 52d4ab1ca790a668cc8f2c27017138b1c467168c
+	Merge tag 'drm-misc-next-fixes-2026-06-11' of https://gitlab.freedesktop.org/drm/misc/kernel into drm-next
+drm-rust drm-rust-next-fixes 99676aed1fec109d62822e21a06760eb098dc5f4
+	gpu: nova-core: move lifetime to `Bar0`
+drm-intel drm-intel-next-fixes 2ee8dbd880b14fb0b5115bf2353c7900aa33b95b
+	drm/i915/cdclk: Fix up CDCLK_FREQ_DECIMAL without a full PLL re-enable
+drm-xe drm-xe-next-fixes 0b5ed2756d45b04669502a1f13b1657ec7664571
+	drm/xe: Add compact-PT and addr mask handling for page reclaim
+drm-misc drm-misc-next cff96362794a5c1f3adb013b4a46c7233149a629
+	drm/mxsfb/lcdif: don't hide lcdif_attach_bridge() deferral messages
+drm-rust drm-rust-next 24d2581fd911d34f88153af59d3b0d6bc5f07adf
+	gpu: nova-core: remove `#[allow(non_snake_case)]`
+drm-intel drm-intel-next c2408fda34d67b99a72727a5e9a128a379e28557
+	drm/i915/cmtg: Warn on invalid CMTG transcoder in intel_cmtg_disable()
+drm-intel drm-intel-gt-next 6029bc064f0b1bac184203a50fbaaf070fa18832
+	drm/i915: Return NULL on error in active_instance
+drm-xe drm-xe-next f6c23e4589bdc69a5d2f79aed5c5bddd5d406cbe
+	drm/xe/oa: Fix offset alignment for MERT WHITELIST_OA_MERT_MMIO_TRG
+drm-intel topic/core-for-CI d8451c92a4da76aa7cabb07864ef2a601c482ca7
+	Revert "lockdep: Enable PROVE_RAW_LOCK_NESTING with PROVE_LOCKING."
+drm-xe topic/xe-for-CI c944d863bcf9437285af3e58ec895f97d481983c
+	topic/xe-for-CI: Define GuC firmware for NVL-P
+drm topic/drm-next-nouveau-r570 6cc6e08d4542473d79ea83d9123d9d35e9c01c92
+	drm/nouveau/kms: add support for GB20x
